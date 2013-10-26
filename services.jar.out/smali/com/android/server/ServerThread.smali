@@ -3934,7 +3934,7 @@
 
     invoke-static {v3, v9, v0}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
-    goto/16 :goto_3c
+    goto/16 :goto_lewa_0
 
     .line 758
     .end local v68           #e:Ljava/lang/Throwable;
