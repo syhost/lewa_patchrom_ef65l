@@ -28,7 +28,7 @@ local-lewa-device := EF65L_JB
 
 # Config density for co-developers to use the aaps with HDPI or XHDPI resource,
 # Default configrations are HDPI for ics branch and XHDPI for jellybean branch
-local-density := HDPI
+local-density := XHDPI
 
 include phoneapps.mk
 
