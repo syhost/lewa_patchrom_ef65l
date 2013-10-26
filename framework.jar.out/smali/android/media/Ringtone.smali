@@ -391,6 +391,19 @@
     .line 154
     .end local v1           #themes:Landroid/net/Uri;
     :cond_4
+    invoke-static {v8}, Landroid/media/Ringtone$Injector;->isThemeAuthority(Ljava/lang/String;)Z
+
+    move-result v1
+
+    if-eqz v1, :lewa_cond_0
+    
+    const-string v12, ""
+
+    invoke-static {v0, v12, p1}, Landroid/media/Ringtone$Injector;->setTitle(Landroid/content/ContentResolver;Ljava/lang/String;Landroid/net/Uri;)V
+
+    goto :goto_0
+
+    :lewa_cond_0
     :try_start_0
     const-string v2, "drm"
 
