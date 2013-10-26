@@ -7,8 +7,8 @@
 
 
 # annotations
-.annotation system Ldalvik/annotation/EnclosingClass;
-    value = Lcom/android/internal/policy/impl/PhoneWindowManager;
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lcom/android/internal/policy/impl/PhoneWindowManager;->showOrHideRecentAppsDialog(I)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -20,15 +20,20 @@
 # instance fields
 .field final synthetic this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
 
+.field final synthetic val$behavior:I
+
 
 # direct methods
-.method constructor <init>(Lcom/android/internal/policy/impl/PhoneWindowManager;)V
+.method constructor <init>(Lcom/android/internal/policy/impl/PhoneWindowManager;I)V
     .locals 0
+    .parameter
     .parameter
 
     .prologue
-    .line 924
+    .line 821
     iput-object p1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
+
+    iput p2, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->val$behavior:I
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -38,114 +43,133 @@
 
 # virtual methods
 .method public run()V
-    .locals 9
+    .locals 3
 
     .prologue
-    const/4 v5, 0x1
+    .line 824
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
 
-    const/4 v8, 0x2
+    iget-object v0, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mRecentAppsDialog:Lcom/android/internal/policy/impl/RecentApplicationsDialog;
 
-    const/4 v6, 0x0
+    if-nez v0, :cond_0
 
-    .line 927
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
+    .line 825
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
 
-    iget-object v4, v4, Lcom/android/internal/policy/impl/PhoneWindowManager;->mContext:Landroid/content/Context;
+    new-instance v1, Lcom/android/internal/policy/impl/RecentApplicationsDialog;
 
-    const-string v7, "audio"
+    iget-object v2, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
 
-    invoke-virtual {v4, v7}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+    iget-object v2, v2, Lcom/android/internal/policy/impl/PhoneWindowManager;->mContext:Landroid/content/Context;
 
-    move-result-object v0
+    invoke-direct {v1, v2}, Lcom/android/internal/policy/impl/RecentApplicationsDialog;-><init>(Landroid/content/Context;)V
 
-    check-cast v0, Landroid/media/AudioManager;
+    iput-object v1, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mRecentAppsDialog:Lcom/android/internal/policy/impl/RecentApplicationsDialog;
 
-    .line 928
-    .local v0, am:Landroid/media/AudioManager;
-    invoke-virtual {v0}, Landroid/media/AudioManager;->getRingerMode()I
+    .line 827
+    :cond_0
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
 
-    move-result v1
+    iget-object v0, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mRecentAppsDialog:Lcom/android/internal/policy/impl/RecentApplicationsDialog;
 
-    .line 929
-    .local v1, ringerMode:I
-    new-instance v3, Landroid/view/VolumePanel;
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/RecentApplicationsDialog;->isShowing()Z
 
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
+    move-result v0
 
-    iget-object v4, v4, Lcom/android/internal/policy/impl/PhoneWindowManager;->mContext:Landroid/content/Context;
+    if-eqz v0, :cond_1
 
-    invoke-static {v4}, Lcom/android/internal/app/ThemeUtils;->createUiContext(Landroid/content/Context;)Landroid/content/Context;
+    .line 828
+    iget v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->val$behavior:I
 
-    move-result-object v7
+    packed-switch v0, :pswitch_data_0
 
-    invoke-static {}, Lcom/android/internal/policy/impl/PhoneWindowManager;->getAudioService()Landroid/media/IAudioService;
-
-    move-result-object v4
-
-    check-cast v4, Landroid/media/AudioService;
-
-    invoke-direct {v3, v7, v4}, Landroid/view/VolumePanel;-><init>(Landroid/content/Context;Landroid/media/AudioService;)V
-
-    .line 931
-    .local v3, volumePanel:Landroid/view/VolumePanel;
-    if-ne v1, v8, :cond_2
-
-    .line 932
-    iget-object v4, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
-
-    iget-object v4, v4, Lcom/android/internal/policy/impl/PhoneWindowManager;->mContext:Landroid/content/Context;
-
-    invoke-virtual {v4}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
-
-    move-result-object v4
-
-    const-string v7, "vibrate_when_ringing"
-
-    invoke-static {v4, v7, v6}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
-
-    move-result v4
-
-    if-eqz v4, :cond_0
-
-    move v2, v5
-
-    .line 934
-    .local v2, vibrateSetting:Z
+    .line 858
     :goto_0
-    if-eqz v2, :cond_1
-
-    move v4, v5
-
-    :goto_1
-    invoke-virtual {v0, v4}, Landroid/media/AudioManager;->setRingerMode(I)V
-
-    .line 939
-    .end local v2           #vibrateSetting:Z
-    :goto_2
-    const/16 v4, 0x11
-
-    invoke-virtual {v3, v8, v4}, Landroid/view/VolumePanel;->postVolumeChanged(II)V
-
-    .line 941
+    :pswitch_0
     return-void
 
-    :cond_0
-    move v2, v6
+    .line 831
+    :pswitch_1
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
 
-    .line 932
+    iget-object v0, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mRecentAppsDialog:Lcom/android/internal/policy/impl/RecentApplicationsDialog;
+
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/RecentApplicationsDialog;->dismiss()V
+
     goto :goto_0
 
-    .restart local v2       #vibrateSetting:Z
-    :cond_1
-    move v4, v6
+    .line 834
+    :pswitch_2
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
 
-    .line 934
+    iget-object v0, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mRecentAppsDialog:Lcom/android/internal/policy/impl/RecentApplicationsDialog;
+
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/RecentApplicationsDialog;->dismissAndSwitch()V
+
+    goto :goto_0
+
+    .line 841
+    :cond_1
+    iget v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->val$behavior:I
+
+    packed-switch v0, :pswitch_data_1
+
+    goto :goto_0
+
+    .line 843
+    :pswitch_3
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
+
+    iget-object v0, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mRecentAppsDialog:Lcom/android/internal/policy/impl/RecentApplicationsDialog;
+
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/RecentApplicationsDialog;->show()V
+
+    goto :goto_0
+
+    .line 847
+    :pswitch_4
+    :try_start_0
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
+
+    iget-object v0, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mWindowManager:Landroid/view/IWindowManager;
+
+    const/4 v1, 0x0
+
+    invoke-interface {v0, v1}, Landroid/view/IWindowManager;->setInTouchMode(Z)V
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 850
+    :goto_1
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$4;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
+
+    iget-object v0, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mRecentAppsDialog:Lcom/android/internal/policy/impl/RecentApplicationsDialog;
+
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/RecentApplicationsDialog;->show()V
+
+    goto :goto_0
+
+    .line 848
+    :catch_0
+    move-exception v0
+
     goto :goto_1
 
-    .line 937
-    .end local v2           #vibrateSetting:Z
-    :cond_2
-    invoke-virtual {v0, v8}, Landroid/media/AudioManager;->setRingerMode(I)V
+    .line 828
+    nop
 
-    goto :goto_2
+    :pswitch_data_0
+    .packed-switch 0x0
+        :pswitch_1
+        :pswitch_0
+        :pswitch_1
+        :pswitch_2
+    .end packed-switch
+
+    .line 841
+    :pswitch_data_1
+    .packed-switch 0x0
+        :pswitch_3
+        :pswitch_4
+    .end packed-switch
 .end method
