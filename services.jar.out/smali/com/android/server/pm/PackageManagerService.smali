@@ -21279,6 +21279,203 @@
     .parameter "targetPkg"
     .parameter "finishedReceiver"
     .parameter "userId"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
+
+    move-result-object v1
+
+    .local v1, am:Landroid/app/IActivityManager;
+    if-eqz v1, :cond_5
+
+    const/4 v2, -0x1
+
+    move/from16 v0, p6
+
+    if-ne v0, v2, :cond_4
+
+    :try_start_0
+    sget-object v2, Lcom/android/server/pm/PackageManagerService;->sUserManager:Lcom/android/server/pm/UserManager;
+
+    invoke-virtual {v2}, Lcom/android/server/pm/UserManager;->getUserIds()[I
+
+    move-result-object v17
+
+    .local v17, userIds:[I
+    :goto_0
+    move-object/from16 v13, v17
+
+    .local v13, arr$:[I
+    array-length v15, v13
+
+    .local v15, len$:I
+    const/4 v14, 0x0
+
+    .local v14, i$:I
+    :goto_1
+    if-ge v14, v15, :cond_5
+
+    aget v12, v13, v14
+
+    .local v12, id:I
+    new-instance v3, Landroid/content/Intent;
+
+    if-eqz p1, :cond_6
+
+    const-string v2, "package"
+
+    const/4 v4, 0x0
+
+    move-object/from16 v0, p1
+
+    invoke-static {v2, v0, v4}, Landroid/net/Uri;->fromParts(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v2
+
+    :goto_2
+    move-object/from16 v0, p0
+
+    invoke-direct {v3, v0, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    .local v3, intent:Landroid/content/Intent;
+    if-eqz p3, :cond_0
+
+    move-object/from16 v0, p3
+
+    invoke-virtual {v3, v0}, Landroid/content/Intent;->putExtras(Landroid/os/Bundle;)Landroid/content/Intent;
+
+    :cond_0
+    if-eqz p4, :cond_1
+
+    move-object/from16 v0, p4
+
+    invoke-virtual {v3, v0}, Landroid/content/Intent;->setPackage(Ljava/lang/String;)Landroid/content/Intent;
+
+    :cond_1
+    const-string v2, "android.intent.extra.UID"
+
+    const/4 v4, -0x1
+
+    invoke-virtual {v3, v2, v4}, Landroid/content/Intent;->getIntExtra(Ljava/lang/String;I)I
+
+    move-result v16
+
+    .local v16, uid:I
+    if-lez v16, :cond_2
+
+    if-lez v12, :cond_2
+
+    invoke-static/range {v16 .. v16}, Landroid/os/UserId;->getAppId(I)I
+
+    move-result v2
+
+    invoke-static {v12, v2}, Landroid/os/UserId;->getUid(II)I
+
+    move-result v16
+
+    const-string v2, "android.intent.extra.UID"
+
+    move/from16 v0, v16
+
+    invoke-virtual {v3, v2, v0}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
+
+    :cond_2
+    const/high16 v2, 0x800
+
+    invoke-virtual {v3, v2}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
+
+    if-eqz p2, :cond_3
+
+    move-object/from16 v0, p2
+
+    invoke-virtual {v3, v0}, Landroid/content/Intent;->addCategory(Ljava/lang/String;)Landroid/content/Intent;
+
+    :cond_3
+    const/4 v2, 0x0
+
+    const/4 v4, 0x0
+
+    const/4 v6, 0x0
+
+    const/4 v7, 0x0
+
+    const/4 v8, 0x0
+
+    const/4 v9, 0x0
+
+    if-eqz p5, :cond_7
+
+    const/4 v10, 0x1
+
+    :goto_3
+    const/4 v11, 0x0
+
+    move-object/from16 v5, p5
+
+    invoke-interface/range {v1 .. v12}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;Ljava/lang/String;ZZI)I
+
+    add-int/lit8 v14, v14, 0x1
+
+    goto :goto_1
+
+    .end local v3           #intent:Landroid/content/Intent;
+    .end local v12           #id:I
+    .end local v13           #arr$:[I
+    .end local v14           #i$:I
+    .end local v15           #len$:I
+    .end local v16           #uid:I
+    .end local v17           #userIds:[I
+    :cond_4
+    const/4 v2, 0x1
+
+    new-array v0, v2, [I
+
+    move-object/from16 v17, v0
+
+    const/4 v2, 0x0
+
+    aput p6, v17, v2
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    goto :goto_0
+
+    :catch_0
+    move-exception v2
+
+    :cond_5
+    return-void
+
+    .restart local v12       #id:I
+    .restart local v13       #arr$:[I
+    .restart local v14       #i$:I
+    .restart local v15       #len$:I
+    .restart local v17       #userIds:[I
+    :cond_6
+    const/4 v2, 0x0
+
+    goto :goto_2
+
+    .restart local v3       #intent:Landroid/content/Intent;
+    .restart local v16       #uid:I
+    :cond_7
+    const/4 v10, 0x0
+
+    goto :goto_3
+.end method
+
+.method static final sendPackageBroadcast(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;Ljava/lang/String;Landroid/content/IIntentReceiver;I)V
+    .locals 18
+    .parameter "action"
+    .parameter "pkg"
+    .parameter "intentCategory"
+    .parameter "extras"
+    .parameter "targetPkg"
+    .parameter "finishedReceiver"
+    .parameter "userId"
 
     .prologue
     .line 5175
@@ -24533,6 +24730,9 @@
     .locals 4
     .parameter "pkgSetting"
     .parameter "pkg"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v0, 0x0
@@ -24612,6 +24812,11 @@
     if-eqz v1, :cond_1
 
     .line 3319
+    invoke-static {p2}, Lcom/android/server/pm/PackageManagerService$Injector;->skipVerifySignatures(Landroid/content/pm/PackageParser$Package;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_1
     iget-object v1, p1, Lcom/android/server/pm/PackageSetting;->sharedUser:Lcom/android/server/pm/SharedUserSetting;
 
     iget-object v1, v1, Lcom/android/server/pm/SharedUserSetting;->signatures:Lcom/android/server/pm/PackageSignatures;
@@ -36268,7 +36473,7 @@
 
     .line 4357
     :try_start_0
-    invoke-direct {p0, p1}, Lcom/android/server/pm/PackageManagerService;->cleanAssetRedirections(Landroid/content/pm/PackageParser$Package;)V
+    invoke-static {p0, p1}, Lcom/android/server/pm/PackageManagerService$Injector;->cleanAssetRedirections(Lcom/android/server/pm/PackageManagerService;Landroid/content/pm/PackageParser$Package;)V
 
     .line 4359
     iget-object v9, p0, Lcom/android/server/pm/PackageManagerService;->mPackages:Ljava/util/HashMap;
