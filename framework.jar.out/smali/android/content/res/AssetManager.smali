@@ -48,8 +48,16 @@
 
 # instance fields
 .field private mAppName:Ljava/lang/String;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mAssetDir:Ljava/lang/String;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mNObject:I
 
@@ -60,17 +68,6 @@
 .field private final mOffsets:[J
 
 .field private mOpen:Z
-
-.field private mRedirections:Landroid/util/SparseArray;
-    .annotation system Ldalvik/annotation/Signature;
-        value = {
-            "Landroid/util/SparseArray",
-            "<",
-            "Landroid/content/res/PackageRedirectionMap;",
-            ">;"
-        }
-    .end annotation
-.end field
 
 .field private mRedirections:Landroid/util/SparseArray;
     .annotation build Landroid/annotation/LewaHook;
@@ -100,12 +97,6 @@
 .end field
 
 .field private mStringBlocks:[Landroid/content/res/StringBlock;
-
-.field private mThemeCookie:I
-
-.field private mThemePackageName:Ljava/lang/String;
-
-.field private mThemeSupport:Z
 
 .field private mThemeCookie:I
     .annotation build Landroid/annotation/LewaHook;
@@ -341,6 +332,9 @@
 .end method
 
 .method private final native addRedirectionsNative(I)V
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 .end method
 
 .method static final native applyStyle(IIII[I[I[I)Z
@@ -350,6 +344,9 @@
 .end method
 
 .method private final native clearRedirectionsNative()V
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 .end method
 
 .method static final native copyTheme(II)V
@@ -547,9 +544,6 @@
 .end method
 
 .method private final native splitThemePackage(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)I
-.end method
-
-.method private final native splitThemePackage(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)I
     .annotation build Landroid/annotation/LewaHook;
         value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
     .end annotation
@@ -604,71 +598,6 @@
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
-.end method
-
-.method public addRedirections(Landroid/content/res/PackageRedirectionMap;)V
-    .locals 2
-    .parameter "map"
-
-    .prologue
-    .line 747
-    iget-object v0, p0, Landroid/content/res/AssetManager;->mRedirections:Landroid/util/SparseArray;
-
-    if-nez v0, :cond_0
-
-    .line 748
-    new-instance v0, Landroid/util/SparseArray;
-
-    const/4 v1, 0x2
-
-    invoke-direct {v0, v1}, Landroid/util/SparseArray;-><init>(I)V
-
-    iput-object v0, p0, Landroid/content/res/AssetManager;->mRedirections:Landroid/util/SparseArray;
-
-    .line 750
-    :cond_0
-    iget-object v0, p0, Landroid/content/res/AssetManager;->mRedirections:Landroid/util/SparseArray;
-
-    invoke-virtual {p1}, Landroid/content/res/PackageRedirectionMap;->getPackageId()I
-
-    move-result v1
-
-    invoke-virtual {v0, v1, p1}, Landroid/util/SparseArray;->append(ILjava/lang/Object;)V
-
-    .line 751
-    invoke-virtual {p1}, Landroid/content/res/PackageRedirectionMap;->getNativePointer()I
-
-    move-result v0
-
-    invoke-direct {p0, v0}, Landroid/content/res/AssetManager;->addRedirectionsNative(I)V
-
-    .line 752
-    return-void
-.end method
-
-.method public final native attachThemePath(Ljava/lang/String;)I
-.end method
-
-.method public clearRedirections()V
-    .locals 1
-
-    .prologue
-    .line 759
-    iget-object v0, p0, Landroid/content/res/AssetManager;->mRedirections:Landroid/util/SparseArray;
-
-    if-eqz v0, :cond_0
-
-    .line 760
-    iget-object v0, p0, Landroid/content/res/AssetManager;->mRedirections:Landroid/util/SparseArray;
-
-    invoke-virtual {v0}, Landroid/util/SparseArray;->clear()V
-
-    .line 762
-    :cond_0
-    invoke-direct {p0}, Landroid/content/res/AssetManager;->clearRedirectionsNative()V
-
-    .line 763
-    return-void
 .end method
 
 .method public addRedirections(Landroid/content/res/PackageRedirectionMap;)V
@@ -831,9 +760,6 @@
 .end method
 
 .method public final native detachThemePath(Ljava/lang/String;I)Z
-.end method
-
-.method public final native detachThemePath(Ljava/lang/String;I)Z
     .annotation build Landroid/annotation/LewaHook;
         value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
     .end annotation
@@ -912,6 +838,9 @@
 .end method
 
 .method public final native generateStyleRedirections(III)Z
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 .end method
 
 .method final native getArrayIntResource(I)[I
@@ -921,12 +850,21 @@
 .end method
 
 .method public final native getBasePackageCount()I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 .end method
 
 .method public final native getBasePackageId(I)I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 .end method
 
 .method public final native getBasePackageName(I)Ljava/lang/String;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 .end method
 
 .method public final native getCookieName(I)Ljava/lang/String;
@@ -1290,26 +1228,6 @@
 
 .method public getThemeCookie()I
     .locals 1
-
-    .prologue
-    .line 730
-    iget v0, p0, Landroid/content/res/AssetManager;->mThemeCookie:I
-
-    return v0
-.end method
-
-.method public getThemePackageName()Ljava/lang/String;
-    .locals 1
-
-    .prologue
-    .line 714
-    iget-object v0, p0, Landroid/content/res/AssetManager;->mThemePackageName:Ljava/lang/String;
-
-    return-object v0
-.end method
-
-.method public getThemeCookie()I
-    .locals 1
     .annotation build Landroid/annotation/LewaHook;
         value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
     .end annotation
@@ -1396,16 +1314,6 @@
     const/4 v2, 0x0
 
     goto :goto_0
-.end method
-
-.method public final hasThemeSupport()Z
-    .locals 1
-
-    .prologue
-    .line 696
-    iget-boolean v0, p0, Landroid/content/res/AssetManager;->mThemeSupport:Z
-
-    return v0
 .end method
 
 .method public final hasThemeSupport()Z
@@ -2213,36 +2121,6 @@
 
 .method final recreateStringBlocks()V
     .locals 1
-
-    .prologue
-    .line 272
-    monitor-enter p0
-
-    .line 273
-    const/4 v0, 0x1
-
-    :try_start_0
-    invoke-virtual {p0, v0}, Landroid/content/res/AssetManager;->makeStringBlocks(Z)V
-
-    .line 274
-    monitor-exit p0
-
-    .line 275
-    return-void
-
-    .line 274
-    :catchall_0
-    move-exception v0
-
-    monitor-exit p0
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
-
-    throw v0
-.end method
-
-.method final recreateStringBlocks()V
-    .locals 1
     .annotation build Landroid/annotation/LewaHook;
         value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
     .end annotation
@@ -2311,57 +2189,6 @@
 .end method
 
 .method public final native setLocale(Ljava/lang/String;)V
-.end method
-
-.method public setThemeCookie(I)V
-    .locals 0
-    .parameter "cookie"
-
-    .prologue
-    .line 738
-    iput p1, p0, Landroid/content/res/AssetManager;->mThemeCookie:I
-
-    .line 739
-    return-void
-.end method
-
-.method public setThemePackageName(Ljava/lang/String;)V
-    .locals 0
-    .parameter "packageName"
-
-    .prologue
-    .line 722
-    iput-object p1, p0, Landroid/content/res/AssetManager;->mThemePackageName:Ljava/lang/String;
-
-    .line 723
-    return-void
-.end method
-
-.method public final setThemeSupport(Z)V
-    .locals 0
-    .parameter "themeSupport"
-
-    .prologue
-    .line 686
-    iput-boolean p1, p0, Landroid/content/res/AssetManager;->mThemeSupport:Z
-
-    .line 687
-    return-void
-.end method
-
-.method public final splitDrmProtectedThemePackage(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)I
-    .locals 1
-    .parameter "packageFileName"
-    .parameter "lockedFileName"
-    .parameter "drmProtectedresources"
-
-    .prologue
-    .line 492
-    invoke-direct {p0, p1, p2, p3}, Landroid/content/res/AssetManager;->splitThemePackage(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)I
-
-    move-result v0
-
-    return v0
 .end method
 
 .method public setThemeCookie(I)V
