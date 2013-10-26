@@ -716,6 +716,12 @@
 
 .field mSystemReady:Z
 
+.field private mThemeChangeReceiver:Landroid/content/BroadcastReceiver;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_CLASS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field mTopAction:Ljava/lang/String;
 
 .field mTopComponent:Landroid/content/ComponentName;
@@ -723,6 +729,10 @@
 .field mTopData:Ljava/lang/String;
 
 .field mUiContext:Landroid/content/Context;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field mUidAlert:Landroid/app/AlertDialog;
 
@@ -71895,6 +71905,8 @@
 
     .line 13549
     :cond_3
+    invoke-static/range {p0 .. p1}, Lcom/android/server/am/ActivityManagerService$Injector;->setThemeResource(Lcom/android/server/am/ActivityManagerService;Landroid/content/res/Configuration;)V
+ 
     move-object/from16 v0, p0
 
     iget v2, v0, Lcom/android/server/am/ActivityManagerService;->mConfigurationSeq:I

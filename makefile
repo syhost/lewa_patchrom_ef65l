@@ -49,3 +49,6 @@ updater := $(ZIP_DIR)/META-INF/com/google/android/updater-script
 pre_install_data_packages := $(TMP_DIR)/pre_install_apk_pkgname.txt
 
 local-pre-zip-misc: add-prebuilt-lewa-sqlite-library
+	@echo customize build.prop
+	cp -f other/build.prop $(ZIP_DIR)/system/build.prop
+	cp other/boot.img $(ZIP_DIR)/boot.img
