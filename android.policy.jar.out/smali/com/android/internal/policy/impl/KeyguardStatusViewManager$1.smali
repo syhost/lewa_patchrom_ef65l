@@ -1,5 +1,5 @@
 .class Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;
-.super Landroid/os/Handler;
+.super Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$InfoCallbackImpl;
 .source "KeyguardStatusViewManager.java"
 
 
@@ -24,136 +24,129 @@
     .parameter
 
     .prologue
-    .line 305
+    .line 632
     iput-object p1, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
-    invoke-direct {p0}, Landroid/os/Handler;-><init>()V
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$InfoCallbackImpl;-><init>()V
 
     return-void
 .end method
 
 
 # virtual methods
-.method public handleMessage(Landroid/os/Message;)V
-    .locals 5
-    .parameter "msg"
+.method public onPhoneStateChanged(I)V
+    .locals 1
+    .parameter "phoneState"
 
     .prologue
-    const/4 v4, 0x1
+    .line 658
+    iget-object v0, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
-    const/4 v3, 0x0
+    iput p1, v0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->mPhoneState:I
 
-    .line 308
-    iget v2, p1, Landroid/os/Message;->what:I
+    .line 659
+    iget-object v0, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
-    packed-switch v2, :pswitch_data_0
+    #calls: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->updateEmergencyCallButtonState(I)V
+    invoke-static {v0, p1}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$1100(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;I)V
 
-    .line 389
-    :goto_0
+    .line 660
     return-void
+.end method
 
-    .line 310
-    :pswitch_0
-    new-instance v0, Ljava/lang/Thread;
+.method public onRefreshBatteryInfo(ZZI)V
+    .locals 4
+    .parameter "showBatteryInfo"
+    .parameter "pluggedIn"
+    .parameter "batteryLevel"
 
-    new-instance v2, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1$1;
+    .prologue
+    .line 637
+    iget-object v1, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
-    invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1$1;-><init>(Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;)V
+    #setter for: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->mShowingBatteryInfo:Z
+    invoke-static {v1, p1}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$402(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;Z)Z
 
-    invoke-direct {v0, v2}, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;)V
+    .line 638
+    iget-object v1, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
-    .line 369
-    .local v0, queryWeather:Ljava/lang/Thread;
-    iget-object v2, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
+    #setter for: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->mPluggedIn:Z
+    invoke-static {v1, p2}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$502(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;Z)Z
 
-    #setter for: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->mWeatherRefreshing:Z
-    invoke-static {v2, v4}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$802(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;Z)Z
+    .line 639
+    iget-object v1, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
-    .line 370
-    invoke-virtual {v0, v4}, Ljava/lang/Thread;->setPriority(I)V
+    #setter for: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->mBatteryLevel:I
+    invoke-static {v1, p3}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$602(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;I)I
 
-    .line 371
-    invoke-virtual {v0}, Ljava/lang/Thread;->start()V
+    .line 640
+    new-instance v0, Llibcore/util/MutableInt;
 
-    goto :goto_0
+    const/4 v1, 0x0
 
-    .line 374
-    .end local v0           #queryWeather:Ljava/lang/Thread;
-    :pswitch_1
-    iget-object v1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;
+    invoke-direct {v0, v1}, Llibcore/util/MutableInt;-><init>(I)V
 
-    check-cast v1, Lcom/android/internal/util/weather/WeatherInfo;
+    .line 641
+    .local v0, tmpIcon:Llibcore/util/MutableInt;
+    iget-object v1, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
-    .line 375
-    .local v1, w:Lcom/android/internal/util/weather/WeatherInfo;
-    if-eqz v1, :cond_0
+    const/16 v2, 0xf
 
-    .line 376
-    iget-object v2, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
+    iget-object v3, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
-    #setter for: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->mWeatherRefreshing:Z
-    invoke-static {v2, v3}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$802(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;Z)Z
-
-    .line 377
-    iget-object v2, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
-
-    #calls: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->setWeatherData(Lcom/android/internal/util/weather/WeatherInfo;)V
-    invoke-static {v2, v1}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$900(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;Lcom/android/internal/util/weather/WeatherInfo;)V
-
-    .line 378
-    invoke-static {v1}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$1002(Lcom/android/internal/util/weather/WeatherInfo;)Lcom/android/internal/util/weather/WeatherInfo;
-
-    goto :goto_0
-
-    .line 380
-    :cond_0
-    iget-object v2, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
-
-    #setter for: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->mWeatherRefreshing:Z
-    invoke-static {v2, v3}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$802(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;Z)Z
-
-    .line 381
-    invoke-static {}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$1000()Lcom/android/internal/util/weather/WeatherInfo;
-
-    move-result-object v2
-
-    iget-object v2, v2, Lcom/android/internal/util/weather/WeatherInfo;->temp:Ljava/lang/String;
-
-    const-string v3, "-"
-
-    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v2
-
-    if-eqz v2, :cond_1
-
-    .line 382
-    iget-object v2, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
-
-    #calls: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->setNoWeatherData()V
-    invoke-static {v2}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$1100(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;)V
-
-    goto :goto_0
-
-    .line 384
-    :cond_1
-    iget-object v2, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
-
-    invoke-static {}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$1000()Lcom/android/internal/util/weather/WeatherInfo;
+    #calls: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->getAltTextMessage(Llibcore/util/MutableInt;)Ljava/lang/CharSequence;
+    invoke-static {v3, v0}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$100(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;Llibcore/util/MutableInt;)Ljava/lang/CharSequence;
 
     move-result-object v3
 
-    #calls: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->setWeatherData(Lcom/android/internal/util/weather/WeatherInfo;)V
-    invoke-static {v2, v3}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$900(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;Lcom/android/internal/util/weather/WeatherInfo;)V
+    #calls: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->update(ILjava/lang/CharSequence;)V
+    invoke-static {v1, v2, v3}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$700(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;ILjava/lang/CharSequence;)V
 
-    goto :goto_0
+    .line 642
+    return-void
+.end method
 
-    .line 308
-    nop
+.method public onRefreshCarrierInfo(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)V
+    .locals 2
+    .parameter "plmn"
+    .parameter "spn"
 
-    :pswitch_data_0
-    .packed-switch 0x0
-        :pswitch_0
-        :pswitch_1
-    .end packed-switch
+    .prologue
+    .line 651
+    iget-object v0, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
+
+    #setter for: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->mPlmn:Ljava/lang/CharSequence;
+    invoke-static {v0, p1}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$802(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
+
+    .line 652
+    iget-object v0, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
+
+    #setter for: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->mSpn:Ljava/lang/CharSequence;
+    invoke-static {v0, p2}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$902(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
+
+    .line 653
+    iget-object v0, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
+
+    iget-object v1, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
+
+    iget-object v1, v1, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->mSimState:Lcom/android/internal/telephony/IccCard$State;
+
+    #calls: Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->updateCarrierStateWithSimStatus(Lcom/android/internal/telephony/IccCard$State;)V
+    invoke-static {v0, v1}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->access$1000(Lcom/android/internal/policy/impl/KeyguardStatusViewManager;Lcom/android/internal/telephony/IccCard$State;)V
+
+    .line 654
+    return-void
+.end method
+
+.method public onTimeChanged()V
+    .locals 1
+
+    .prologue
+    .line 646
+    iget-object v0, p0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager$1;->this$0:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
+
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->refreshDate()V
+
+    .line 647
+    return-void
 .end method
