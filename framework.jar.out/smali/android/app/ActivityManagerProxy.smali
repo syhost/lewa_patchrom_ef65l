@@ -2346,7 +2346,7 @@
     .line 3695
     iget-object v3, p0, Landroid/app/ActivityManagerProxy;->mRemote:Landroid/os/IBinder;
 
-    const/16 v4, 0x91
+    const/16 v4, 0x82
 
     const/4 v5, 0x0
 
