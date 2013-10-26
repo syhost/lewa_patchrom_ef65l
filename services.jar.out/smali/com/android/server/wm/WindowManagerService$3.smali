@@ -1,11 +1,14 @@
 .class Lcom/android/server/wm/WindowManagerService$3;
-.super Landroid/content/BroadcastReceiver;
+.super Ljava/lang/Object;
 .source "WindowManagerService.java"
+
+# interfaces
+.implements Landroid/view/WindowManagerPolicy$OnKeyguardExitResult;
 
 
 # annotations
-.annotation system Ldalvik/annotation/EnclosingClass;
-    value = Lcom/android/server/wm/WindowManagerService;
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lcom/android/server/wm/WindowManagerService;->exitKeyguardSecurely(Landroid/view/IOnKeyguardExitResult;)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -17,75 +20,48 @@
 # instance fields
 .field final synthetic this$0:Lcom/android/server/wm/WindowManagerService;
 
+.field final synthetic val$callback:Landroid/view/IOnKeyguardExitResult;
+
 
 # direct methods
-.method constructor <init>(Lcom/android/server/wm/WindowManagerService;)V
+.method constructor <init>(Lcom/android/server/wm/WindowManagerService;Landroid/view/IOnKeyguardExitResult;)V
     .locals 0
+    .parameter
     .parameter
 
     .prologue
-    .line 318
+    .line 5017
     iput-object p1, p0, Lcom/android/server/wm/WindowManagerService$3;->this$0:Lcom/android/server/wm/WindowManagerService;
 
-    invoke-direct {p0}, Landroid/content/BroadcastReceiver;-><init>()V
+    iput-object p2, p0, Lcom/android/server/wm/WindowManagerService$3;->val$callback:Landroid/view/IOnKeyguardExitResult;
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
 .end method
 
 
 # virtual methods
-.method public onReceive(Landroid/content/Context;Landroid/content/Intent;)V
-    .locals 3
-    .parameter "context"
-    .parameter "intent"
+.method public onKeyguardExitResult(Z)V
+    .locals 1
+    .parameter "success"
 
     .prologue
-    .line 321
-    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService$3;->this$0:Lcom/android/server/wm/WindowManagerService;
-
-    iget-object v0, v0, Lcom/android/server/wm/WindowManagerService;->mPolicy:Landroid/view/WindowManagerPolicy;
-
-    const/4 v1, 0x1
-
-    invoke-interface {v0, v1}, Landroid/view/WindowManagerPolicy;->enableKeyguard(Z)V
-
-    .line 322
-    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService$3;->this$0:Lcom/android/server/wm/WindowManagerService;
-
-    iget-object v1, v0, Lcom/android/server/wm/WindowManagerService;->mKeyguardTokenWatcher:Landroid/os/TokenWatcher;
-
-    monitor-enter v1
-
-    .line 324
+    .line 5020
     :try_start_0
-    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService$3;->this$0:Lcom/android/server/wm/WindowManagerService;
+    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService$3;->val$callback:Landroid/view/IOnKeyguardExitResult;
 
-    const/4 v2, -0x1
+    invoke-interface {v0, p1}, Landroid/view/IOnKeyguardExitResult;->onKeyguardExitResult(Z)V
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
-    #setter for: Lcom/android/server/wm/WindowManagerService;->mAllowDisableKeyguard:I
-    invoke-static {v0, v2}, Lcom/android/server/wm/WindowManagerService;->access$302(Lcom/android/server/wm/WindowManagerService;I)I
-
-    .line 325
-    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService$3;->this$0:Lcom/android/server/wm/WindowManagerService;
-
-    const/4 v2, 0x0
-
-    #setter for: Lcom/android/server/wm/WindowManagerService;->mKeyguardDisabled:Z
-    invoke-static {v0, v2}, Lcom/android/server/wm/WindowManagerService;->access$102(Lcom/android/server/wm/WindowManagerService;Z)Z
-
-    .line 326
-    monitor-exit v1
-
-    .line 327
+    .line 5024
+    :goto_0
     return-void
 
-    .line 326
-    :catchall_0
+    .line 5021
+    :catch_0
     move-exception v0
 
-    monitor-exit v1
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
-
-    throw v0
+    goto :goto_0
 .end method
