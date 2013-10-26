@@ -256,6 +256,11 @@
     .line 696
     invoke-direct {p0}, Landroid/app/INotificationManager$Stub;-><init>()V
 
+    new-instance v12, Ljava/util/HashMap;
+
+    invoke-direct {v12}, Ljava/util/HashMap;-><init>()V
+
+    iput-object v12, p0, Lcom/android/server/NotificationManagerService;->mBlacklist:Ljava/util/Map;
     .line 127
     new-instance v12, Landroid/os/Binder;
 
@@ -4590,6 +4595,15 @@
 
     .line 1005
     .local v29, isSystemNotification:Z
+    move-object/from16 v0, p1
+
+    move-object/from16 v1, p0
+
+    invoke-static {v0, v1}, Lcom/android/server/NotificationManagerService$Injector;->checkBlockCall(Ljava/lang/String;Lcom/android/server/NotificationManagerService;)Z
+
+    move-result v5
+
+    if-nez v5, :cond_0
     if-nez v29, :cond_3
 
     .line 1006
@@ -5246,7 +5260,15 @@
 
     and-int/2addr v5, v6
 
-    if-nez v5, :cond_16
+    if-eqz v5, :cond_lewa_1
+
+    invoke-static/range {p0 .. p1}, Lcom/android/server/NotificationManagerService$Injector;->isInCall(Lcom/android/server/NotificationManagerService;Ljava/lang/String;)Z
+
+    move-result v5
+
+    if-eqz v5, :cond_16
+
+    :cond_lewa_1
 
     if-eqz v31, :cond_f
 
