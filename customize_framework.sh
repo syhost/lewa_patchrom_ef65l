@@ -16,11 +16,16 @@ then
             rm -rf "$file"
     done
 
-	rm -rf "$BUILD_OUT/framework/smali/com/google/android/mms"
+	
+	
 	
 	mkdir -p "$BUILD_OUT/$SEP_FRAME/smali"
 	mkdir -p "$BUILD_OUT/$SEP_FRAME/smali/android"
+	mkdir -p "$BUILD_OUT/$SEP_FRAME/smali/com"
+	mkdir -p "$BUILD_OUT/$SEP_FRAME/smali/com/google"
+	mkdir -p "$BUILD_OUT/$SEP_FRAME/smali/com/google/android"
 	
+	mv "$BUILD_OUT/framework/smali/com/google/android/mms" "$BUILD_OUT/$SEP_FRAME/smali/com/google/android/"
 	mv "$BUILD_OUT/framework/smali/android/widget" "$BUILD_OUT/$SEP_FRAME/smali/android/"
 	
 #    rm -rf "$BUILD_OUT/framework/smali/com/google"
@@ -38,7 +43,7 @@ then
             rm -rf "$file"
     done
 
-	cp -rf "$BUILD_OUT/framework_ext_lewa/smali/com/google/android/mms" "$BUILD_OUT/framework_ext/smali/com/google/android"
+	cp -rf "$BUILD_OUT/$SEP_FRAME/smali/com/google/android/mms" "$BUILD_OUT/framework_ext/smali/com/google/android"
 	mv "$BUILD_OUT/$SEP_FRAME/smali/android/widget/"  "$BUILD_OUT/framework_ext/smali/android/widget"
 	#mv "$BUILD_OUT/$SEP_FRAME/smali/miui/"  "$BUILD_OUT/framework_ext/smali/miui"
 	rm -rf $BUILD_OUT/$SEP_FRAME
