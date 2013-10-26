@@ -780,6 +780,10 @@
 
     iput-object v3, p0, Lcom/android/internal/app/ActionBarImpl;->mContainerView:Lcom/android/internal/widget/ActionBarContainer;
 
+    iget-object v3, p0, Lcom/android/internal/app/ActionBarImpl;->mContainerView:Lcom/android/internal/widget/ActionBarContainer;
+
+    invoke-virtual {v3, v5}, Lcom/android/internal/widget/ActionBarContainer;->setVisibility(I)V
+
     .line 177
     const v3, 0x1020334
 
