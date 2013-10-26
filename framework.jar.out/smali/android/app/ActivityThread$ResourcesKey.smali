@@ -17,8 +17,6 @@
 # instance fields
 .field private final mHash:I
 
-.field private final mIsThemeable:Z
-
 .field private mIsThemeable:Z
     .annotation build Landroid/annotation/LewaHook;
         value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
@@ -31,65 +29,44 @@
 
 
 # direct methods
-.method constructor <init>(Ljava/lang/String;FZ)V
-    .locals 4
+.method constructor <init>(Ljava/lang/String;F)V
+    .locals 3
     .parameter "resDir"
     .parameter "scale"
-    .parameter "isThemeable"
 
     .prologue
-    .line 1487
+    .line 1476
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 1488
+    .line 1477
     iput-object p1, p0, Landroid/app/ActivityThread$ResourcesKey;->mResDir:Ljava/lang/String;
 
-    .line 1489
+    .line 1478
     iput p2, p0, Landroid/app/ActivityThread$ResourcesKey;->mScale:F
 
-    .line 1490
-    iput-boolean p3, p0, Landroid/app/ActivityThread$ResourcesKey;->mIsThemeable:Z
-
-    .line 1491
+    .line 1479
     iget-object v0, p0, Landroid/app/ActivityThread$ResourcesKey;->mResDir:Ljava/lang/String;
 
     invoke-virtual {v0}, Ljava/lang/String;->hashCode()I
 
-    move-result v1
+    move-result v0
 
-    iget-boolean v0, p0, Landroid/app/ActivityThread$ResourcesKey;->mIsThemeable:Z
+    iget v1, p0, Landroid/app/ActivityThread$ResourcesKey;->mScale:F
 
-    if-eqz v0, :cond_0
+    const/high16 v2, 0x4000
 
-    const/4 v0, 0x1
+    mul-float/2addr v1, v2
 
-    :goto_0
-    shl-int/lit8 v0, v0, 0x2
+    float-to-int v1, v1
 
-    add-int/lit8 v0, v0, 0x3
+    add-int/lit8 v1, v1, 0x2
 
-    iget v2, p0, Landroid/app/ActivityThread$ResourcesKey;->mScale:F
-
-    const/high16 v3, 0x4000
-
-    mul-float/2addr v2, v3
-
-    float-to-int v2, v2
-
-    add-int/2addr v0, v2
-
-    shl-int v0, v1, v0
+    shl-int/2addr v0, v1
 
     iput v0, p0, Landroid/app/ActivityThread$ResourcesKey;->mHash:I
 
-    .line 1492
+    .line 1480
     return-void
-
-    .line 1491
-    :cond_0
-    const/4 v0, 0x0
-
-    goto :goto_0
 .end method
 
 .method constructor <init>(Ljava/lang/String;FZ)V
@@ -161,12 +138,12 @@
     .prologue
     const/4 v1, 0x0
 
-    .line 1501
+    .line 1489
     instance-of v2, p1, Landroid/app/ActivityThread$ResourcesKey;
 
     if-nez v2, :cond_1
 
-    .line 1505
+    .line 1493
     :cond_0
     :goto_0
     return v1
@@ -174,10 +151,10 @@
     :cond_1
     move-object v0, p1
 
-    .line 1504
+    .line 1492
     check-cast v0, Landroid/app/ActivityThread$ResourcesKey;
 
-    .line 1505
+    .line 1493
     .local v0, peer:Landroid/app/ActivityThread$ResourcesKey;
     iget-object v2, p0, Landroid/app/ActivityThread$ResourcesKey;->mResDir:Ljava/lang/String;
 
@@ -203,12 +180,6 @@
 
     if-ne v2, v3, :cond_0
 
-    iget-boolean v2, p0, Landroid/app/ActivityThread$ResourcesKey;->mIsThemeable:Z
-
-    iget-boolean v3, v0, Landroid/app/ActivityThread$ResourcesKey;->mIsThemeable:Z
-
-    if-ne v2, v3, :cond_0
-
     const/4 v1, 0x1
 
     goto :goto_0
@@ -218,7 +189,7 @@
     .locals 1
 
     .prologue
-    .line 1496
+    .line 1484
     iget v0, p0, Landroid/app/ActivityThread$ResourcesKey;->mHash:I
 
     return v0
