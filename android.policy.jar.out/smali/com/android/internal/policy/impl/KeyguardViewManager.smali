@@ -423,6 +423,9 @@
 
 .method public declared-synchronized show()V
     .locals 13
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/high16 v12, 0x100
@@ -527,7 +530,7 @@
 
     .line 123
     .local v10, stretch:I
-    const v4, 0x4100800
+    const v4, 0x100900
 
     .line 128
     .local v4, flags:I
