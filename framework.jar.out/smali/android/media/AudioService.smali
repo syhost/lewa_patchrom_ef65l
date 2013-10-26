@@ -66,6 +66,12 @@
 
 .field private static final MSG_PERSIST_RINGER_MODE:I = 0x3
 
+.field private static final MSG_PERSIST_VIBRATE_SETTING:I = 0x16
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field private static final MSG_PERSIST_VOLUME:I = 0x1
 
 .field private static final MSG_PLAY_SOUND_EFFECT:I = 0x6
@@ -157,6 +163,10 @@
 .field private final STREAM_NAMES:[Ljava/lang/String;
 
 .field private final STREAM_VOLUME_ALIAS:[I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private final STREAM_VOLUME_ALIAS_NON_VOICE:[I
 
@@ -1205,14 +1215,14 @@
     :array_a
     .array-data 0x4
         0x0t 0x0t 0x0t 0x0t
-        0x2t 0x0t 0x0t 0x0t
+        0x1t 0x0t 0x0t 0x0t
         0x2t 0x0t 0x0t 0x0t
         0x3t 0x0t 0x0t 0x0t
         0x4t 0x0t 0x0t 0x0t
         0x2t 0x0t 0x0t 0x0t
         0x6t 0x0t 0x0t 0x0t
-        0x2t 0x0t 0x0t 0x0t
-        0x2t 0x0t 0x0t 0x0t
+        0x1t 0x0t 0x0t 0x0t
+        0x0t 0x0t 0x0t 0x0t
         0x3t 0x0t 0x0t 0x0t
     .end array-data
 
@@ -7631,6 +7641,9 @@
 
 .method private readPersistedSettings()V
     .locals 9
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v5, 0x2
@@ -7703,6 +7716,10 @@
     .line 649
     iget-boolean v4, p0, Landroid/media/AudioService;->mHasVibrator:Z
 
+    if-nez v4, :cond_lewa_0
+
+    iget-boolean v4, p0, Landroid/media/AudioService;->mHasVibrator:Z
+
     if-eqz v4, :cond_3
 
     move v4, v5
@@ -7728,8 +7745,8 @@
 
     iput v4, p0, Landroid/media/AudioService;->mVibrateSetting:I
 
-    .line 660
-    const-string/jumbo v4, "mode_ringer_streams_affected"
+    :goto_lewa_0
+    const-string v4, "mode_ringer_streams_affected"
 
     const/16 v5, 0xa6
 
@@ -7833,16 +7850,24 @@
     :cond_3
     move v4, v6
 
-    .line 649
     goto :goto_0
 
     :cond_4
     move v5, v6
 
-    .line 653
     goto :goto_1
 
-    .line 667
+    :cond_lewa_0
+    const-string v4, "vibrate_on"
+
+    invoke-static {v0, v4, v6}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v4
+
+    iput v4, p0, Landroid/media/AudioService;->mVibrateSetting:I
+
+    goto :goto_lewa_0
+
     :cond_5
     iget v4, p0, Landroid/media/AudioService;->mRingerModeAffectedStreams:I
 
@@ -12229,6 +12254,24 @@
     return-void
 .end method
 
+.method persistVibrateSetting()V
+    .locals 3
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Landroid/media/AudioService;->mContentResolver:Landroid/content/ContentResolver;
+
+    const-string v1, "vibrate_on"
+
+    iget v2, p0, Landroid/media/AudioService;->mVibrateSetting:I
+
+    invoke-static {v0, v1, v2}, Landroid/provider/Settings$System;->putInt(Landroid/content/ContentResolver;Ljava/lang/String;I)Z
+
+    return-void
+.end method
+
 .method public playSoundEffect(I)V
     .locals 7
     .parameter "effectType"
@@ -14836,21 +14879,23 @@
 .end method
 
 .method public setVibrateSetting(II)V
-    .locals 1
+    .locals 7
     .parameter "vibrateType"
     .parameter "vibrateSetting"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 1298
+    const/4 v3, 0x0
+
     iget-boolean v0, p0, Landroid/media/AudioService;->mHasVibrator:Z
 
     if-nez v0, :cond_0
 
-    .line 1305
     :goto_0
     return-void
 
-    .line 1300
     :cond_0
     iget v0, p0, Landroid/media/AudioService;->mVibrateSetting:I
 
@@ -14862,6 +14907,20 @@
 
     .line 1303
     invoke-direct {p0, p1}, Landroid/media/AudioService;->broadcastVibrateSetting(I)V
+
+    iget-object v0, p0, Landroid/media/AudioService;->mAudioHandler:Landroid/media/AudioService$AudioHandler;
+
+    const/16 v1, 0x16
+
+    const/4 v2, 0x1
+
+    const/4 v5, 0x0
+
+    move v4, v3
+
+    move v6, v3
+
+    invoke-static/range {v0 .. v6}, Landroid/media/AudioService;->sendMsg(Landroid/os/Handler;IIIILjava/lang/Object;I)V
 
     goto :goto_0
 .end method

@@ -71,6 +71,12 @@
 
 .field public mIsThemeApk:Z
 
+.field public mIsThemeApk:Z
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field public mOperationPending:Z
 
 .field public mOriginalPackages:Ljava/util/ArrayList;
@@ -99,6 +105,21 @@
 .field public mSignatures:[Landroid/content/pm/Signature;
 
 .field public final mThemeInfos:Ljava/util/ArrayList;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "Ljava/util/ArrayList",
+            "<",
+            "Landroid/content/pm/ThemeInfo;",
+            ">;"
+        }
+    .end annotation
+.end field
+
+.field public final mThemeInfos:Ljava/util/ArrayList;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "Ljava/util/ArrayList",
@@ -251,139 +272,120 @@
 
     const/4 v1, 0x0
 
-    .line 3244
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 3152
     new-instance v0, Landroid/content/pm/ApplicationInfo;
 
     invoke-direct {v0}, Landroid/content/pm/ApplicationInfo;-><init>()V
 
     iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->applicationInfo:Landroid/content/pm/ApplicationInfo;
 
-    .line 3154
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V
 
     iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->permissions:Ljava/util/ArrayList;
 
-    .line 3155
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V
 
     iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->permissionGroups:Ljava/util/ArrayList;
 
-    .line 3156
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V
 
     iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->activities:Ljava/util/ArrayList;
 
-    .line 3157
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V
 
     iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->receivers:Ljava/util/ArrayList;
 
-    .line 3158
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V
 
     iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->providers:Ljava/util/ArrayList;
 
-    .line 3159
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V
 
     iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->services:Ljava/util/ArrayList;
 
-    .line 3160
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V
 
     iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->instrumentation:Ljava/util/ArrayList;
 
-    .line 3162
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->requestedPermissions:Ljava/util/ArrayList;
 
-    .line 3163
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->requestedPermissionsRequired:Ljava/util/ArrayList;
 
-    .line 3167
     iput-object v2, p0, Landroid/content/pm/PackageParser$Package;->usesLibraries:Ljava/util/ArrayList;
 
-    .line 3168
     iput-object v2, p0, Landroid/content/pm/PackageParser$Package;->usesOptionalLibraries:Ljava/util/ArrayList;
 
-    .line 3169
     iput-object v2, p0, Landroid/content/pm/PackageParser$Package;->usesLibraryFiles:[Ljava/lang/String;
 
-    .line 3171
     iput-object v2, p0, Landroid/content/pm/PackageParser$Package;->mOriginalPackages:Ljava/util/ArrayList;
 
-    .line 3172
     iput-object v2, p0, Landroid/content/pm/PackageParser$Package;->mRealPackage:Ljava/lang/String;
 
-    .line 3173
     iput-object v2, p0, Landroid/content/pm/PackageParser$Package;->mAdoptPermissions:Ljava/util/ArrayList;
 
-    .line 3176
     iput-object v2, p0, Landroid/content/pm/PackageParser$Package;->mAppMetaData:Landroid/os/Bundle;
 
-    .line 3198
     iput v1, p0, Landroid/content/pm/PackageParser$Package;->mPreferredOrder:I
 
-    .line 3208
     iput-boolean v1, p0, Landroid/content/pm/PackageParser$Package;->mIsThemeApk:Z
 
-    .line 3211
+    iput-boolean v1, p0, Landroid/content/pm/PackageParser$Package;->mIsThemeApk:Z
+
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V
 
     iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->mThemeInfos:Ljava/util/ArrayList;
 
-    .line 3228
+    new-instance v0, Ljava/util/ArrayList;
+
+    invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V
+
+    iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->mThemeInfos:Ljava/util/ArrayList;
+
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v0, p0, Landroid/content/pm/PackageParser$Package;->configPreferences:Ljava/util/ArrayList;
 
-    .line 3234
     iput-object v2, p0, Landroid/content/pm/PackageParser$Package;->reqFeatures:Ljava/util/ArrayList;
 
-    .line 3245
     iput-object p1, p0, Landroid/content/pm/PackageParser$Package;->packageName:Ljava/lang/String;
 
-    .line 3246
     iget-object v0, p0, Landroid/content/pm/PackageParser$Package;->applicationInfo:Landroid/content/pm/ApplicationInfo;
 
     iput-object p1, v0, Landroid/content/pm/ApplicationInfo;->packageName:Ljava/lang/String;
 
-    .line 3247
     iget-object v0, p0, Landroid/content/pm/PackageParser$Package;->applicationInfo:Landroid/content/pm/ApplicationInfo;
 
     const/4 v1, -0x1
 
     iput v1, v0, Landroid/content/pm/ApplicationInfo;->uid:I
 
-    .line 3248
     return-void
 .end method
 

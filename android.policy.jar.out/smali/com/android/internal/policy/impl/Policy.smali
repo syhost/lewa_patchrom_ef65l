@@ -159,12 +159,14 @@
 .method public makeNewLayoutInflater(Landroid/content/Context;)Landroid/view/LayoutInflater;
     .locals 1
     .parameter "context"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 67
-    new-instance v0, Lcom/android/internal/policy/impl/PhoneLayoutInflater;
+    new-instance v0, Lcom/android/internal/policy/impl/LewaPhoneLayoutInflater;
 
-    invoke-direct {v0, p1}, Lcom/android/internal/policy/impl/PhoneLayoutInflater;-><init>(Landroid/content/Context;)V
+    invoke-direct {v0, p1}, Lcom/android/internal/policy/impl/LewaPhoneLayoutInflater;-><init>(Landroid/content/Context;)V
 
     return-object v0
 .end method
@@ -184,12 +186,14 @@
 
 .method public makeNewWindowManager()Landroid/view/WindowManagerPolicy;
     .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 71
-    new-instance v0, Lcom/android/internal/policy/impl/PhoneWindowManager;
+    new-instance v0, Lcom/android/internal/policy/impl/LewaPhoneWindowManager;
 
-    invoke-direct {v0}, Lcom/android/internal/policy/impl/PhoneWindowManager;-><init>()V
+    invoke-direct {v0}, Lcom/android/internal/policy/impl/LewaPhoneWindowManager;-><init>()V
 
     return-object v0
 .end method

@@ -23,6 +23,7 @@
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Landroid/provider/ContactsContract$RawContacts$EntityIteratorImpl;,
+        Landroid/provider/ContactsContract$RawContacts$StickerDisplayPhoto;,
         Landroid/provider/ContactsContract$RawContacts$DisplayPhoto;,
         Landroid/provider/ContactsContract$RawContacts$StreamItems;,
         Landroid/provider/ContactsContract$RawContacts$Entity;,
@@ -47,7 +48,55 @@
 
 .field public static final CONTENT_TYPE:Ljava/lang/String; = "vnd.android.cursor.dir/raw_contact"
 
-.field public static final CONTENT_URI:Landroid/net/Uri;
+.field public static final CONTENT_URI:Landroid/net/Uri; = null
+
+.field public static final INDICATE_PHONE:I = -0x1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field public static final INDICATE_SIM:I = 0x0
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field public static final INDICATE_SIM1:I = 0x1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field public static final INDICATE_SIM2:I = 0x2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field public static final INDICATE_USIM:I = 0xa
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field public static final INDICATE_USIM1:I = 0xb
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field public static final INDICATE_USIM2:I = 0xc
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field public static final TIMESTAMP:Ljava/lang/String; = "timestamp"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 
 # direct methods

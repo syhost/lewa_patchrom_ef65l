@@ -6,6 +6,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Landroid/widget/TimePicker$Injector;,
         Landroid/widget/TimePicker$SavedState;,
         Landroid/widget/TimePicker$OnTimeChangedListener;
     }
@@ -135,17 +136,22 @@
 
     .line 138
     .local v1, attributesArray:Landroid/content/res/TypedArray;
+    invoke-static {p1}, Llewa/util/LewaUiUtil;->isV5Ui(Landroid/content/Context;)Z
+
+    move-result v4
+
+    if-nez v4, :cond_lewa_0
+
     const v4, 0x10900bc
 
     invoke-virtual {v1, v7, v4}, Landroid/content/res/TypedArray;->getResourceId(II)I
 
     move-result v3
 
-    .line 140
     .local v3, layoutResourceId:I
+    :goto_lewa_0
     invoke-virtual {v1}, Landroid/content/res/TypedArray;->recycle()V
 
-    .line 142
     const-string v4, "layout_inflater"
 
     invoke-virtual {p1, v4}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
@@ -160,6 +166,10 @@
 
     .line 147
     const v4, 0x102035f
+
+    invoke-static {p1, v4}, Landroid/widget/TimePicker$Injector;->getHourResourceId(Landroid/content/Context;I)I
+
+    move-result v4
 
     invoke-virtual {p0, v4}, Landroid/widget/TimePicker;->findViewById(I)Landroid/view/View;
 
@@ -220,6 +230,10 @@
     .line 171
     :cond_0
     const v4, 0x1020360
+
+    invoke-static {p1, v4}, Landroid/widget/TimePicker$Injector;->getMinuteResourceId(Landroid/content/Context;I)I
+
+    move-result v4
 
     invoke-virtual {p0, v4}, Landroid/widget/TimePicker;->findViewById(I)Landroid/view/View;
 
@@ -291,32 +305,30 @@
 
     iput-object v4, p0, Landroid/widget/TimePicker;->mAmPmStrings:[Ljava/lang/String;
 
-    .line 206
     const v4, 0x1020361
+
+    invoke-static {p1, v4}, Landroid/widget/TimePicker$Injector;->getAmpmResourceId(Landroid/content/Context;I)I
+
+    move-result v4
 
     invoke-virtual {p0, v4}, Landroid/widget/TimePicker;->findViewById(I)Landroid/view/View;
 
     move-result-object v0
 
-    .line 207
     .local v0, amPmView:Landroid/view/View;
     instance-of v4, v0, Landroid/widget/Button;
 
     if-eqz v4, :cond_3
 
-    .line 208
     iput-object v10, p0, Landroid/widget/TimePicker;->mAmPmSpinner:Landroid/widget/NumberPicker;
 
-    .line 209
     iput-object v10, p0, Landroid/widget/TimePicker;->mAmPmSpinnerInput:Landroid/widget/EditText;
 
-    .line 210
     check-cast v0, Landroid/widget/Button;
 
     .end local v0           #amPmView:Landroid/view/View;
     iput-object v0, p0, Landroid/widget/TimePicker;->mAmPmButton:Landroid/widget/Button;
 
-    .line 211
     iget-object v4, p0, Landroid/widget/TimePicker;->mAmPmButton:Landroid/widget/Button;
 
     new-instance v5, Landroid/widget/TimePicker$4;
@@ -367,63 +379,72 @@
 
     invoke-virtual {p0, v4}, Landroid/widget/TimePicker;->setCurrentMinute(Ljava/lang/Integer;)V
 
-    .line 248
     invoke-virtual {p0}, Landroid/widget/TimePicker;->isEnabled()Z
 
     move-result v4
 
     if-nez v4, :cond_1
 
-    .line 249
     invoke-virtual {p0, v7}, Landroid/widget/TimePicker;->setEnabled(Z)V
 
-    .line 253
     :cond_1
     invoke-direct {p0}, Landroid/widget/TimePicker;->setContentDescriptions()V
 
-    .line 256
     invoke-virtual {p0}, Landroid/widget/TimePicker;->getImportantForAccessibility()I
 
     move-result v4
 
     if-nez v4, :cond_2
 
-    .line 257
     invoke-virtual {p0, v8}, Landroid/widget/TimePicker;->setImportantForAccessibility(I)V
 
-    .line 259
     :cond_2
+    iget-object v4, p0, Landroid/widget/TimePicker;->mHourSpinner:Landroid/widget/NumberPicker;
+
+    invoke-direct {p0, v4}, Landroid/widget/TimePicker;->setPosState(Landroid/widget/NumberPicker;)V
+
+    iget-object v4, p0, Landroid/widget/TimePicker;->mMinuteSpinner:Landroid/widget/NumberPicker;
+
+    invoke-direct {p0, v4}, Landroid/widget/TimePicker;->setPosState(Landroid/widget/NumberPicker;)V
+
+    iget-object v4, p0, Landroid/widget/TimePicker;->mAmPmSpinner:Landroid/widget/NumberPicker;
+
+    invoke-direct {p0, v4}, Landroid/widget/TimePicker;->setPosState(Landroid/widget/NumberPicker;)V
+
     return-void
 
-    .line 220
+    .end local v2           #inflater:Landroid/view/LayoutInflater;
+    .end local v3           #layoutResourceId:I
+    :cond_lewa_0
+    const v3, 0x9090014
+
+    goto/16 :goto_lewa_0
+
     .restart local v0       #amPmView:Landroid/view/View;
+    .restart local v2       #inflater:Landroid/view/LayoutInflater;
+    .restart local v3       #layoutResourceId:I
     :cond_3
     iput-object v10, p0, Landroid/widget/TimePicker;->mAmPmButton:Landroid/widget/Button;
 
-    .line 221
     check-cast v0, Landroid/widget/NumberPicker;
 
     .end local v0           #amPmView:Landroid/view/View;
     iput-object v0, p0, Landroid/widget/TimePicker;->mAmPmSpinner:Landroid/widget/NumberPicker;
 
-    .line 222
     iget-object v4, p0, Landroid/widget/TimePicker;->mAmPmSpinner:Landroid/widget/NumberPicker;
 
     invoke-virtual {v4, v7}, Landroid/widget/NumberPicker;->setMinValue(I)V
 
-    .line 223
     iget-object v4, p0, Landroid/widget/TimePicker;->mAmPmSpinner:Landroid/widget/NumberPicker;
 
     invoke-virtual {v4, v8}, Landroid/widget/NumberPicker;->setMaxValue(I)V
 
-    .line 224
     iget-object v4, p0, Landroid/widget/TimePicker;->mAmPmSpinner:Landroid/widget/NumberPicker;
 
     iget-object v5, p0, Landroid/widget/TimePicker;->mAmPmStrings:[Ljava/lang/String;
 
     invoke-virtual {v4, v5}, Landroid/widget/NumberPicker;->setDisplayedValues([Ljava/lang/String;)V
 
-    .line 225
     iget-object v4, p0, Landroid/widget/TimePicker;->mAmPmSpinner:Landroid/widget/NumberPicker;
 
     new-instance v5, Landroid/widget/TimePicker$5;
@@ -450,7 +471,7 @@
 
     invoke-virtual {v4, v5}, Landroid/widget/EditText;->setImeOptions(I)V
 
-    goto :goto_0
+    goto/16 :goto_0
 .end method
 
 .method static synthetic access$000(Landroid/widget/TimePicker;)V
@@ -661,6 +682,32 @@
     iput-object v0, p0, Landroid/widget/TimePicker;->mTempCalendar:Ljava/util/Calendar;
 
     goto :goto_0
+.end method
+
+.method private setPosState(Landroid/widget/NumberPicker;)V
+    .locals 2
+    .parameter "v"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    instance-of v1, p1, Llewa/internal/v5/widget/NumberPicker;
+
+    if-eqz v1, :cond_0
+
+    move-object v0, p1
+
+    check-cast v0, Llewa/internal/v5/widget/NumberPicker;
+
+    .local v0, numberpicker:Llewa/internal/v5/widget/NumberPicker;
+    const/4 v1, 0x1
+
+    invoke-virtual {v0, v1}, Llewa/internal/v5/widget/NumberPicker;->setPositionState(I)V
+
+    .end local v0           #numberpicker:Llewa/internal/v5/widget/NumberPicker;
+    :cond_0
+    return-void
 .end method
 
 .method private trySetContentDescription(Landroid/view/View;II)V

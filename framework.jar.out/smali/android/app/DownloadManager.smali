@@ -8,7 +8,8 @@
     value = {
         Landroid/app/DownloadManager$CursorTranslator;,
         Landroid/app/DownloadManager$Query;,
-        Landroid/app/DownloadManager$Request;
+        Landroid/app/DownloadManager$Request;,
+        Landroid/app/DownloadManager$Injector;
     }
 .end annotation
 
@@ -695,6 +696,18 @@
     .line 906
     .local v1, id:J
     return-wide v1
+.end method
+
+.method getBaseUri()Landroid/net/Uri;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Landroid/app/DownloadManager;->mBaseUri:Landroid/net/Uri;
+
+    return-object v0
 .end method
 
 .method getDownloadUri(J)Landroid/net/Uri;

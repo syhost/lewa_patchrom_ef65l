@@ -15622,6 +15622,35 @@
     return-void
 .end method
 
+.method public startActionMode()V
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Landroid/widget/AbsListView;->mChoiceActionMode:Landroid/view/ActionMode;
+
+    if-nez v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/AbsListView;->mMultiChoiceModeCallback:Landroid/widget/AbsListView$MultiChoiceModeWrapper;
+
+    invoke-virtual {p0, v0}, Landroid/widget/AbsListView;->startActionMode(Landroid/view/ActionMode$Callback;)Landroid/view/ActionMode;
+
+    move-result-object v0
+
+    iput-object v0, p0, Landroid/widget/AbsListView;->mChoiceActionMode:Landroid/view/ActionMode;
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x0
+
+    invoke-virtual {p0, v0}, Landroid/widget/AbsListView;->performHapticFeedback(I)Z
+
+    :cond_0
+    return-void
+.end method
+
 .method touchModeDrawsInPressedState()Z
     .locals 1
 

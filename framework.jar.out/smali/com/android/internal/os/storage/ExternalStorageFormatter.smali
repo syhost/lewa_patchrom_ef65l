@@ -379,12 +379,14 @@
 .end method
 
 .method public onStartCommand(Landroid/content/Intent;II)I
-    .locals 3
+    .locals 4
     .parameter "intent"
     .parameter "flags"
     .parameter "startId"
 
     .prologue
+    const/4 v3, 0x3
+
     const/4 v2, 0x1
 
     .line 80
@@ -430,29 +432,24 @@
 
     iput-object v0, p0, Lcom/android/internal/os/storage/ExternalStorageFormatter;->mStorageVolume:Landroid/os/storage/StorageVolume;
 
-    .line 89
     iget-object v0, p0, Lcom/android/internal/os/storage/ExternalStorageFormatter;->mProgressDialog:Landroid/app/ProgressDialog;
 
     if-nez v0, :cond_3
 
-    .line 90
     new-instance v0, Landroid/app/ProgressDialog;
 
-    invoke-direct {v0, p0}, Landroid/app/ProgressDialog;-><init>(Landroid/content/Context;)V
+    invoke-direct {v0, p0, v3}, Landroid/app/ProgressDialog;-><init>(Landroid/content/Context;I)V
 
     iput-object v0, p0, Lcom/android/internal/os/storage/ExternalStorageFormatter;->mProgressDialog:Landroid/app/ProgressDialog;
 
-    .line 91
     iget-object v0, p0, Lcom/android/internal/os/storage/ExternalStorageFormatter;->mProgressDialog:Landroid/app/ProgressDialog;
 
     invoke-virtual {v0, v2}, Landroid/app/ProgressDialog;->setIndeterminate(Z)V
 
-    .line 92
     iget-object v0, p0, Lcom/android/internal/os/storage/ExternalStorageFormatter;->mProgressDialog:Landroid/app/ProgressDialog;
 
     invoke-virtual {v0, v2}, Landroid/app/ProgressDialog;->setCancelable(Z)V
 
-    .line 93
     iget-object v0, p0, Lcom/android/internal/os/storage/ExternalStorageFormatter;->mProgressDialog:Landroid/app/ProgressDialog;
 
     invoke-virtual {v0}, Landroid/app/ProgressDialog;->getWindow()Landroid/view/Window;
@@ -484,9 +481,7 @@
 
     .line 101
     :cond_3
-    const/4 v0, 0x3
-
-    return v0
+    return v3
 .end method
 
 .method public updateProgressDialog(I)V
@@ -494,33 +489,30 @@
     .parameter "msg"
 
     .prologue
-    .line 222
     iget-object v0, p0, Lcom/android/internal/os/storage/ExternalStorageFormatter;->mProgressDialog:Landroid/app/ProgressDialog;
 
     if-nez v0, :cond_0
 
-    .line 223
     new-instance v0, Landroid/app/ProgressDialog;
 
-    invoke-direct {v0, p0}, Landroid/app/ProgressDialog;-><init>(Landroid/content/Context;)V
+    const/4 v1, 0x3
+
+    invoke-direct {v0, p0, v1}, Landroid/app/ProgressDialog;-><init>(Landroid/content/Context;I)V
 
     iput-object v0, p0, Lcom/android/internal/os/storage/ExternalStorageFormatter;->mProgressDialog:Landroid/app/ProgressDialog;
 
-    .line 224
     iget-object v0, p0, Lcom/android/internal/os/storage/ExternalStorageFormatter;->mProgressDialog:Landroid/app/ProgressDialog;
 
     const/4 v1, 0x1
 
     invoke-virtual {v0, v1}, Landroid/app/ProgressDialog;->setIndeterminate(Z)V
 
-    .line 225
     iget-object v0, p0, Lcom/android/internal/os/storage/ExternalStorageFormatter;->mProgressDialog:Landroid/app/ProgressDialog;
 
     const/4 v1, 0x0
 
     invoke-virtual {v0, v1}, Landroid/app/ProgressDialog;->setCancelable(Z)V
 
-    .line 226
     iget-object v0, p0, Lcom/android/internal/os/storage/ExternalStorageFormatter;->mProgressDialog:Landroid/app/ProgressDialog;
 
     invoke-virtual {v0}, Landroid/app/ProgressDialog;->getWindow()Landroid/view/Window;

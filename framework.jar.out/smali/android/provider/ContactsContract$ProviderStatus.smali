@@ -21,6 +21,12 @@
 
 .field public static final DATA1:Ljava/lang/String; = "data1"
 
+.field public static final SIM_CONTACT_CONTENT_URI:Landroid/net/Uri; = null
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field public static final STATUS:Ljava/lang/String; = "status"
 
 .field public static final STATUS_CHANGING_LOCALE:I = 0x3
@@ -49,6 +55,16 @@
     move-result-object v0
 
     sput-object v0, Landroid/provider/ContactsContract$ProviderStatus;->CONTENT_URI:Landroid/net/Uri;
+
+    sget-object v0, Landroid/provider/ContactsContract;->AUTHORITY_URI:Landroid/net/Uri;
+
+    const-string v1, "provider_sim_contact_status"
+
+    invoke-static {v0, v1}, Landroid/net/Uri;->withAppendedPath(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v0
+
+    sput-object v0, Landroid/provider/ContactsContract$ProviderStatus;->SIM_CONTACT_CONTENT_URI:Landroid/net/Uri;
 
     return-void
 .end method

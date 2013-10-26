@@ -3,6 +3,14 @@
 .source "DateFormat.java"
 
 
+# annotations
+.annotation system Ldalvik/annotation/MemberClasses;
+    value = {
+        Landroid/text/format/DateFormat$Injector;
+    }
+.end annotation
+
+
 # static fields
 .field public static final AM_PM:C = 'a'
 
@@ -1294,28 +1302,34 @@
 .method public static is24HourFormat(Landroid/content/Context;)Z
     .locals 9
     .parameter "context"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v6, 0x0
 
     const/4 v0, 0x1
 
-    .line 204
     invoke-virtual {p0}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
 
     move-result-object v7
 
-    const-string/jumbo v8, "time_12_24"
+    const-string v8, "time_12_24"
 
     invoke-static {v7, v8}, Landroid/provider/Settings$System;->getString(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v5
 
-    .line 207
     .local v5, value:Ljava/lang/String;
     if-nez v5, :cond_1
 
-    .line 208
+    invoke-static {p0}, Landroid/text/format/DateFormat$Injector;->isSetTimeFormatHour(Landroid/content/Context;)Z
+
+    move-result v7
+
+    if-nez v7, :cond_lewa_0
+
     invoke-virtual {p0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v7
@@ -1346,29 +1360,25 @@
 
     if-eqz v8, :cond_0
 
-    .line 212
     sget-boolean v0, Landroid/text/format/DateFormat;->sIs24Hour:Z
 
     monitor-exit v7
 
-    .line 240
     .end local v1           #locale:Ljava/util/Locale;
+    :cond_lewa_0
     :goto_0
     return v0
 
-    .line 214
     .restart local v1       #locale:Ljava/util/Locale;
     :cond_0
     monitor-exit v7
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 216
     invoke-static {v0, v1}, Ljava/text/DateFormat;->getTimeInstance(ILjava/util/Locale;)Ljava/text/DateFormat;
 
     move-result-object v2
 
-    .line 220
     .local v2, natural:Ljava/text/DateFormat;
     instance-of v7, v2, Ljava/text/SimpleDateFormat;
 

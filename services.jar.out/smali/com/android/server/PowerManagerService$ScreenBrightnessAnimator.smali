@@ -427,26 +427,30 @@
     .parameter "sensorTarget"
     .parameter "mask"
     .parameter "animationDuration"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v1, 0x1
 
     const/4 v2, 0x0
 
-    .line 2474
     monitor-enter p0
 
-    .line 2475
+    :try_start_0
+    iget-object v3, p0, Lcom/android/server/PowerManagerService$ScreenBrightnessAnimator;->this$0:Lcom/android/server/PowerManagerService;
+
+    invoke-static {v3, p3, p1}, Lcom/android/server/PowerManagerService$Injector;->_setButtonBrightness(Lcom/android/server/PowerManagerService;II)V
+
     and-int/lit8 v3, p3, 0x2
 
     if-nez v3, :cond_2
 
-    .line 2477
     and-int/lit8 v2, p3, 0x4
 
     if-eqz v2, :cond_0
 
-    .line 2478
     :try_start_0
     invoke-static {}, Lcom/android/server/PowerManagerService;->access$2800()I
 
@@ -462,7 +466,7 @@
 
     move-result-object v2
 
-    invoke-virtual {v2, p1}, Lcom/android/server/LightsService$Light;->setBrightness(I)V
+    #invoke-virtual {v2, p1}, Lcom/android/server/LightsService$Light;->setBrightness(I)V
 
     .line 2481
     :cond_0
@@ -936,6 +940,9 @@
 
 .method protected onLooperPrepared()V
     .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 2333

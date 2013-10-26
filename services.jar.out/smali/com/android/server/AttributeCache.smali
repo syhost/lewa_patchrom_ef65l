@@ -373,6 +373,9 @@
 .method public updateConfiguration(Landroid/content/res/Configuration;)V
     .locals 2
     .parameter "config"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 84
@@ -388,7 +391,7 @@
 
     .line 86
     .local v0, changes:I
-    const v1, -0x400000a1
+    const v1, -0x400800a1
 
     and-int/2addr v1, v0
 

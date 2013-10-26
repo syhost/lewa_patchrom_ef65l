@@ -47,6 +47,18 @@
     return-void
 .end method
 
+.method private isSetActionModeTile()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/4 v0, 0x0
+
+    return v0
+.end method
+
 
 # virtual methods
 .method public onActionItemClicked(Landroid/view/ActionMode;Landroid/view/MenuItem;)Z
@@ -102,6 +114,9 @@
     .locals 8
     .parameter "mode"
     .parameter "menu"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v7, 0x6
@@ -153,6 +168,12 @@
 
     .line 2662
     .local v0, allowText:Z
+    invoke-direct {p0}, Landroid/widget/Editor$SelectionActionModeCallback;->isSetActionModeTile()Z
+
+    move-result v5
+
+    if-eqz v5, :cond_lewa_0
+
     iget-object v5, p0, Landroid/widget/Editor$SelectionActionModeCallback;->this$0:Landroid/widget/Editor;
 
     #getter for: Landroid/widget/Editor;->mTextView:Landroid/widget/TextView;
@@ -172,29 +193,24 @@
 
     invoke-virtual {p1, v5}, Landroid/view/ActionMode;->setTitle(Ljava/lang/CharSequence;)V
 
-    .line 2664
+    :cond_lewa_0
     const/4 v5, 0x0
 
     invoke-virtual {p1, v5}, Landroid/view/ActionMode;->setSubtitle(Ljava/lang/CharSequence;)V
 
-    .line 2665
     invoke-virtual {p1, v4}, Landroid/view/ActionMode;->setTitleOptionalHint(Z)V
 
-    .line 2667
     const/4 v1, 0x0
 
-    .line 2668
     .local v1, selectAllIconId:I
     if-nez v0, :cond_0
 
-    .line 2670
     const/4 v5, 0x3
 
     invoke-virtual {v2, v5, v3}, Landroid/content/res/TypedArray;->getResourceId(II)I
 
     move-result v1
 
-    .line 2674
     :cond_0
     const v5, 0x102001f
 

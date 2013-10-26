@@ -99,36 +99,40 @@
 
     move-result-object v1
 
-    .line 7743
     .local v1, intent:Landroid/content/Intent;
     invoke-virtual {v1, p2}, Landroid/content/Intent;->setData(Landroid/net/Uri;)Landroid/content/Intent;
 
-    .line 7744
     invoke-virtual {v1, p1}, Landroid/content/Intent;->setSourceBounds(Landroid/graphics/Rect;)V
 
-    .line 7745
-    const-string/jumbo v3, "mode"
+    const-string v3, "mode"
 
     invoke-virtual {v1, v3, p3}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
 
-    .line 7746
     const-string v3, "exclude_mimes"
 
     invoke-virtual {v1, v3, p4}, Landroid/content/Intent;->putExtra(Ljava/lang/String;[Ljava/lang/String;)Landroid/content/Intent;
 
-    .line 7747
+    :try_start_0
     invoke-virtual {p0, v1}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
+    :try_end_0
+    .catch Landroid/content/ActivityNotFoundException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 7748
+    :goto_2
     return-void
 
-    .line 7736
     .end local v1           #intent:Landroid/content/Intent;
     .end local v2           #intentFlags:I
     :cond_1
     const v2, 0x10008000
 
     goto :goto_1
+
+    .restart local v1       #intent:Landroid/content/Intent;
+    .restart local v2       #intentFlags:I
+    :catch_0
+    move-exception v3
+
+    goto :goto_2
 .end method
 
 .method public static showQuickContact(Landroid/content/Context;Landroid/view/View;Landroid/net/Uri;I[Ljava/lang/String;)V

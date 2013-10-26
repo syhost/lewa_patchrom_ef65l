@@ -21,6 +21,7 @@
         Landroid/provider/ContactsContract$CommonDataKinds$Website;,
         Landroid/provider/ContactsContract$CommonDataKinds$GroupMembership;,
         Landroid/provider/ContactsContract$CommonDataKinds$Note;,
+        Landroid/provider/ContactsContract$CommonDataKinds$StickerPhoto;,
         Landroid/provider/ContactsContract$CommonDataKinds$Photo;,
         Landroid/provider/ContactsContract$CommonDataKinds$Event;,
         Landroid/provider/ContactsContract$CommonDataKinds$Relation;,
@@ -31,6 +32,7 @@
         Landroid/provider/ContactsContract$CommonDataKinds$Phone;,
         Landroid/provider/ContactsContract$CommonDataKinds$Nickname;,
         Landroid/provider/ContactsContract$CommonDataKinds$StructuredName;,
+        Landroid/provider/ContactsContract$CommonDataKinds$LocalGroup;,
         Landroid/provider/ContactsContract$CommonDataKinds$CommonColumns;,
         Landroid/provider/ContactsContract$CommonDataKinds$BaseTypes;
     }

@@ -5352,6 +5352,102 @@
     goto :goto_0
 .end method
 
+.method public static isRestrictedNumber(Ljava/lang/String;)Z
+    .locals 6
+    .parameter "number"
+
+    .prologue
+    invoke-static {}, Landroid/app/ActivityManager;->isUserAMonkey()Z
+
+    move-result v5
+
+    if-eqz v5, :cond_1
+
+    invoke-static {p0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v5
+
+    if-nez v5, :cond_1
+
+    const-string v5, "persist.radio.limitation.List"
+
+    invoke-static {v5}, Landroid/os/SystemProperties;->get(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v3
+
+    .local v3, numbers:Ljava/lang/String;
+    invoke-static {v3}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v5
+
+    if-nez v5, :cond_1
+
+    const-string v5, ","
+
+    invoke-virtual {v3, v5}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    move-result-object v0
+
+    .local v0, arr$:[Ljava/lang/String;
+    array-length v2, v0
+
+    .local v2, len$:I
+    const/4 v1, 0x0
+
+    .local v1, i$:I
+    :goto_0
+    if-ge v1, v2, :cond_1
+
+    aget-object v4, v0, v1
+
+    .local v4, restrictedNumber:Ljava/lang/String;
+    invoke-static {v4}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v5
+
+    if-nez v5, :cond_0
+
+    invoke-virtual {v4}, Ljava/lang/String;->trim()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-virtual {p0, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v5
+
+    if-eqz v5, :cond_0
+
+    const/4 v5, 0x1
+
+    .end local v0           #arr$:[Ljava/lang/String;
+    .end local v1           #i$:I
+    .end local v2           #len$:I
+    .end local v3           #numbers:Ljava/lang/String;
+    .end local v4           #restrictedNumber:Ljava/lang/String;
+    :goto_1
+    return v5
+
+    .restart local v0       #arr$:[Ljava/lang/String;
+    .restart local v1       #i$:I
+    .restart local v2       #len$:I
+    .restart local v3       #numbers:Ljava/lang/String;
+    .restart local v4       #restrictedNumber:Ljava/lang/String;
+    :cond_0
+    add-int/lit8 v1, v1, 0x1
+
+    goto :goto_0
+
+    .end local v0           #arr$:[Ljava/lang/String;
+    .end local v1           #i$:I
+    .end local v2           #len$:I
+    .end local v3           #numbers:Ljava/lang/String;
+    .end local v4           #restrictedNumber:Ljava/lang/String;
+    :cond_1
+    const/4 v5, 0x0
+
+    goto :goto_1
+.end method
+
 .method private static isSeparator(C)Z
     .locals 1
     .parameter "ch"

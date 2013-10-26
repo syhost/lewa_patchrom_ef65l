@@ -19,6 +19,12 @@
 
 .field private final mIsThemeable:Z
 
+.field private mIsThemeable:Z
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field private final mResDir:Ljava/lang/String;
 
 .field private final mScale:F
@@ -86,11 +92,71 @@
     goto :goto_0
 .end method
 
+.method constructor <init>(Ljava/lang/String;FZ)V
+    .locals 4
+    .parameter "resDir"
+    .parameter "scale"
+    .parameter "isThemeable"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    iput-object p1, p0, Landroid/app/ActivityThread$ResourcesKey;->mResDir:Ljava/lang/String;
+
+    iput p2, p0, Landroid/app/ActivityThread$ResourcesKey;->mScale:F
+
+    iput-boolean p3, p0, Landroid/app/ActivityThread$ResourcesKey;->mIsThemeable:Z
+
+    iget-object v0, p0, Landroid/app/ActivityThread$ResourcesKey;->mResDir:Ljava/lang/String;
+
+    invoke-virtual {v0}, Ljava/lang/String;->hashCode()I
+
+    move-result v1
+
+    iget-boolean v0, p0, Landroid/app/ActivityThread$ResourcesKey;->mIsThemeable:Z
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x1
+
+    :goto_0
+    shl-int/lit8 v0, v0, 0x2
+
+    add-int/lit8 v0, v0, 0x3
+
+    iget v2, p0, Landroid/app/ActivityThread$ResourcesKey;->mScale:F
+
+    const/high16 v3, 0x4000
+
+    mul-float/2addr v2, v3
+
+    float-to-int v2, v2
+
+    add-int/2addr v0, v2
+
+    shl-int v0, v1, v0
+
+    iput v0, p0, Landroid/app/ActivityThread$ResourcesKey;->mHash:I
+
+    return-void
+
+    :cond_0
+    const/4 v0, 0x0
+
+    goto :goto_0
+.end method
+
 
 # virtual methods
 .method public equals(Ljava/lang/Object;)Z
     .locals 4
     .parameter "obj"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v1, 0x0
@@ -130,6 +196,12 @@
     cmpl-float v2, v2, v3
 
     if-nez v2, :cond_0
+
+    iget-boolean v2, p0, Landroid/app/ActivityThread$ResourcesKey;->mIsThemeable:Z
+
+    iget-boolean v3, v0, Landroid/app/ActivityThread$ResourcesKey;->mIsThemeable:Z
+
+    if-ne v2, v3, :cond_0
 
     iget-boolean v2, p0, Landroid/app/ActivityThread$ResourcesKey;->mIsThemeable:Z
 

@@ -6,6 +6,8 @@
 # static fields
 .field public static final CURRENT_ACTIVE_PHONE:Ljava/lang/String; = "gsm.current.phone-type"
 
+.field public static final PROPERTY_ADDED_LIMIT_LIST:Ljava/lang/String; = "persist.radio.limitation.List"
+
 .field public static final PROPERTY_BASEBAND_VERSION:Ljava/lang/String; = "gsm.version.baseband"
 
 .field public static final PROPERTY_CALL_RING_DELAY:Ljava/lang/String; = "ro.telephony.call_ring.delay"

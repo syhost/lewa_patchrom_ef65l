@@ -116,20 +116,23 @@
 
     sub-long v2, v11, v6
 
-    .line 2347
     .local v2, elapsed:J
+    iget-object v11, p0, Lcom/android/server/PowerManagerService$ScreenBrightnessAnimator$1;->this$1:Lcom/android/server/PowerManagerService$ScreenBrightnessAnimator;
+
+    iget-object v11, v11, Lcom/android/server/PowerManagerService$ScreenBrightnessAnimator;->this$0:Lcom/android/server/PowerManagerService;
+
+    invoke-static {v11, v4, v8}, Lcom/android/server/PowerManagerService$Injector;->setButtonBrightness(Lcom/android/server/PowerManagerService;II)V
+
     and-int/lit8 v11, v4, 0x4
 
     if-eqz v11, :cond_1
 
-    .line 2352
     invoke-static {}, Lcom/android/server/PowerManagerService;->access$2800()I
 
     move-result v11
 
     if-nez v11, :cond_1
 
-    .line 2353
     iget-object v11, p0, Lcom/android/server/PowerManagerService$ScreenBrightnessAnimator$1;->this$1:Lcom/android/server/PowerManagerService$ScreenBrightnessAnimator;
 
     iget-object v11, v11, Lcom/android/server/PowerManagerService$ScreenBrightnessAnimator;->this$0:Lcom/android/server/PowerManagerService;

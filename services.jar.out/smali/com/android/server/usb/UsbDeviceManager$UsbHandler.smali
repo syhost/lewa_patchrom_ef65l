@@ -39,6 +39,9 @@
     .locals 10
     .parameter
     .parameter "looper"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 323
@@ -186,38 +189,27 @@
 
     move-result v5
 
-    if-lez v5, :cond_2
+    if-lez v5, :cond_1
 
-    .line 349
     const/4 v5, 0x0
 
     invoke-virtual {v4, v5}, Ljava/lang/String;->charAt(I)C
 
     move-result v2
 
-    .line 350
     .local v2, enable:C
     const/16 v5, 0x31
 
     if-ne v2, v5, :cond_3
 
-    .line 351
     const/4 v5, 0x1
 
     invoke-direct {p0, v5}, Lcom/android/server/usb/UsbDeviceManager$UsbHandler;->setAdbEnabled(Z)V
 
-    .line 355
-    :cond_1
-    :goto_0
-    const-string v5, "persist.service.adb.enable"
-
-    const-string v6, ""
-
-    invoke-static {v5, v6}, Landroid/os/SystemProperties;->set(Ljava/lang/String;Ljava/lang/String;)V
-
     .line 359
     .end local v2           #enable:C
-    :cond_2
+    :cond_1
+    :goto_0
     #getter for: Lcom/android/server/usb/UsbDeviceManager;->mContentResolver:Landroid/content/ContentResolver;
     invoke-static {p1}, Lcom/android/server/usb/UsbDeviceManager;->access$000(Lcom/android/server/usb/UsbDeviceManager;)Landroid/content/ContentResolver;
 
@@ -1248,6 +1240,9 @@
 
 .method private updateUsbNotification()V
     .locals 11
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v9, 0x0
@@ -1340,66 +1335,52 @@
 
     invoke-virtual {v7, v8}, Landroid/app/NotificationManager;->cancel(I)V
 
-    .line 668
     iput v10, p0, Lcom/android/server/usb/UsbDeviceManager$UsbHandler;->mUsbNotificationId:I
 
-    .line 670
     :cond_3
     if-eqz v0, :cond_0
 
-    .line 671
     const v7, 0x104046e
 
     invoke-virtual {v5, v7}, Landroid/content/res/Resources;->getText(I)Ljava/lang/CharSequence;
 
     move-result-object v2
 
-    .line 673
     .local v2, message:Ljava/lang/CharSequence;
     invoke-virtual {v5, v0}, Landroid/content/res/Resources;->getText(I)Ljava/lang/CharSequence;
 
     move-result-object v6
 
-    .line 675
     .local v6, title:Ljava/lang/CharSequence;
     new-instance v3, Landroid/app/Notification;
 
     invoke-direct {v3}, Landroid/app/Notification;-><init>()V
 
-    .line 676
     .local v3, notification:Landroid/app/Notification;
     const v7, 0x1080560
 
     iput v7, v3, Landroid/app/Notification;->icon:I
 
-    .line 677
     const-wide/16 v7, 0x0
 
     iput-wide v7, v3, Landroid/app/Notification;->when:J
 
-    .line 678
     const/4 v7, 0x2
 
     iput v7, v3, Landroid/app/Notification;->flags:I
 
-    .line 679
     iput-object v6, v3, Landroid/app/Notification;->tickerText:Ljava/lang/CharSequence;
 
-    .line 680
     iput v10, v3, Landroid/app/Notification;->defaults:I
 
-    .line 681
     iput-object v9, v3, Landroid/app/Notification;->sound:Landroid/net/Uri;
 
-    .line 682
     iput-object v9, v3, Landroid/app/Notification;->vibrate:[J
 
-    .line 683
-    const/4 v7, -0x2
+    const/4 v7, -0x1
 
     iput v7, v3, Landroid/app/Notification;->priority:I
 
-    .line 685
     new-instance v7, Landroid/content/ComponentName;
 
     const-string v8, "com.android.settings"

@@ -16,7 +16,8 @@
         Landroid/app/Activity$1;,
         Landroid/app/Activity$ManagedCursor;,
         Landroid/app/Activity$NonConfigurationInstances;,
-        Landroid/app/Activity$ManagedDialog;
+        Landroid/app/Activity$ManagedDialog;,
+	Landroid/app/Activity$Injector;
     }
 .end annotation
 
@@ -5235,6 +5236,9 @@
 .method protected onPostCreate(Landroid/os/Bundle;)V
     .locals 3
     .parameter "savedInstanceState"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v2, 0x1
@@ -5259,6 +5263,10 @@
     move-result v1
 
     invoke-virtual {p0, v0, v1}, Landroid/app/Activity;->onTitleChanged(Ljava/lang/CharSequence;I)V
+
+    iget-object v0, p0, Landroid/app/Activity;->mWindow:Landroid/view/Window;
+
+    invoke-static {p0, v0}, Landroid/app/Activity$Injector;->setContentViewForeground(Landroid/content/Context;Landroid/view/Window;)V
 
     .line 1002
     :cond_0
@@ -6168,93 +6176,38 @@
 
     if-lt v3, v5, :cond_2
 
-    .line 5051
-    new-instance v3, Ljava/lang/IllegalStateException;
-
-    new-instance v5, Ljava/lang/StringBuilder;
-
-    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string/jumbo v6, "trying to requery an already closed cursor  "
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    #getter for: Landroid/app/Activity$ManagedCursor;->mCursor:Landroid/database/Cursor;
-    invoke-static {v2}, Landroid/app/Activity$ManagedCursor;->access$100(Landroid/app/Activity$ManagedCursor;)Landroid/database/Cursor;
-
-    move-result-object v6
-
-    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v5
-
-    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v5
-
-    invoke-direct {v3, v5}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
-
-    throw v3
-
-    .line 5060
-    .end local v0           #N:I
-    .end local v1           #i:I
-    .end local v2           #mc:Landroid/app/Activity$ManagedCursor;
-    :catchall_0
-    move-exception v3
-
-    monitor-exit v4
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
-
-    throw v3
-
-    .line 5056
-    .restart local v0       #N:I
-    .restart local v1       #i:I
-    .restart local v2       #mc:Landroid/app/Activity$ManagedCursor;
     :cond_2
     const/4 v3, 0x0
 
-    :try_start_1
     #setter for: Landroid/app/Activity$ManagedCursor;->mReleased:Z
     invoke-static {v2, v3}, Landroid/app/Activity$ManagedCursor;->access$202(Landroid/app/Activity$ManagedCursor;Z)Z
 
-    .line 5057
     const/4 v3, 0x0
 
     #setter for: Landroid/app/Activity$ManagedCursor;->mUpdated:Z
     invoke-static {v2, v3}, Landroid/app/Activity$ManagedCursor;->access$302(Landroid/app/Activity$ManagedCursor;Z)Z
 
-    .line 5045
     :cond_3
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
-    .line 5060
     .end local v2           #mc:Landroid/app/Activity$ManagedCursor;
     :cond_4
     monitor-exit v4
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 5062
     iput-boolean v6, p0, Landroid/app/Activity;->mCalled:Z
 
-    .line 5063
     iget-object v3, p0, Landroid/app/Activity;->mInstrumentation:Landroid/app/Instrumentation;
 
     invoke-virtual {v3, p0}, Landroid/app/Instrumentation;->callActivityOnRestart(Landroid/app/Activity;)V
 
-    .line 5064
     iget-boolean v3, p0, Landroid/app/Activity;->mCalled:Z
 
     if-nez v3, :cond_5
 
-    .line 5065
     new-instance v3, Landroid/app/SuperNotCalledException;
 
     new-instance v4, Ljava/lang/StringBuilder;
@@ -6291,11 +6244,25 @@
 
     throw v3
 
-    .line 5069
+    .line 5060
+    .end local v0           #N:I
+    .end local v1           #i:I
+    :catchall_0
+    move-exception v3
+
+    :try_start_1
+    monitor-exit v4
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+
+    throw v3
+
+    .line 5056
+    .restart local v0       #N:I
+    .restart local v1       #i:I
     :cond_5
     invoke-virtual {p0}, Landroid/app/Activity;->performStart()V
 
-    .line 5071
     .end local v0           #N:I
     .end local v1           #i:I
     :cond_6

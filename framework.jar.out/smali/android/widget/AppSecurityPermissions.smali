@@ -11,7 +11,8 @@
     value = {
         Landroid/widget/AppSecurityPermissions$1;,
         Landroid/widget/AppSecurityPermissions$PermissionInfoComparator;,
-        Landroid/widget/AppSecurityPermissions$State;
+        Landroid/widget/AppSecurityPermissions$State;,
+        Landroid/widget/AppSecurityPermissions$Injector;
     }
 .end annotation
 
@@ -2038,6 +2039,9 @@
 
 .method public getPermissionsView()Landroid/view/View;
     .locals 4
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v3, 0x1
@@ -2190,6 +2194,12 @@
 
     const v1, 0x108038c
 
+    const v2, 0x9080075
+
+    invoke-static {v1, v2}, Landroid/widget/AppSecurityPermissions$Injector;->resolveResourceId(II)I
+
+    move-result v1
+
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
 
     move-result-object v0
@@ -2204,6 +2214,12 @@
     move-result-object v0
 
     const v1, 0x10802af
+
+    const v2, 0x9080076
+
+    invoke-static {v1, v2}, Landroid/widget/AppSecurityPermissions$Injector;->resolveResourceId(II)I
+
+    move-result v1
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
 
@@ -2220,6 +2236,12 @@
 
     const v1, 0x108026b
 
+    const v2, 0x9080077
+
+    invoke-static {v1, v2}, Landroid/widget/AppSecurityPermissions$Injector;->resolveResourceId(II)I
+
+    move-result v1
+
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
 
     move-result-object v0
@@ -2234,6 +2256,12 @@
     move-result-object v0
 
     const v1, 0x1080272
+
+    const v2, 0x9080078
+
+    invoke-static {v1, v2}, Landroid/widget/AppSecurityPermissions$Injector;->resolveResourceId(II)I
+
+    move-result v1
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
 

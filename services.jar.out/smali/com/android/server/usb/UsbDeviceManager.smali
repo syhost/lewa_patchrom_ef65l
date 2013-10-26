@@ -88,7 +88,19 @@
 
 .field private final mSettingsManager:Lcom/android/server/usb/UsbSettingsManager;
 
+.field private mThemeChangeReceiver:Landroid/content/BroadcastReceiver;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_CLASS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field private final mUEventObserver:Landroid/os/UEventObserver;
+
+.field mUiContext:Landroid/content/Context;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mUseUsbNotification:Z
 
@@ -150,37 +162,36 @@
     .parameter "settingsManager"
 
     .prologue
-    .line 157
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 133
     new-instance v2, Lcom/android/server/usb/UsbDeviceManager$1;
 
     invoke-direct {v2, p0}, Lcom/android/server/usb/UsbDeviceManager$1;-><init>(Lcom/android/server/usb/UsbDeviceManager;)V
 
     iput-object v2, p0, Lcom/android/server/usb/UsbDeviceManager;->mUEventObserver:Landroid/os/UEventObserver;
 
-    .line 158
+    new-instance v2, Lcom/android/server/usb/UsbDeviceManager$2;
+
+    invoke-direct {v2, p0}, Lcom/android/server/usb/UsbDeviceManager$2;-><init>(Lcom/android/server/usb/UsbDeviceManager;)V
+
+    iput-object v2, p0, Lcom/android/server/usb/UsbDeviceManager;->mThemeChangeReceiver:Landroid/content/BroadcastReceiver;
+
     iput-object p1, p0, Lcom/android/server/usb/UsbDeviceManager;->mContext:Landroid/content/Context;
 
-    .line 159
     invoke-virtual {p1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
 
     move-result-object v2
 
     iput-object v2, p0, Lcom/android/server/usb/UsbDeviceManager;->mContentResolver:Landroid/content/ContentResolver;
 
-    .line 160
     iput-object p2, p0, Lcom/android/server/usb/UsbDeviceManager;->mSettingsManager:Lcom/android/server/usb/UsbSettingsManager;
 
-    .line 161
     iget-object v2, p0, Lcom/android/server/usb/UsbDeviceManager;->mContext:Landroid/content/Context;
 
     invoke-virtual {v2}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
 
     move-result-object v0
 
-    .line 162
     .local v0, pm:Landroid/content/pm/PackageManager;
     const-string v2, "android.hardware.usb.accessory"
 
@@ -1380,6 +1391,41 @@
     move-result-object v0
 
     return-object v0
+.end method
+
+.method getUiContext()Landroid/content/Context;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/server/usb/UsbDeviceManager;->mUiContext:Landroid/content/Context;
+
+    if-nez v0, :cond_0
+
+    iget-object v0, p0, Lcom/android/server/usb/UsbDeviceManager;->mContext:Landroid/content/Context;
+
+    invoke-static {v0}, Lcom/android/internal/app/ThemeUtils;->createUiContext(Landroid/content/Context;)Landroid/content/Context;
+
+    move-result-object v0
+
+    iput-object v0, p0, Lcom/android/server/usb/UsbDeviceManager;->mUiContext:Landroid/content/Context;
+
+    :cond_0
+    iget-object v0, p0, Lcom/android/server/usb/UsbDeviceManager;->mUiContext:Landroid/content/Context;
+
+    if-eqz v0, :cond_1
+
+    iget-object v0, p0, Lcom/android/server/usb/UsbDeviceManager;->mUiContext:Landroid/content/Context;
+
+    :goto_0
+    return-object v0
+
+    :cond_1
+    iget-object v0, p0, Lcom/android/server/usb/UsbDeviceManager;->mContext:Landroid/content/Context;
+
+    goto :goto_0
 .end method
 
 .method public openAccessory(Landroid/hardware/usb/UsbAccessory;)Landroid/os/ParcelFileDescriptor;

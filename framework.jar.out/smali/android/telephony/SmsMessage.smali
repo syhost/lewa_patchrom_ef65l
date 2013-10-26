@@ -43,6 +43,18 @@
 
 
 # direct methods
+.method public constructor <init>()V
+    .locals 0
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
 .method private constructor <init>(Lcom/android/internal/telephony/SmsMessageBase;)V
     .locals 0
     .parameter "smb"

@@ -26,7 +26,8 @@
         Lcom/android/server/am/ActivityManagerService$ProcessChangeItem;,
         Lcom/android/server/am/ActivityManagerService$Identity;,
         Lcom/android/server/am/ActivityManagerService$ForegroundToken;,
-        Lcom/android/server/am/ActivityManagerService$PendingActivityLaunch;
+        Lcom/android/server/am/ActivityManagerService$PendingActivityLaunch;,
+        Lcom/android/server/am/ActivityManagerService$Injector;
     }
 .end annotation
 
@@ -1192,188 +1193,148 @@
 
     iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mStringBuilder:Ljava/lang/StringBuilder;
 
-    .line 659
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mStartRunning:Z
 
-    .line 663
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mProcessesReady:Z
 
-    .line 664
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mSystemReady:Z
 
-    .line 665
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mBooting:Z
 
-    .line 666
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mWaitingUpdate:Z
 
-    .line 667
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mDidUpdate:Z
 
-    .line 668
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mOnBattery:Z
 
-    .line 669
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mLaunchWarningShown:Z
 
-    .line 704
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mSleeping:Z
 
-    .line 709
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mWentToSleep:Z
 
-    .line 714
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mLockScreenShown:Z
 
-    .line 719
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mShuttingDown:Z
 
-    .line 727
     iput v7, p0, Lcom/android/server/am/ActivityManagerService;->mCurTask:I
 
-    .line 732
     iput v6, p0, Lcom/android/server/am/ActivityManagerService;->mAdjSeq:I
 
-    .line 737
     iput v6, p0, Lcom/android/server/am/ActivityManagerService;->mLruSeq:I
 
-    .line 743
     iput v6, p0, Lcom/android/server/am/ActivityManagerService;->mNumServiceProcs:I
 
-    .line 744
     iput v6, p0, Lcom/android/server/am/ActivityManagerService;->mNewNumServiceProcs:I
 
-    .line 750
     const/16 v2, 0x14
 
     new-array v2, v2, [I
 
     iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mProcDeaths:[I
 
-    .line 758
     iput-object v4, p0, Lcom/android/server/am/ActivityManagerService;->mDebugApp:Ljava/lang/String;
 
-    .line 759
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mWaitForDebugger:Z
 
-    .line 760
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mDebugTransient:Z
 
-    .line 761
     iput-object v4, p0, Lcom/android/server/am/ActivityManagerService;->mOrigDebugApp:Ljava/lang/String;
 
-    .line 762
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mOrigWaitForDebugger:Z
 
-    .line 763
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mAlwaysFinishActivities:Z
 
-    .line 764
     iput-object v4, p0, Lcom/android/server/am/ActivityManagerService;->mController:Landroid/app/IActivityController;
 
-    .line 765
     iput-object v4, p0, Lcom/android/server/am/ActivityManagerService;->mProfileApp:Ljava/lang/String;
 
-    .line 766
     iput-object v4, p0, Lcom/android/server/am/ActivityManagerService;->mProfileProc:Lcom/android/server/am/ProcessRecord;
 
-    .line 769
     iput v6, p0, Lcom/android/server/am/ActivityManagerService;->mProfileType:I
 
-    .line 770
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mAutoStopProfiler:Z
 
-    .line 771
     iput-object v4, p0, Lcom/android/server/am/ActivityManagerService;->mOpenGlTraceApp:Ljava/lang/String;
 
-    .line 783
     new-instance v2, Landroid/os/RemoteCallbackList;
 
     invoke-direct {v2}, Landroid/os/RemoteCallbackList;-><init>()V
 
     iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mProcessObservers:Landroid/os/RemoteCallbackList;
 
-    .line 785
     new-array v2, v5, [Lcom/android/server/am/ActivityManagerService$ProcessChangeItem;
 
     iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mActiveProcessChanges:[Lcom/android/server/am/ActivityManagerService$ProcessChangeItem;
 
-    .line 787
     new-instance v2, Ljava/util/ArrayList;
 
     invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mPendingProcessChanges:Ljava/util/ArrayList;
 
-    .line 789
     new-instance v2, Ljava/util/ArrayList;
 
     invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mAvailProcessChanges:Ljava/util/ArrayList;
 
-    .line 801
     new-instance v2, Ljava/util/ArrayList;
 
     invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mRequestPssList:Ljava/util/ArrayList;
 
-    .line 814
     new-instance v2, Lcom/android/internal/os/ProcessStats;
 
     invoke-direct {v2, v6}, Lcom/android/internal/os/ProcessStats;-><init>(Z)V
 
     iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mProcessStats:Lcom/android/internal/os/ProcessStats;
 
-    .line 816
     new-instance v2, Ljava/util/concurrent/atomic/AtomicLong;
 
     invoke-direct {v2, v8, v9}, Ljava/util/concurrent/atomic/AtomicLong;-><init>(J)V
 
     iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mLastCpuTime:Ljava/util/concurrent/atomic/AtomicLong;
 
-    .line 817
     new-instance v2, Ljava/util/concurrent/atomic/AtomicBoolean;
 
     invoke-direct {v2, v7}, Ljava/util/concurrent/atomic/AtomicBoolean;-><init>(Z)V
 
     iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mProcessStatsMutexFree:Ljava/util/concurrent/atomic/AtomicBoolean;
 
-    .line 819
     iput-wide v8, p0, Lcom/android/server/am/ActivityManagerService;->mLastWriteTime:J
 
-    .line 824
     iput-boolean v6, p0, Lcom/android/server/am/ActivityManagerService;->mBooted:Z
 
-    .line 826
     sget v2, Lcom/android/server/am/ProcessList;->MAX_HIDDEN_APPS:I
 
     iput v2, p0, Lcom/android/server/am/ActivityManagerService;->mProcessLimit:I
 
-    .line 827
     const/4 v2, -0x1
 
     iput v2, p0, Lcom/android/server/am/ActivityManagerService;->mProcessLimitOverride:I
 
-    .line 890
     iput-wide v8, p0, Lcom/android/server/am/ActivityManagerService;->mLastMemUsageReportTime:J
 
-    .line 892
     new-instance v2, Lcom/android/server/am/ActivityManagerService$2;
 
     invoke-direct {v2, p0}, Lcom/android/server/am/ActivityManagerService$2;-><init>(Lcom/android/server/am/ActivityManagerService;)V
 
     iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mHandler:Landroid/os/Handler;
 
-    .line 15193
     new-instance v2, Landroid/util/SparseIntArray;
 
     invoke-direct {v2, v5}, Landroid/util/SparseIntArray;-><init>(I)V
 
     iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mLoggedInUsers:Landroid/util/SparseIntArray;
 
-    .line 1521
+    new-instance v2, Lcom/android/server/am/ActivityManagerService$15;
+
+    invoke-direct {v2, p0}, Lcom/android/server/am/ActivityManagerService$15;-><init>(Lcom/android/server/am/ActivityManagerService;)V
+
+    iput-object v2, p0, Lcom/android/server/am/ActivityManagerService;->mThemeChangeReceiver:Landroid/content/BroadcastReceiver;
+
     const-string v2, "ActivityManager"
 
     new-instance v3, Ljava/lang/StringBuilder;
@@ -8976,6 +8937,9 @@
     .parameter "TOP_APP"
     .parameter "recursed"
     .parameter "doingAll"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 13801
@@ -9461,29 +9425,31 @@
 
     move-object/from16 v0, p1
 
-    if-ne v0, v2, :cond_c
+    if-eq v0, v2, :cond_lewa_0
 
-    .line 13975
+    invoke-static/range {p1 .. p1}, Lcom/android/server/am/ActivityManagerService$Injector;->isPIMProcess(Lcom/android/server/am/ProcessRecord;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_c
+
+    :cond_lewa_0
     const/4 v11, 0x6
 
-    .line 13976
     const/16 v34, 0x0
 
-    .line 13977
     const/4 v2, 0x0
 
     move-object/from16 v0, p1
 
     iput-boolean v2, v0, Lcom/android/server/am/ProcessRecord;->hidden:Z
 
-    .line 13978
     const-string v2, "home"
 
     move-object/from16 v0, p1
 
     iput-object v2, v0, Lcom/android/server/am/ProcessRecord;->adjType:Ljava/lang/String;
 
-    .line 13981
     :cond_c
     const/4 v2, 0x7
 
@@ -48503,6 +48469,9 @@
 
 .method final finishBooting()V
     .locals 23
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 4221
@@ -48539,6 +48508,16 @@
     move-object/from16 v0, v20
 
     invoke-virtual {v2, v3, v0}, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;
+
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Lcom/android/server/am/ActivityManagerService;->mContext:Landroid/content/Context;
+
+    move-object/from16 v0, p0
+
+    iget-object v3, v0, Lcom/android/server/am/ActivityManagerService;->mThemeChangeReceiver:Landroid/content/BroadcastReceiver;
+
+    invoke-static {v2, v3}, Lcom/android/internal/app/ThemeUtils;->registerThemeChangeReceiver(Landroid/content/Context;Landroid/content/BroadcastReceiver;)V
 
     .line 4241
     new-instance v22, Landroid/content/IntentFilter;
@@ -53841,6 +53820,59 @@
     .end local v16           #pending:Lcom/android/server/am/PendingThumbnailsRecord;
     .restart local v15       #pending:Lcom/android/server/am/PendingThumbnailsRecord;
     goto :goto_8
+.end method
+
+.method getUiContext()Landroid/content/Context;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    monitor-enter p0
+
+    :try_start_0
+    iget-object v0, p0, Lcom/android/server/am/ActivityManagerService;->mUiContext:Landroid/content/Context;
+
+    if-nez v0, :cond_0
+
+    iget-boolean v0, p0, Lcom/android/server/am/ActivityManagerService;->mBooted:Z
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Lcom/android/server/am/ActivityManagerService;->mContext:Landroid/content/Context;
+
+    invoke-static {v0}, Lcom/android/internal/app/ThemeUtils;->createUiContext(Landroid/content/Context;)Landroid/content/Context;
+
+    move-result-object v0
+
+    iput-object v0, p0, Lcom/android/server/am/ActivityManagerService;->mUiContext:Landroid/content/Context;
+
+    :cond_0
+    iget-object v0, p0, Lcom/android/server/am/ActivityManagerService;->mUiContext:Landroid/content/Context;
+
+    if-eqz v0, :cond_1
+
+    iget-object v0, p0, Lcom/android/server/am/ActivityManagerService;->mUiContext:Landroid/content/Context;
+
+    :goto_0
+    monitor-exit p0
+
+    return-object v0
+
+    :cond_1
+    iget-object v0, p0, Lcom/android/server/am/ActivityManagerService;->mContext:Landroid/content/Context;
+
+    goto :goto_0
+
+    :catchall_0
+    move-exception v0
+
+    monitor-exit p0
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    throw v0
 .end method
 
 .method public getUidForIntentSender(Landroid/content/IIntentSender;)I
@@ -59248,6 +59280,20 @@
     move-exception v0
 
     goto :goto_0
+.end method
+
+.method public performAppGcs()V
+    .locals 0
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-virtual {p0}, Lcom/android/server/am/ActivityManagerService;->trimApplications()V
+
+    invoke-virtual {p0}, Lcom/android/server/am/ActivityManagerService;->performAppGcsIfAppropriateLocked()V
+
+    return-void
 .end method
 
 .method final performAppGcsIfAppropriateLocked()V
@@ -64867,6 +64913,9 @@
     .locals 2
     .parameter "cur"
     .parameter "next"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 3361
@@ -71705,6 +71754,9 @@
     .parameter "starting"
     .parameter "persistent"
     .parameter "initLocale"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 13522

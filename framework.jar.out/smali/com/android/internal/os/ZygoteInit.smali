@@ -500,6 +500,18 @@
     throw v4
 .end method
 
+.method private static isPreloadResources()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/4 v0, 0x0
+
+    return v0
+.end method
+
 .method public static main([Ljava/lang/String;)V
     .locals 5
     .parameter "argv"

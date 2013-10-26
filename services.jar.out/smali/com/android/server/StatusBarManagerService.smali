@@ -2013,20 +2013,16 @@
     .parameter "mask"
 
     .prologue
-    .line 297
     invoke-direct {p0}, Lcom/android/server/StatusBarManagerService;->enforceStatusBarService()V
 
-    .line 301
     iget-object v1, p0, Lcom/android/server/StatusBarManagerService;->mLock:Ljava/lang/Object;
 
     monitor-enter v1
 
-    .line 302
     :try_start_0
     invoke-direct {p0, p1, p2}, Lcom/android/server/StatusBarManagerService;->updateUiVisibilityLocked(II)V
 
-    .line 303
-    const/high16 v0, 0x1ff
+    const/high16 v0, 0x3ff
 
     and-int/2addr v0, p1
 

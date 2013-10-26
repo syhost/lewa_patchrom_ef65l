@@ -11,7 +11,8 @@
         Lcom/android/server/NotificationManagerService$LEDSettingsObserver;,
         Lcom/android/server/NotificationManagerService$NotificationLedValues;,
         Lcom/android/server/NotificationManagerService$ToastRecord;,
-        Lcom/android/server/NotificationManagerService$NotificationRecord;
+        Lcom/android/server/NotificationManagerService$NotificationRecord;,
+        Lcom/android/server/NotificationManagerService$Injector;
     }
 .end annotation
 
@@ -36,6 +37,12 @@
 .field private static final JUNK_SCORE:I = -0x3e8
 
 .field private static final LONG_DELAY:I = 0xdac
+
+.field private static final MAX_DELAY:I = 0x3a98
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private static final MAX_PACKAGE_NOTIFICATIONS:I = 0x32
 
@@ -65,6 +72,22 @@
 
 .field private mAudioService:Landroid/media/IAudioService;
 
+.field mBlacklist:Ljava/util/Map;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "Ljava/util/Map",
+            "<",
+            "Ljava/lang/String;",
+            "Ljava/lang/String;",
+            ">;"
+        }
+    .end annotation
+.end field
+
 .field private mBlockedPackages:Ljava/util/HashSet;
     .annotation system Ldalvik/annotation/Signature;
         value = {
@@ -90,7 +113,11 @@
 
 .field private mHandler:Lcom/android/server/NotificationManagerService$WorkerHandler;
 
-.field private mInCall:Z
+.field mInCall:Z
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mIntentReceiver:Landroid/content/BroadcastReceiver;
 
@@ -2643,6 +2670,9 @@
     .locals 5
     .parameter "r"
     .parameter "immediate"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 906
@@ -2654,28 +2684,25 @@
 
     move-result-object v2
 
-    .line 907
     .local v2, m:Landroid/os/Message;
     if-eqz p2, :cond_0
 
     const-wide/16 v0, 0x0
 
-    .line 908
     .local v0, delay:J
     :goto_0
+    invoke-static {p1, p2, v0, v1}, Lcom/android/server/NotificationManagerService$Injector;->setDelay(Lcom/android/server/NotificationManagerService$ToastRecord;ZJ)V
+
     iget-object v3, p0, Lcom/android/server/NotificationManagerService;->mHandler:Lcom/android/server/NotificationManagerService$WorkerHandler;
 
     invoke-virtual {v3, p1}, Lcom/android/server/NotificationManagerService$WorkerHandler;->removeCallbacksAndMessages(Ljava/lang/Object;)V
 
-    .line 909
     iget-object v3, p0, Lcom/android/server/NotificationManagerService;->mHandler:Lcom/android/server/NotificationManagerService$WorkerHandler;
 
     invoke-virtual {v3, v2, v0, v1}, Lcom/android/server/NotificationManagerService$WorkerHandler;->sendMessageDelayed(Landroid/os/Message;J)Z
 
-    .line 910
     return-void
 
-    .line 907
     .end local v0           #delay:J
     :cond_0
     iget v3, p1, Lcom/android/server/NotificationManagerService$ToastRecord;->duration:I
@@ -3366,6 +3393,66 @@
 
 
 # virtual methods
+.method public addBlackList(Ljava/lang/String;[Ljava/lang/String;)V
+    .locals 6
+    .parameter "pkg"
+    .parameter "blackList"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v5, p0, Lcom/android/server/NotificationManagerService;->mBlacklist:Ljava/util/Map;
+
+    monitor-enter v5
+
+    :try_start_0
+    iget-object v4, p0, Lcom/android/server/NotificationManagerService;->mBlacklist:Ljava/util/Map;
+
+    invoke-interface {v4}, Ljava/util/Map;->clear()V
+
+    move-object v0, p2
+
+    .local v0, arr$:[Ljava/lang/String;
+    array-length v3, v0
+
+    .local v3, len$:I
+    const/4 v2, 0x0
+
+    .local v2, i$:I
+    :goto_0
+    if-ge v2, v3, :cond_0
+
+    aget-object v1, v0, v2
+
+    .local v1, blockpkg:Ljava/lang/String;
+    iget-object v4, p0, Lcom/android/server/NotificationManagerService;->mBlacklist:Ljava/util/Map;
+
+    invoke-interface {v4, v1, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    add-int/lit8 v2, v2, 0x1
+
+    goto :goto_0
+
+    .end local v1           #blockpkg:Ljava/lang/String;
+    :cond_0
+    monitor-exit v5
+
+    return-void
+
+    .end local v0           #arr$:[Ljava/lang/String;
+    .end local v2           #i$:I
+    .end local v3           #len$:I
+    :catchall_0
+    move-exception v4
+
+    monitor-exit v5
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    throw v4
+.end method
+
 .method public areNotificationsEnabledForPackage(Ljava/lang/String;)Z
     .locals 1
     .parameter "pkg"
@@ -4484,6 +4571,9 @@
     .parameter "id"
     .parameter "notification"
     .parameter "idOut"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 1000

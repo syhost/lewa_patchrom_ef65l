@@ -25,6 +25,12 @@
 
 .field private static final TWO_COUNT_COLUMNS:Ljava/lang/String; = "%21s %8d %21s %8d"
 
+.field private static final TWO_COUNT_COLUMNS_DB:Ljava/lang/String; = "%21s %8d %21s %8d"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 
 # instance fields
 .field final synthetic this$0:Landroid/app/ActivityThread;

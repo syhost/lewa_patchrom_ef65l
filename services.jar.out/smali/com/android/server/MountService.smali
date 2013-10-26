@@ -5483,6 +5483,9 @@
 .method public getVolumeState(Ljava/lang/String;)Ljava/lang/String;
     .locals 5
     .parameter "mountPoint"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 1415
@@ -5546,22 +5549,18 @@
 
     if-eqz v1, :cond_1
 
-    .line 1420
     const-string v0, "removed"
 
-    .line 1426
     :cond_0
+    :goto_0
     monitor-exit v2
 
     return-object v0
 
-    .line 1422
     :cond_1
-    new-instance v1, Ljava/lang/IllegalArgumentException;
+    const-string v0, "not_present"
 
-    invoke-direct {v1}, Ljava/lang/IllegalArgumentException;-><init>()V
-
-    throw v1
+    goto :goto_0
 
     .line 1427
     .end local v0           #state:Ljava/lang/String;

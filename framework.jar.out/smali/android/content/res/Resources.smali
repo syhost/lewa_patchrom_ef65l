@@ -7,7 +7,8 @@
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Landroid/content/res/Resources$Theme;,
-        Landroid/content/res/Resources$NotFoundException;
+        Landroid/content/res/Resources$NotFoundException;,
+        Landroid/content/res/Resources$Injector;
     }
 .end annotation
 
@@ -44,7 +45,11 @@
     .end annotation
 .end field
 
-.field private static final sPreloadedColorStateLists:Landroid/util/LongSparseArray;
+.field static final sPreloadedColorStateLists:Landroid/util/LongSparseArray;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "Landroid/util/LongSparseArray",
@@ -55,7 +60,11 @@
     .end annotation
 .end field
 
-.field private static final sPreloadedDrawables:Landroid/util/LongSparseArray;
+.field static final sPreloadedDrawables:Landroid/util/LongSparseArray;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "Landroid/util/LongSparseArray",
@@ -76,7 +85,11 @@
 
 .field private final mCachedXmlBlocks:[Landroid/content/res/XmlBlock;
 
-.field private final mColorDrawableCache:Landroid/util/LongSparseArray;
+.field final mColorDrawableCache:Landroid/util/LongSparseArray;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "Landroid/util/LongSparseArray",
@@ -106,7 +119,11 @@
 
 .field private final mConfiguration:Landroid/content/res/Configuration;
 
-.field private final mDrawableCache:Landroid/util/LongSparseArray;
+.field final mDrawableCache:Landroid/util/LongSparseArray;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "Landroid/util/LongSparseArray",
@@ -511,6 +528,10 @@
     .locals 5
     .parameter
     .parameter "configChanges"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -1956,6 +1977,57 @@
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     throw v1
+.end method
+
+.method public getDrawable(IILandroid/graphics/PorterDuff$Mode;)Landroid/graphics/drawable/Drawable;
+    .locals 4
+    .parameter "id"
+    .parameter "mask"
+    .parameter "maskType"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Landroid/content/res/Resources$NotFoundException;
+        }
+    .end annotation
+
+    .prologue
+    iget-object v3, p0, Landroid/content/res/Resources;->mTmpValue:Landroid/util/TypedValue;
+
+    monitor-enter v3
+
+    :try_start_0
+    iget-object v1, p0, Landroid/content/res/Resources;->mTmpValue:Landroid/util/TypedValue;
+
+    .local v1, value:Landroid/util/TypedValue;
+    const/4 v2, 0x1
+
+    invoke-virtual {p0, p1, v1, v2}, Landroid/content/res/Resources;->getValue(ILandroid/util/TypedValue;Z)V
+
+    invoke-virtual {p0, v1, p1}, Landroid/content/res/Resources;->loadDrawable(Landroid/util/TypedValue;I)Landroid/graphics/drawable/Drawable;
+
+    move-result-object v0
+
+    .local v0, tmpDrawable:Landroid/graphics/drawable/Drawable;
+    invoke-virtual {v0, p2, p3}, Landroid/graphics/drawable/Drawable;->setColorFilter(ILandroid/graphics/PorterDuff$Mode;)V
+
+    monitor-exit v3
+
+    return-object v0
+
+    .end local v0           #tmpDrawable:Landroid/graphics/drawable/Drawable;
+    .end local v1           #value:Landroid/util/TypedValue;
+    :catchall_0
+    move-exception v2
+
+    monitor-exit v3
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    throw v2
 .end method
 
 .method public getDrawableForDensity(II)Landroid/graphics/drawable/Drawable;
@@ -5340,6 +5412,9 @@
     .parameter "config"
     .parameter "metrics"
     .parameter "compat"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 1409
@@ -5782,6 +5857,12 @@
 
     invoke-direct {v0, v2, v1}, Landroid/content/res/Resources;->clearDrawableCache(Landroid/util/LongSparseArray;I)V
 
+    move-object/from16 v0, p0
+
+    move/from16 v1, v20
+
+    invoke-static {v0, v1}, Landroid/content/res/Resources$Injector;->clearPreloaderCache(Landroid/content/res/Resources;I)V
+
     .line 1500
     move-object/from16 v0, p0
 
@@ -5918,6 +5999,36 @@
     return-void
 
     .line 1884
+    :catchall_0
+    move-exception v0
+
+    monitor-exit v1
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    throw v0
+.end method
+
+.method public final updateStringCache()V
+    .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v1, p0, Landroid/content/res/Resources;->mTmpValue:Landroid/util/TypedValue;
+
+    monitor-enter v1
+
+    :try_start_0
+    iget-object v0, p0, Landroid/content/res/Resources;->mAssets:Landroid/content/res/AssetManager;
+
+    invoke-virtual {v0}, Landroid/content/res/AssetManager;->recreateStringBlocks()V
+
+    monitor-exit v1
+
+    return-void
+
     :catchall_0
     move-exception v0
 

@@ -9,6 +9,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Lcom/android/server/LocationManagerService$Injector;,
         Lcom/android/server/LocationManagerService$BlacklistObserver;,
         Lcom/android/server/LocationManagerService$LocationWorkerHandler;,
         Lcom/android/server/LocationManagerService$ProximityListener;,
@@ -489,9 +490,18 @@
     .locals 3
     .parameter "provider"
     .parameter "packageName"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v1, 0x0
+
+    invoke-static {p1, p0}, Lcom/android/server/LocationManagerService$Injector;->checkPermission(Ljava/lang/String;Lcom/android/server/LocationManagerService;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_0
 
     .line 1868
     invoke-direct {p0, p1, v1}, Lcom/android/server/LocationManagerService;->checkPermissionsSafe(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
@@ -551,6 +561,9 @@
 .method private _getProviderInfoLocked(Ljava/lang/String;)Landroid/os/Bundle;
     .locals 4
     .parameter "provider"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v0, 0x0
@@ -564,24 +577,26 @@
 
     check-cast v1, Lcom/android/server/location/LocationProviderInterface;
 
-    .line 1796
     .local v1, p:Lcom/android/server/location/LocationProviderInterface;
     if-nez v1, :cond_0
 
-    .line 1813
+    :cond_lewa_0
     :goto_0
     return-object v0
 
-    .line 1800
     :cond_0
+    invoke-static {p1, p0}, Lcom/android/server/LocationManagerService$Injector;->checkPermission(Ljava/lang/String;Lcom/android/server/LocationManagerService;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_lewa_0
+
     invoke-direct {p0, p1, v0}, Lcom/android/server/LocationManagerService;->checkPermissionsSafe(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
-    .line 1802
     new-instance v0, Landroid/os/Bundle;
 
     invoke-direct {v0}, Landroid/os/Bundle;-><init>()V
 
-    .line 1803
     .local v0, b:Landroid/os/Bundle;
     const-string v2, "network"
 
@@ -773,14 +788,21 @@
 .method private _isProviderEnabledLocked(Ljava/lang/String;)Z
     .locals 2
     .parameter "provider"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 1842
     const/4 v1, 0x0
+
+    invoke-static {p1, p0}, Lcom/android/server/LocationManagerService$Injector;->checkPermission(Ljava/lang/String;Lcom/android/server/LocationManagerService;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_lewa_0
 
     invoke-direct {p0, p1, v1}, Lcom/android/server/LocationManagerService;->checkPermissionsSafe(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
-    .line 1844
     iget-object v1, p0, Lcom/android/server/LocationManagerService;->mProvidersByName:Ljava/util/HashMap;
 
     invoke-virtual {v1, p1}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
@@ -789,14 +811,12 @@
 
     check-cast v0, Lcom/android/server/location/LocationProviderInterface;
 
-    .line 1845
     .local v0, p:Lcom/android/server/location/LocationProviderInterface;
     if-nez v0, :cond_0
 
-    .line 1846
     const/4 v1, 0x0
 
-    .line 1848
+    :cond_lewa_0
     :goto_0
     return v1
 
@@ -4447,6 +4467,9 @@
     .parameter "minDistance"
     .parameter "singleShot"
     .parameter "receiver"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 1277
@@ -4501,6 +4524,16 @@
 
     .line 1282
     :cond_0
+    move-object/from16 v0, p1
+
+    move-object/from16 v1, p0
+
+    invoke-static {v0, v1}, Lcom/android/server/LocationManagerService$Injector;->checkPermission(Ljava/lang/String;Lcom/android/server/LocationManagerService;)Z
+
+    move-result v4
+
+    if-eqz v4, :cond_lewa_0
+
     move-object/from16 v0, p6
 
     iget-object v4, v0, Lcom/android/server/LocationManagerService$Receiver;->mRequiredPermissions:Ljava/lang/String;
@@ -4714,16 +4747,14 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 1321
     .end local v16           #minTimeForProvider:J
     :cond_4
     :goto_2
     invoke-static {v13, v14}, Landroid/os/Binder;->restoreCallingIdentity(J)V
 
-    .line 1323
+    :cond_lewa_0
     return-void
 
-    .line 1288
     .end local v3           #r:Lcom/android/server/LocationManagerService$UpdateRecord;
     .end local v13           #identity:J
     .end local v15           #isProviderEnabled:Z
@@ -8756,25 +8787,30 @@
     .parameter "provider"
     .parameter "command"
     .parameter "extras"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 1454
+    const/4 v1, 0x0
+
     if-nez p1, :cond_0
 
-    .line 1456
     new-instance v1, Ljava/lang/NullPointerException;
 
     invoke-direct {v1}, Ljava/lang/NullPointerException;-><init>()V
 
     throw v1
 
-    .line 1460
     :cond_0
-    const/4 v1, 0x0
+    invoke-static {p1, p0}, Lcom/android/server/LocationManagerService$Injector;->checkPermission(Ljava/lang/String;Lcom/android/server/LocationManagerService;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_lewa_0
 
     invoke-direct {p0, p1, v1}, Lcom/android/server/LocationManagerService;->checkPermissionsSafe(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
-    .line 1462
     iget-object v1, p0, Lcom/android/server/LocationManagerService;->mContext:Landroid/content/Context;
 
     const-string v2, "android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"
@@ -8810,16 +8846,14 @@
 
     check-cast v0, Lcom/android/server/location/LocationProviderInterface;
 
-    .line 1469
     .local v0, p:Lcom/android/server/location/LocationProviderInterface;
     if-nez v0, :cond_2
 
-    .line 1470
     const/4 v1, 0x0
 
     monitor-exit v2
 
-    .line 1473
+    :cond_lewa_0
     :goto_0
     return v1
 

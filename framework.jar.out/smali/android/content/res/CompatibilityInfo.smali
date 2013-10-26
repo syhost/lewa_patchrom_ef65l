@@ -9,7 +9,8 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
-        Landroid/content/res/CompatibilityInfo$Translator;
+        Landroid/content/res/CompatibilityInfo$Translator;,
+        Landroid/content/res/CompatibilityInfo$Injector;
     }
 .end annotation
 
@@ -50,22 +51,28 @@
 
 .field public final isThemeable:Z
 
+.field public isThemeable:Z
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field private final mCompatibilityFlags:I
 
 
 # direct methods
 .method static constructor <clinit>()V
-    .locals 1
+    .locals 2
 
     .prologue
-    .line 39
     new-instance v0, Landroid/content/res/CompatibilityInfo$1;
 
-    invoke-direct {v0}, Landroid/content/res/CompatibilityInfo$1;-><init>()V
+    const/4 v1, 0x1
+
+    invoke-direct {v0, v1}, Landroid/content/res/CompatibilityInfo$1;-><init>(Z)V
 
     sput-object v0, Landroid/content/res/CompatibilityInfo;->DEFAULT_COMPATIBILITY_INFO:Landroid/content/res/CompatibilityInfo;
 
-    .line 586
     new-instance v0, Landroid/content/res/CompatibilityInfo$2;
 
     invoke-direct {v0}, Landroid/content/res/CompatibilityInfo$2;-><init>()V
@@ -129,12 +136,42 @@
     return-void
 .end method
 
+.method private constructor <init>(IIFFZ)V
+    .locals 0
+    .parameter "compFlags"
+    .parameter "dens"
+    .parameter "scale"
+    .parameter "invertedScale"
+    .parameter "isThemeable"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    iput p1, p0, Landroid/content/res/CompatibilityInfo;->mCompatibilityFlags:I
+
+    iput p2, p0, Landroid/content/res/CompatibilityInfo;->applicationDensity:I
+
+    iput p3, p0, Landroid/content/res/CompatibilityInfo;->applicationScale:F
+
+    iput p4, p0, Landroid/content/res/CompatibilityInfo;->applicationInvertedScale:F
+
+    iput-boolean p5, p0, Landroid/content/res/CompatibilityInfo;->isThemeable:Z
+
+    return-void
+.end method
+
 .method public constructor <init>(Landroid/content/pm/ApplicationInfo;IIZ)V
     .locals 11
     .parameter "appInfo"
     .parameter "screenLayout"
     .parameter "sw"
     .parameter "forceCompat"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 101
@@ -503,12 +540,12 @@
 
     iput v9, p0, Landroid/content/res/CompatibilityInfo;->applicationInvertedScale:F
 
-    .line 243
     or-int/lit8 v5, v5, 0x1
 
     goto/16 :goto_3
 
-    .line 204
+    nop
+
     :pswitch_data_0
     .packed-switch 0x3
         :pswitch_1
@@ -575,6 +612,8 @@
     :goto_0
     iput-boolean v0, p0, Landroid/content/res/CompatibilityInfo;->isThemeable:Z
 
+    invoke-static {p1, p0}, Landroid/content/res/CompatibilityInfo$Injector;->setThemeable(Landroid/os/Parcel;Landroid/content/res/CompatibilityInfo;)V
+
     .line 603
     return-void
 
@@ -593,6 +632,42 @@
     .prologue
     .line 37
     invoke-direct {p0, p1}, Landroid/content/res/CompatibilityInfo;-><init>(Landroid/os/Parcel;)V
+
+    return-void
+.end method
+
+.method private constructor <init>(Z)V
+    .locals 6
+    .parameter "isTrue"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/high16 v3, 0x3f80
+
+    const/4 v1, 0x4
+
+    sget v2, Landroid/util/DisplayMetrics;->DENSITY_DEVICE:I
+
+    move-object v0, p0
+
+    move v4, v3
+
+    move v5, p1
+
+    invoke-direct/range {v0 .. v5}, Landroid/content/res/CompatibilityInfo;-><init>(IIFFZ)V
+
+    return-void
+.end method
+
+.method synthetic constructor <init>(ZLandroid/content/res/CompatibilityInfo$1;)V
+    .locals 0
+    .parameter "x0"
+    .parameter "x1"
+
+    .prologue
+    invoke-direct {p0, p1}, Landroid/content/res/CompatibilityInfo;-><init>(Z)V
 
     return-void
 .end method
@@ -966,6 +1041,9 @@
 .method public equals(Ljava/lang/Object;)Z
     .locals 6
     .parameter "o"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v3, 0x0
@@ -1069,6 +1147,9 @@
 
 .method public hashCode()I
     .locals 3
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 563
@@ -1303,6 +1384,9 @@
     .locals 1
     .parameter "dest"
     .parameter "flags"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 579

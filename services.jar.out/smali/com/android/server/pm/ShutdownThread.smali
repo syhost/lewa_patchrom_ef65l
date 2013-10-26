@@ -6,7 +6,8 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
-        Lcom/android/server/pm/ShutdownThread$CloseDialogReceiver;
+        Lcom/android/server/pm/ShutdownThread$CloseDialogReceiver;,
+        Lcom/android/server/pm/ShutdownThread$Injector;
     }
 .end annotation
 
@@ -36,9 +37,17 @@
 
 .field private static final sInstance:Lcom/android/server/pm/ShutdownThread;
 
-.field private static sIsStarted:Z
+.field static sIsStarted:Z
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
-.field private static sIsStartedGuard:Ljava/lang/Object;
+.field static sIsStartedGuard:Ljava/lang/Object;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 
 # instance fields
@@ -138,6 +147,9 @@
 .method private static beginShutdownSequence(Landroid/content/Context;)V
     .locals 7
     .parameter "context"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v5, 0x1
@@ -227,15 +239,12 @@
 
     invoke-virtual {v2, v3}, Landroid/view/Window;->setType(I)V
 
-    .line 264
-    invoke-virtual {v1}, Landroid/app/ProgressDialog;->show()V
+    invoke-static {p0}, Lcom/android/server/pm/ShutdownThread$Injector;->createShutDownDialog(Landroid/content/Context;)V
 
-    .line 266
     sget-object v2, Lcom/android/server/pm/ShutdownThread;->sInstance:Lcom/android/server/pm/ShutdownThread;
 
     iput-object p0, v2, Lcom/android/server/pm/ShutdownThread;->mContext:Landroid/content/Context;
 
-    .line 267
     sget-object v3, Lcom/android/server/pm/ShutdownThread;->sInstance:Lcom/android/server/pm/ShutdownThread;
 
     const-string v2, "power"
@@ -434,6 +443,30 @@
     goto :goto_3
 .end method
 
+.method static getReboot()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    sget-boolean v0, Lcom/android/server/pm/ShutdownThread;->mReboot:Z
+
+    return v0
+.end method
+
+.method static isShowShutdownAnimation()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    sget-boolean v0, Llewa/os/Build;->SHUTDOWN_ANIMATIOM:Z
+
+    return v0
+.end method
+
 .method public static reboot(Landroid/content/Context;Ljava/lang/String;Z)V
     .locals 1
     .parameter "context"
@@ -601,6 +634,32 @@
     return-void
 .end method
 
+.method static setReboot(Z)V
+    .locals 0
+    .parameter "enable"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    sput-boolean p0, Lcom/android/server/pm/ShutdownThread;->mReboot:Z
+
+    return-void
+.end method
+
+.method static setRebootReason(Ljava/lang/String;)V
+    .locals 0
+    .parameter "reason"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    sput-object p0, Lcom/android/server/pm/ShutdownThread;->mRebootReason:Ljava/lang/String;
+
+    return-void
+.end method
+
 .method public static shutdown(Landroid/content/Context;Z)V
     .locals 1
     .parameter "context"
@@ -626,6 +685,9 @@
     .locals 10
     .parameter "context"
     .parameter "confirm"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const v9, 0x1040013
@@ -792,12 +854,10 @@
 
     invoke-virtual {v4, v5}, Landroid/view/Window;->setType(I)V
 
-    .line 183
-    invoke-virtual {v1}, Landroid/app/AlertDialog;->show()V
+    invoke-static {p0}, Lcom/android/server/pm/ShutdownThread$Injector;->createRebootDialog(Landroid/content/Context;)V
 
     goto/16 :goto_0
 
-    .line 114
     .end local v0           #closer:Lcom/android/server/pm/ShutdownThread$CloseDialogReceiver;
     .end local v1           #dialog:Landroid/app/AlertDialog;
     .end local v2           #longPressBehavior:I

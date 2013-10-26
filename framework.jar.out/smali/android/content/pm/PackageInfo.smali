@@ -6,6 +6,14 @@
 .implements Landroid/os/Parcelable;
 
 
+# annotations
+.annotation system Ldalvik/annotation/MemberClasses;
+    value = {
+        Landroid/content/pm/PackageInfo$Injector;
+    }
+.end annotation
+
+
 # static fields
 .field public static final CREATOR:Landroid/os/Parcelable$Creator; = null
     .annotation system Ldalvik/annotation/Signature;
@@ -77,6 +85,12 @@
 .field public signatures:[Landroid/content/pm/Signature;
 
 .field public themeInfos:[Landroid/content/pm/ThemeInfo;
+
+.field public themeInfos:[Landroid/content/pm/ThemeInfo;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field public versionCode:I
 
@@ -373,26 +387,24 @@
 
     iput-object v1, p0, Landroid/content/pm/PackageInfo;->themeInfos:[Landroid/content/pm/ThemeInfo;
 
-    .line 371
     invoke-virtual {p1}, Landroid/os/Parcel;->readString()Ljava/lang/String;
 
     move-result-object v1
 
     iput-object v1, p0, Landroid/content/pm/PackageInfo;->lockedZipFilePath:Ljava/lang/String;
 
-    .line 372
+    invoke-static {p1, p0}, Landroid/content/pm/PackageInfo$Injector;->writePackageInfoToParcel(Landroid/os/Parcel;Landroid/content/pm/PackageInfo;)V
+
     return-void
 
     :cond_1
     move v1, v3
 
-    .line 368
     goto :goto_0
 
     :cond_2
     move v2, v3
 
-    .line 369
     goto :goto_1
 .end method
 
@@ -464,6 +476,56 @@
     return-void
 .end method
 
+.method public getLockedZipFilePath()Ljava/lang/String;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Landroid/content/pm/PackageInfo;->lockedZipFilePath:Ljava/lang/String;
+
+    return-object v0
+.end method
+
+.method public isDrmProtectedThemeApk()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-boolean v0, p0, Landroid/content/pm/PackageInfo;->mDrmProtectedThemeApk:Z
+
+    return v0
+.end method
+
+.method public setDrmProtectedThemeApk(Z)V
+    .locals 0
+    .parameter "value"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput-boolean p1, p0, Landroid/content/pm/PackageInfo;->mDrmProtectedThemeApk:Z
+
+    return-void
+.end method
+
+.method public setLockedZipFilePath(Ljava/lang/String;)V
+    .locals 0
+    .parameter "value"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput-object p1, p0, Landroid/content/pm/PackageInfo;->lockedZipFilePath:Ljava/lang/String;
+
+    return-void
+.end method
+
 .method public toString()Ljava/lang/String;
     .locals 2
 
@@ -520,6 +582,9 @@
     .locals 5
     .parameter "dest"
     .parameter "parcelableFlags"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v1, 0x1
@@ -658,20 +723,18 @@
     :goto_2
     invoke-virtual {p1, v1}, Landroid/os/Parcel;->writeInt(I)V
 
-    .line 326
     iget-object v0, p0, Landroid/content/pm/PackageInfo;->themeInfos:[Landroid/content/pm/ThemeInfo;
 
     invoke-virtual {p1, v0, p2}, Landroid/os/Parcel;->writeTypedArray([Landroid/os/Parcelable;I)V
 
-    .line 327
     iget-object v0, p0, Landroid/content/pm/PackageInfo;->lockedZipFilePath:Ljava/lang/String;
 
     invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
 
-    .line 328
+    invoke-static {p1, p2, p0}, Landroid/content/pm/PackageInfo$Injector;->writeThemeToParcel(Landroid/os/Parcel;ILandroid/content/pm/PackageInfo;)V
+
     return-void
 
-    .line 305
     :cond_0
     invoke-virtual {p1, v2}, Landroid/os/Parcel;->writeInt(I)V
 

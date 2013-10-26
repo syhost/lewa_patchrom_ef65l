@@ -4,6 +4,10 @@
 
 
 # annotations
+.annotation build Landroid/annotation/LewaHook;
+    value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+.end annotation
+
 .annotation system Ldalvik/annotation/EnclosingClass;
     value = Lcom/android/server/pm/PackageManagerService;
 .end annotation
@@ -18,6 +22,8 @@
 .field args:Lcom/android/server/pm/PackageManagerService$InstallArgs;
 
 .field isRemovedPackageSystemUpdate:Z
+
+.field isThemeApk:Z
 
 .field isThemeApk:Z
 
@@ -56,6 +62,8 @@
 
     .line 7677
     iput-boolean v1, p0, Lcom/android/server/pm/PackageManagerService$PackageRemovedInfo;->isThemeApk:Z
+
+    iput-boolean v0, p0, Lcom/android/server/pm/PackageManagerService$PackageRemovedInfo;->isThemeApk:Z
 
     return-void
 .end method

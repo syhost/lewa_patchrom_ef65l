@@ -36,6 +36,12 @@
 
 .field public static final FLAG_DEBUGGABLE:I = 0x2
 
+.field public static final FLAG_DISABLE_AUTOSTART:I = 0x40000000
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field public static final FLAG_EXTERNAL_STORAGE:I = 0x40000
 
 .field public static final FLAG_FACTORY_TEST:I = 0x10
@@ -82,6 +88,24 @@
 
 .field private static final PLUTO_SCHEMA:Ljava/lang/String; = "http://www.w3.org/2001/pluto.html"
 
+.field public static final PLUTO_HANDLE_THEME_CONFIG_CHANGES_ATTRIBUTE_NAME:Ljava/lang/String; = "handleThemeConfigChanges"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field public static final PLUTO_ISTHEMEABLE_ATTRIBUTE_NAME:Ljava/lang/String; = "isThemeable"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field private static final PLUTO_SCHEMA:Ljava/lang/String; = "http://www.w3.org/2001/pluto.html"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 
 # instance fields
 .field public backupAgentName:Ljava/lang/String;
@@ -103,6 +127,12 @@
 .field public installLocation:I
 
 .field public isThemeable:Z
+
+.field public isThemeable:Z
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field public largestWidthLimitDp:I
 
@@ -156,212 +186,180 @@
     .prologue
     const/4 v1, 0x0
 
-    .line 541
     invoke-direct {p0}, Landroid/content/pm/PackageItemInfo;-><init>()V
 
-    .line 99
+    iput-boolean v1, p0, Landroid/content/pm/ApplicationInfo;->isThemeable:Z
+
     iput v1, p0, Landroid/content/pm/ApplicationInfo;->uiOptions:I
 
-    .line 341
     iput v1, p0, Landroid/content/pm/ApplicationInfo;->flags:I
 
-    .line 349
     iput v1, p0, Landroid/content/pm/ApplicationInfo;->requiresSmallestWidthDp:I
 
-    .line 357
     iput v1, p0, Landroid/content/pm/ApplicationInfo;->compatibleWidthLimitDp:I
 
-    .line 365
     iput v1, p0, Landroid/content/pm/ApplicationInfo;->largestWidthLimitDp:I
 
-    .line 428
     const/4 v0, 0x1
 
     iput-boolean v0, p0, Landroid/content/pm/ApplicationInfo;->enabled:Z
 
-    .line 434
     iput v1, p0, Landroid/content/pm/ApplicationInfo;->enabledSetting:I
 
-    .line 439
     iput-boolean v1, p0, Landroid/content/pm/ApplicationInfo;->isThemeable:Z
 
-    .line 464
     const/4 v0, -0x1
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->installLocation:I
 
-    .line 542
     return-void
 .end method
 
 .method public constructor <init>(Landroid/content/pm/ApplicationInfo;)V
     .locals 2
     .parameter "orig"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v1, 0x0
 
-    .line 545
     invoke-direct {p0, p1}, Landroid/content/pm/PackageItemInfo;-><init>(Landroid/content/pm/PackageItemInfo;)V
 
-    .line 99
+    iput-boolean v1, p0, Landroid/content/pm/ApplicationInfo;->isThemeable:Z
+
     iput v1, p0, Landroid/content/pm/ApplicationInfo;->uiOptions:I
 
-    .line 341
     iput v1, p0, Landroid/content/pm/ApplicationInfo;->flags:I
 
-    .line 349
     iput v1, p0, Landroid/content/pm/ApplicationInfo;->requiresSmallestWidthDp:I
 
-    .line 357
     iput v1, p0, Landroid/content/pm/ApplicationInfo;->compatibleWidthLimitDp:I
 
-    .line 365
     iput v1, p0, Landroid/content/pm/ApplicationInfo;->largestWidthLimitDp:I
 
-    .line 428
     const/4 v0, 0x1
 
     iput-boolean v0, p0, Landroid/content/pm/ApplicationInfo;->enabled:Z
 
-    .line 434
     iput v1, p0, Landroid/content/pm/ApplicationInfo;->enabledSetting:I
 
-    .line 439
     iput-boolean v1, p0, Landroid/content/pm/ApplicationInfo;->isThemeable:Z
 
-    .line 464
     const/4 v0, -0x1
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->installLocation:I
 
-    .line 546
     iget-object v0, p1, Landroid/content/pm/ApplicationInfo;->taskAffinity:Ljava/lang/String;
 
     iput-object v0, p0, Landroid/content/pm/ApplicationInfo;->taskAffinity:Ljava/lang/String;
 
-    .line 547
     iget-object v0, p1, Landroid/content/pm/ApplicationInfo;->permission:Ljava/lang/String;
 
     iput-object v0, p0, Landroid/content/pm/ApplicationInfo;->permission:Ljava/lang/String;
 
-    .line 548
     iget-object v0, p1, Landroid/content/pm/ApplicationInfo;->processName:Ljava/lang/String;
 
     iput-object v0, p0, Landroid/content/pm/ApplicationInfo;->processName:Ljava/lang/String;
 
-    .line 549
     iget-object v0, p1, Landroid/content/pm/ApplicationInfo;->className:Ljava/lang/String;
 
     iput-object v0, p0, Landroid/content/pm/ApplicationInfo;->className:Ljava/lang/String;
 
-    .line 550
     iget v0, p1, Landroid/content/pm/ApplicationInfo;->theme:I
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->theme:I
 
-    .line 551
     iget v0, p1, Landroid/content/pm/ApplicationInfo;->flags:I
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->flags:I
 
-    .line 552
     iget v0, p1, Landroid/content/pm/ApplicationInfo;->requiresSmallestWidthDp:I
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->requiresSmallestWidthDp:I
 
-    .line 553
     iget v0, p1, Landroid/content/pm/ApplicationInfo;->compatibleWidthLimitDp:I
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->compatibleWidthLimitDp:I
 
-    .line 554
     iget v0, p1, Landroid/content/pm/ApplicationInfo;->largestWidthLimitDp:I
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->largestWidthLimitDp:I
 
-    .line 555
     iget-object v0, p1, Landroid/content/pm/ApplicationInfo;->sourceDir:Ljava/lang/String;
 
     iput-object v0, p0, Landroid/content/pm/ApplicationInfo;->sourceDir:Ljava/lang/String;
 
-    .line 556
     iget-object v0, p1, Landroid/content/pm/ApplicationInfo;->publicSourceDir:Ljava/lang/String;
 
     iput-object v0, p0, Landroid/content/pm/ApplicationInfo;->publicSourceDir:Ljava/lang/String;
 
-    .line 557
     iget-object v0, p1, Landroid/content/pm/ApplicationInfo;->nativeLibraryDir:Ljava/lang/String;
 
     iput-object v0, p0, Landroid/content/pm/ApplicationInfo;->nativeLibraryDir:Ljava/lang/String;
 
-    .line 558
     iget-object v0, p1, Landroid/content/pm/ApplicationInfo;->resourceDirs:[Ljava/lang/String;
 
     iput-object v0, p0, Landroid/content/pm/ApplicationInfo;->resourceDirs:[Ljava/lang/String;
 
-    .line 559
     iget-object v0, p1, Landroid/content/pm/ApplicationInfo;->sharedLibraryFiles:[Ljava/lang/String;
 
     iput-object v0, p0, Landroid/content/pm/ApplicationInfo;->sharedLibraryFiles:[Ljava/lang/String;
 
-    .line 560
     iget-object v0, p1, Landroid/content/pm/ApplicationInfo;->dataDir:Ljava/lang/String;
 
     iput-object v0, p0, Landroid/content/pm/ApplicationInfo;->dataDir:Ljava/lang/String;
 
-    .line 561
     iget v0, p1, Landroid/content/pm/ApplicationInfo;->uid:I
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->uid:I
 
-    .line 562
     iget v0, p1, Landroid/content/pm/ApplicationInfo;->targetSdkVersion:I
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->targetSdkVersion:I
 
-    .line 563
     iget-boolean v0, p1, Landroid/content/pm/ApplicationInfo;->enabled:Z
 
     iput-boolean v0, p0, Landroid/content/pm/ApplicationInfo;->enabled:Z
 
-    .line 564
     iget v0, p1, Landroid/content/pm/ApplicationInfo;->enabledSetting:I
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->enabledSetting:I
 
-    .line 565
     iget v0, p1, Landroid/content/pm/ApplicationInfo;->installLocation:I
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->installLocation:I
 
-    .line 566
     iget-object v0, p1, Landroid/content/pm/ApplicationInfo;->manageSpaceActivityName:Ljava/lang/String;
 
     iput-object v0, p0, Landroid/content/pm/ApplicationInfo;->manageSpaceActivityName:Ljava/lang/String;
 
-    .line 567
     iget v0, p1, Landroid/content/pm/ApplicationInfo;->descriptionRes:I
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->descriptionRes:I
 
-    .line 568
     iget v0, p1, Landroid/content/pm/ApplicationInfo;->uiOptions:I
 
     iput v0, p0, Landroid/content/pm/ApplicationInfo;->uiOptions:I
 
-    .line 569
     iget-boolean v0, p1, Landroid/content/pm/ApplicationInfo;->isThemeable:Z
 
     iput-boolean v0, p0, Landroid/content/pm/ApplicationInfo;->isThemeable:Z
 
-    .line 570
+    iget-boolean v0, p1, Landroid/content/pm/ApplicationInfo;->isThemeable:Z
+
+    iput-boolean v0, p0, Landroid/content/pm/ApplicationInfo;->isThemeable:Z
+
     return-void
 .end method
 
 .method private constructor <init>(Landroid/os/Parcel;)V
     .locals 3
     .parameter "source"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v1, 0x1
@@ -583,6 +581,8 @@
     :goto_1
     iput-boolean v1, p0, Landroid/content/pm/ApplicationInfo;->isThemeable:Z
 
+    invoke-virtual {p0, p1}, Landroid/content/pm/ApplicationInfo;->setThemeable(Landroid/os/Parcel;)V
+
     .line 649
     return-void
 
@@ -659,6 +659,35 @@
 
     .prologue
     .line 457
+    if-eqz p0, :cond_0
+
+    const-string v0, "http://www.w3.org/2001/pluto.html"
+
+    invoke-virtual {p0, v0}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x1
+
+    :goto_0
+    return v0
+
+    :cond_0
+    const/4 v0, 0x0
+
+    goto :goto_0
+.end method
+
+.method public static isPlutoNamespace(Ljava/lang/String;)Z
+    .locals 1
+    .parameter "namespace"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
     if-eqz p0, :cond_0
 
     const-string v0, "http://www.w3.org/2001/pluto.html"
@@ -1443,6 +1472,33 @@
     .end local v0           #label:Ljava/lang/CharSequence;
     :goto_0
     return-object v0
+
+    :cond_0
+    const/4 v0, 0x0
+
+    goto :goto_0
+.end method
+
+.method setThemeable(Landroid/os/Parcel;)V
+    .locals 1
+    .parameter "source"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x1
+
+    :goto_0
+    iput-boolean v0, p0, Landroid/content/pm/ApplicationInfo;->isThemeable:Z
+
+    return-void
 
     :cond_0
     const/4 v0, 0x0

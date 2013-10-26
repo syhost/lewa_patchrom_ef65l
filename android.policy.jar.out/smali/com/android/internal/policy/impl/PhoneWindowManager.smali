@@ -13,7 +13,8 @@
         Lcom/android/internal/policy/impl/PhoneWindowManager$MyOrientationListener;,
         Lcom/android/internal/policy/impl/PhoneWindowManager$SettingsObserver;,
         Lcom/android/internal/policy/impl/PhoneWindowManager$PolicyHandler;,
-        Lcom/android/internal/policy/impl/PhoneWindowManager$PointerLocationInputEventReceiver;
+        Lcom/android/internal/policy/impl/PhoneWindowManager$PointerLocationInputEventReceiver;,
+        Lcom/android/internal/policy/impl/PhoneWindowManager$Injector;
     }
 .end annotation
 
@@ -250,6 +251,12 @@
 
 .field mBroadcastWakeLock:Landroid/os/PowerManager$WakeLock;
 
+.field mCameraPowerShutter:Z
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field mCanHideNavigationBar:Z
 
 .field mCarDockEnablesAccelerometer:Z
@@ -337,7 +344,11 @@
 
 .field mForceStatusBar:Z
 
-.field mGlobalActions:Lcom/android/internal/policy/impl/GlobalActions;
+.field mGlobalActions:Lcom/android/internal/policy/impl/LewaGlobalActions;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mHDMIObserver:Landroid/os/UEventObserver;
 
@@ -596,6 +607,12 @@
 .field mTopIsFullscreen:Z
 
 .field mUiContext:Landroid/content/Context;
+
+.field private mUiContext:Landroid/content/Context;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field mUiMode:I
 
@@ -1713,6 +1730,30 @@
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
+.end method
+
+.method static getMsgDispatchMediaKeyWithWakeLock()I
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/4 v0, 0x3
+
+    return v0
+.end method
+
+.method static getScreenshotChordDebounceDelayMillis()J
+    .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const-wide/16 v0, 0x96
+
+    return-wide v0
 .end method
 
 .method private getSearchManager()Landroid/app/SearchManager;
@@ -4143,6 +4184,9 @@
     .parameter "displayWidth"
     .parameter "displayHeight"
     .parameter "displayRotation"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 2793
@@ -5013,12 +5057,6 @@
 
     move-object/from16 v0, p0
 
-    iget v4, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mStatusBarHeight:I
-
-    add-int/2addr v3, v4
-
-    move-object/from16 v0, p0
-
     iput v3, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mSystemTop:I
 
     .line 2967
@@ -5257,6 +5295,118 @@
     invoke-interface {v3, v4}, Landroid/view/WindowManagerPolicy$WindowState;->hideLw(Z)Z
 
     goto :goto_a
+.end method
+
+.method callCancelPendingPowerKeyAction()V
+    .locals 0
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->cancelPendingPowerKeyAction()V
+
+    return-void
+.end method
+
+.method callCancelPendingScreenshotChordAction()V
+    .locals 0
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->cancelPendingScreenshotChordAction()V
+
+    return-void
+.end method
+
+.method callHandleLongPressOnHome()V
+    .locals 0
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->handleLongPressOnHome()V
+
+    return-void
+.end method
+
+.method callInterceptPowerKeyDown(Z)V
+    .locals 0
+    .parameter "handled"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-direct {p0, p1}, Lcom/android/internal/policy/impl/PhoneWindowManager;->interceptPowerKeyDown(Z)V
+
+    return-void
+.end method
+
+.method callInterceptPowerKeyUp(Z)Z
+    .locals 1
+    .parameter "canceled"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-direct {p0, p1}, Lcom/android/internal/policy/impl/PhoneWindowManager;->interceptPowerKeyUp(Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method callInterceptScreenshotChord()V
+    .locals 0
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->interceptScreenshotChord()V
+
+    return-void
+.end method
+
+.method callLaunchAssistAction()V
+    .locals 0
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->launchAssistAction()V
+
+    return-void
+.end method
+
+.method callLaunchAssistLongPressAction()V
+    .locals 0
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->launchAssistLongPressAction()V
+
+    return-void
+.end method
+
+.method callUpdateLockScreenTimeout()V
+    .locals 0
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->updateLockScreenTimeout()V
+
+    return-void
 .end method
 
 .method public canBeForceHidden(Landroid/view/WindowManagerPolicy$WindowState;Landroid/view/WindowManager$LayoutParams;)Z
@@ -7416,6 +7566,18 @@
     goto :goto_1
 .end method
 
+.method getLongPressOnHomeBehavior()I
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mLongPressOnHomeBehavior:I
+
+    return v0
+.end method
+
 .method public getMaxWallpaperLayer()I
     .locals 1
 
@@ -7506,6 +7668,42 @@
     .end local p1
     :cond_0
     return p1
+.end method
+
+.method getPowerKeyTime()J
+    .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-wide v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mPowerKeyTime:J
+
+    return-wide v0
+.end method
+
+.method getPowerKeyTriggered()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mPowerKeyTriggered:Z
+
+    return v0
+.end method
+
+.method getScreenshotChordEnabled()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mScreenshotChordEnabled:Z
+
+    return v0
 .end method
 
 .method getStatusBarService()Lcom/android/internal/statusbar/IStatusBarService;
@@ -7614,6 +7812,54 @@
     const/4 v0, 0x0
 
     goto :goto_0
+.end method
+
+.method getVolumeDownKeyConsumedByScreenshotChord()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeDownKeyConsumedByScreenshotChord:Z
+
+    return v0
+.end method
+
+.method getVolumeDownKeyTime()J
+    .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-wide v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeDownKeyTime:J
+
+    return-wide v0
+.end method
+
+.method getVolumeDownKeyTriggered()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeDownKeyTriggered:Z
+
+    return v0
+.end method
+
+.method getVolumeUpKeyTriggered()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeUpKeyTriggered:Z
+
+    return v0
 .end method
 
 .method goHome()Z
@@ -7996,6 +8242,9 @@
     .parameter "windowManager"
     .parameter "windowManagerFuncs"
     .parameter "powerManager"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 1138
@@ -15324,6 +15573,9 @@
     .locals 4
     .parameter "win"
     .parameter "attrs"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v0, -0x7
@@ -15436,18 +15688,11 @@
 
     goto :goto_0
 
-    .line 2017
     :sswitch_5
-    iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mKeyguard:Landroid/view/WindowManagerPolicy$WindowState;
-
-    if-nez v1, :cond_0
-
-    .line 2020
     iput-object p1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mKeyguard:Landroid/view/WindowManagerPolicy$WindowState;
 
     goto :goto_0
 
-    .line 1977
     nop
 
     :sswitch_data_0
@@ -17620,6 +17865,45 @@
     return-void
 .end method
 
+.method setLongPressOnHomeBehavior(I)V
+    .locals 0
+    .parameter "mLongPressOnHomeBehavior"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput p1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mLongPressOnHomeBehavior:I
+
+    return-void
+.end method
+
+.method setPowerKeyTime(J)V
+    .locals 0
+    .parameter "mPowerKeyTime"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput-wide p1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mPowerKeyTime:J
+
+    return-void
+.end method
+
+.method setPowerKeyTriggered(Z)V
+    .locals 0
+    .parameter "mPowerKeyTriggered"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput-boolean p1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mPowerKeyTriggered:Z
+
+    return-void
+.end method
+
 .method public setRotationLw(I)V
     .locals 1
     .parameter "rotation"
@@ -17662,6 +17946,19 @@
     const/16 v0, 0x2710
 
     goto :goto_0
+.end method
+
+.method setScreenshotChordEnabled(Z)V
+    .locals 0
+    .parameter "mScreenshotChordEnabled"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput-boolean p1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mScreenshotChordEnabled:Z
+
+    return-void
 .end method
 
 .method public setUserRotationMode(II)V
@@ -17708,6 +18005,58 @@
     goto :goto_0
 .end method
 
+.method setVolumeDownKeyConsumedByScreenshotChord(Z)V
+    .locals 0
+    .parameter "mVolumeDownKeyConsumedByScreenshotChord"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput-boolean p1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeDownKeyConsumedByScreenshotChord:Z
+
+    return-void
+.end method
+
+.method setVolumeDownKeyTime(J)V
+    .locals 0
+    .parameter "mVolumeDownKeyTime"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput-wide p1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeDownKeyTime:J
+
+    return-void
+.end method
+
+.method setVolumeDownKeyTriggered(Z)V
+    .locals 0
+    .parameter "mVolumeDownKeyTriggered"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput-boolean p1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeDownKeyTriggered:Z
+
+    return-void
+.end method
+
+.method setVolumeUpKeyTriggered(Z)V
+    .locals 0
+    .parameter "mVolumeUpKeyTriggered"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput-boolean p1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeUpKeyTriggered:Z
+
+    return-void
+.end method
+
 .method public showBootMessage(Ljava/lang/CharSequence;Z)V
     .locals 2
     .parameter "msg"
@@ -17738,23 +18087,24 @@
 
 .method showGlobalActionsDialog()V
     .locals 4
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 989
-    iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/GlobalActions;
+    iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/LewaGlobalActions;
 
     if-nez v1, :cond_0
 
-    .line 990
-    new-instance v1, Lcom/android/internal/policy/impl/GlobalActions;
+    new-instance v1, Lcom/android/internal/policy/impl/LewaGlobalActions;
 
     iget-object v2, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mContext:Landroid/content/Context;
 
     iget-object v3, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mWindowManagerFuncs:Landroid/view/WindowManagerPolicy$WindowManagerFuncs;
 
-    invoke-direct {v1, v2, v3}, Lcom/android/internal/policy/impl/GlobalActions;-><init>(Landroid/content/Context;Landroid/view/WindowManagerPolicy$WindowManagerFuncs;)V
+    invoke-direct {v1, v2, v3}, Lcom/android/internal/policy/impl/LewaGlobalActions;-><init>(Landroid/content/Context;Landroid/view/WindowManagerPolicy$WindowManagerFuncs;)V
 
-    iput-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/GlobalActions;
+    iput-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/LewaGlobalActions;
 
     .line 992
     :cond_0
@@ -17764,13 +18114,13 @@
 
     .line 993
     .local v0, keyguardShowing:Z
-    iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/GlobalActions;
+    iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/LewaGlobalActions;
 
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->isDeviceProvisioned()Z
 
     move-result v2
 
-    invoke-virtual {v1, v0, v2}, Lcom/android/internal/policy/impl/GlobalActions;->showDialog(ZZ)V
+    invoke-virtual {v1, v0, v2}, Lcom/android/internal/policy/impl/LewaGlobalActions;->showDialog(ZZ)V
 
     .line 994
     if-eqz v0, :cond_1
@@ -19018,6 +19368,10 @@
     move-result-object v2
 
     invoke-static {v1, v2}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
+
+    invoke-static {p1, v0}, Lcom/android/internal/policy/impl/PhoneWindowManager$Injector;->getLewaViewLayer(II)I
+
+    move-result v0
 
     goto :goto_0
 

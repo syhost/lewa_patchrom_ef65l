@@ -3,6 +3,14 @@
 .source "Ringtone.java"
 
 
+# annotations
+.annotation system Ldalvik/annotation/MemberClasses;
+    value = {
+        Landroid/media/Ringtone$Injector;
+    }
+.end annotation
+
+
 # static fields
 .field private static final DRM_COLUMNS:[Ljava/lang/String; = null
 
@@ -184,6 +192,9 @@
     .parameter "context"
     .parameter "uri"
     .parameter "followSettingsUri"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 127

@@ -13,7 +13,8 @@
         Landroid/widget/Spinner$DropdownPopup;,
         Landroid/widget/Spinner$DialogPopup;,
         Landroid/widget/Spinner$SpinnerPopup;,
-        Landroid/widget/Spinner$DropDownAdapter;
+        Landroid/widget/Spinner$DropDownAdapter;,
+        Landroid/widget/Spinner$Injector;
     }
 .end annotation
 
@@ -29,6 +30,30 @@
 
 .field private static final TAG:Ljava/lang/String; = "Spinner"
 
+.field static backGroundResource:I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field static childNow:Landroid/view/View;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field static isHideInputKeyBoard:Z
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field static isSpinnerV5Style:Z
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 
 # instance fields
 .field private mDisableChildrenWhenDisabled:Z
@@ -43,8 +68,51 @@
 
 .field private mTempRect:Landroid/graphics/Rect;
 
+.field paddingBottom:I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field paddingLeft:I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field paddingRight:I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field paddingTop:I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 
 # direct methods
+.method static constructor <clinit>()V
+    .locals 1
+
+    .prologue
+    const/4 v0, 0x0
+
+    sput-object v0, Landroid/widget/Spinner;->childNow:Landroid/view/View;
+
+    const/4 v0, 0x0
+
+    sput-boolean v0, Landroid/widget/Spinner;->isSpinnerV5Style:Z
+
+    const/4 v0, 0x1
+
+    sput-boolean v0, Landroid/widget/Spinner;->isHideInputKeyBoard:Z
+
+    return-void
+.end method
+
 .method public constructor <init>(Landroid/content/Context;)V
     .locals 1
     .parameter "context"
@@ -80,6 +148,9 @@
     .locals 1
     .parameter "context"
     .parameter "attrs"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 118
@@ -96,6 +167,9 @@
     .parameter "context"
     .parameter "attrs"
     .parameter "defStyle"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 134
@@ -113,47 +187,53 @@
     .parameter "attrs"
     .parameter "defStyle"
     .parameter "mode"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v7, 0x0
 
     const/4 v6, 0x0
 
-    .line 155
     invoke-direct {p0, p1, p2, p3}, Landroid/widget/AbsSpinner;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
 
-    .line 82
     new-instance v4, Landroid/graphics/Rect;
 
     invoke-direct {v4}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v4, p0, Landroid/widget/Spinner;->mTempRect:Landroid/graphics/Rect;
 
-    .line 157
+    invoke-static {p1, p2}, Landroid/widget/Spinner$Injector;->isSpinnerV5Style(Landroid/content/Context;Landroid/util/AttributeSet;)Z
+
+    move-result v4
+
+    sput-boolean v4, Landroid/widget/Spinner;->isSpinnerV5Style:Z
+
+    invoke-direct {p0, p1, p2}, Landroid/widget/Spinner;->setHideInputKeyBOard(Landroid/content/Context;Landroid/util/AttributeSet;)V
+
+    invoke-static {p1, p2}, Landroid/widget/Spinner$Injector;->setDefaultBackGroundResource(Landroid/content/Context;Landroid/util/AttributeSet;)V
+
     sget-object v4, Lcom/android/internal/R$styleable;->Spinner:[I
 
     invoke-virtual {p1, p2, v4, p3, v6}, Landroid/content/Context;->obtainStyledAttributes(Landroid/util/AttributeSet;[III)Landroid/content/res/TypedArray;
 
     move-result-object v0
 
-    .line 160
     .local v0, a:Landroid/content/res/TypedArray;
     const/4 v4, -0x1
 
     if-ne p4, v4, :cond_0
 
-    .line 161
     const/4 v4, 0x7
 
     invoke-virtual {v0, v4, v6}, Landroid/content/res/TypedArray;->getInt(II)I
 
     move-result p4
 
-    .line 164
     :cond_0
     packed-switch p4, :pswitch_data_0
 
-    .line 195
     :goto_0
     const/16 v4, 0x11
 
@@ -307,39 +387,80 @@
     return-object v0
 .end method
 
+.method static synthetic access$400(Landroid/widget/Spinner;)Landroid/content/Context;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-object v0, p0, Landroid/widget/Spinner;->mContext:Landroid/content/Context;
+
+    return-object v0
+.end method
+
+.method private hideInputField()V
+    .locals 3
+
+    .prologue
+    sget-boolean v1, Landroid/widget/Spinner;->isHideInputKeyBoard:Z
+
+    if-eqz v1, :cond_0
+
+    iget-object v1, p0, Landroid/widget/Spinner;->mContext:Landroid/content/Context;
+
+    const-string v2, "input_method"
+
+    invoke-virtual {v1, v2}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/view/inputmethod/InputMethodManager;
+
+    .local v0, inputMethodManager:Landroid/view/inputmethod/InputMethodManager;
+    invoke-virtual {p0}, Landroid/widget/Spinner;->getWindowToken()Landroid/os/IBinder;
+
+    move-result-object v1
+
+    const/4 v2, 0x2
+
+    invoke-virtual {v0, v1, v2}, Landroid/view/inputmethod/InputMethodManager;->hideSoftInputFromWindow(Landroid/os/IBinder;I)Z
+
+    .end local v0           #inputMethodManager:Landroid/view/inputmethod/InputMethodManager;
+    :cond_0
+    return-void
+.end method
+
 .method private makeAndAddView(I)Landroid/view/View;
     .locals 4
     .parameter "position"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 530
     iget-boolean v2, p0, Landroid/widget/Spinner;->mDataChanged:Z
 
     if-nez v2, :cond_0
 
-    .line 531
     iget-object v2, p0, Landroid/widget/Spinner;->mRecycler:Landroid/widget/AbsSpinner$RecycleBin;
 
     invoke-virtual {v2, p1}, Landroid/widget/AbsSpinner$RecycleBin;->get(I)Landroid/view/View;
 
     move-result-object v0
 
-    .line 532
     .local v0, child:Landroid/view/View;
     if-eqz v0, :cond_0
 
-    .line 534
     invoke-direct {p0, v0}, Landroid/widget/Spinner;->setUpChild(Landroid/view/View;)V
+
+    sput-object v0, Landroid/widget/Spinner;->childNow:Landroid/view/View;
 
     move-object v1, v0
 
-    .line 546
     .end local v0           #child:Landroid/view/View;
     .local v1, child:Landroid/view/View;
     :goto_0
     return-object v1
 
-    .line 541
     .end local v1           #child:Landroid/view/View;
     :cond_0
     iget-object v2, p0, Landroid/widget/Spinner;->mAdapter:Landroid/widget/SpinnerAdapter;
@@ -350,16 +471,34 @@
 
     move-result-object v0
 
-    .line 544
     .restart local v0       #child:Landroid/view/View;
     invoke-direct {p0, v0}, Landroid/widget/Spinner;->setUpChild(Landroid/view/View;)V
 
+    sput-object v0, Landroid/widget/Spinner;->childNow:Landroid/view/View;
+
     move-object v1, v0
 
-    .line 546
     .end local v0           #child:Landroid/view/View;
     .restart local v1       #child:Landroid/view/View;
     goto :goto_0
+.end method
+
+.method private setHideInputKeyBOard(Landroid/content/Context;Landroid/util/AttributeSet;)V
+    .locals 1
+    .parameter "context"
+    .parameter "attrs"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-static {p1, p2}, Landroid/widget/Spinner$Injector;->isHideInputKeyBoard(Landroid/content/Context;Landroid/util/AttributeSet;)Z
+
+    move-result v0
+
+    sput-boolean v0, Landroid/widget/Spinner;->isHideInputKeyBoard:Z
+
+    return-void
 .end method
 
 .method private setUpChild(Landroid/view/View;)V
@@ -666,6 +805,36 @@
     move-result-object v0
 
     return-object v0
+.end method
+
+.method public isPopupShowing()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Landroid/widget/Spinner;->mPopup:Landroid/widget/Spinner$SpinnerPopup;
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/Spinner;->mPopup:Landroid/widget/Spinner$SpinnerPopup;
+
+    invoke-interface {v0}, Landroid/widget/Spinner$SpinnerPopup;->isShowing()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x1
+
+    :goto_0
+    return v0
+
+    :cond_0
+    const/4 v0, 0x0
+
+    goto :goto_0
 .end method
 
 .method layout(IZ)V
@@ -1191,6 +1360,9 @@
 
 .method public performClick()Z
     .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 598
@@ -1214,12 +1386,26 @@
 
     if-nez v1, :cond_0
 
-    .line 604
     iget-object v1, p0, Landroid/widget/Spinner;->mPopup:Landroid/widget/Spinner$SpinnerPopup;
 
     invoke-interface {v1}, Landroid/widget/Spinner$SpinnerPopup;->show()V
 
-    .line 608
+    sget-boolean v1, Landroid/widget/Spinner;->isSpinnerV5Style:Z
+
+    if-eqz v1, :cond_0
+
+    invoke-direct {p0}, Landroid/widget/Spinner;->hideInputField()V
+
+    invoke-static {p0}, Landroid/widget/Spinner$Injector;->storeSpinnerPadding(Landroid/widget/Spinner;)V
+
+    const v1, 0x9080042
+
+    invoke-virtual {p0, v1}, Landroid/widget/Spinner;->setBackgroundResource(I)V
+
+    invoke-static {p0}, Landroid/widget/Spinner$Injector;->setSpinnerPadding(Landroid/widget/Spinner;)V
+
+    invoke-static {p0}, Landroid/widget/Spinner$Injector;->setArrow(Landroid/widget/Spinner;)V
+
     :cond_0
     return v0
 .end method

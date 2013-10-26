@@ -14,7 +14,8 @@
         Landroid/app/Instrumentation$EmptyRunnable;,
         Landroid/app/Instrumentation$InstrumentationThread;,
         Landroid/app/Instrumentation$ActivityResult;,
-        Landroid/app/Instrumentation$ActivityMonitor;
+        Landroid/app/Instrumentation$ActivityMonitor;,
+        Landroid/app/Instrumentation$Injector;
     }
 .end annotation
 
@@ -1306,6 +1307,9 @@
     .parameter "intent"
     .parameter "requestCode"
     .parameter "options"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 1392
@@ -1428,6 +1432,24 @@
     .end local v13           #N:I
     .end local v15           #i:I
     :cond_3
+    :try_start_lewa_0
+    move-object/from16 v0, p1
+
+    move-object/from16 v1, p5
+
+    invoke-static {v0, v1}, Landroid/app/Instrumentation$Injector;->checkPermission(Landroid/content/Context;Landroid/content/Intent;)Z
+    :try_end_lewa_0
+    .catch Landroid/os/RemoteException; {:try_start_lewa_0 .. :try_end_lewa_0} :catch_0
+
+    move-result v2
+
+    if-nez v2, :cond_lewa_0
+
+    const/4 v2, 0x0
+
+    goto :goto_2
+
+    :cond_lewa_0
     const/4 v2, 0x0
 
     :try_start_1
@@ -1528,6 +1550,9 @@
     .parameter "intent"
     .parameter "requestCode"
     .parameter "options"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 1491
@@ -1650,6 +1675,24 @@
     .end local v13           #N:I
     .end local v15           #i:I
     :cond_3
+    :try_start_lewa_0
+    move-object/from16 v0, p1
+
+    move-object/from16 v1, p5
+
+    invoke-static {v0, v1}, Landroid/app/Instrumentation$Injector;->checkPermission(Landroid/content/Context;Landroid/content/Intent;)Z
+    :try_end_lewa_0
+    .catch Landroid/os/RemoteException; {:try_start_lewa_0 .. :try_end_lewa_0} :catch_0
+
+    move-result v2
+
+    if-nez v2, :cond_lewa_0
+
+    const/4 v2, 0x0
+
+    goto :goto_2
+
+    :cond_lewa_0
     const/4 v2, 0x0
 
     :try_start_1

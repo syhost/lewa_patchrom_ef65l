@@ -10,6 +10,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Lcom/android/server/PowerManagerService$Injector;,
         Lcom/android/server/PowerManagerService$LockList;,
         Lcom/android/server/PowerManagerService$ScreenBrightnessAnimator;,
         Lcom/android/server/PowerManagerService$TimeoutTask;,
@@ -145,7 +146,11 @@
 
 .field private mAutoBrightnessButtonKeyboard:Z
 
-.field private mAutoBrightnessLevels:[I
+.field mAutoBrightnessLevels:[I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mAutoBrightnessTask:Ljava/lang/Runnable;
 
@@ -163,7 +168,11 @@
 
 .field private mButtonBacklightValues:[I
 
-.field private mButtonBrightnessOverride:I
+.field mButtonBrightnessOverride:I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mButtonLight:Lcom/android/server/LightsService$Light;
 
@@ -229,7 +238,11 @@
 
 .field private mLastTouchDown:J
 
-.field private mLcdBacklightValues:[I
+.field mLcdBacklightValues:[I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mLcdLight:Lcom/android/server/LightsService$Light;
 
@@ -267,7 +280,11 @@
 
 .field private mLightSensorAdjustSetting:F
 
-.field private mLightSensorButtonBrightness:I
+.field mLightSensorButtonBrightness:I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mLightSensorEnabled:Z
 
@@ -3319,6 +3336,9 @@
     .locals 12
     .parameter "value"
     .parameter "immediate"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const-wide/16 v10, 0x7d0
@@ -11807,6 +11827,58 @@
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
     throw v2
+.end method
+
+.method public rebootConfirm(Ljava/lang/String;Z)V
+    .locals 5
+    .parameter "reason"
+    .parameter "confirm"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v2, p0, Lcom/android/server/PowerManagerService;->mContext:Landroid/content/Context;
+
+    const-string v3, "android.permission.REBOOT"
+
+    const/4 v4, 0x0
+
+    invoke-virtual {v2, v3, v4}, Landroid/content/Context;->enforceCallingOrSelfPermission(Ljava/lang/String;Ljava/lang/String;)V
+
+    iget-object v2, p0, Lcom/android/server/PowerManagerService;->mHandler:Landroid/os/Handler;
+
+    if-eqz v2, :cond_0
+
+    invoke-static {}, Landroid/app/ActivityManagerNative;->isSystemReady()Z
+
+    move-result v2
+
+    if-nez v2, :cond_1
+
+    :cond_0
+    new-instance v2, Ljava/lang/IllegalStateException;
+
+    const-string v3, "Too early to call reboot()"
+
+    invoke-direct {v2, v3}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+
+    throw v2
+
+    :cond_1
+    move-object v0, p1
+
+    .local v0, finalReason:Ljava/lang/String;
+    new-instance v1, Lcom/android/server/PowerManagerService$14;
+
+    invoke-direct {v1, p0, v0, p2}, Lcom/android/server/PowerManagerService$14;-><init>(Lcom/android/server/PowerManagerService;Ljava/lang/String;Z)V
+
+    .local v1, runnable:Ljava/lang/Runnable;
+    iget-object v2, p0, Lcom/android/server/PowerManagerService;->mHandler:Landroid/os/Handler;
+
+    invoke-virtual {v2, v1}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+
+    return-void
 .end method
 
 .method public releaseWakeLock(Landroid/os/IBinder;I)V

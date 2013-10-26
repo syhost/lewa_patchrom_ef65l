@@ -15,6 +15,8 @@
 
 
 # static fields
+.field public static final IS_RESTRICTED:Ljava/lang/String; = "is_restricted"
+
 .field public static final SYNC1:Ljava/lang/String; = "sync1"
 
 .field public static final SYNC2:Ljava/lang/String; = "sync2"

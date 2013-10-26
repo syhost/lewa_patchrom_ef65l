@@ -21,7 +21,8 @@
         Landroid/content/pm/PackageParser$ParseComponentArgs;,
         Landroid/content/pm/PackageParser$ParsePackageItemArgs;,
         Landroid/content/pm/PackageParser$SplitPermissionInfo;,
-        Landroid/content/pm/PackageParser$NewPermissionInfo;
+        Landroid/content/pm/PackageParser$NewPermissionInfo;,
+        Landroid/content/pm/PackageParser$Injector;
     }
 .end annotation
 
@@ -51,9 +52,21 @@
 
 .field public static final PARSE_IS_SYSTEM_DIR:I = 0x40
 
+.field public static final PARSE_IS_VENDOR:I = 0x100
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field public static final PARSE_MUST_BE_APK:I = 0x4
 
 .field public static final PARSE_ON_SDCARD:I = 0x20
+
+.field public static final PARSE_UNINSTALL_APP:I = 0x80
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private static final RIGID_PARSER:Z = false
 
@@ -1403,6 +1416,10 @@
     .parameter "stopped"
     .parameter "enabledState"
     .parameter "userId"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -1573,6 +1590,10 @@
     .end local v5           #N:I
     .end local v7           #i:I
     :cond_3
+    move-object/from16 v0, p0
+
+    invoke-static {v0, v12}, Landroid/content/pm/PackageParser$Injector;->setLockedZipFilePath(Landroid/content/pm/PackageParser$Package;Landroid/content/pm/PackageInfo;)V
+
     move-object/from16 v0, p0
 
     move/from16 v1, p2
@@ -3015,9 +3036,88 @@
     goto :goto_0
 .end method
 
+.method public static getLockedZipFilePath(Ljava/lang/String;)Ljava/lang/String;
+    .locals 3
+    .parameter "path"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    if-nez p0, :cond_0
+
+    const/4 v0, 0x0
+
+    :goto_0
+    return-object v0
+
+    :cond_0
+    invoke-static {p0}, Landroid/content/pm/PackageParser;->isPackageFilename(Ljava/lang/String;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_1
+
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const/4 v1, 0x0
+
+    invoke-virtual {p0}, Ljava/lang/String;->length()I
+
+    move-result v2
+
+    add-int/lit8 v2, v2, -0x4
+
+    invoke-virtual {p0, v1, v2}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    const-string v1, ".locked.zip"
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    goto :goto_0
+
+    :cond_1
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    const-string v1, ".locked.zip"
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    goto :goto_0
+.end method
+
 .method private static final isPackageFilename(Ljava/lang/String;)Z
     .locals 1
     .parameter "name"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 244
@@ -3027,7 +3127,26 @@
 
     move-result v0
 
+    if-nez v0, :cond_0
+
+    const-string v0, ".lwt"
+
+    invoke-virtual {p0, v0}, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_1
+
+    :cond_0
+    const/4 v0, 0x1
+
+    :goto_0
     return v0
+
+    :cond_1
+    const/4 v0, 0x0
+
+    goto :goto_0
 .end method
 
 .method private loadCertificates(Ljava/util/jar/JarFile;Ljava/util/jar/JarEntry;[B)[Ljava/security/cert/Certificate;
@@ -3191,6 +3310,10 @@
     .parameter "outError"
     .parameter "receiver"
     .parameter "hardwareAccelerated"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Lorg/xmlpull/v1/XmlPullParserException;,
@@ -8083,6 +8206,10 @@
     .parameter "parser"
     .parameter "flags"
     .parameter "outError"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Lorg/xmlpull/v1/XmlPullParserException;,
@@ -8134,26 +8261,20 @@
 
     move-result-object v34
 
-    .line 923
     .local v34, pkgName:Ljava/lang/String;
     if-nez v34, :cond_1
 
-    .line 924
     const/16 v3, -0x6a
 
     move-object/from16 v0, p0
 
     iput v3, v0, Landroid/content/pm/PackageParser;->mParseError:I
 
-    .line 925
     const/4 v4, 0x0
 
-    .line 1396
-    :cond_0
     :goto_0
     return-object v4
 
-    .line 929
     :cond_1
     move-object/from16 v0, p0
 
@@ -9926,16 +10047,35 @@
 
     move-result v3
 
-    if-eqz v3, :cond_32
+    if-eqz v3, :cond_lewa_0
 
-    .line 1296
     invoke-static/range {p2 .. p2}, Lcom/android/internal/util/XmlUtils;->skipCurrentTag(Lorg/xmlpull/v1/XmlPullParser;)V
 
     goto/16 :goto_1
 
-    .line 1298
+    :cond_lewa_0
+    const-string v3, "theme"
+
+    move-object/from16 v0, v43
+
+    invoke-virtual {v0, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v3
+
+    if-eqz v3, :cond_32
+
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, p1
+
+    move-object/from16 v2, p2
+
+    invoke-direct {v0, v4, v1, v2, v7}, Landroid/content/pm/PackageParser;->setThemeApk(Landroid/content/pm/PackageParser$Package;Landroid/content/res/Resources;Landroid/content/res/XmlResourceParser;Landroid/util/AttributeSet;)V
+
+    goto/16 :goto_1
+
     :cond_32
-    const-string/jumbo v3, "theme"
+    const-string v3, "theme"
 
     move-object/from16 v0, v43
 
@@ -10456,6 +10596,9 @@
     const/4 v5, 0x0
 
     iput-boolean v5, v3, Landroid/content/pm/ApplicationInfo;->isThemeable:Z
+
+    :cond_48
+    invoke-static {v4}, Landroid/content/pm/PackageParser$Injector;->setThemeable(Landroid/content/pm/PackageParser$Package;)V
 
     goto/16 :goto_0
 .end method
@@ -11282,6 +11425,10 @@
     .parameter "attrs"
     .parameter "flags"
     .parameter "outError"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/io/IOException;,
@@ -11380,6 +11527,14 @@
     if-eqz v0, :cond_6
 
     const-string v4, "android"
+
+    invoke-virtual {v4, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v4
+
+    if-nez v4, :cond_6
+
+    const-string v4, "lewa"
 
     invoke-virtual {v4, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
@@ -14153,6 +14308,34 @@
     sput-boolean p0, Landroid/content/pm/PackageParser;->sCompatibilityModeEnabled:Z
 
     .line 3770
+    return-void
+.end method
+
+.method private setThemeApk(Landroid/content/pm/PackageParser$Package;Landroid/content/res/Resources;Landroid/content/res/XmlResourceParser;Landroid/util/AttributeSet;)V
+    .locals 2
+    .parameter "pkg"
+    .parameter "res"
+    .parameter "parser"
+    .parameter "attrs"
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Lorg/xmlpull/v1/XmlPullParserException;
+        }
+    .end annotation
+
+    .prologue
+    const/4 v0, 0x1
+
+    iput-boolean v0, p1, Landroid/content/pm/PackageParser$Package;->mIsThemeApk:Z
+
+    iget-object v0, p1, Landroid/content/pm/PackageParser$Package;->mThemeInfos:Ljava/util/ArrayList;
+
+    new-instance v1, Landroid/content/pm/ThemeInfo;
+
+    invoke-direct {v1, p3, p2, p4}, Landroid/content/pm/ThemeInfo;-><init>(Lorg/xmlpull/v1/XmlPullParser;Landroid/content/res/Resources;Landroid/util/AttributeSet;)V
+
+    invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+
     return-void
 .end method
 

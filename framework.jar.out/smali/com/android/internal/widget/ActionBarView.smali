@@ -8,7 +8,8 @@
     value = {
         Lcom/android/internal/widget/ActionBarView$ExpandedActionViewMenuPresenter;,
         Lcom/android/internal/widget/ActionBarView$HomeView;,
-        Lcom/android/internal/widget/ActionBarView$SavedState;
+        Lcom/android/internal/widget/ActionBarView$SavedState;,
+        Lcom/android/internal/widget/ActionBarView$Injector;
     }
 .end annotation
 
@@ -932,6 +933,44 @@
     goto :goto_0
 .end method
 
+.method private getAvailableWidth(Landroid/view/View;III)I
+    .locals 2
+    .parameter "child"
+    .parameter "availableWidth"
+    .parameter "childSpecHeight"
+    .parameter "spacing"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/4 v1, 0x0
+
+    invoke-virtual {p0}, Lcom/android/internal/widget/ActionBarView;->getContext()Landroid/content/Context;
+
+    move-result-object v0
+
+    invoke-static {v0}, Llewa/util/LewaUiUtil;->isV5Ui(Landroid/content/Context;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    invoke-static {p1, p2, p3, v1}, Lcom/android/internal/widget/ActionBarView$Injector;->measureTitleView(Landroid/view/View;III)I
+
+    move-result v0
+
+    :goto_0
+    return v0
+
+    :cond_0
+    invoke-virtual {p0, p1, p2, p3, v1}, Lcom/android/internal/widget/ActionBarView;->measureChildView(Landroid/view/View;III)I
+
+    move-result v0
+
+    goto :goto_0
+.end method
+
 .method private initTitle()V
     .locals 10
 
@@ -958,7 +997,13 @@
 
     .line 763
     .local v1, inflater:Landroid/view/LayoutInflater;
-    const v4, 0x1090019
+    invoke-virtual {p0}, Lcom/android/internal/widget/ActionBarView;->getContext()Landroid/content/Context;
+
+    move-result-object v4
+
+    invoke-static {v4}, Lcom/android/internal/widget/ActionBarView$Injector;->getTitleResouceId(Landroid/content/Context;)I
+
+    move-result v4
 
     invoke-virtual {v1, v4, p0, v6}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
@@ -1005,19 +1050,12 @@
 
     iput-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mTitleUpView:Landroid/view/View;
 
-    .line 769
-    iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mTitleLayout:Landroid/widget/LinearLayout;
+    invoke-direct {p0}, Lcom/android/internal/widget/ActionBarView;->setTitleListener()V
 
-    iget-object v8, p0, Lcom/android/internal/widget/ActionBarView;->mUpClickListener:Landroid/view/View$OnClickListener;
-
-    invoke-virtual {v4, v8}, Landroid/widget/LinearLayout;->setOnClickListener(Landroid/view/View$OnClickListener;)V
-
-    .line 771
     iget v4, p0, Lcom/android/internal/widget/ActionBarView;->mTitleStyleRes:I
 
     if-eqz v4, :cond_0
 
-    .line 772
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mTitleView:Landroid/widget/TextView;
 
     iget-object v8, p0, Lcom/android/internal/widget/ActionBarView;->mContext:Landroid/content/Context;
@@ -1026,26 +1064,30 @@
 
     invoke-virtual {v4, v8, v9}, Landroid/widget/TextView;->setTextAppearance(Landroid/content/Context;I)V
 
-    .line 774
     :cond_0
+    invoke-virtual {p0}, Lcom/android/internal/widget/ActionBarView;->getContext()Landroid/content/Context;
+
+    move-result-object v4
+
+    iget-object v8, p0, Lcom/android/internal/widget/ActionBarView;->mTitleView:Landroid/widget/TextView;
+
+    invoke-static {v4, v8}, Lcom/android/internal/widget/ActionBarView$Injector;->setTitleShadow(Landroid/content/Context;Landroid/widget/TextView;)V
+
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mTitle:Ljava/lang/CharSequence;
 
     if-eqz v4, :cond_1
 
-    .line 775
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mTitleView:Landroid/widget/TextView;
 
     iget-object v8, p0, Lcom/android/internal/widget/ActionBarView;->mTitle:Ljava/lang/CharSequence;
 
     invoke-virtual {v4, v8}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 778
     :cond_1
     iget v4, p0, Lcom/android/internal/widget/ActionBarView;->mSubtitleStyleRes:I
 
     if-eqz v4, :cond_2
 
-    .line 779
     iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mSubtitleView:Landroid/widget/TextView;
 
     iget-object v8, p0, Lcom/android/internal/widget/ActionBarView;->mContext:Landroid/content/Context;
@@ -1136,6 +1178,8 @@
     :goto_5
     invoke-virtual {v4, v5}, Landroid/widget/LinearLayout;->setClickable(Z)V
 
+    invoke-direct {p0}, Lcom/android/internal/widget/ActionBarView;->setTitleStatus()V
+
     .line 794
     .end local v0           #homeAsUp:Z
     .end local v1           #inflater:Landroid/view/LayoutInflater;
@@ -1221,6 +1265,39 @@
 
     .line 791
     goto :goto_5
+.end method
+
+.method private newMenuPresenterExt(Landroid/content/Context;)Lcom/android/internal/view/menu/ActionMenuPresenter;
+    .locals 1
+    .parameter "context"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-static {p1}, Llewa/util/LewaUiUtil;->isV5Ui(Landroid/content/Context;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    iget-boolean v0, p0, Lcom/android/internal/widget/ActionBarView;->mSplitActionBar:Z
+
+    if-eqz v0, :cond_0
+
+    new-instance v0, Llewa/internal/v5/view/menu/LewaActionMenuPresenter;
+
+    invoke-direct {v0, p1}, Llewa/internal/v5/view/menu/LewaActionMenuPresenter;-><init>(Landroid/content/Context;)V
+
+    :goto_0
+    return-object v0
+
+    :cond_0
+    new-instance v0, Lcom/android/internal/view/menu/ActionMenuPresenter;
+
+    invoke-direct {v0, p1}, Lcom/android/internal/view/menu/ActionMenuPresenter;-><init>(Landroid/content/Context;)V
+
+    goto :goto_0
 .end method
 
 .method private setTitleImpl(Ljava/lang/CharSequence;)V
@@ -1311,6 +1388,83 @@
     const/16 v1, 0x8
 
     goto :goto_1
+.end method
+
+.method private setTitleListener()V
+    .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/4 v1, 0x0
+
+    invoke-virtual {p0}, Lcom/android/internal/widget/ActionBarView;->getContext()Landroid/content/Context;
+
+    move-result-object v0
+
+    invoke-static {v0}, Llewa/util/LewaUiUtil;->isV5Ui(Landroid/content/Context;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Lcom/android/internal/widget/ActionBarView;->mTitleView:Landroid/widget/TextView;
+
+    invoke-virtual {v0, v1}, Landroid/widget/TextView;->setClickable(Z)V
+
+    iget-object v0, p0, Lcom/android/internal/widget/ActionBarView;->mSubtitleView:Landroid/widget/TextView;
+
+    invoke-virtual {v0, v1}, Landroid/widget/TextView;->setClickable(Z)V
+
+    iget-object v0, p0, Lcom/android/internal/widget/ActionBarView;->mTitleUpView:Landroid/view/View;
+
+    iget-object v1, p0, Lcom/android/internal/widget/ActionBarView;->mUpClickListener:Landroid/view/View$OnClickListener;
+
+    invoke-virtual {v0, v1}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    :goto_0
+    return-void
+
+    :cond_0
+    iget-object v0, p0, Lcom/android/internal/widget/ActionBarView;->mTitleLayout:Landroid/widget/LinearLayout;
+
+    iget-object v1, p0, Lcom/android/internal/widget/ActionBarView;->mUpClickListener:Landroid/view/View$OnClickListener;
+
+    invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    goto :goto_0
+.end method
+
+.method private setTitleStatus()V
+    .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/4 v1, 0x0
+
+    invoke-virtual {p0}, Lcom/android/internal/widget/ActionBarView;->getContext()Landroid/content/Context;
+
+    move-result-object v0
+
+    invoke-static {v0}, Llewa/util/LewaUiUtil;->isV5Ui(Landroid/content/Context;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Lcom/android/internal/widget/ActionBarView;->mTitleLayout:Landroid/widget/LinearLayout;
+
+    invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setEnabled(Z)V
+
+    iget-object v0, p0, Lcom/android/internal/widget/ActionBarView;->mTitleLayout:Landroid/widget/LinearLayout;
+
+    invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setClickable(Z)V
+
+    :cond_0
+    return-void
 .end method
 
 
@@ -3837,7 +3991,7 @@
 
     move/from16 v3, v42
 
-    invoke-virtual {v0, v1, v5, v2, v3}, Lcom/android/internal/widget/ActionBarView;->measureChildView(Landroid/view/View;III)I
+    invoke-direct {v0, v1, v5, v2, v3}, Lcom/android/internal/widget/ActionBarView;->getAvailableWidth(Landroid/view/View;III)I
 
     move-result v5
 
@@ -4809,6 +4963,8 @@
     :goto_a
     invoke-virtual {v7, v8}, Landroid/widget/LinearLayout;->setClickable(Z)V
 
+    invoke-direct {p0}, Lcom/android/internal/widget/ActionBarView;->setTitleStatus()V
+
     .line 610
     .end local v1           #homeAsUp:Z
     :cond_4
@@ -5401,6 +5557,14 @@
     iget-object v5, p0, Lcom/android/internal/widget/ActionBarView;->mContext:Landroid/content/Context;
 
     invoke-direct {v4, v5}, Lcom/android/internal/view/menu/ActionMenuPresenter;-><init>(Landroid/content/Context;)V
+
+    iput-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mActionMenuPresenter:Lcom/android/internal/view/menu/ActionMenuPresenter;
+
+    iget-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mContext:Landroid/content/Context;
+
+    invoke-direct {p0, v4}, Lcom/android/internal/widget/ActionBarView;->newMenuPresenterExt(Landroid/content/Context;)Lcom/android/internal/view/menu/ActionMenuPresenter;
+
+    move-result-object v4
 
     iput-object v4, p0, Lcom/android/internal/widget/ActionBarView;->mActionMenuPresenter:Lcom/android/internal/view/menu/ActionMenuPresenter;
 

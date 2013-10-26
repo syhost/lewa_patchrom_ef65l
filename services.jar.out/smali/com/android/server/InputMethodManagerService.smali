@@ -3766,6 +3766,9 @@
 .method private showInputMethodMenuInternal(Z)V
     .locals 28
     .parameter "showSubtypes"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 2352
@@ -4101,9 +4104,13 @@
     .local v5, a:Landroid/content/res/TypedArray;
     new-instance v23, Landroid/app/AlertDialog$Builder;
 
+    const/16 v25, 0x3
+
     move-object/from16 v0, v23
 
-    invoke-direct {v0, v8}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
+    move/from16 v1, v25
+
+    invoke-direct {v0, v8, v1}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;I)V
 
     new-instance v25, Lcom/android/server/InputMethodManagerService$5;
 

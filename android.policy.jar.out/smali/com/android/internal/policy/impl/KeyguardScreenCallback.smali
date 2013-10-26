@@ -34,5 +34,11 @@
 .method public abstract reportSuccessfulUnlockAttempt()V
 .end method
 
+.method public abstract setPendingIntent(Landroid/content/Intent;)V
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end method
+
 .method public abstract takeEmergencyCallAction()V
 .end method

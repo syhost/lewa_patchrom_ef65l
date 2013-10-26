@@ -1526,6 +1526,18 @@
     return v0
 .end method
 
+.method public overlayBitmap(Landroid/graphics/Bitmap;Landroid/graphics/drawable/Drawable;)Landroid/graphics/Bitmap;
+    .locals 0
+    .parameter "bitmap"
+    .parameter "front"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    return-object p1
+.end method
+
 .method public processDrmInfo(Landroid/drm/DrmInfo;)I
     .locals 4
     .parameter "drmInfo"

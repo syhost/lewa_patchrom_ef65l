@@ -22,7 +22,8 @@
         Lcom/android/server/pm/PackageManagerService$ActivityIntentResolver;,
         Lcom/android/server/pm/PackageManagerService$PackageHandler;,
         Lcom/android/server/pm/PackageManagerService$PostInstallData;,
-        Lcom/android/server/pm/PackageManagerService$DefaultContainerConnection;
+        Lcom/android/server/pm/PackageManagerService$DefaultContainerConnection;,
+        Lcom/android/server/pm/PackageManagerService$Injector;
     }
 .end annotation
 
@@ -84,6 +85,13 @@
 
 .field private static final INSTALL_PACKAGE_SUFFIX:Ljava/lang/String; = "-"
 
+#the value of this static final field might be set in the static constructor
+.field private static final LEWA_DEV_MODE:Z = false
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field private static final LIB_DIR_NAME:Ljava/lang/String; = "lib"
 
 .field private static final LOG_UID:I = 0x3ef
@@ -142,6 +150,12 @@
 
 .field private static final THEME_MAMANER_GUID:I = 0x514
 
+.field private static final THEME_MAMANER_GUID:I = 0x514
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field static final UPDATED_MEDIA_STATUS:I = 0xc
 
 .field static final UPDATE_PERMISSIONS_ALL:I = 0x1
@@ -155,6 +169,12 @@
 .field static final WRITE_SETTINGS:I = 0xd
 
 .field static final WRITE_SETTINGS_DELAY:I = 0x2710
+
+.field static mIconManager:Llewa/util/IIconManager; = null
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private static final mProviderInitOrderSorter:Ljava/util/Comparator; = null
     .annotation system Ldalvik/annotation/Signature;
@@ -209,6 +229,12 @@
 .field final mAsecInternalPath:Ljava/lang/String;
 
 .field mAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
+
+.field mAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field final mAvailableFeatures:Ljava/util/HashMap;
     .annotation system Ldalvik/annotation/Signature;
@@ -483,7 +509,21 @@
     .locals 3
 
     .prologue
-    .line 223
+    const/4 v0, 0x1
+
+    const/4 v1, 0x0
+
+    const-string v2, "persist.sys.lewa_dev_mode"
+
+    invoke-static {v2, v1}, Landroid/os/SystemProperties;->getInt(Ljava/lang/String;I)I
+
+    move-result v2
+
+    if-ne v2, v0, :cond_0
+
+    :goto_0
+    sput-boolean v0, Lcom/android/server/pm/PackageManagerService;->LEWA_DEV_MODE:Z
+
     new-instance v0, Landroid/content/ComponentName;
 
     const-string v1, "com.android.defcontainer"
@@ -509,6 +549,11 @@
     sput-object v0, Lcom/android/server/pm/PackageManagerService;->mProviderInitOrderSorter:Ljava/util/Comparator;
 
     return-void
+
+    :cond_0
+    move v0, v1
+
+    goto :goto_0
 .end method
 
 .method public constructor <init>(Landroid/content/Context;ZZ)V
@@ -516,6 +561,9 @@
     .parameter "context"
     .parameter "factoryTest"
     .parameter "onlyCore"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 878
@@ -968,6 +1016,8 @@
     const/4 v5, 0x1
 
     invoke-virtual {v2, v3, v4, v5}, Lcom/android/server/pm/Settings;->addSharedUserLPw(Ljava/lang/String;II)Lcom/android/server/pm/SharedUserSetting;
+
+    invoke-static/range {p0 .. p0}, Lcom/android/server/pm/PackageManagerService$Injector;->addThemeManagerToSharedLpw(Lcom/android/server/pm/PackageManagerService;)V
 
     .line 899
     const-string v2, "debug.separate_processes"
@@ -1761,6 +1811,12 @@
     .line 1015
     move-object/from16 v0, p0
 
+    move-object/from16 v1, v24
+
+    invoke-static {v0, v1}, Lcom/android/server/pm/PackageManagerService$Injector;->ignoreLewaFrameworkRes(Lcom/android/server/pm/PackageManagerService;Ljava/util/HashSet;)V
+
+    move-object/from16 v0, p0
+
     iget-object v2, v0, Lcom/android/server/pm/PackageManagerService;->mFrameworkDir:Ljava/io/File;
 
     invoke-virtual {v2}, Ljava/io/File;->list()[Ljava/lang/String;
@@ -2531,23 +2587,25 @@
 
     invoke-virtual {v0, v2}, Lcom/android/server/pm/PackageManagerService;->cleanupInstallFailedPackage(Lcom/android/server/pm/PackageSetting;)V
 
-    .line 1143
     add-int/lit8 v21, v21, 0x1
 
     goto :goto_9
 
-    .line 1148
     :cond_16
     invoke-direct/range {p0 .. p0}, Lcom/android/server/pm/PackageManagerService;->deleteTempPackageFiles()V
 
-    .line 1150
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
+
+    invoke-static {v2}, Lcom/android/server/pm/ExtraPackageManagerServices;->performPreinstallApp(Lcom/android/server/pm/Settings;)V
+
     move-object/from16 v0, p0
 
     iget-boolean v2, v0, Lcom/android/server/pm/PackageManagerService;->mOnlyCore:Z
 
     if-nez v2, :cond_18
 
-    .line 1151
     const/16 v2, 0xc08
 
     invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
@@ -3159,6 +3217,8 @@
     move-object/from16 v0, p0
 
     iput-object v2, v0, Lcom/android/server/pm/PackageManagerService;->mRequiredVerifierPackage:Ljava/lang/String;
+
+    invoke-static {}, Lcom/android/server/pm/ExtraPackageManagerServices;->postScanPackages()V
 
     .line 1255
     monitor-exit v43
@@ -7670,6 +7730,43 @@
     goto :goto_0
 .end method
 
+.method public static getIconManager()Llewa/util/IIconManager;
+    .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    sget-object v1, Lcom/android/server/pm/PackageManagerService;->mIconManager:Llewa/util/IIconManager;
+
+    if-eqz v1, :cond_0
+
+    sget-object v1, Lcom/android/server/pm/PackageManagerService;->mIconManager:Llewa/util/IIconManager;
+
+    .local v0, b:Landroid/os/IBinder;
+    :goto_0
+    return-object v1
+
+    .end local v0           #b:Landroid/os/IBinder;
+    :cond_0
+    const-string v1, "iconmanager"
+
+    invoke-static {v1}, Landroid/os/ServiceManager;->getService(Ljava/lang/String;)Landroid/os/IBinder;
+
+    move-result-object v0
+
+    .restart local v0       #b:Landroid/os/IBinder;
+    invoke-static {v0}, Llewa/util/IIconManager$Stub;->asInterface(Landroid/os/IBinder;)Llewa/util/IIconManager;
+
+    move-result-object v1
+
+    sput-object v1, Lcom/android/server/pm/PackageManagerService;->mIconManager:Llewa/util/IIconManager;
+
+    sget-object v1, Lcom/android/server/pm/PackageManagerService;->mIconManager:Llewa/util/IIconManager;
+
+    goto :goto_0
+.end method
+
 .method private static getNextCodePath(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
     .locals 7
     .parameter "oldCodePath"
@@ -8753,6 +8850,9 @@
     .locals 22
     .parameter "pkg"
     .parameter "replace"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 4600
@@ -9369,27 +9469,26 @@
 
     if-eqz v19, :cond_c
 
-    .line 4672
     invoke-virtual/range {v15 .. v16}, Ljava/util/HashSet;->contains(Ljava/lang/Object;)Z
 
     move-result v19
 
     if-eqz v19, :cond_11
 
-    .line 4673
     const/4 v4, 0x1
 
-    .line 4678
     :cond_c
     :goto_9
+    move-object/from16 v0, p1
+
+    invoke-static {v0, v4}, Lcom/android/server/pm/PackageManagerService$Injector;->grantPermissionForLewa(Landroid/content/pm/PackageParser$Package;Z)V
+
     if-eqz v4, :cond_4
 
-    .line 4679
     const/4 v5, 0x1
 
     goto/16 :goto_3
 
-    .line 4643
     .end local v4           #allowed:Z
     :cond_d
     const/4 v4, 0x0
@@ -10011,6 +10110,9 @@
     .parameter "scanMode"
     .parameter "installerPackageName"
     .parameter "res"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 6999
@@ -10243,25 +10345,27 @@
 
     if-ne v0, v1, :cond_0
 
-    .line 7029
     const/4 v0, -0x2
 
     iput v0, p5, Lcom/android/server/pm/PackageManagerService$PackageInstalledInfo;->returnCode:I
 
     goto :goto_0
 
-    .line 7032
     :cond_4
+    iget-object v0, p1, Landroid/content/pm/PackageParser$Package;->applicationInfo:Landroid/content/pm/ApplicationInfo;
+
+    iget-object v1, p0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
+
+    invoke-static {v0, v1}, Lcom/android/server/pm/ExtraPackageManagerServices;->postProcessNewInstall(Landroid/content/pm/ApplicationInfo;Lcom/android/server/pm/Settings;)V
+
     invoke-direct {p0, v7, p4, p5}, Lcom/android/server/pm/PackageManagerService;->updateSettingsLI(Landroid/content/pm/PackageParser$Package;Ljava/lang/String;Lcom/android/server/pm/PackageManagerService$PackageInstalledInfo;)V
 
-    .line 7037
     iget v0, p5, Lcom/android/server/pm/PackageManagerService$PackageInstalledInfo;->returnCode:I
 
     const/4 v1, 0x1
 
     if-eq v0, v1, :cond_0
 
-    .line 7042
     const/4 v2, 0x0
 
     if-eqz v6, :cond_5
@@ -18369,6 +18473,16 @@
     :goto_14
     move-object/from16 v0, p1
 
+    iget-object v3, v0, Landroid/content/pm/PackageParser$Package;->applicationInfo:Landroid/content/pm/ApplicationInfo;
+
+    move-object/from16 v0, p0
+
+    iget-object v10, v0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
+
+    invoke-static {v3, v10}, Lcom/android/server/pm/ExtraPackageManagerServices;->blockAutoStartedApp(Landroid/content/pm/ApplicationInfo;Lcom/android/server/pm/Settings;)V
+
+    move-object/from16 v0, p1
+
     iget-object v3, v0, Landroid/content/pm/PackageParser$Package;->providers:Ljava/util/ArrayList;
 
     invoke-virtual {v3}, Ljava/util/ArrayList;->size()I
@@ -25148,6 +25262,8 @@
     .prologue
     const/4 v2, 0x0
 
+    invoke-static {p0, p1}, Lcom/android/server/pm/PackageManagerService$Injector;->cleanAssetRedirections(Lcom/android/server/pm/PackageManagerService;Landroid/content/pm/PackageParser$Package;)V
+
     .line 1959
     iget-object v3, p0, Lcom/android/server/pm/PackageManagerService;->mPackages:Ljava/util/HashMap;
 
@@ -29405,6 +29521,41 @@
     goto :goto_0
 .end method
 
+.method public getAssetRedirectionManager()Lcom/android/internal/app/IAssetRedirectionManager;
+    .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v1, p0, Lcom/android/server/pm/PackageManagerService;->mAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
+
+    if-eqz v1, :cond_0
+
+    iget-object v1, p0, Lcom/android/server/pm/PackageManagerService;->mAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
+
+    :goto_0
+    return-object v1
+
+    :cond_0
+    const-string v1, "assetredirection"
+
+    invoke-static {v1}, Landroid/os/ServiceManager;->getService(Ljava/lang/String;)Landroid/os/IBinder;
+
+    move-result-object v0
+
+    .local v0, b:Landroid/os/IBinder;
+    invoke-static {v0}, Lcom/android/internal/app/IAssetRedirectionManager$Stub;->asInterface(Landroid/os/IBinder;)Lcom/android/internal/app/IAssetRedirectionManager;
+
+    move-result-object v1
+
+    iput-object v1, p0, Lcom/android/server/pm/PackageManagerService;->mAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
+
+    iget-object v1, p0, Lcom/android/server/pm/PackageManagerService;->mAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
+
+    goto :goto_0
+.end method
+
 .method public getComponentEnabledSetting(Landroid/content/ComponentName;I)I
     .locals 3
     .parameter "componentName"
@@ -29532,6 +29683,10 @@
     .parameter "flags"
     .parameter "lastRead"
     .parameter "userId"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(I",
@@ -29660,14 +29815,17 @@
 
     check-cast v10, Lcom/android/server/pm/PackageSetting;
 
-    .line 2863
     .local v10, ps:Lcom/android/server/pm/PackageSetting;
     if-eqz v7, :cond_5
 
-    .line 2864
     if-eqz v10, :cond_1
 
-    .line 2865
+    invoke-static {v10, p1}, Lcom/android/server/pm/PackageManagerService$Injector;->removeThemePkg(Lcom/android/server/pm/PackageSetting;I)Z
+
+    move-result v11
+
+    if-eqz v11, :cond_1
+
     iget-object v11, v10, Lcom/android/server/pm/PackageSetting;->name:Ljava/lang/String;
 
     move/from16 v0, p3
@@ -29766,13 +29924,17 @@
 
     check-cast v8, Landroid/content/pm/PackageParser$Package;
 
-    .line 2869
     .local v8, p:Landroid/content/pm/PackageParser$Package;
     if-eqz v8, :cond_1
 
     if-eqz v10, :cond_1
 
-    .line 2870
+    invoke-static {v8, p1}, Lcom/android/server/pm/PackageManagerService$Injector;->removeThemePkg(Landroid/content/pm/PackageParser$Package;I)Z
+
+    move-result v11
+
+    if-eqz v11, :cond_1
+
     move/from16 v0, p3
 
     invoke-virtual {v10, v0}, Lcom/android/server/pm/PackageSetting;->getStopped(I)Z
@@ -29819,6 +29981,10 @@
     .locals 15
     .parameter "flags"
     .parameter "lastRead"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(I",
@@ -29959,7 +30125,9 @@
     :goto_3
     if-eqz v9, :cond_5
 
-    invoke-virtual {v5, v9}, Landroid/content/pm/ParceledListSlice;->append(Landroid/os/Parcelable;)Z
+    move/from16 v0, p1
+
+    invoke-static {v5, v9, v0}, Lcom/android/server/pm/PackageManagerService$Injector;->addPackageToSlice(Landroid/content/pm/ParceledListSlice;Landroid/content/pm/PackageInfo;I)Z
 
     move-result v12
 
@@ -30152,6 +30320,262 @@
     goto :goto_0
 
     .line 2835
+    .end local v3           #pi:Landroid/content/pm/PackageInfo;
+    :cond_1
+    return-object v0
+.end method
+
+.method public getInstalledThemePackages(Ljava/lang/String;)Landroid/content/pm/ParceledListSlice;
+    .locals 12
+    .parameter "lastRead"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/String;",
+            ")",
+            "Landroid/content/pm/ParceledListSlice",
+            "<",
+            "Landroid/content/pm/PackageInfo;",
+            ">;"
+        }
+    .end annotation
+
+    .prologue
+    new-instance v4, Landroid/content/pm/ParceledListSlice;
+
+    invoke-direct {v4}, Landroid/content/pm/ParceledListSlice;-><init>()V
+
+    .local v4, list:Landroid/content/pm/ParceledListSlice;,"Landroid/content/pm/ParceledListSlice<Landroid/content/pm/PackageInfo;>;"
+    invoke-static {}, Landroid/os/UserId;->getCallingUserId()I
+
+    move-result v8
+
+    .local v8, userId:I
+    iget-object v10, p0, Lcom/android/server/pm/PackageManagerService;->mPackages:Ljava/util/HashMap;
+
+    monitor-enter v10
+
+    :try_start_0
+    iget-object v9, p0, Lcom/android/server/pm/PackageManagerService;->mPackages:Ljava/util/HashMap;
+
+    invoke-virtual {v9}, Ljava/util/HashMap;->keySet()Ljava/util/Set;
+
+    move-result-object v9
+
+    iget-object v11, p0, Lcom/android/server/pm/PackageManagerService;->mPackages:Ljava/util/HashMap;
+
+    invoke-virtual {v11}, Ljava/util/HashMap;->size()I
+
+    move-result v11
+
+    new-array v11, v11, [Ljava/lang/String;
+
+    invoke-interface {v9, v11}, Ljava/util/Set;->toArray([Ljava/lang/Object;)[Ljava/lang/Object;
+
+    move-result-object v3
+
+    check-cast v3, [Ljava/lang/String;
+
+    .local v3, keys:[Ljava/lang/String;
+    invoke-static {v3}, Ljava/util/Arrays;->sort([Ljava/lang/Object;)V
+
+    invoke-static {v3, p1}, Lcom/android/server/pm/PackageManagerService;->getContinuationPoint([Ljava/lang/String;Ljava/lang/String;)I
+
+    move-result v1
+
+    .local v1, i:I
+    array-length v0, v3
+
+    .local v0, N:I
+    move v2, v1
+
+    .end local v1           #i:I
+    .local v2, i:I
+    :goto_0
+    if-ge v2, v0, :cond_5
+
+    add-int/lit8 v1, v2, 0x1
+
+    .end local v2           #i:I
+    .restart local v1       #i:I
+    aget-object v6, v3, v2
+
+    .local v6, packageName:Ljava/lang/String;
+    const/4 v7, 0x0
+
+    .local v7, pi:Landroid/content/pm/PackageInfo;
+    iget-object v9, p0, Lcom/android/server/pm/PackageManagerService;->mPackages:Ljava/util/HashMap;
+
+    invoke-virtual {v9, v6}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v5
+
+    check-cast v5, Landroid/content/pm/PackageParser$Package;
+
+    .local v5, p:Landroid/content/pm/PackageParser$Package;
+    if-eqz v5, :cond_0
+
+    const/4 v9, 0x0
+
+    invoke-virtual {p0, v5, v9, v8}, Lcom/android/server/pm/PackageManagerService;->generatePackageInfo(Landroid/content/pm/PackageParser$Package;II)Landroid/content/pm/PackageInfo;
+
+    move-result-object v7
+
+    :cond_0
+    if-eqz v7, :cond_4
+
+    iget-boolean v9, v7, Landroid/content/pm/PackageInfo;->isThemeApk:Z
+
+    if-nez v9, :cond_1
+
+    move v2, v1
+
+    .end local v1           #i:I
+    .restart local v2       #i:I
+    goto :goto_0
+
+    .end local v2           #i:I
+    .restart local v1       #i:I
+    :cond_1
+    invoke-virtual {v4, v7}, Landroid/content/pm/ParceledListSlice;->append(Landroid/os/Parcelable;)Z
+
+    move-result v9
+
+    if-eqz v9, :cond_3
+
+    .end local v5           #p:Landroid/content/pm/PackageParser$Package;
+    .end local v6           #packageName:Ljava/lang/String;
+    .end local v7           #pi:Landroid/content/pm/PackageInfo;
+    :goto_1
+    if-ne v1, v0, :cond_2
+
+    const/4 v9, 0x1
+
+    invoke-virtual {v4, v9}, Landroid/content/pm/ParceledListSlice;->setLastSlice(Z)V
+
+    :cond_2
+    monitor-exit v10
+
+    return-object v4
+
+    .restart local v5       #p:Landroid/content/pm/PackageParser$Package;
+    .restart local v6       #packageName:Ljava/lang/String;
+    .restart local v7       #pi:Landroid/content/pm/PackageInfo;
+    :cond_3
+    move v2, v1
+
+    .end local v1           #i:I
+    .restart local v2       #i:I
+    goto :goto_0
+
+    .end local v0           #N:I
+    .end local v2           #i:I
+    .end local v3           #keys:[Ljava/lang/String;
+    .end local v5           #p:Landroid/content/pm/PackageParser$Package;
+    .end local v6           #packageName:Ljava/lang/String;
+    .end local v7           #pi:Landroid/content/pm/PackageInfo;
+    :catchall_0
+    move-exception v9
+
+    monitor-exit v10
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    throw v9
+
+    .restart local v0       #N:I
+    .restart local v1       #i:I
+    .restart local v3       #keys:[Ljava/lang/String;
+    .restart local v5       #p:Landroid/content/pm/PackageParser$Package;
+    .restart local v6       #packageName:Ljava/lang/String;
+    .restart local v7       #pi:Landroid/content/pm/PackageInfo;
+    :cond_4
+    move v2, v1
+
+    .end local v1           #i:I
+    .restart local v2       #i:I
+    goto :goto_0
+
+    .end local v5           #p:Landroid/content/pm/PackageParser$Package;
+    .end local v6           #packageName:Ljava/lang/String;
+    .end local v7           #pi:Landroid/content/pm/PackageInfo;
+    :cond_5
+    move v1, v2
+
+    .end local v2           #i:I
+    .restart local v1       #i:I
+    goto :goto_1
+.end method
+
+.method public getInstalledThemePackages()Ljava/util/List;
+    .locals 6
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()",
+            "Ljava/util/List",
+            "<",
+            "Landroid/content/pm/PackageInfo;",
+            ">;"
+        }
+    .end annotation
+
+    .prologue
+    new-instance v0, Ljava/util/ArrayList;
+
+    invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
+
+    .local v0, finalList:Ljava/util/ArrayList;,"Ljava/util/ArrayList<Landroid/content/pm/PackageInfo;>;"
+    iget-object v4, p0, Lcom/android/server/pm/PackageManagerService;->mContext:Landroid/content/Context;
+
+    invoke-virtual {v4}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+
+    move-result-object v4
+
+    const/4 v5, 0x0
+
+    invoke-virtual {v4, v5}, Landroid/content/pm/PackageManager;->getInstalledPackages(I)Ljava/util/List;
+
+    move-result-object v2
+
+    .local v2, installedPackagesList:Ljava/util/List;,"Ljava/util/List<Landroid/content/pm/PackageInfo;>;"
+    invoke-interface {v2}, Ljava/util/List;->iterator()Ljava/util/Iterator;
+
+    move-result-object v1
+
+    .local v1, i:Ljava/util/Iterator;,"Ljava/util/Iterator<Landroid/content/pm/PackageInfo;>;"
+    :cond_0
+    :goto_0
+    invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v4
+
+    if-eqz v4, :cond_1
+
+    invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v3
+
+    check-cast v3, Landroid/content/pm/PackageInfo;
+
+    .local v3, pi:Landroid/content/pm/PackageInfo;
+    if-eqz v3, :cond_0
+
+    iget-boolean v4, v3, Landroid/content/pm/PackageInfo;->isThemeApk:Z
+
+    if-eqz v4, :cond_0
+
+    invoke-virtual {v0, v3}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+
+    goto :goto_0
+
     .end local v3           #pi:Landroid/content/pm/PackageInfo;
     :cond_1
     return-object v0
@@ -30986,6 +31410,10 @@
 .method public getPersistentApplications(I)Ljava/util/List;
     .locals 9
     .parameter "flags"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(I)",
@@ -31071,6 +31499,12 @@
 
     .line 2900
     :cond_1
+    invoke-static {v2, p1}, Lcom/android/server/pm/PackageManagerService$Injector;->removeThemePkg(Landroid/content/pm/PackageParser$Package;I)Z
+
+    move-result v5
+
+    if-eqz v5, :cond_0
+
     iget-object v5, p0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
 
     iget-object v5, v5, Lcom/android/server/pm/Settings;->mPackages:Ljava/util/HashMap;
@@ -35822,6 +36256,9 @@
     .locals 14
     .parameter "pkg"
     .parameter "chatty"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 4356

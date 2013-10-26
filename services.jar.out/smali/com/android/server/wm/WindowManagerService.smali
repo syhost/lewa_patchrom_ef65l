@@ -564,6 +564,12 @@
 
 .field private mThemeChangeReceiver:Landroid/content/BroadcastReceiver;
 
+.field private mThemeChangeReceiver:Landroid/content/BroadcastReceiver;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_CLASS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field final mTmpDisplayMetrics:Landroid/util/DisplayMetrics;
 
 .field final mTmpFloats:[F
@@ -589,6 +595,12 @@
 .field mTurnOnScreen:Z
 
 .field private mUiContext:Landroid/content/Context;
+
+.field private mUiContext:Landroid/content/Context;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field mUpperWallpaperTarget:Lcom/android/server/wm/WindowState;
 
@@ -1244,55 +1256,50 @@
 
     iput-object v3, p0, Lcom/android/server/wm/WindowManagerService;->mAnimationRunnable:Lcom/android/server/wm/WindowManagerService$AnimationRunnable;
 
-    .line 760
     const/4 v3, 0x1
 
     iput-boolean v3, p0, Lcom/android/server/wm/WindowManagerService;->mInTouchMode:Z
 
-    .line 763
     new-instance v3, Ljava/util/ArrayList;
 
     invoke-direct {v3}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v3, p0, Lcom/android/server/wm/WindowManagerService;->mWindowChangeListeners:Ljava/util/ArrayList;
 
-    .line 765
     const/4 v3, 0x0
 
     iput-boolean v3, p0, Lcom/android/server/wm/WindowManagerService;->mWindowsChanged:Z
 
-    .line 772
     new-instance v3, Landroid/content/res/Configuration;
 
     invoke-direct {v3}, Landroid/content/res/Configuration;-><init>()V
 
     iput-object v3, p0, Lcom/android/server/wm/WindowManagerService;->mTempConfiguration:Landroid/content/res/Configuration;
 
-    .line 6712
     new-instance v3, Lcom/android/server/wm/InputMonitor;
 
     invoke-direct {v3, p0}, Lcom/android/server/wm/InputMonitor;-><init>(Lcom/android/server/wm/WindowManagerService;)V
 
     iput-object v3, p0, Lcom/android/server/wm/WindowManagerService;->mInputMonitor:Lcom/android/server/wm/InputMonitor;
 
-    .line 7828
     const/4 v3, 0x0
 
     iput-boolean v3, p0, Lcom/android/server/wm/WindowManagerService;->mInLayout:Z
 
-    .line 888
+    new-instance v3, Lcom/android/server/wm/WindowManagerService$5;
+
+    invoke-direct {v3, p0}, Lcom/android/server/wm/WindowManagerService$5;-><init>(Lcom/android/server/wm/WindowManagerService;)V
+
+    iput-object v3, p0, Lcom/android/server/wm/WindowManagerService;->mThemeChangeReceiver:Landroid/content/BroadcastReceiver;
+
     iput-object p1, p0, Lcom/android/server/wm/WindowManagerService;->mContext:Landroid/content/Context;
 
-    .line 889
     iput-boolean p3, p0, Lcom/android/server/wm/WindowManagerService;->mHaveInputMethods:Z
 
-    .line 890
     iput-boolean p4, p0, Lcom/android/server/wm/WindowManagerService;->mAllowBootMessages:Z
 
-    .line 891
     iput-boolean p5, p0, Lcom/android/server/wm/WindowManagerService;->mOnlyCore:Z
 
-    .line 892
     invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v3
@@ -5297,6 +5304,41 @@
     iput-object v0, p0, Lcom/android/server/wm/WindowManagerService;->mUiContext:Landroid/content/Context;
 
     .line 958
+    :cond_0
+    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService;->mUiContext:Landroid/content/Context;
+
+    if-eqz v0, :cond_1
+
+    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService;->mUiContext:Landroid/content/Context;
+
+    :goto_0
+    return-object v0
+
+    :cond_1
+    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService;->mContext:Landroid/content/Context;
+
+    goto :goto_0
+.end method
+
+.method private getUiContext()Landroid/content/Context;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService;->mUiContext:Landroid/content/Context;
+
+    if-nez v0, :cond_0
+
+    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService;->mContext:Landroid/content/Context;
+
+    invoke-static {v0}, Lcom/android/internal/app/ThemeUtils;->createUiContext(Landroid/content/Context;)Landroid/content/Context;
+
+    move-result-object v0
+
+    iput-object v0, p0, Lcom/android/server/wm/WindowManagerService;->mUiContext:Landroid/content/Context;
+
     :cond_0
     iget-object v0, p0, Lcom/android/server/wm/WindowManagerService;->mUiContext:Landroid/content/Context;
 
@@ -28845,14 +28887,12 @@
 
     or-int v23, v29, v30
 
-    .line 2724
-    const/high16 v29, 0x1ff
+    const/high16 v29, 0x3ff
 
     and-int v29, v29, v23
 
     if-eqz v29, :cond_0
 
-    .line 2725
     move-object/from16 v0, p0
 
     iget-object v0, v0, Lcom/android/server/wm/WindowManagerService;->mContext:Landroid/content/Context;
@@ -28867,18 +28907,15 @@
 
     if-eqz v29, :cond_0
 
-    .line 2727
-    const v29, -0x1ff0001
+    const v29, -0x3ff0001
 
     and-int v23, v23, v29
 
-    .line 2731
     :cond_0
     invoke-static {}, Landroid/os/Binder;->clearCallingIdentity()J
 
     move-result-wide v17
 
-    .line 2733
     .local v17, origId:J
     move-object/from16 v0, p0
 
@@ -29042,6 +29079,30 @@
     if-eqz p4, :cond_8
 
     .line 2760
+    move-object/from16 v0, v27
+
+    iget-object v0, v0, Lcom/android/server/wm/WindowState;->mAttrs:Landroid/view/WindowManager$LayoutParams;
+
+    move-object/from16 v29, v0
+
+    move-object/from16 v0, v29
+
+    iget v0, v0, Landroid/view/WindowManager$LayoutParams;->type:I
+
+    move/from16 v29, v0
+
+    move-object/from16 v0, p4
+
+    iget v0, v0, Landroid/view/WindowManager$LayoutParams;->type:I
+
+    move/from16 v31, v0
+
+    move/from16 v0, v29
+
+    move/from16 v1, v31
+
+    if-ne v0, v1, :cond_7
+
     move-object/from16 v0, v27
 
     iget-object v0, v0, Lcom/android/server/wm/WindowState;->mAttrs:Landroid/view/WindowManager$LayoutParams;

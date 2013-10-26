@@ -71,6 +71,12 @@
 
 .field private mBitmapCache:Landroid/widget/RemoteViews$BitmapCache;
 
+.field mDefaultTheme:I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field private mIsRoot:Z
 
 .field private mIsWidgetCollectionChild:Z
@@ -134,56 +140,48 @@
 
     const/4 v4, 0x1
 
-    .line 1374
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 104
+    const v6, 0x103006e
+
+    iput v6, p0, Landroid/widget/RemoteViews;->mDefaultTheme:I
+
     iput-boolean v4, p0, Landroid/widget/RemoteViews;->mIsRoot:Z
 
-    .line 118
     iput-object v7, p0, Landroid/widget/RemoteViews;->mLandscape:Landroid/widget/RemoteViews;
 
-    .line 119
     iput-object v7, p0, Landroid/widget/RemoteViews;->mPortrait:Landroid/widget/RemoteViews;
 
-    .line 128
     iput-boolean v5, p0, Landroid/widget/RemoteViews;->mIsWidgetCollectionChild:Z
 
-    .line 1375
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
     move-result v2
 
-    .line 1378
     .local v2, mode:I
     if-nez p2, :cond_0
 
-    .line 1379
     new-instance v6, Landroid/widget/RemoteViews$BitmapCache;
 
     invoke-direct {v6, p1}, Landroid/widget/RemoteViews$BitmapCache;-><init>(Landroid/os/Parcel;)V
 
     iput-object v6, p0, Landroid/widget/RemoteViews;->mBitmapCache:Landroid/widget/RemoteViews$BitmapCache;
 
-    .line 1385
     :goto_0
     if-nez v2, :cond_2
 
-    .line 1386
     invoke-virtual {p1}, Landroid/os/Parcel;->readString()Ljava/lang/String;
 
     move-result-object v6
 
     iput-object v6, p0, Landroid/widget/RemoteViews;->mPackage:Ljava/lang/String;
 
-    .line 1387
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
     move-result v6
 
     iput v6, p0, Landroid/widget/RemoteViews;->mLayoutId:I
 
-    .line 1388
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
     move-result v6
@@ -537,31 +535,28 @@
     .prologue
     const/4 v2, 0x0
 
-    .line 1342
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 104
+    const v0, 0x103006e
+
+    iput v0, p0, Landroid/widget/RemoteViews;->mDefaultTheme:I
+
     const/4 v0, 0x1
 
     iput-boolean v0, p0, Landroid/widget/RemoteViews;->mIsRoot:Z
 
-    .line 118
     iput-object v2, p0, Landroid/widget/RemoteViews;->mLandscape:Landroid/widget/RemoteViews;
 
-    .line 119
     iput-object v2, p0, Landroid/widget/RemoteViews;->mPortrait:Landroid/widget/RemoteViews;
 
-    .line 128
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Landroid/widget/RemoteViews;->mIsWidgetCollectionChild:Z
 
-    .line 1343
     if-eqz p1, :cond_0
 
     if-nez p2, :cond_1
 
-    .line 1344
     :cond_0
     new-instance v0, Ljava/lang/RuntimeException;
 
@@ -652,49 +647,42 @@
     .prologue
     const/4 v1, 0x0
 
-    .line 1321
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 104
+    const v0, 0x103006e
+
+    iput v0, p0, Landroid/widget/RemoteViews;->mDefaultTheme:I
+
     const/4 v0, 0x1
 
     iput-boolean v0, p0, Landroid/widget/RemoteViews;->mIsRoot:Z
 
-    .line 118
     iput-object v1, p0, Landroid/widget/RemoteViews;->mLandscape:Landroid/widget/RemoteViews;
 
-    .line 119
     iput-object v1, p0, Landroid/widget/RemoteViews;->mPortrait:Landroid/widget/RemoteViews;
 
-    .line 128
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Landroid/widget/RemoteViews;->mIsWidgetCollectionChild:Z
 
-    .line 1322
     iput-object p1, p0, Landroid/widget/RemoteViews;->mPackage:Ljava/lang/String;
 
-    .line 1323
     iput p2, p0, Landroid/widget/RemoteViews;->mLayoutId:I
 
-    .line 1324
     new-instance v0, Landroid/widget/RemoteViews$BitmapCache;
 
     invoke-direct {v0}, Landroid/widget/RemoteViews$BitmapCache;-><init>()V
 
     iput-object v0, p0, Landroid/widget/RemoteViews;->mBitmapCache:Landroid/widget/RemoteViews$BitmapCache;
 
-    .line 1327
     new-instance v0, Landroid/widget/RemoteViews$MemoryUsageCounter;
 
     invoke-direct {v0, p0, v1}, Landroid/widget/RemoteViews$MemoryUsageCounter;-><init>(Landroid/widget/RemoteViews;Landroid/widget/RemoteViews$1;)V
 
     iput-object v0, p0, Landroid/widget/RemoteViews;->mMemoryUsageCounter:Landroid/widget/RemoteViews$MemoryUsageCounter;
 
-    .line 1328
     invoke-direct {p0}, Landroid/widget/RemoteViews;->recalculateMemoryUsage()V
 
-    .line 1329
     return-void
 .end method
 
@@ -1237,6 +1225,9 @@
     .parameter "context"
     .parameter "parent"
     .parameter "handler"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 2115
@@ -1252,6 +1243,10 @@
 
     .line 2121
     .local v0, c:Landroid/content/Context;
+    iget v4, p0, Landroid/widget/RemoteViews;->mDefaultTheme:I
+
+    invoke-virtual {v0, v4}, Landroid/content/Context;->setTheme(I)V
+
     const-string v4, "layout_inflater"
 
     invoke-virtual {v0, v4}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
@@ -1729,6 +1724,19 @@
     invoke-virtual {p0, p1, v0, p2}, Landroid/widget/RemoteViews;->setCharSequence(ILjava/lang/String;Ljava/lang/CharSequence;)V
 
     .line 2084
+    return-void
+.end method
+
+.method public setDefaultTheme(I)V
+    .locals 0
+    .parameter "id"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput p1, p0, Landroid/widget/RemoteViews;->mDefaultTheme:I
+
     return-void
 .end method
 

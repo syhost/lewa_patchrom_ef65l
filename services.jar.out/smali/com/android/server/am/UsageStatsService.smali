@@ -7,7 +7,8 @@
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Lcom/android/server/am/UsageStatsService$PkgUsageStatsExtended;,
-        Lcom/android/server/am/UsageStatsService$TimeStats;
+        Lcom/android/server/am/UsageStatsService$TimeStats;,
+        Lcom/android/server/am/UsageStatsService$Injector;
     }
 .end annotation
 
@@ -35,6 +36,12 @@
 
 .field private static final VERSION:I = 0x3ef
 
+.field static bInit:Z
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field private static final localLOGV:Z
 
 .field static sService:Lcom/android/internal/app/IUsageStats;
@@ -43,7 +50,11 @@
 # instance fields
 .field private mCal:Ljava/util/Calendar;
 
-.field private mContext:Landroid/content/Context;
+.field mContext:Landroid/content/Context;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mDir:Ljava/io/File;
 
@@ -74,13 +85,23 @@
 
 .field private mLastResumedComp:Ljava/lang/String;
 
-.field private mLastResumedPkg:Ljava/lang/String;
+.field mLastResumedPkg:Ljava/lang/String;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private final mLastWriteDay:Ljava/util/concurrent/atomic/AtomicInteger;
 
 .field private final mLastWriteElapsedTime:Ljava/util/concurrent/atomic/AtomicLong;
 
 .field private mPackageMonitor:Lcom/android/internal/content/PackageMonitor;
+
+.field mPkgStartTime:J
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private final mStats:Ljava/util/Map;
     .annotation system Ldalvik/annotation/Signature;
@@ -104,7 +125,10 @@
     .locals 1
 
     .prologue
-    .line 89
+    const/4 v0, 0x0
+
+    sput-boolean v0, Lcom/android/server/am/UsageStatsService;->bInit:Z
+
     const/16 v0, 0x9
 
     new-array v0, v0, [I
@@ -114,6 +138,8 @@
     sput-object v0, Lcom/android/server/am/UsageStatsService;->LAUNCH_TIME_BINS:[I
 
     return-void
+
+    nop
 
     :array_0
     .array-data 0x4
@@ -4206,6 +4232,9 @@
 .method public noteResumeComponent(Landroid/content/ComponentName;)V
     .locals 10
     .parameter "componentName"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v6, 0x0
@@ -4249,18 +4278,17 @@
 
     move-result v4
 
-    .line 690
     .local v4, samePackage:Z
+    invoke-static {v4, p0}, Lcom/android/server/am/UsageStatsService$Injector;->observerAppUsage(ZLcom/android/server/am/UsageStatsService;)V
+
     iget-boolean v8, p0, Lcom/android/server/am/UsageStatsService;->mIsResumed:Z
 
     if-eqz v8, :cond_2
 
-    .line 691
     iget-object v8, p0, Lcom/android/server/am/UsageStatsService;->mLastResumedPkg:Ljava/lang/String;
 
     if-eqz v8, :cond_2
 
-    .line 696
     iget-object v8, p0, Lcom/android/server/am/UsageStatsService;->mStats:Ljava/util/Map;
 
     iget-object v9, p0, Lcom/android/server/am/UsageStatsService;->mLastResumedPkg:Ljava/lang/String;

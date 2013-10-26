@@ -1082,12 +1082,44 @@
     .parameter "selectionArgs"
     .parameter "sortOrder"
     .parameter "cancellationSignal"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 188
+    const/4 v3, 0x1
+
     invoke-direct {p0, p1}, Landroid/content/ContentProvider$Transport;->enforceReadPermission(Landroid/net/Uri;)V
 
-    .line 189
+    iget-object v0, p0, Landroid/content/ContentProvider$Transport;->this$0:Landroid/content/ContentProvider;
+
+    invoke-static {v0, p1}, Landroid/content/ContentProvider$Injector;->checkPermission(Landroid/content/ContentProvider;Landroid/net/Uri;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_1
+
+    new-instance v0, Landroid/database/MatrixCursor;
+
+    if-nez p2, :cond_0
+
+    new-array p2, v3, [Ljava/lang/String;
+
+    .end local p2
+    const/4 v1, 0x0
+
+    const-string v2, "fake"
+
+    aput-object v2, p2, v1
+
+    :cond_0
+    invoke-direct {v0, p2, v3}, Landroid/database/MatrixCursor;-><init>([Ljava/lang/String;I)V
+
+    :goto_0
+    return-object v0
+
+    .restart local p2
+    :cond_1
     iget-object v0, p0, Landroid/content/ContentProvider$Transport;->this$0:Landroid/content/ContentProvider;
 
     invoke-static {p6}, Landroid/os/CancellationSignal;->fromTransport(Landroid/os/ICancellationSignal;)Landroid/os/CancellationSignal;
@@ -1108,7 +1140,7 @@
 
     move-result-object v0
 
-    return-object v0
+    goto :goto_0
 .end method
 
 .method public update(Landroid/net/Uri;Landroid/content/ContentValues;Ljava/lang/String;[Ljava/lang/String;)I

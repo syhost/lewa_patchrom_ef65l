@@ -42,6 +42,9 @@
     .parameter "year"
     .parameter "monthOfYear"
     .parameter "dayOfMonth"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 96
@@ -78,6 +81,8 @@
     move-result-object v4
 
     invoke-virtual {p0, v3, v4, p0}, Landroid/app/DatePickerDialog;->setButton(ILjava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)V
+
+    invoke-direct {p0, v1, p0}, Landroid/app/DatePickerDialog;->setButton(Landroid/content/Context;Landroid/app/DatePickerDialog;)V
 
     .line 104
     const/4 v3, 0x0
@@ -157,6 +162,28 @@
     invoke-direct/range {v0 .. v6}, Landroid/app/DatePickerDialog;-><init>(Landroid/content/Context;ILandroid/app/DatePickerDialog$OnDateSetListener;III)V
 
     .line 80
+    return-void
+.end method
+
+.method private setButton(Landroid/content/Context;Landroid/app/DatePickerDialog;)V
+    .locals 2
+    .parameter "context"
+    .parameter "dialog"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/4 v0, -0x2
+
+    const/high16 v1, 0x104
+
+    invoke-virtual {p1, v1}, Landroid/content/Context;->getText(I)Ljava/lang/CharSequence;
+
+    move-result-object v1
+
+    invoke-virtual {p0, v0, v1, p2}, Landroid/app/DatePickerDialog;->setButton(ILjava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)V
+
     return-void
 .end method
 
@@ -301,15 +328,21 @@
 .end method
 
 .method public onClick(Landroid/content/DialogInterface;I)V
-    .locals 0
+    .locals 1
     .parameter "dialog"
     .parameter "which"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 116
+    const/4 v0, -0x1
+
+    if-ne v0, p2, :cond_lewa_0
+
     invoke-direct {p0}, Landroid/app/DatePickerDialog;->tryNotifyDateSet()V
 
-    .line 117
+    :cond_lewa_0
     return-void
 .end method
 

@@ -10562,6 +10562,10 @@
 
     move-result v0
 
+    invoke-virtual {p0, v0}, Lcom/android/server/am/ActivityStack;->setForegroundProcess(Z)Z
+
+    move-result v0
+
     return v0
 .end method
 
@@ -10569,6 +10573,9 @@
     .locals 25
     .parameter "prev"
     .parameter "options"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 1403
@@ -12354,6 +12361,45 @@
     invoke-virtual/range {v0 .. v5}, Lcom/android/server/am/ActivityRecord;->addResultLocked(Lcom/android/server/am/ActivityRecord;Ljava/lang/String;IILandroid/content/Intent;)V
 
     goto :goto_0
+.end method
+
+.method setForegroundProcess(Z)Z
+    .locals 3
+    .parameter "resumed"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/4 v1, 0x0
+
+    invoke-virtual {p0, v1}, Lcom/android/server/am/ActivityStack;->topRunningActivityLocked(Lcom/android/server/am/ActivityRecord;)Lcom/android/server/am/ActivityRecord;
+
+    move-result-object v0
+
+    .local v0, next:Lcom/android/server/am/ActivityRecord;
+    if-eqz v0, :cond_0
+
+    if-eqz p1, :cond_0
+
+    const-string v1, "sys.foreground_process"
+
+    iget-object v2, v0, Lcom/android/server/am/ActivityRecord;->processName:Ljava/lang/String;
+
+    invoke-static {v1, v2}, Landroid/os/SystemProperties;->set(Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string v1, "sys.foreground_activity"
+
+    iget-object v2, v0, Lcom/android/server/am/ActivityRecord;->realActivity:Landroid/content/ComponentName;
+
+    invoke-virtual {v2}, Landroid/content/ComponentName;->getClassName()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Landroid/os/SystemProperties;->set(Ljava/lang/String;Ljava/lang/String;)V
+
+    :cond_0
+    return p1
 .end method
 
 .method final showAskCompatModeDialogLocked(Lcom/android/server/am/ActivityRecord;)V

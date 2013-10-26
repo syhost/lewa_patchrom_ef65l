@@ -7,7 +7,8 @@
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Lcom/android/server/TelephonyRegistry$1;,
-        Lcom/android/server/TelephonyRegistry$Record;
+        Lcom/android/server/TelephonyRegistry$Record;,
+        Lcom/android/server/TelephonyRegistry$Injector;
     }
 .end annotation
 
@@ -44,7 +45,11 @@
     .end annotation
 .end field
 
-.field private final mContext:Landroid/content/Context;
+.field final mContext:Landroid/content/Context;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mDataActivity:I
 
@@ -1411,30 +1416,33 @@
     .parameter "callback"
     .parameter "events"
     .parameter "notifyNow"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 144
     if-eqz p3, :cond_e
 
-    .line 146
     invoke-direct {p0, p3}, Lcom/android/server/TelephonyRegistry;->checkListenerPermission(I)V
 
-    .line 148
+    invoke-static {p3, p0}, Lcom/android/server/TelephonyRegistry$Injector;->checkPermission(ILcom/android/server/TelephonyRegistry;)Z
+
+    move-result v8
+
+    if-eqz v8, :cond_lewa_0
+
     iget-object v9, p0, Lcom/android/server/TelephonyRegistry;->mRecords:Ljava/util/ArrayList;
 
     monitor-enter v9
 
-    .line 150
     const/4 v5, 0x0
 
-    .line 152
     .local v5, r:Lcom/android/server/TelephonyRegistry$Record;
     :try_start_0
     invoke-interface {p2}, Lcom/android/internal/telephony/IPhoneStateListener;->asBinder()Landroid/os/IBinder;
 
     move-result-object v1
 
-    .line 153
     .local v1, b:Landroid/os/IBinder;
     iget-object v8, p0, Lcom/android/server/TelephonyRegistry;->mRecords:Ljava/util/ArrayList;
 
@@ -1733,6 +1741,8 @@
     .end local v4           #i:I
     .end local v5           #r:Lcom/android/server/TelephonyRegistry$Record;
     .end local v7           #send:I
+
+    :cond_lewa_0
     :goto_d
     return-void
 

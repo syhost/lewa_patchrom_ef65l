@@ -42,6 +42,12 @@
 
 .field public static final FILE_TYPE_JPEG:I = 0x1f
 
+.field public static final FILE_TYPE_LEWA_THEME:I = 0x384
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field public static final FILE_TYPE_M3U:I = 0x29
 
 .field public static final FILE_TYPE_M4A:I = 0x2
@@ -815,25 +821,24 @@
 
     invoke-static {v0, v1, v2}, Landroid/media/MediaFile;->addFileType(Ljava/lang/String;ILjava/lang/String;)V
 
-    .line 245
     const-string v0, "MPG"
 
     const/16 v1, 0xc8
 
-    const-string/jumbo v2, "video/mp2p"
+    const-string v2, "video/mp2p"
 
     invoke-static {v0, v1, v2}, Landroid/media/MediaFile;->addFileType(Ljava/lang/String;ILjava/lang/String;)V
 
-    .line 246
     const-string v0, "MPEG"
 
     const/16 v1, 0xc8
 
-    const-string/jumbo v2, "video/mp2p"
+    const-string v2, "video/mp2p"
 
     invoke-static {v0, v1, v2}, Landroid/media/MediaFile;->addFileType(Ljava/lang/String;ILjava/lang/String;)V
 
-    .line 247
+    invoke-static {}, Landroid/media/MediaFile;->addLewaThemeFileType()V
+
     return-void
 .end method
 
@@ -916,6 +921,24 @@
     invoke-virtual {v0, v1, p2}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
     .line 147
+    return-void
+.end method
+
+.method private static addLewaThemeFileType()V
+    .locals 3
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const-string v0, "LWT"
+
+    const/16 v1, 0x384
+
+    const-string v2, "application/lewa-theme"
+
+    invoke-static {v0, v1, v2}, Landroid/media/MediaFile;->addFileType(Ljava/lang/String;ILjava/lang/String;)V
+
     return-void
 .end method
 
@@ -1015,6 +1038,32 @@
     move-result-object v1
 
     check-cast v1, Landroid/media/MediaFile$MediaFileType;
+
+    goto :goto_0
+.end method
+
+.method public static getFileTypeBySuffix(Ljava/lang/String;)I
+    .locals 2
+    .parameter "filename"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-static {p0}, Landroid/media/MediaFile;->getFileType(Ljava/lang/String;)Landroid/media/MediaFile$MediaFileType;
+
+    move-result-object v0
+
+    .local v0, mdeiaFileType:Landroid/media/MediaFile$MediaFileType;
+    if-nez v0, :cond_0
+
+    const/4 v1, -0x1
+
+    :goto_0
+    return v1
+
+    :cond_0
+    iget v1, v0, Landroid/media/MediaFile$MediaFileType;->fileType:I
 
     goto :goto_0
 .end method
@@ -1127,6 +1176,32 @@
     .end local v2           #value:Ljava/lang/Integer;
     :cond_1
     const/16 v3, 0x3000
+
+    goto :goto_0
+.end method
+
+.method public static getMimeTypeBySuffix(Ljava/lang/String;)Ljava/lang/String;
+    .locals 2
+    .parameter "filename"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-static {p0}, Landroid/media/MediaFile;->getFileType(Ljava/lang/String;)Landroid/media/MediaFile$MediaFileType;
+
+    move-result-object v0
+
+    .local v0, mdeiaFileType:Landroid/media/MediaFile$MediaFileType;
+    if-nez v0, :cond_0
+
+    const/4 v1, 0x0
+
+    :goto_0
+    return-object v1
+
+    :cond_0
+    iget-object v1, v0, Landroid/media/MediaFile$MediaFileType;->mimeType:Ljava/lang/String;
 
     goto :goto_0
 .end method

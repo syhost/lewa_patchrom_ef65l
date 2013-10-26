@@ -29,6 +29,9 @@
     .parameter "path"
     .parameter "mask"
     .parameter "isrom"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 5260

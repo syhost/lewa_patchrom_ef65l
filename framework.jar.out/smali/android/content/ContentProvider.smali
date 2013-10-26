@@ -10,7 +10,8 @@
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Landroid/content/ContentProvider$PipeDataWriter;,
-        Landroid/content/ContentProvider$Transport;
+        Landroid/content/ContentProvider$Transport;,
+        Landroid/content/ContentProvider$Injector;
     }
 .end annotation
 
@@ -20,7 +21,11 @@
 
 
 # instance fields
-.field private mContext:Landroid/content/Context;
+.field mContext:Landroid/content/Context;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mExported:Z
 

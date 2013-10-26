@@ -6,6 +6,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Landroid/drm/DrmStore$DrmExtra;,
         Landroid/drm/DrmStore$RightsStatus;,
         Landroid/drm/DrmStore$Action;,
         Landroid/drm/DrmStore$Playback;,

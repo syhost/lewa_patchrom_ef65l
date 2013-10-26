@@ -744,6 +744,9 @@
 .method public handleMessage(Landroid/os/Message;)V
     .locals 17
     .parameter "msg"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 3009
@@ -1621,6 +1624,17 @@
 
     goto/16 :goto_0
 
+    :pswitch_16
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/media/AudioService$AudioHandler;->this$0:Landroid/media/AudioService;
+
+    invoke-virtual {v1}, Landroid/media/AudioService;->persistVibrateSetting()V
+
+    goto/16 :goto_0
+
+    nop
+
     .line 3009
     :pswitch_data_0
     .packed-switch 0x0
@@ -1646,5 +1660,6 @@
         :pswitch_15
         :pswitch_10
         :pswitch_11
+        :pswitch_16
     .end packed-switch
 .end method

@@ -28,7 +28,8 @@
         Landroid/app/ActivityThread$ReceiverData;,
         Landroid/app/ActivityThread$NewIntentData;,
         Landroid/app/ActivityThread$ProviderClientRecord;,
-        Landroid/app/ActivityThread$ActivityClientRecord;
+        Landroid/app/ActivityThread$ActivityClientRecord;,
+        Landroid/app/ActivityThread$Injector;
     }
 .end annotation
 
@@ -69,6 +70,12 @@
 .field static mSystemContext:Landroid/app/ContextImpl;
 
 .field static sAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
+
+.field static sAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private static final sCurrentBroadcastIntent:Ljava/lang/ThreadLocal;
     .annotation system Ldalvik/annotation/Signature;
@@ -1977,6 +1984,43 @@
     sput-object v1, Landroid/app/ActivityThread;->sAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
 
     .line 1546
+    sget-object v1, Landroid/app/ActivityThread;->sAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
+
+    goto :goto_0
+.end method
+
+.method public static getAssetRedirectionManager()Lcom/android/internal/app/IAssetRedirectionManager;
+    .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    sget-object v1, Landroid/app/ActivityThread;->sAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
+
+    if-eqz v1, :cond_0
+
+    sget-object v1, Landroid/app/ActivityThread;->sAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
+
+    .local v0, b:Landroid/os/IBinder;
+    :goto_0
+    return-object v1
+
+    .end local v0           #b:Landroid/os/IBinder;
+    :cond_0
+    const-string v1, "assetredirection"
+
+    invoke-static {v1}, Landroid/os/ServiceManager;->getService(Ljava/lang/String;)Landroid/os/IBinder;
+
+    move-result-object v0
+
+    .restart local v0       #b:Landroid/os/IBinder;
+    invoke-static {v0}, Lcom/android/internal/app/IAssetRedirectionManager$Stub;->asInterface(Landroid/os/IBinder;)Lcom/android/internal/app/IAssetRedirectionManager;
+
+    move-result-object v1
+
+    sput-object v1, Landroid/app/ActivityThread;->sAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
+
     sget-object v1, Landroid/app/ActivityThread;->sAssetRedirectionManager:Lcom/android/internal/app/IAssetRedirectionManager;
 
     goto :goto_0
@@ -9153,6 +9197,9 @@
     .locals 22
     .parameter "r"
     .parameter "customIntent"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 2069
@@ -10815,6 +10862,9 @@
     .locals 1
     .parameter "config"
     .parameter "compat"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 1568
@@ -11624,33 +11674,33 @@
 .method final freeTextLayoutCachesIfNeeded(I)V
     .locals 2
     .parameter "configDiff"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 3906
-    if-eqz p1, :cond_0
+    if-eqz p1, :cond_1
 
-    .line 3908
     and-int/lit8 v1, p1, 0x4
 
-    if-eqz v1, :cond_1
+    if-eqz v1, :cond_2
 
     const/4 v0, 0x1
 
-    .line 3909
     .local v0, hasLocaleConfigChange:Z
     :goto_0
     if-eqz v0, :cond_0
 
-    .line 3910
     invoke-static {}, Landroid/graphics/Canvas;->freeTextLayoutCaches()V
 
-    .line 3914
-    .end local v0           #hasLocaleConfigChange:Z
     :cond_0
+    invoke-static {p1}, Landroid/app/ActivityThread$Injector;->FreeCanvasCaches(I)V
+
+    .end local v0           #hasLocaleConfigChange:Z
+    :cond_1
     return-void
 
-    .line 3908
-    :cond_1
+    :cond_2
     const/4 v0, 0x0
 
     goto :goto_0
@@ -12431,6 +12481,9 @@
     .locals 10
     .parameter "resDir"
     .parameter "compInfo"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v2, 0x0

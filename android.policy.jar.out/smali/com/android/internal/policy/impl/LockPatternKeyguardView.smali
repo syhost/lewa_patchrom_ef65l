@@ -40,6 +40,12 @@
 
 .field private mConfiguration:Landroid/content/res/Configuration;
 
+.field mContext:Landroid/content/Context;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field private mEnableFallback:Z
 
 .field private mForgotPattern:Z
@@ -113,86 +119,75 @@
     .parameter "updateMonitor"
     .parameter "lockPatternUtils"
     .parameter "controller"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v2, 0x0
 
-    .line 455
     invoke-direct {p0, p1, p2}, Lcom/android/internal/policy/impl/KeyguardViewBase;-><init>(Landroid/content/Context;Lcom/android/internal/policy/impl/KeyguardViewCallback;)V
 
-    .line 99
     iput-boolean v2, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mWindowFocused:Z
 
-    .line 102
     iput-boolean v2, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mEnableFallback:Z
 
-    .line 104
     iput-boolean v2, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mShowLockBeforeUnlock:Z
 
-    .line 108
     new-instance v0, Ljava/lang/Object;
 
     invoke-direct {v0}, Ljava/lang/Object;-><init>()V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mBiometricUnlockStartupLock:Ljava/lang/Object;
 
-    .line 111
     const/16 v0, 0x3e8
 
     iput v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->BIOMETRIC_AREA_EMERGENCY_DIALER_TIMEOUT:I
 
-    .line 119
     iput-boolean v2, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mHasDialog:Z
 
-    .line 179
     new-instance v0, Lcom/android/internal/policy/impl/LockPatternKeyguardView$1;
 
     invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView$1;-><init>(Lcom/android/internal/policy/impl/LockPatternKeyguardView;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mThemeChangeReceiver:Landroid/content/BroadcastReceiver;
 
-    .line 188
     sget-object v0, Lcom/android/internal/policy/impl/LockPatternKeyguardView$Mode;->LockScreen:Lcom/android/internal/policy/impl/LockPatternKeyguardView$Mode;
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mMode:Lcom/android/internal/policy/impl/LockPatternKeyguardView$Mode;
 
-    .line 194
     sget-object v0, Lcom/android/internal/policy/impl/LockPatternKeyguardView$UnlockMode;->Unknown:Lcom/android/internal/policy/impl/LockPatternKeyguardView$UnlockMode;
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mUnlockScreenMode:Lcom/android/internal/policy/impl/LockPatternKeyguardView$UnlockMode;
 
-    .line 202
     iput-boolean v2, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mIsVerifyUnlockOnly:Z
 
-    .line 214
     new-instance v0, Lcom/android/internal/policy/impl/LockPatternKeyguardView$2;
 
     invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView$2;-><init>(Lcom/android/internal/policy/impl/LockPatternKeyguardView;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mRecreateRunnable:Ljava/lang/Runnable;
 
-    .line 236
-    new-instance v0, Lcom/android/internal/policy/impl/LockPatternKeyguardView$3;
+    invoke-virtual {p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->createKeyguardScreenCallback()Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
-    invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView$3;-><init>(Lcom/android/internal/policy/impl/LockPatternKeyguardView;)V
+    move-result-object v0
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mWidgetCallback:Lcom/android/internal/widget/LockScreenWidgetCallback;
 
-    .line 290
     new-instance v0, Lcom/android/internal/policy/impl/LockPatternKeyguardView$4;
 
     invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView$4;-><init>(Lcom/android/internal/policy/impl/LockPatternKeyguardView;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mKeyguardScreenCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
-    .line 719
     new-instance v0, Lcom/android/internal/policy/impl/LockPatternKeyguardView$5;
 
     invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView$5;-><init>(Lcom/android/internal/policy/impl/LockPatternKeyguardView;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mInfoCallback:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$InfoCallbackImpl;
 
-    .line 457
+    iput-object p1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mContext:Landroid/content/Context;
+
     invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v0
@@ -1022,9 +1017,12 @@
     goto :goto_1
 .end method
 
-.method private initializeTransportControlView(Landroid/view/View;)V
+.method protected initializeTransportControlView(Landroid/view/View;)V
     .locals 2
     .parameter "view"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 998
@@ -1493,8 +1491,11 @@
     return-void
 .end method
 
-.method private saveWidgetState()V
+.method protected saveWidgetState()V
     .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 601
@@ -2234,8 +2235,25 @@
     return-void
 .end method
 
-.method createLockScreen()Landroid/view/View;
+.method protected createKeyguardScreenCallback()Lcom/android/internal/policy/impl/KeyguardScreenCallback;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    new-instance v0, Lcom/android/internal/policy/impl/LockPatternKeyguardView$3;
+
+    invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView$3;-><init>(Lcom/android/internal/policy/impl/LockPatternKeyguardView;)V
+
+    return-object v0
+.end method
+
+.method protected createLockScreen()Landroid/view/View;
     .locals 6
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 917
@@ -2253,11 +2271,9 @@
 
     invoke-direct/range {v0 .. v5}, Lcom/android/internal/policy/impl/LockScreen;-><init>(Landroid/content/Context;Landroid/content/res/Configuration;Lcom/android/internal/widget/LockPatternUtils;Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;Lcom/android/internal/policy/impl/KeyguardScreenCallback;)V
 
-    .line 923
     .local v0, lockView:Landroid/view/View;
-    invoke-direct {p0, v0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->initializeTransportControlView(Landroid/view/View;)V
+    invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->initializeTransportControlView(Landroid/view/View;)V
 
-    .line 924
     return-object v0
 .end method
 
@@ -2297,40 +2313,32 @@
 
     invoke-direct/range {v0 .. v6}, Lcom/android/internal/policy/impl/PatternUnlockScreen;-><init>(Landroid/content/Context;Landroid/content/res/Configuration;Lcom/android/internal/widget/LockPatternUtils;Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;Lcom/android/internal/policy/impl/KeyguardScreenCallback;I)V
 
-    .line 941
     .local v0, view:Lcom/android/internal/policy/impl/PatternUnlockScreen;
     iget-boolean v3, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mEnableFallback:Z
 
     invoke-virtual {v0, v3}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->setEnableFallback(Z)V
 
-    .line 942
     move-object v1, v0
 
-    .line 990
     .end local v0           #view:Lcom/android/internal/policy/impl/PatternUnlockScreen;
     .restart local v1       #unlockView:Landroid/view/View;
     :goto_0
-    invoke-direct {p0, v1}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->initializeTransportControlView(Landroid/view/View;)V
+    invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->initializeTransportControlView(Landroid/view/View;)V
 
-    .line 991
     invoke-direct {p0, v1}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->initializeBiometricUnlockView(Landroid/view/View;)V
 
-    .line 993
     iput-object p1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mUnlockScreenMode:Lcom/android/internal/policy/impl/LockPatternKeyguardView$UnlockMode;
 
     move-object v3, v1
 
-    .line 994
     :goto_1
     return-object v3
 
-    .line 943
     :cond_0
     sget-object v3, Lcom/android/internal/policy/impl/LockPatternKeyguardView$UnlockMode;->SimPuk:Lcom/android/internal/policy/impl/LockPatternKeyguardView$UnlockMode;
 
     if-ne p1, v3, :cond_1
 
-    .line 944
     new-instance v1, Lcom/android/internal/policy/impl/SimPukUnlockScreen;
 
     .end local v1           #unlockView:Landroid/view/View;
@@ -2555,9 +2563,120 @@
     return-void
 .end method
 
+.method getBiometricUnlock()Lcom/android/internal/policy/impl/BiometricSensorUnlock;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mBiometricUnlock:Lcom/android/internal/policy/impl/BiometricSensorUnlock;
+
+    return-object v0
+.end method
+
+.method getConfiguration()Landroid/content/res/Configuration;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mConfiguration:Landroid/content/res/Configuration;
+
+    return-object v0
+.end method
+
+.method getForgotPattern()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mForgotPattern:Z
+
+    return v0
+.end method
+
+.method getLockPatternUtils()Lcom/android/internal/widget/LockPatternUtils;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
+
+    return-object v0
+.end method
+
+.method getLockScreen()Landroid/view/View;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mLockScreen:Landroid/view/View;
+
+    return-object v0
+.end method
+
+.method getRecreateRunnable()Ljava/lang/Runnable;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mRecreateRunnable:Ljava/lang/Runnable;
+
+    return-object v0
+.end method
+
+.method getScreenOn()Z
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mScreenOn:Z
+
+    return v0
+.end method
+
+.method getUnlockScreen()Landroid/view/View;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mUnlockScreen:Landroid/view/View;
+
+    return-object v0
+.end method
+
+.method getUpdateMonitor()Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+
+    return-object v0
+.end method
+
 .method protected onConfigurationChanged(Landroid/content/res/Configuration;)V
     .locals 2
     .parameter "newConfig"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 708
@@ -2589,26 +2708,16 @@
     :goto_0
     iput-boolean v1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mShowLockBeforeUnlock:Z
 
-    .line 711
     iput-object p1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mConfiguration:Landroid/content/res/Configuration;
 
-    .line 713
-    invoke-direct {p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->saveWidgetState()V
+    invoke-virtual {p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->saveWidgetState()V
 
-    .line 714
     iget-object v1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mRecreateRunnable:Ljava/lang/Runnable;
 
     invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->removeCallbacks(Ljava/lang/Runnable;)Z
 
-    .line 716
-    iget-object v1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mRecreateRunnable:Ljava/lang/Runnable;
-
-    invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->post(Ljava/lang/Runnable;)Z
-
-    .line 717
     return-void
 
-    .line 709
     :cond_1
     const/4 v1, 0x0
 
@@ -2667,52 +2776,42 @@
     .prologue
     const/4 v0, 0x0
 
-    .line 562
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mScreenOn:Z
 
-    .line 563
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mForgotPattern:Z
 
-    .line 566
     iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mLockScreen:Landroid/view/View;
 
     if-eqz v0, :cond_0
 
-    .line 567
     iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mLockScreen:Landroid/view/View;
 
     check-cast v0, Lcom/android/internal/policy/impl/KeyguardScreen;
 
     invoke-interface {v0}, Lcom/android/internal/policy/impl/KeyguardScreen;->onPause()V
 
-    .line 569
     :cond_0
     iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mUnlockScreen:Landroid/view/View;
 
     if-eqz v0, :cond_1
 
-    .line 570
     iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mUnlockScreen:Landroid/view/View;
 
     check-cast v0, Lcom/android/internal/policy/impl/KeyguardScreen;
 
     invoke-interface {v0}, Lcom/android/internal/policy/impl/KeyguardScreen;->onPause()V
 
-    .line 573
     :cond_1
-    invoke-direct {p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->saveWidgetState()V
+    invoke-virtual {p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->saveWidgetState()V
 
-    .line 575
     iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mBiometricUnlock:Lcom/android/internal/policy/impl/BiometricSensorUnlock;
 
     if-eqz v0, :cond_2
 
-    .line 577
     iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mBiometricUnlock:Lcom/android/internal/policy/impl/BiometricSensorUnlock;
 
     invoke-interface {v0}, Lcom/android/internal/policy/impl/BiometricSensorUnlock;->stop()Z
 
-    .line 579
     :cond_2
     return-void
 .end method
@@ -2887,6 +2986,32 @@
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->post(Ljava/lang/Runnable;)Z
 
     .line 557
+    return-void
+.end method
+
+.method setForgotPattern(Z)V
+    .locals 0
+    .parameter "forgotPattern"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput-boolean p1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mForgotPattern:Z
+
+    return-void
+.end method
+
+.method setScreenOn(Z)V
+    .locals 0
+    .parameter "screenOn"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput-boolean p1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mScreenOn:Z
+
     return-void
 .end method
 

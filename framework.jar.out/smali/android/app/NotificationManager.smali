@@ -91,6 +91,67 @@
 
 
 # virtual methods
+.method public addBlackList([Ljava/lang/String;)V
+    .locals 5
+    .parameter "blockpkgs"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    invoke-static {}, Landroid/app/NotificationManager;->getService()Landroid/app/INotificationManager;
+
+    move-result-object v1
+
+    .local v1, service:Landroid/app/INotificationManager;
+    iget-object v2, p0, Landroid/app/NotificationManager;->mContext:Landroid/content/Context;
+
+    invoke-virtual {v2}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+
+    move-result-object v0
+
+    .local v0, pkg:Ljava/lang/String;
+    sget-boolean v2, Landroid/app/NotificationManager;->localLOGV:Z
+
+    if-eqz v2, :cond_0
+
+    sget-object v2, Landroid/app/NotificationManager;->TAG:Ljava/lang/String;
+
+    new-instance v3, Ljava/lang/StringBuilder;
+
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    const-string v4, ": addBlackList()"
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-static {v2, v3}, Landroid/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)I
+
+    :cond_0
+    :try_start_0
+    invoke-interface {v1, v0, p1}, Landroid/app/INotificationManager;->addBlackList(Ljava/lang/String;[Ljava/lang/String;)V
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    :goto_0
+    return-void
+
+    :catch_0
+    move-exception v2
+
+    goto :goto_0
+.end method
+
 .method public cancel(I)V
     .locals 1
     .parameter "id"

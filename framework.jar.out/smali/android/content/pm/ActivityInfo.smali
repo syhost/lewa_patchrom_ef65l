@@ -7,6 +7,12 @@
 
 
 # static fields
+.field public static final CONFIG_FONT:I = 0x80000
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field public static final CONFIG_FONT_SCALE:I = 0x40000000
 
 .field public static final CONFIG_KEYBOARD:I = 0x10
@@ -32,6 +38,12 @@
 .field public static final CONFIG_SMALLEST_SCREEN_SIZE:I = 0x800
 
 .field public static final CONFIG_THEME_RESOURCE:I = 0x8000
+
+.field public static final CONFIG_THEME_RESOURCE:I = 0x8000
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field public static final CONFIG_TOUCHSCREEN:I = 0x8
 

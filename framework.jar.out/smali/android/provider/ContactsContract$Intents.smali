@@ -26,10 +26,22 @@
 
 .field public static final ATTACH_IMAGE:Ljava/lang/String; = "com.android.contacts.action.ATTACH_IMAGE"
 
+.field public static final EXTRA_BROADCAST_RESULT:Ljava/lang/String; = "broadcast_result"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field public static final EXTRA_CREATE_DESCRIPTION:Ljava/lang/String; = "com.android.contacts.action.CREATE_DESCRIPTION"
 
 .field public static final EXTRA_EXCLUDE_MIMES:Ljava/lang/String; = "exclude_mimes"
     .annotation runtime Ljava/lang/Deprecated;
+    .end annotation
+.end field
+
+.field public static final EXTRA_FILTER_SIM_CONTACT:Ljava/lang/String; = "filter_sim_contact"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
     .end annotation
 .end field
 
@@ -71,6 +83,12 @@
 .field public static final SEARCH_SUGGESTION_DIAL_NUMBER_CLICKED:Ljava/lang/String; = "android.provider.Contacts.SEARCH_SUGGESTION_DIAL_NUMBER_CLICKED"
 
 .field public static final SHOW_OR_CREATE_CONTACT:Ljava/lang/String; = "com.android.contacts.action.SHOW_OR_CREATE_CONTACT"
+
+.field public static final UPDATE_FILTER_CONTACT:Ljava/lang/String; = "android.widget.mmswidget.UPDATE_FILTER_CONTACT"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 
 # direct methods

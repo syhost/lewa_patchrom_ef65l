@@ -48,6 +48,12 @@
 
 .field public static final COUNTRY_ISO:Ljava/lang/String; = "countryiso"
 
+.field public static final DATA_ID:Ljava/lang/String; = "data_id"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field public static final DATE:Ljava/lang/String; = "date"
 
 .field public static final DEFAULT_SORT_ORDER:Ljava/lang/String; = "date DESC"
@@ -58,6 +64,12 @@
 
 .field public static final INCOMING_TYPE:I = 0x1
 
+.field public static final IP_PREFIX:Ljava/lang/String; = "ip_prefix"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field public static final IS_READ:Ljava/lang/String; = "is_read"
 
 .field public static final MISSED_TYPE:I = 0x3
@@ -67,6 +79,18 @@
 .field public static final NUMBER:Ljava/lang/String; = "number"
 
 .field public static final OUTGOING_TYPE:I = 0x2
+
+.field public static final RAW_CONTACT_ID:Ljava/lang/String; = "raw_contact_id"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
+.field public static final SUBSCRIPTION:Ljava/lang/String; = "sim_id"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field public static final TYPE:Ljava/lang/String; = "type"
 

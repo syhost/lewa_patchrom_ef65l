@@ -6,7 +6,8 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
-        Landroid/app/ApplicationPackageManager$ResourceName;
+        Landroid/app/ApplicationPackageManager$ResourceName;,
+        Landroid/app/ApplicationPackageManager$Injector;
     }
 .end annotation
 
@@ -2306,6 +2307,10 @@
     .locals 4
     .parameter "packageName"
     .parameter "flags"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Landroid/content/pm/PackageManager$NameNotFoundException;
@@ -2322,24 +2327,22 @@
     move-result v3
 
     invoke-interface {v2, p1, p2, v3}, Landroid/content/pm/IPackageManager;->getPackageInfo(Ljava/lang/String;II)Landroid/content/pm/PackageInfo;
-    :try_end_0
-    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
     move-result-object v1
 
-    .line 73
     .local v1, pi:Landroid/content/pm/PackageInfo;
     if-eqz v1, :cond_0
 
-    .line 74
+    invoke-static {p1, v1}, Landroid/app/ApplicationPackageManager$Injector;->registerUmengAnalytic(Ljava/lang/String;Landroid/content/pm/PackageInfo;)V
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
     return-object v1
 
-    .line 76
     .end local v1           #pi:Landroid/content/pm/PackageInfo;
     :catch_0
     move-exception v0
 
-    .line 77
     .local v0, e:Landroid/os/RemoteException;
     new-instance v2, Ljava/lang/RuntimeException;
 

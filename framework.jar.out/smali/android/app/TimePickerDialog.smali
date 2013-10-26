@@ -44,6 +44,9 @@
     .parameter "hourOfDay"
     .parameter "minute"
     .parameter "is24HourView"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 89
@@ -81,6 +84,16 @@
     const/4 v3, -0x1
 
     const v4, 0x1040451
+
+    invoke-virtual {v1, v4}, Landroid/content/Context;->getText(I)Ljava/lang/CharSequence;
+
+    move-result-object v4
+
+    invoke-virtual {p0, v3, v4, p0}, Landroid/app/TimePickerDialog;->setButton(ILjava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)V
+
+    const/4 v3, -0x2
+
+    const/high16 v4, 0x104
 
     invoke-virtual {v1, v4}, Landroid/content/Context;->getText(I)Ljava/lang/CharSequence;
 
@@ -243,15 +256,21 @@
 
 # virtual methods
 .method public onClick(Landroid/content/DialogInterface;I)V
-    .locals 0
+    .locals 1
     .parameter "dialog"
     .parameter "which"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 115
+    const/4 v0, -0x1
+
+    if-ne v0, p2, :cond_0
+
     invoke-direct {p0}, Landroid/app/TimePickerDialog;->tryNotifyTimeSet()V
 
-    .line 116
+    :cond_0
     return-void
 .end method
 

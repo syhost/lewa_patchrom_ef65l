@@ -69,6 +69,10 @@
 .field private mBroadCastReceiver:Landroid/content/BroadcastReceiver;
 
 .field private mCallback:Lcom/android/internal/policy/impl/PhoneWindowManager;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mContext:Landroid/content/Context;
 
@@ -99,6 +103,12 @@
 .field private mLockSounds:Landroid/media/SoundPool;
 
 .field private mMasterStreamType:I
+
+.field private mMode:I
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_FIELD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private mNeedToReshowWhenReenabled:Z
 
@@ -149,86 +159,77 @@
     .parameter "context"
     .parameter "callback"
     .parameter "powerManager"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
-    .line 279
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 160
     const/4 v0, 0x1
 
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mSuppressNextLockSound:Z
 
-    .line 197
     const/4 v0, 0x1
 
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mExternallyEnabled:Z
 
-    .line 204
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mNeedToReshowWhenReenabled:Z
 
-    .line 208
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mShowing:Z
 
-    .line 211
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mHidden:Z
 
-    .line 235
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mScreenOn:Z
 
-    .line 238
     sget-object v0, Landroid/telephony/TelephonyManager;->EXTRA_STATE_IDLE:Ljava/lang/String;
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mPhoneState:Ljava/lang/String;
 
-    .line 249
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mWaitingUntilKeyguardVisible:Z
 
-    .line 264
+    const/4 v0, 0x0
+
+    iput v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mMode:I
+
     new-instance v0, Lcom/android/internal/policy/impl/KeyguardViewMediator$1;
 
     invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/KeyguardViewMediator$1;-><init>(Lcom/android/internal/policy/impl/KeyguardViewMediator;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mInfoCallback:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$InfoCallbackImpl;
 
-    .line 841
     new-instance v0, Lcom/android/internal/policy/impl/KeyguardViewMediator$2;
 
     invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/KeyguardViewMediator$2;-><init>(Lcom/android/internal/policy/impl/KeyguardViewMediator;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mUserChangeReceiver:Landroid/content/BroadcastReceiver;
 
-    .line 853
     new-instance v0, Lcom/android/internal/policy/impl/KeyguardViewMediator$3;
 
     invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/KeyguardViewMediator$3;-><init>(Lcom/android/internal/policy/impl/KeyguardViewMediator;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mBroadCastReceiver:Landroid/content/BroadcastReceiver;
 
-    .line 1052
     new-instance v0, Lcom/android/internal/policy/impl/KeyguardViewMediator$4;
 
     invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/KeyguardViewMediator$4;-><init>(Lcom/android/internal/policy/impl/KeyguardViewMediator;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mHandler:Landroid/os/Handler;
 
-    .line 280
     iput-object p1, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mContext:Landroid/content/Context;
 
-    .line 282
     iput-object p3, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mRealPowerManager:Landroid/os/LocalPowerManager;
 
-    .line 283
     const-string v0, "power"
 
     invoke-virtual {p1, v0}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
@@ -373,14 +374,13 @@
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
-    .line 313
-    new-instance v0, Lcom/android/internal/policy/impl/LockPatternKeyguardViewProperties;
+    new-instance v0, Lcom/android/internal/policy/impl/LewaLockPatternKeyguardViewProperties;
 
     iget-object v1, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
     iget-object v2, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
 
-    invoke-direct {v0, v1, v2}, Lcom/android/internal/policy/impl/LockPatternKeyguardViewProperties;-><init>(Lcom/android/internal/widget/LockPatternUtils;Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;)V
+    invoke-direct {v0, v1, v2}, Lcom/android/internal/policy/impl/LewaLockPatternKeyguardViewProperties;-><init>(Lcom/android/internal/widget/LockPatternUtils;Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mKeyguardViewProperties:Lcom/android/internal/policy/impl/KeyguardViewProperties;
 
@@ -1502,6 +1502,9 @@
 
 .method private handleShow()V
     .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 1191
@@ -1515,33 +1518,35 @@
 
     monitor-exit p0
 
-    .line 1210
     :goto_0
     return-void
 
-    .line 1195
     :cond_0
+    iget-object v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
+
+    invoke-virtual {v0}, Lcom/android/internal/widget/LockPatternUtils;->isLockScreenDisabled()Z
+
+    move-result v0
+
+    if-nez v0, :cond_1
+
     iget-object v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mKeyguardViewManager:Lcom/android/internal/policy/impl/KeyguardViewManager;
 
     invoke-virtual {v0}, Lcom/android/internal/policy/impl/KeyguardViewManager;->show()V
 
-    .line 1196
     const/4 v0, 0x1
 
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mShowing:Z
 
-    .line 1197
+    :cond_1
     invoke-direct {p0}, Lcom/android/internal/policy/impl/KeyguardViewMediator;->updateActivityLockScreenState()V
 
-    .line 1198
     invoke-direct {p0}, Lcom/android/internal/policy/impl/KeyguardViewMediator;->adjustUserActivityLocked()V
 
-    .line 1199
     invoke-direct {p0}, Lcom/android/internal/policy/impl/KeyguardViewMediator;->adjustStatusBarLocked()V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 1201
     :try_start_1
     invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
 
@@ -2177,6 +2182,18 @@
 
     .line 612
     return-void
+.end method
+
+.method public getLockScreenMode()I
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget v0, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mMode:I
+
+    return v0
 .end method
 
 .method public isInputRestricted()Z
@@ -3454,6 +3471,19 @@
     .catchall {:try_start_3 .. :try_end_3} :catchall_0
 
     goto :goto_2
+.end method
+
+.method public setLockScreenMode(I)V
+    .locals 0
+    .parameter "mode"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iput p1, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mMode:I
+
+    return-void
 .end method
 
 .method public verifyUnlock(Landroid/view/WindowManagerPolicy$OnKeyguardExitResult;)V

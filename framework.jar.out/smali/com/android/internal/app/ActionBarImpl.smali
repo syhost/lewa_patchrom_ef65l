@@ -88,6 +88,12 @@
 
 .field private mShowingForMode:Z
 
+.field final mSplitHideListener:Landroid/animation/Animator$AnimatorListener;
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_CLASS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
+
 .field private mSplitView:Lcom/android/internal/widget/ActionBarContainer;
 
 .field private mTabScrollView:Lcom/android/internal/widget/ScrollingTabContainerView;
@@ -116,78 +122,70 @@
     .parameter "activity"
 
     .prologue
-    .line 150
     invoke-direct {p0}, Landroid/app/ActionBar;-><init>()V
 
-    .line 85
     new-instance v2, Ljava/util/ArrayList;
 
     invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mTabs:Ljava/util/ArrayList;
 
-    .line 88
     const/4 v2, -0x1
 
     iput v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSavedTabPosition:I
 
-    .line 97
     new-instance v2, Ljava/util/ArrayList;
 
     invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mMenuVisibilityListeners:Ljava/util/ArrayList;
 
-    .line 108
     new-instance v2, Landroid/os/Handler;
 
     invoke-direct {v2}, Landroid/os/Handler;-><init>()V
 
     iput-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mHandler:Landroid/os/Handler;
 
-    .line 111
     const/4 v2, 0x0
 
     iput v2, p0, Lcom/android/internal/app/ActionBarImpl;->mCurWindowVisibility:I
 
-    .line 117
     const/4 v2, 0x1
 
     iput-boolean v2, p0, Lcom/android/internal/app/ActionBarImpl;->mNowShowing:Z
 
-    .line 122
     new-instance v2, Lcom/android/internal/app/ActionBarImpl$1;
 
     invoke-direct {v2, p0}, Lcom/android/internal/app/ActionBarImpl$1;-><init>(Lcom/android/internal/app/ActionBarImpl;)V
 
     iput-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mHideListener:Landroid/animation/Animator$AnimatorListener;
 
-    .line 142
     new-instance v2, Lcom/android/internal/app/ActionBarImpl$2;
 
     invoke-direct {v2, p0}, Lcom/android/internal/app/ActionBarImpl$2;-><init>(Lcom/android/internal/app/ActionBarImpl;)V
 
     iput-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mShowListener:Landroid/animation/Animator$AnimatorListener;
 
-    .line 151
+    new-instance v2, Lcom/android/internal/app/ActionBarImpl$3;
+
+    invoke-direct {v2, p0}, Lcom/android/internal/app/ActionBarImpl$3;-><init>(Lcom/android/internal/app/ActionBarImpl;)V
+
+    iput-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitHideListener:Landroid/animation/Animator$AnimatorListener;
+
     iput-object p1, p0, Lcom/android/internal/app/ActionBarImpl;->mActivity:Landroid/app/Activity;
 
-    .line 152
     invoke-virtual {p1}, Landroid/app/Activity;->getWindow()Landroid/view/Window;
 
     move-result-object v1
 
-    .line 153
     .local v1, window:Landroid/view/Window;
     invoke-virtual {v1}, Landroid/view/Window;->getDecorView()Landroid/view/View;
 
     move-result-object v0
 
-    .line 154
     .local v0, decor:Landroid/view/View;
     invoke-direct {p0, v0}, Lcom/android/internal/app/ActionBarImpl;->init(Landroid/view/View;)V
 
-    .line 155
     iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mActivity:Landroid/app/Activity;
 
     invoke-virtual {v2}, Landroid/app/Activity;->getWindow()Landroid/view/Window;
@@ -221,63 +219,58 @@
     .parameter "dialog"
 
     .prologue
-    .line 160
     invoke-direct {p0}, Landroid/app/ActionBar;-><init>()V
 
-    .line 85
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mTabs:Ljava/util/ArrayList;
 
-    .line 88
     const/4 v0, -0x1
 
     iput v0, p0, Lcom/android/internal/app/ActionBarImpl;->mSavedTabPosition:I
 
-    .line 97
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mMenuVisibilityListeners:Ljava/util/ArrayList;
 
-    .line 108
     new-instance v0, Landroid/os/Handler;
 
     invoke-direct {v0}, Landroid/os/Handler;-><init>()V
 
     iput-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mHandler:Landroid/os/Handler;
 
-    .line 111
     const/4 v0, 0x0
 
     iput v0, p0, Lcom/android/internal/app/ActionBarImpl;->mCurWindowVisibility:I
 
-    .line 117
     const/4 v0, 0x1
 
     iput-boolean v0, p0, Lcom/android/internal/app/ActionBarImpl;->mNowShowing:Z
 
-    .line 122
     new-instance v0, Lcom/android/internal/app/ActionBarImpl$1;
 
     invoke-direct {v0, p0}, Lcom/android/internal/app/ActionBarImpl$1;-><init>(Lcom/android/internal/app/ActionBarImpl;)V
 
     iput-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mHideListener:Landroid/animation/Animator$AnimatorListener;
 
-    .line 142
     new-instance v0, Lcom/android/internal/app/ActionBarImpl$2;
 
     invoke-direct {v0, p0}, Lcom/android/internal/app/ActionBarImpl$2;-><init>(Lcom/android/internal/app/ActionBarImpl;)V
 
     iput-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mShowListener:Landroid/animation/Animator$AnimatorListener;
 
-    .line 161
+    new-instance v0, Lcom/android/internal/app/ActionBarImpl$3;
+
+    invoke-direct {v0, p0}, Lcom/android/internal/app/ActionBarImpl$3;-><init>(Lcom/android/internal/app/ActionBarImpl;)V
+
+    iput-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitHideListener:Landroid/animation/Animator$AnimatorListener;
+
     iput-object p1, p0, Lcom/android/internal/app/ActionBarImpl;->mDialog:Landroid/app/Dialog;
 
-    .line 162
     invoke-virtual {p1}, Landroid/app/Dialog;->getWindow()Landroid/view/Window;
 
     move-result-object v0
@@ -716,6 +709,9 @@
 .method private init(Landroid/view/View;)V
     .locals 7
     .parameter "decor"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v5, 0x0
@@ -1089,6 +1085,21 @@
 
     .line 231
     goto :goto_3
+.end method
+
+.method private setSelectionMode(Lcom/android/internal/app/ActionBarImpl$ActionModeImpl;)V
+    .locals 1
+    .parameter "mode"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/4 v0, 0x1
+
+    invoke-virtual {p1, v0}, Lcom/android/internal/app/ActionBarImpl$ActionModeImpl;->setSelectionMode(I)V
+
+    return-void
 .end method
 
 .method private showForActionMode()V
@@ -2161,6 +2172,32 @@
     return-object v0
 .end method
 
+.method public getSplitHeight()I
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    invoke-virtual {v0}, Lcom/android/internal/widget/ActionBarContainer;->getHeight()I
+
+    move-result v0
+
+    :goto_0
+    return v0
+
+    :cond_0
+    const/4 v0, 0x0
+
+    goto :goto_0
+.end method
+
 .method public getSubtitle()Ljava/lang/CharSequence;
     .locals 1
 
@@ -2368,6 +2405,175 @@
     .line 637
     :cond_0
     return-void
+.end method
+
+.method public hideSplit()V
+    .locals 8
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/4 v7, 0x0
+
+    const/4 v5, 0x0
+
+    const/4 v6, 0x1
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mCurrentShowAnim:Landroid/animation/Animator;
+
+    if-eqz v2, :cond_0
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mCurrentShowAnim:Landroid/animation/Animator;
+
+    invoke-virtual {v2}, Landroid/animation/Animator;->end()V
+
+    :cond_0
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    if-eqz v2, :cond_1
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    invoke-virtual {v2}, Lcom/android/internal/widget/ActionBarContainer;->getVisibility()I
+
+    move-result v2
+
+    const/16 v3, 0x8
+
+    if-ne v2, v3, :cond_2
+
+    :cond_1
+    :goto_0
+    return-void
+
+    :cond_2
+    iget-boolean v2, p0, Lcom/android/internal/app/ActionBarImpl;->mShowHideAnimationEnabled:Z
+
+    if-eqz v2, :cond_3
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    const/high16 v3, 0x3f80
+
+    invoke-virtual {v2, v3}, Lcom/android/internal/widget/ActionBarContainer;->setAlpha(F)V
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    invoke-virtual {v2, v6}, Lcom/android/internal/widget/ActionBarContainer;->setTransitioning(Z)V
+
+    new-instance v0, Landroid/animation/AnimatorSet;
+
+    invoke-direct {v0}, Landroid/animation/AnimatorSet;-><init>()V
+
+    .local v0, anim:Landroid/animation/AnimatorSet;
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    const-string v3, "alpha"
+
+    new-array v4, v6, [F
+
+    aput v5, v4, v7
+
+    invoke-static {v2, v3, v4}, Landroid/animation/ObjectAnimator;->ofFloat(Ljava/lang/Object;Ljava/lang/String;[F)Landroid/animation/ObjectAnimator;
+
+    move-result-object v2
+
+    invoke-virtual {v0, v2}, Landroid/animation/AnimatorSet;->play(Landroid/animation/Animator;)Landroid/animation/AnimatorSet$Builder;
+
+    move-result-object v1
+
+    .local v1, b:Landroid/animation/AnimatorSet$Builder;
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    const-string v3, "translationY"
+
+    const/4 v4, 0x2
+
+    new-array v4, v4, [F
+
+    aput v5, v4, v7
+
+    iget-object v5, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    invoke-virtual {v5}, Lcom/android/internal/widget/ActionBarContainer;->getHeight()I
+
+    move-result v5
+
+    int-to-float v5, v5
+
+    aput v5, v4, v6
+
+    invoke-static {v2, v3, v4}, Landroid/animation/ObjectAnimator;->ofFloat(Ljava/lang/Object;Ljava/lang/String;[F)Landroid/animation/ObjectAnimator;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroid/animation/AnimatorSet$Builder;->with(Landroid/animation/Animator;)Landroid/animation/AnimatorSet$Builder;
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitHideListener:Landroid/animation/Animator$AnimatorListener;
+
+    invoke-virtual {v0, v2}, Landroid/animation/AnimatorSet;->addListener(Landroid/animation/Animator$AnimatorListener;)V
+
+    iput-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mCurrentShowAnim:Landroid/animation/Animator;
+
+    invoke-virtual {v0}, Landroid/animation/AnimatorSet;->start()V
+
+    goto :goto_0
+
+    .end local v0           #anim:Landroid/animation/AnimatorSet;
+    .end local v1           #b:Landroid/animation/AnimatorSet$Builder;
+    :cond_3
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mHideListener:Landroid/animation/Animator$AnimatorListener;
+
+    const/4 v3, 0x0
+
+    invoke-interface {v2, v3}, Landroid/animation/Animator$AnimatorListener;->onAnimationEnd(Landroid/animation/Animator;)V
+
+    goto :goto_0
+.end method
+
+.method public hideSplitNoAnimation()V
+    .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mCurrentShowAnim:Landroid/animation/Animator;
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mCurrentShowAnim:Landroid/animation/Animator;
+
+    invoke-virtual {v0}, Landroid/animation/Animator;->end()V
+
+    :cond_0
+    iget-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    if-eqz v0, :cond_1
+
+    iget-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    invoke-virtual {v0}, Lcom/android/internal/widget/ActionBarContainer;->getVisibility()I
+
+    move-result v0
+
+    const/16 v1, 0x8
+
+    if-ne v0, v1, :cond_2
+
+    :cond_1
+    :goto_0
+    return-void
+
+    :cond_2
+    iget-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitHideListener:Landroid/animation/Animator$AnimatorListener;
+
+    const/4 v1, 0x0
+
+    invoke-interface {v0, v1}, Landroid/animation/Animator$AnimatorListener;->onAnimationEnd(Landroid/animation/Animator;)V
+
+    goto :goto_0
 .end method
 
 .method public isShowing()Z
@@ -3265,6 +3471,38 @@
     .end packed-switch
 .end method
 
+.method public setScrollState(I)V
+    .locals 1
+    .parameter "state"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mActionView:Lcom/android/internal/widget/ActionBarView;
+
+    invoke-virtual {v0}, Lcom/android/internal/widget/ActionBarView;->getNavigationMode()I
+
+    move-result v0
+
+    packed-switch v0, :pswitch_data_0
+
+    :goto_0
+    return-void
+
+    :pswitch_0
+    iget-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mTabScrollView:Lcom/android/internal/widget/ScrollingTabContainerView;
+
+    invoke-virtual {v0, p1}, Lcom/android/internal/widget/ScrollingTabContainerView;->setScrollState(I)V
+
+    goto :goto_0
+
+    :pswitch_data_0
+    .packed-switch 0x2
+        :pswitch_0
+    .end packed-switch
+.end method
+
 .method public setSelectedNavigationItem(I)V
     .locals 2
     .parameter "position"
@@ -3501,9 +3739,189 @@
     return-void
 .end method
 
+.method public showSplit()V
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/4 v0, 0x1
+
+    invoke-virtual {p0, v0}, Lcom/android/internal/app/ActionBarImpl;->showSplit(Z)V
+
+    return-void
+.end method
+
+.method showSplit(Z)V
+    .locals 9
+    .parameter "markHiddenBeforeMode"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    const/high16 v5, 0x3f80
+
+    const/4 v8, 0x1
+
+    const/4 v7, 0x0
+
+    const/4 v6, 0x0
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mCurrentShowAnim:Landroid/animation/Animator;
+
+    if-eqz v2, :cond_0
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mCurrentShowAnim:Landroid/animation/Animator;
+
+    invoke-virtual {v2}, Landroid/animation/Animator;->end()V
+
+    :cond_0
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mTopVisibilityView:Landroid/view/ViewGroup;
+
+    invoke-virtual {v2, v6}, Landroid/view/ViewGroup;->setVisibility(I)V
+
+    iget-boolean v2, p0, Lcom/android/internal/app/ActionBarImpl;->mShowHideAnimationEnabled:Z
+
+    if-eqz v2, :cond_2
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    if-eqz v2, :cond_1
+
+    iget v2, p0, Lcom/android/internal/app/ActionBarImpl;->mContextDisplayMode:I
+
+    if-ne v2, v8, :cond_1
+
+    new-instance v0, Landroid/animation/AnimatorSet;
+
+    invoke-direct {v0}, Landroid/animation/AnimatorSet;-><init>()V
+
+    .local v0, anim:Landroid/animation/AnimatorSet;
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    const-string v3, "alpha"
+
+    new-array v4, v8, [F
+
+    aput v5, v4, v6
+
+    invoke-static {v2, v3, v4}, Landroid/animation/ObjectAnimator;->ofFloat(Ljava/lang/Object;Ljava/lang/String;[F)Landroid/animation/ObjectAnimator;
+
+    move-result-object v2
+
+    invoke-virtual {v0, v2}, Landroid/animation/AnimatorSet;->play(Landroid/animation/Animator;)Landroid/animation/AnimatorSet$Builder;
+
+    move-result-object v1
+
+    .local v1, b:Landroid/animation/AnimatorSet$Builder;
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    invoke-virtual {v2, v7}, Lcom/android/internal/widget/ActionBarContainer;->setAlpha(F)V
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    invoke-virtual {v2, v6}, Lcom/android/internal/widget/ActionBarContainer;->setVisibility(I)V
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    const-string v3, "translationY"
+
+    const/4 v4, 0x2
+
+    new-array v4, v4, [F
+
+    iget-object v5, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    invoke-virtual {v5}, Lcom/android/internal/widget/ActionBarContainer;->getHeight()I
+
+    move-result v5
+
+    int-to-float v5, v5
+
+    aput v5, v4, v6
+
+    aput v7, v4, v8
+
+    invoke-static {v2, v3, v4}, Landroid/animation/ObjectAnimator;->ofFloat(Ljava/lang/Object;Ljava/lang/String;[F)Landroid/animation/ObjectAnimator;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Landroid/animation/AnimatorSet$Builder;->with(Landroid/animation/Animator;)Landroid/animation/AnimatorSet$Builder;
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mShowListener:Landroid/animation/Animator$AnimatorListener;
+
+    invoke-virtual {v0, v2}, Landroid/animation/AnimatorSet;->addListener(Landroid/animation/Animator$AnimatorListener;)V
+
+    iput-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mCurrentShowAnim:Landroid/animation/Animator;
+
+    invoke-virtual {v0}, Landroid/animation/AnimatorSet;->start()V
+
+    .end local v0           #anim:Landroid/animation/AnimatorSet;
+    .end local v1           #b:Landroid/animation/AnimatorSet$Builder;
+    :cond_1
+    :goto_0
+    return-void
+
+    :cond_2
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    invoke-virtual {v2, v5}, Lcom/android/internal/widget/ActionBarContainer;->setAlpha(F)V
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mSplitView:Lcom/android/internal/widget/ActionBarContainer;
+
+    invoke-virtual {v2, v7}, Lcom/android/internal/widget/ActionBarContainer;->setTranslationY(F)V
+
+    iget-object v2, p0, Lcom/android/internal/app/ActionBarImpl;->mShowListener:Landroid/animation/Animator$AnimatorListener;
+
+    const/4 v3, 0x0
+
+    invoke-interface {v2, v3}, Landroid/animation/Animator$AnimatorListener;->onAnimationEnd(Landroid/animation/Animator;)V
+
+    goto :goto_0
+.end method
+
+.method public smoothScrollTabIndicator(IFI)V
+    .locals 1
+    .parameter "position"
+    .parameter "positionOffset"
+    .parameter "positionOffsetPixels"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mActionView:Lcom/android/internal/widget/ActionBarView;
+
+    invoke-virtual {v0}, Lcom/android/internal/widget/ActionBarView;->getNavigationMode()I
+
+    move-result v0
+
+    packed-switch v0, :pswitch_data_0
+
+    :goto_0
+    return-void
+
+    :pswitch_0
+    iget-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mTabScrollView:Lcom/android/internal/widget/ScrollingTabContainerView;
+
+    invoke-virtual {v0, p1, p2, p3}, Lcom/android/internal/widget/ScrollingTabContainerView;->smoothScrollTabIndicator(IFI)V
+
+    goto :goto_0
+
+    :pswitch_data_0
+    .packed-switch 0x2
+        :pswitch_0
+    .end packed-switch
+.end method
+
 .method public startActionMode(Landroid/view/ActionMode$Callback;)Landroid/view/ActionMode;
     .locals 3
     .parameter "callback"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v2, 0x1
@@ -3591,10 +4009,10 @@
 
     invoke-virtual {v1, v2}, Lcom/android/internal/widget/ActionBarContextView;->sendAccessibilityEvent(I)V
 
-    .line 460
     iput-object v0, p0, Lcom/android/internal/app/ActionBarImpl;->mActionMode:Lcom/android/internal/app/ActionBarImpl$ActionModeImpl;
 
-    .line 463
+    invoke-direct {p0, v0}, Lcom/android/internal/app/ActionBarImpl;->setSelectionMode(Lcom/android/internal/app/ActionBarImpl$ActionModeImpl;)V
+
     .end local v0           #mode:Lcom/android/internal/app/ActionBarImpl$ActionModeImpl;
     :goto_0
     return-object v0

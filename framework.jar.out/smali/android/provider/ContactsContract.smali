@@ -7,7 +7,17 @@
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
         Landroid/provider/ContactsContract$1;,
+        Landroid/provider/ContactsContract$RosterData;,
+        Landroid/provider/ContactsContract$Roster;,
+        Landroid/provider/ContactsContract$User;,
+        Landroid/provider/ContactsContract$RosterDataColumns;,
+        Landroid/provider/ContactsContract$RosterColumns;,
+        Landroid/provider/ContactsContract$UserColumns;,
+        Landroid/provider/ContactsContract$DialerSearch;,
+        Landroid/provider/ContactsContract$ViewDialerSearchColumns;,
+        Landroid/provider/ContactsContract$DialerSearchColumns;,
         Landroid/provider/ContactsContract$Intents;,
+        Landroid/provider/ContactsContract$StickerDisplayPhoto;,
         Landroid/provider/ContactsContract$DisplayPhoto;,
         Landroid/provider/ContactsContract$QuickContact;,
         Landroid/provider/ContactsContract$DataUsageFeedback;,

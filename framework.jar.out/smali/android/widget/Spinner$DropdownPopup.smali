@@ -32,6 +32,9 @@
     .parameter "context"
     .parameter "attrs"
     .parameter "defStyleRes"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/4 v1, 0x0
@@ -116,6 +119,9 @@
 
 .method public show()V
     .locals 10
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 941
@@ -268,19 +274,21 @@
     .end local v5           #spinnerPaddingRight:I
     .end local v6           #spinnerWidth:I
     :goto_1
+    sget-boolean v7, Landroid/widget/Spinner;->isSpinnerV5Style:Z
+
+    if-nez v7, :cond_lewa_0
+
     add-int v7, v1, v4
 
     invoke-virtual {p0, v7}, Landroid/widget/Spinner$DropdownPopup;->setHorizontalOffset(I)V
 
-    .line 973
+    :cond_lewa_0
     const/4 v7, 0x2
 
     invoke-virtual {p0, v7}, Landroid/widget/Spinner$DropdownPopup;->setInputMethodMode(I)V
 
-    .line 974
     invoke-super {p0}, Landroid/widget/ListPopupWindow;->show()V
 
-    .line 975
     invoke-virtual {p0}, Landroid/widget/Spinner$DropdownPopup;->getListView()Landroid/widget/ListView;
 
     move-result-object v7
@@ -354,9 +362,20 @@
 
     .line 968
     .restart local v5       #spinnerPaddingRight:I
+    sget-boolean v7, Landroid/widget/Spinner;->isSpinnerV5Style:Z
+
+    if-nez v7, :cond_lewa_1
+
     sub-int v7, v6, v4
 
     sub-int/2addr v7, v5
+
+    invoke-virtual {p0, v7}, Landroid/widget/Spinner$DropdownPopup;->setContentWidth(I)V
+
+    goto :goto_1
+
+    :cond_lewa_1
+    add-int/lit8 v7, v6, -0x5
 
     invoke-virtual {p0, v7}, Landroid/widget/Spinner$DropdownPopup;->setContentWidth(I)V
 
