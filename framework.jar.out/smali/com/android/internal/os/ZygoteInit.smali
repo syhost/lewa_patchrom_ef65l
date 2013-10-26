@@ -26,6 +26,10 @@
 .field private static final PRELOAD_GC_THRESHOLD:I = 0x0
 
 .field private static final PRELOAD_RESOURCES:Z = false
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+.end field
 
 .field private static final ROOT_GID:I = 0x0
 
@@ -1321,16 +1325,19 @@
 .end method
 
 .method private static preloadResources()V
-    .locals 4
+    .locals 10
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 339
     invoke-static {}, Ldalvik/system/VMRuntime;->getRuntime()Ldalvik/system/VMRuntime;
 
-    move-result-object v1
+    move-result-object v3
 
     .line 341
-    .local v1, runtime:Ldalvik/system/VMRuntime;
+    .local v3, runtime:Ldalvik/system/VMRuntime;
     invoke-static {}, Landroid/os/Debug;->startAllocCounting()V
 
     .line 343
@@ -1338,69 +1345,207 @@
     invoke-static {}, Ljava/lang/System;->gc()V
 
     .line 344
-    invoke-virtual {v1}, Ldalvik/system/VMRuntime;->runFinalizationSync()V
+    invoke-virtual {v3}, Ldalvik/system/VMRuntime;->runFinalizationSync()V
 
     .line 345
     invoke-static {}, Landroid/content/res/Resources;->getSystem()Landroid/content/res/Resources;
 
-    move-result-object v2
+    move-result-object v6
 
-    sput-object v2, Lcom/android/internal/os/ZygoteInit;->mResources:Landroid/content/res/Resources;
+    sput-object v6, Lcom/android/internal/os/ZygoteInit;->mResources:Landroid/content/res/Resources;
 
-    .line 346
-    sget-object v2, Lcom/android/internal/os/ZygoteInit;->mResources:Landroid/content/res/Resources;
+    sget-object v6, Lcom/android/internal/os/ZygoteInit;->mResources:Landroid/content/res/Resources;
 
-    invoke-virtual {v2}, Landroid/content/res/Resources;->startPreloading()V
+    invoke-virtual {v6}, Landroid/content/res/Resources;->startPreloading()V
 
-    .line 366
-    const-string v2, "Zygote"
+    invoke-static {}, Lcom/android/internal/os/ZygoteInit;->isPreloadResources()Z
 
-    const-string v3, "Preload resources disabled, skipped."
+    move-result v6
 
-    invoke-static {v2, v3}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+    if-eqz v6, :cond_0
 
-    .line 368
-    sget-object v2, Lcom/android/internal/os/ZygoteInit;->mResources:Landroid/content/res/Resources;
+    const-string v6, "Zygote"
 
-    invoke-virtual {v2}, Landroid/content/res/Resources;->finishPreloading()V
+    const-string v7, "Preloading resources..."
+
+    invoke-static {v6, v7}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+
+    invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
+
+    move-result-wide v4
+
+    .local v4, startTime:J
+    sget-object v6, Lcom/android/internal/os/ZygoteInit;->mResources:Landroid/content/res/Resources;
+
+    const v7, 0x1070006
+
+    invoke-virtual {v6, v7}, Landroid/content/res/Resources;->obtainTypedArray(I)Landroid/content/res/TypedArray;
+
+    move-result-object v1
+
+    .line 353
+    .local v1, ar:Landroid/content/res/TypedArray;
+    invoke-static {v3, v1}, Lcom/android/internal/os/ZygoteInit;->preloadDrawables(Ldalvik/system/VMRuntime;Landroid/content/res/TypedArray;)I
+
+    move-result v0
+
+    .line 354
+    .local v0, N:I
+    invoke-virtual {v1}, Landroid/content/res/TypedArray;->recycle()V
+
+    .line 355
+    const-string v6, "Zygote"
+
+    new-instance v7, Ljava/lang/StringBuilder;
+
+    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v8, "...preloaded "
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    invoke-virtual {v7, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    const-string v8, " resources in "
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
+
+    move-result-wide v8
+
+    sub-long/2addr v8, v4
+
+    invoke-virtual {v7, v8, v9}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    const-string/jumbo v8, "ms."
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v7
+
+    invoke-static {v6, v7}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 358
+    invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
+
+    move-result-wide v4
+
+    .line 359
+    sget-object v6, Lcom/android/internal/os/ZygoteInit;->mResources:Landroid/content/res/Resources;
+
+    const v7, 0x1070007
+
+    invoke-virtual {v6, v7}, Landroid/content/res/Resources;->obtainTypedArray(I)Landroid/content/res/TypedArray;
+
+    move-result-object v1
+
+    .line 361
+    invoke-static {v3, v1}, Lcom/android/internal/os/ZygoteInit;->preloadColorStateLists(Ldalvik/system/VMRuntime;Landroid/content/res/TypedArray;)I
+
+    move-result v0
+
+    .line 362
+    invoke-virtual {v1}, Landroid/content/res/TypedArray;->recycle()V
+
+    .line 363
+    const-string v6, "Zygote"
+
+    new-instance v7, Ljava/lang/StringBuilder;
+
+    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v8, "...preloaded "
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    invoke-virtual {v7, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    const-string v8, " resources in "
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
+
+    move-result-wide v8
+
+    sub-long/2addr v8, v4
+
+    invoke-virtual {v7, v8, v9}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    const-string/jumbo v8, "ms."
+
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v7
+
+    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v7
+
+    invoke-static {v6, v7}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+
+    .end local v0           #N:I
+    .end local v1           #ar:Landroid/content/res/TypedArray;
+    .end local v4           #startTime:J
+    :cond_0
+    sget-object v6, Lcom/android/internal/os/ZygoteInit;->mResources:Landroid/content/res/Resources;
+
+    invoke-virtual {v6}, Landroid/content/res/Resources;->finishPreloading()V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 372
     invoke-static {}, Landroid/os/Debug;->stopAllocCounting()V
 
-    .line 374
     :goto_0
     return-void
 
-    .line 369
     :catch_0
-    move-exception v0
+    move-exception v2
 
-    .line 370
-    .local v0, e:Ljava/lang/RuntimeException;
+    .local v2, e:Ljava/lang/RuntimeException;
     :try_start_1
-    const-string v2, "Zygote"
+    const-string v6, "Zygote"
 
-    const-string v3, "Failure preloading resources"
+    const-string v7, "Failure preloading resources"
 
-    invoke-static {v2, v3, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+    invoke-static {v6, v7, v2}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    .line 372
+    .line 370
     invoke-static {}, Landroid/os/Debug;->stopAllocCounting()V
 
     goto :goto_0
 
-    .end local v0           #e:Ljava/lang/RuntimeException;
+    .end local v2           #e:Ljava/lang/RuntimeException;
     :catchall_0
-    move-exception v2
+    move-exception v6
 
     invoke-static {}, Landroid/os/Debug;->stopAllocCounting()V
 
-    throw v2
+    throw v6
 .end method
 
 .method private static registerZygoteSocket()V
