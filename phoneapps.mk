@@ -6,7 +6,6 @@ private-phone-apps := ApplicationsProvider \
 					  CertInstaller \
 					  DefaultContainerService \
 					  KeyChain \
-					  MusicFX \
 					  Stk \
 					  UserDictionaryProvider \
 					  VpnDialogs \
@@ -14,5 +13,8 @@ private-phone-apps := ApplicationsProvider \
 					  Gallery2 \
 					  UserDictionaryProvider \
 					  Email \
-					  LatinIME \
-					  Phone
+					  PinyinIME \
+					  LiveWallpapers \
+					  LiveWallpapersPicker \
+					  RootExplorer\
+					  DrmProvider \
