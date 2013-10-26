@@ -1,4 +1,4 @@
-.class final Lcom/android/server/pm/ShutdownThread$1;
+.class final Lcom/android/server/pm/ShutdownThread$Injector$2;
 .super Ljava/lang/Object;
 .source "ShutdownThread.java"
 
@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lcom/android/server/pm/ShutdownThread;->shutdownInner(Landroid/content/Context;Z)V
+    value = Lcom/android/server/pm/ShutdownThread$Injector;->createRebootDialog(Landroid/content/Context;)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -27,8 +27,8 @@
     .parameter
 
     .prologue
-    .line 132
-    iput-object p1, p0, Lcom/android/server/pm/ShutdownThread$1;->val$context:Landroid/content/Context;
+    .line 113
+    iput-object p1, p0, Lcom/android/server/pm/ShutdownThread$Injector$2;->val$context:Landroid/content/Context;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -43,12 +43,17 @@
     .parameter "which"
 
     .prologue
-    .line 134
-    iget-object v0, p0, Lcom/android/server/pm/ShutdownThread$1;->val$context:Landroid/content/Context;
+    .line 115
+    const/4 v0, 0x1
+
+    invoke-static {v0}, Lcom/android/server/pm/ShutdownThread;->setReboot(Z)V
+
+    .line 116
+    iget-object v0, p0, Lcom/android/server/pm/ShutdownThread$Injector$2;->val$context:Landroid/content/Context;
 
     #calls: Lcom/android/server/pm/ShutdownThread;->beginShutdownSequence(Landroid/content/Context;)V
     invoke-static {v0}, Lcom/android/server/pm/ShutdownThread;->access$000(Landroid/content/Context;)V
 
-    .line 135
+    .line 117
     return-void
 .end method

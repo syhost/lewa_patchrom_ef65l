@@ -1,14 +1,11 @@
 .class final Lcom/android/server/pm/ShutdownThread$2;
-.super Ljava/lang/Object;
+.super Landroid/os/Handler;
 .source "ShutdownThread.java"
-
-# interfaces
-.implements Landroid/content/DialogInterface$OnClickListener;
 
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lcom/android/server/pm/ShutdownThread;->shutdownInner(Landroid/content/Context;Z)V
+    value = Lcom/android/server/pm/ShutdownThread;->beginShutdownSequence(Landroid/content/Context;)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -17,43 +14,13 @@
 .end annotation
 
 
-# instance fields
-.field final synthetic val$context:Landroid/content/Context;
-
-
 # direct methods
-.method constructor <init>(Landroid/content/Context;)V
+.method constructor <init>()V
     .locals 0
-    .parameter
 
     .prologue
-    .line 143
-    iput-object p1, p0, Lcom/android/server/pm/ShutdownThread$2;->val$context:Landroid/content/Context;
+    .line 253
+    invoke-direct {p0}, Landroid/os/Handler;-><init>()V
 
-    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
-
-    return-void
-.end method
-
-
-# virtual methods
-.method public onClick(Landroid/content/DialogInterface;I)V
-    .locals 1
-    .parameter "dialog"
-    .parameter "which"
-
-    .prologue
-    .line 145
-    const/4 v0, 0x1
-
-    invoke-static {v0}, Lcom/android/server/pm/ShutdownThread;->access$002(Z)Z
-
-    .line 146
-    iget-object v0, p0, Lcom/android/server/pm/ShutdownThread$2;->val$context:Landroid/content/Context;
-
-    #calls: Lcom/android/server/pm/ShutdownThread;->beginShutdownSequence(Landroid/content/Context;)V
-    invoke-static {v0}, Lcom/android/server/pm/ShutdownThread;->access$100(Landroid/content/Context;)V
-
-    .line 147
     return-void
 .end method
