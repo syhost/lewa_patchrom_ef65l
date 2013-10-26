@@ -451,7 +451,6 @@
 
     if-eqz v2, :cond_0
 
-    :try_start_0
     invoke-static {}, Lcom/android/server/PowerManagerService;->access$2800()I
 
     move-result v2
