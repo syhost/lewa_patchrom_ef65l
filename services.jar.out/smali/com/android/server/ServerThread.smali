@@ -139,6 +139,9 @@
 
 .method public run()V
     .locals 127
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 102
@@ -2274,72 +2277,76 @@
 
     .line 731
     .end local v67           #dreamy:Landroid/service/dreams/DreamManagerService;
+    .end local v84           #mountService:Lcom/android/server/MountService;
     .restart local v66       #dreamy:Landroid/service/dreams/DreamManagerService;
     :cond_a
     :goto_3b
-    :try_start_51
-    const-string v3, "SystemServer"
+#    :try_start_51
+#    const-string v3, "SystemServer"
 
-    const-string v9, "AssetRedirectionManager Service"
+#    const-string v9, "AssetRedirectionManager Service"
 
-    invoke-static {v3, v9}, Landroid/util/Slog;->i(Ljava/lang/String;Ljava/lang/String;)I
+#    invoke-static {v3, v9}, Landroid/util/Slog;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 732
-    const-string v3, "assetredirection"
+#    .line 732
+#    const-string v3, "assetredirection"
 
-    new-instance v9, Lcom/android/server/AssetRedirectionManagerService;
+#    new-instance v9, Lcom/android/server/AssetRedirectionManagerService;
 
-    invoke-direct {v9, v4}, Lcom/android/server/AssetRedirectionManagerService;-><init>(Landroid/content/Context;)V
+#    invoke-direct {v9, v4}, Lcom/android/server/AssetRedirectionManagerService;-><init>(Landroid/content/Context;)V
 
-    invoke-static {v3, v9}, Landroid/os/ServiceManager;->addService(Ljava/lang/String;Landroid/os/IBinder;)V
-    :try_end_51
-    .catch Ljava/lang/Throwable; {:try_start_51 .. :try_end_51} :catch_32
+#    invoke-static {v3, v9}, Landroid/os/ServiceManager;->addService(Ljava/lang/String;Landroid/os/IBinder;)V
+#    :try_end_51
+#    .catch Ljava/lang/Throwable; {:try_start_51 .. :try_end_51} :catch_32
 
-    .line 739
-    .end local v84           #mountService:Lcom/android/server/MountService;
-    :goto_3c
-    move-object/from16 v0, p0
+#    .line 739
+#    .end local v84           #mountService:Lcom/android/server/MountService;
+#    :goto_3c
+#    move-object/from16 v0, p0
 
-    iget-object v3, v0, Lcom/android/server/ServerThread;->mContentResolver:Landroid/content/ContentResolver;
+#    iget-object v3, v0, Lcom/android/server/ServerThread;->mContentResolver:Landroid/content/ContentResolver;
 
-    const-string v9, "adb_port"
+#    const-string v9, "adb_port"
 
-    const-string v10, "service.adb.tcp.port"
+#    const-string v10, "service.adb.tcp.port"
 
-    const-string v11, "-1"
+#    const-string v11, "-1"
 
-    invoke-static {v10, v11}, Landroid/os/SystemProperties;->get(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+#    invoke-static {v10, v11}, Landroid/os/SystemProperties;->get(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
-    move-result-object v10
+#    move-result-object v10
 
-    invoke-static {v10}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+#    invoke-static {v10}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
 
-    move-result v10
+#    move-result v10
 
-    invoke-static {v3, v9, v10}, Landroid/provider/Settings$Secure;->putInt(Landroid/content/ContentResolver;Ljava/lang/String;I)Z
+#    invoke-static {v3, v9, v10}, Landroid/provider/Settings$Secure;->putInt(Landroid/content/ContentResolver;Ljava/lang/String;I)Z
 
-    .line 743
-    move-object/from16 v0, p0
+#    .line 743
+#    move-object/from16 v0, p0
 
-    iget-object v3, v0, Lcom/android/server/ServerThread;->mContentResolver:Landroid/content/ContentResolver;
+#    iget-object v3, v0, Lcom/android/server/ServerThread;->mContentResolver:Landroid/content/ContentResolver;
 
-    const-string v9, "adb_port"
+#    const-string v9, "adb_port"
 
-    invoke-static {v9}, Landroid/provider/Settings$Secure;->getUriFor(Ljava/lang/String;)Landroid/net/Uri;
+#    invoke-static {v9}, Landroid/provider/Settings$Secure;->getUriFor(Ljava/lang/String;)Landroid/net/Uri;
 
-    move-result-object v9
+#    move-result-object v9
 
-    const/4 v10, 0x0
+#    const/4 v10, 0x0
 
-    new-instance v11, Lcom/android/server/ServerThread$AdbPortObserver;
+#    new-instance v11, Lcom/android/server/ServerThread$AdbPortObserver;
 
-    move-object/from16 v0, p0
+#    move-object/from16 v0, p0
 
-    invoke-direct {v11, v0}, Lcom/android/server/ServerThread$AdbPortObserver;-><init>(Lcom/android/server/ServerThread;)V
+#    invoke-direct {v11, v0}, Lcom/android/server/ServerThread$AdbPortObserver;-><init>(Lcom/android/server/ServerThread;)V
 
-    invoke-virtual {v3, v9, v10, v11}, Landroid/content/ContentResolver;->registerContentObserver(Landroid/net/Uri;ZLandroid/database/ContentObserver;)V
+#    invoke-virtual {v3, v9, v10, v11}, Landroid/content/ContentResolver;->registerContentObserver(Landroid/net/Uri;ZLandroid/database/ContentObserver;)V
 
     .line 749
+    invoke-static {v4}, Lcom/android/server/ServerThread$Injector;->registerServices(Landroid/content/Context;)V
+ 
+    :goto_lewa_0
     invoke-virtual/range {v126 .. v126}, Lcom/android/server/wm/WindowManagerService;->detectSafeMode()Z
 
     move-result v29
@@ -2475,63 +2482,65 @@
 
     .line 816
     :goto_43
-    new-instance v71, Landroid/content/IntentFilter;
+#    new-instance v71, Landroid/content/IntentFilter;
 
-    invoke-direct/range {v71 .. v71}, Landroid/content/IntentFilter;-><init>()V
+#    invoke-direct/range {v71 .. v71}, Landroid/content/IntentFilter;-><init>()V
 
-    .line 817
-    .local v71, filter:Landroid/content/IntentFilter;
-    const-string v3, "com.tmobile.intent.action.APP_LAUNCH_FAILURE"
+#    .line 817
+#    .local v71, filter:Landroid/content/IntentFilter;
+#    const-string v3, "com.tmobile.intent.action.APP_LAUNCH_FAILURE"
 
-    move-object/from16 v0, v71
+#    move-object/from16 v0, v71
 
-    invoke-virtual {v0, v3}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
+#    invoke-virtual {v0, v3}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 818
-    const-string v3, "com.tmobile.intent.action.APP_LAUNCH_FAILURE_RESET"
+#    .line 818
+#    const-string v3, "com.tmobile.intent.action.APP_LAUNCH_FAILURE_RESET"
 
-    move-object/from16 v0, v71
+#    move-object/from16 v0, v71
 
-    invoke-virtual {v0, v3}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
+#    invoke-virtual {v0, v3}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 819
-    const-string v3, "android.intent.action.PACKAGE_ADDED"
+#    .line 819
+#    const-string v3, "android.intent.action.PACKAGE_ADDED"
 
-    move-object/from16 v0, v71
+#    move-object/from16 v0, v71
 
-    invoke-virtual {v0, v3}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
+#    invoke-virtual {v0, v3}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 820
-    const-string v3, "android.intent.action.PACKAGE_REMOVED"
+#    .line 820
+#    const-string v3, "android.intent.action.PACKAGE_REMOVED"
 
-    move-object/from16 v0, v71
+#    move-object/from16 v0, v71
 
-    invoke-virtual {v0, v3}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
+#    invoke-virtual {v0, v3}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 821
-    const-string v3, "com.tmobile.intent.category.THEME_PACKAGE_INSTALL_STATE_CHANGE"
+#    .line 821
+#    const-string v3, "com.tmobile.intent.category.THEME_PACKAGE_INSTALL_STATE_CHANGE"
 
-    move-object/from16 v0, v71
+#    move-object/from16 v0, v71
 
-    invoke-virtual {v0, v3}, Landroid/content/IntentFilter;->addCategory(Ljava/lang/String;)V
+#    invoke-virtual {v0, v3}, Landroid/content/IntentFilter;->addCategory(Ljava/lang/String;)V
 
-    .line 822
-    const-string v3, "package"
+#    .line 822
+#    const-string v3, "package"
 
-    move-object/from16 v0, v71
+#    move-object/from16 v0, v71
 
-    invoke-virtual {v0, v3}, Landroid/content/IntentFilter;->addDataScheme(Ljava/lang/String;)V
+#    invoke-virtual {v0, v3}, Landroid/content/IntentFilter;->addDataScheme(Ljava/lang/String;)V
 
-    .line 823
-    new-instance v3, Lcom/android/server/AppsLaunchFailureReceiver;
+#    .line 823
+#    new-instance v3, Lcom/android/server/AppsLaunchFailureReceiver;
 
-    invoke-direct {v3}, Lcom/android/server/AppsLaunchFailureReceiver;-><init>()V
+#    invoke-direct {v3}, Lcom/android/server/AppsLaunchFailureReceiver;-><init>()V
 
-    move-object/from16 v0, v71
+#    move-object/from16 v0, v71
 
-    invoke-virtual {v4, v3, v0}, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;
+#    invoke-virtual {v4, v3, v0}, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;
 
     .line 826
+    invoke-static {v4}, Lcom/android/server/ServerThread$Injector;->registerReceivers(Landroid/content/Context;)V
+
     move-object/from16 v17, v4
 
     .line 827
@@ -4584,5 +4593,5 @@
 
     .end local v86           #networkPolicy:Lcom/android/server/net/NetworkPolicyManagerService;
     .restart local v8       #networkPolicy:Lcom/android/server/net/NetworkPolicyManagerService;
-    goto/16 :goto_3c
+    goto/16 :goto_lewa_0
 .end method
