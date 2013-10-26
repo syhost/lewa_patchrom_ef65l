@@ -3918,7 +3918,7 @@
     iget-object v5, p0, Lcom/android/server/PowerManagerService;->mCustomButtonValues:[I
 
     :goto_5
-    invoke-static {p0, p1, v6, v4, v5}, Lcom/android/server/PowerManagerService;->getAutoBrightnessValue(II[I[I)I
+    invoke-direct {p0, p1, v6, v4, v5}, Lcom/android/server/PowerManagerService;->getAutoBrightnessValue(II[I[I)I
 
     move-result v0
 

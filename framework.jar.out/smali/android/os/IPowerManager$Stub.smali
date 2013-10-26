@@ -876,40 +876,6 @@
 
     goto/16 :goto_0
 
-    :sswitch_14
-    const-string v9, "android.os.IPowerManager"
-
-    invoke-virtual {p2, v9}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
-
-    invoke-virtual {p2}, Landroid/os/Parcel;->readString()Ljava/lang/String;
-
-    move-result-object v0
-
-    .restart local v0       #_arg0:Ljava/lang/String;
-    invoke-virtual {p2}, Landroid/os/Parcel;->readInt()I
-
-    move-result v9
-
-    if-eqz v9, :cond_lewa_0
-
-    move v2, v7
-
-    .local v2, _arg1:Z
-    :goto_lewa_0
-    invoke-virtual {p0, v0, v2}, Landroid/os/IPowerManager$Stub;->rebootConfirm(Ljava/lang/String;Z)V
-
-    invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
-
-    goto/16 :goto_0
-
-    .end local v2           #_arg1:Z
-    :cond_lewa_0
-    move v2, v8
-
-    goto :goto_lewa_0
-
-    .end local v0           #_arg0:Ljava/lang/String;
-
     nop
 
     :sswitch_data_0
