@@ -70,10 +70,6 @@
 
 .field public static final FEATURE_NFC:Ljava/lang/String; = "android.hardware.nfc"
 
-.field public static final FEATURE_RADIO_FM_RECEIVER:Ljava/lang/String; = "com.stericsson.hardware.fm.receiver"
-
-.field public static final FEATURE_RADIO_FM_TRANSMITTER:Ljava/lang/String; = "com.stericsson.hardware.fm.transmitter"
-
 .field public static final FEATURE_SCREEN_LANDSCAPE:Ljava/lang/String; = "android.hardware.screen.landscape"
 
 .field public static final FEATURE_SCREEN_PORTRAIT:Ljava/lang/String; = "android.hardware.screen.portrait"
@@ -290,10 +286,10 @@
     .locals 0
 
     .prologue
-    .line 44
+    .line 43
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 50
+    .line 49
     return-void
 .end method
 
@@ -303,7 +299,7 @@
     .parameter "packageName"
 
     .prologue
-    .line 2714
+    .line 2686
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -522,18 +518,6 @@
     .end annotation
 .end method
 
-.method public abstract getInstalledThemePackages()Ljava/util/List;
-    .annotation system Ldalvik/annotation/Signature;
-        value = {
-            "()",
-            "Ljava/util/List",
-            "<",
-            "Landroid/content/pm/PackageInfo;",
-            ">;"
-        }
-    .end annotation
-.end method
-
 .method public abstract getInstallerPackageName(Ljava/lang/String;)Ljava/lang/String;
 .end method
 
@@ -563,47 +547,47 @@
 
     const/4 v8, 0x0
 
-    .line 2185
+    .line 2157
     new-instance v11, Landroid/content/pm/PackageParser;
 
     invoke-direct {v11, p1}, Landroid/content/pm/PackageParser;-><init>(Ljava/lang/String;)V
 
-    .line 2186
+    .line 2158
     .local v11, packageParser:Landroid/content/pm/PackageParser;
     new-instance v10, Landroid/util/DisplayMetrics;
 
     invoke-direct {v10}, Landroid/util/DisplayMetrics;-><init>()V
 
-    .line 2187
+    .line 2159
     .local v10, metrics:Landroid/util/DisplayMetrics;
     invoke-virtual {v10}, Landroid/util/DisplayMetrics;->setToDefaults()V
 
-    .line 2188
+    .line 2160
     new-instance v12, Ljava/io/File;
 
     invoke-direct {v12, p1}, Ljava/io/File;-><init>(Ljava/lang/String;)V
 
-    .line 2189
+    .line 2161
     .local v12, sourceFile:Ljava/io/File;
     invoke-virtual {v11, v12, p1, v10, v8}, Landroid/content/pm/PackageParser;->parsePackage(Ljava/io/File;Ljava/lang/String;Landroid/util/DisplayMetrics;I)Landroid/content/pm/PackageParser$Package;
 
     move-result-object v0
 
-    .line 2191
+    .line 2163
     .local v0, pkg:Landroid/content/pm/PackageParser$Package;
     if-nez v0, :cond_0
 
-    .line 2197
+    .line 2169
     :goto_0
     return-object v1
 
-    .line 2194
+    .line 2166
     :cond_0
     and-int/lit8 v2, p2, 0x40
 
     if-eqz v2, :cond_1
 
-    .line 2195
+    .line 2167
     invoke-virtual {v11, v0, v8}, Landroid/content/pm/PackageParser;->collectCertificates(Landroid/content/pm/PackageParser$Package;I)Z
 
     :cond_1
@@ -615,7 +599,7 @@
 
     move v9, v8
 
-    .line 2197
+    .line 2169
     invoke-static/range {v0 .. v9}, Landroid/content/pm/PackageParser;->generatePackageInfo(Landroid/content/pm/PackageParser$Package;[IIJJLjava/util/HashSet;ZI)Landroid/content/pm/PackageInfo;
 
     move-result-object v1
