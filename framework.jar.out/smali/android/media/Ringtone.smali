@@ -54,7 +54,7 @@
 
     const/4 v2, 0x0
 
-    .line 46
+    .line 45
     new-array v0, v5, [Ljava/lang/String;
 
     const-string v1, "_id"
@@ -71,7 +71,7 @@
 
     sput-object v0, Landroid/media/Ringtone;->MEDIA_COLUMNS:[Ljava/lang/String;
 
-    .line 52
+    .line 51
     new-array v0, v5, [Ljava/lang/String;
 
     const-string v1, "_id"
@@ -99,18 +99,18 @@
     .prologue
     const/4 v1, 0x0
 
-    .line 72
+    .line 71
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 69
+    .line 68
     const/4 v0, 0x2
 
     iput v0, p0, Landroid/media/Ringtone;->mStreamType:I
 
-    .line 73
+    .line 72
     iput-object p1, p0, Landroid/media/Ringtone;->mContext:Landroid/content/Context;
 
-    .line 74
+    .line 73
     iget-object v0, p0, Landroid/media/Ringtone;->mContext:Landroid/content/Context;
 
     const-string v2, "audio"
@@ -123,10 +123,10 @@
 
     iput-object v0, p0, Landroid/media/Ringtone;->mAudioManager:Landroid/media/AudioManager;
 
-    .line 75
+    .line 74
     iput-boolean p2, p0, Landroid/media/Ringtone;->mAllowRemote:Z
 
-    .line 76
+    .line 75
     if-eqz p2, :cond_1
 
     iget-object v0, p0, Landroid/media/Ringtone;->mAudioManager:Landroid/media/AudioManager;
@@ -138,7 +138,7 @@
     :goto_0
     iput-object v0, p0, Landroid/media/Ringtone;->mRemotePlayer:Landroid/media/IRingtonePlayer;
 
-    .line 77
+    .line 76
     if-eqz p2, :cond_0
 
     new-instance v1, Landroid/os/Binder;
@@ -148,13 +148,13 @@
     :cond_0
     iput-object v1, p0, Landroid/media/Ringtone;->mRemoteToken:Landroid/os/Binder;
 
-    .line 78
+    .line 77
     return-void
 
     :cond_1
     move-object v0, v1
 
-    .line 76
+    .line 75
     goto :goto_0
 .end method
 
@@ -162,33 +162,33 @@
     .locals 1
 
     .prologue
-    .line 276
+    .line 254
     iget-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     if-eqz v0, :cond_0
 
-    .line 277
+    .line 255
     iget-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     invoke-virtual {v0}, Landroid/media/MediaPlayer;->reset()V
 
-    .line 278
+    .line 256
     iget-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     invoke-virtual {v0}, Landroid/media/MediaPlayer;->release()V
 
-    .line 279
+    .line 257
     const/4 v0, 0x0
 
     iput-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
-    .line 281
+    .line 259
     :cond_0
     return-void
 .end method
 
 .method private static getTitle(Landroid/content/Context;Landroid/net/Uri;Z)Ljava/lang/String;
-    .locals 13
+    .locals 12
     .parameter "context"
     .parameter "uri"
     .parameter "followSettingsUri"
@@ -197,392 +197,237 @@
     .end annotation
 
     .prologue
-    .line 127
-    const/4 v11, 0x0
+    const/4 v11, 0x1
 
-    .line 128
-    .local v11, cursor:Landroid/database/Cursor;
+    const/4 v3, 0x0
+
+    .line 113
+    const/4 v9, 0x0
+
+    .line 114
+    .local v9, cursor:Landroid/database/Cursor;
     invoke-virtual {p0}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
 
     move-result-object v0
 
-    .line 130
+    .line 116
     .local v0, res:Landroid/content/ContentResolver;
-    const/4 v12, 0x0
+    const/4 v10, 0x0
 
-    .line 132
-    .local v12, title:Ljava/lang/String;
+    .line 118
+    .local v10, title:Ljava/lang/String;
     if-eqz p1, :cond_0
 
-    .line 133
+    .line 119
     invoke-virtual {p1}, Landroid/net/Uri;->getAuthority()Ljava/lang/String;
-
-    move-result-object v10
-
-    .line 135
-    .local v10, authority:Ljava/lang/String;
-    const-string/jumbo v2, "settings"
-
-    invoke-virtual {v2, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v2
-
-    if-eqz v2, :cond_3
-
-    .line 136
-    if-eqz p2, :cond_0
-
-    .line 137
-    invoke-static {p1}, Landroid/media/RingtoneManager;->getDefaultType(Landroid/net/Uri;)I
-
-    move-result v2
-
-    invoke-static {p0, v2}, Landroid/media/RingtoneManager;->getActualDefaultRingtoneUri(Landroid/content/Context;I)Landroid/net/Uri;
-
-    move-result-object v9
-
-    .line 139
-    .local v9, actualUri:Landroid/net/Uri;
-    const/4 v2, 0x0
-
-    invoke-static {p0, v9, v2}, Landroid/media/Ringtone;->getTitle(Landroid/content/Context;Landroid/net/Uri;Z)Ljava/lang/String;
 
     move-result-object v8
 
-    .line 140
-    .local v8, actualTitle:Ljava/lang/String;
-    const v2, 0x104042d
+    .line 121
+    .local v8, authority:Ljava/lang/String;
+    const-string/jumbo v1, "settings"
 
-    const/4 v3, 0x1
+    invoke-virtual {v1, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    new-array v3, v3, [Ljava/lang/Object;
+    move-result v1
 
-    const/4 v4, 0x0
+    if-eqz v1, :cond_3
 
-    aput-object v8, v3, v4
+    .line 122
+    if-eqz p2, :cond_0
 
-    invoke-virtual {p0, v2, v3}, Landroid/content/Context;->getString(I[Ljava/lang/Object;)Ljava/lang/String;
+    .line 123
+    invoke-static {p1}, Landroid/media/RingtoneManager;->getDefaultType(Landroid/net/Uri;)I
 
-    move-result-object v12
+    move-result v1
 
-    .line 178
-    .end local v8           #actualTitle:Ljava/lang/String;
-    .end local v9           #actualUri:Landroid/net/Uri;
-    .end local v10           #authority:Ljava/lang/String;
+    invoke-static {p0, v1}, Landroid/media/RingtoneManager;->getActualDefaultRingtoneUri(Landroid/content/Context;I)Landroid/net/Uri;
+
+    move-result-object v7
+
+    .line 125
+    .local v7, actualUri:Landroid/net/Uri;
+    invoke-static {p0, v7, v3}, Landroid/media/Ringtone;->getTitle(Landroid/content/Context;Landroid/net/Uri;Z)Ljava/lang/String;
+
+    move-result-object v6
+
+    .line 126
+    .local v6, actualTitle:Ljava/lang/String;
+    const v1, 0x1040416
+
+    new-array v2, v11, [Ljava/lang/Object;
+
+    aput-object v6, v2, v3
+
+    invoke-virtual {p0, v1, v2}, Landroid/content/Context;->getString(I[Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v10
+
+    .line 156
+    .end local v6           #actualTitle:Ljava/lang/String;
+    .end local v7           #actualUri:Landroid/net/Uri;
+    .end local v8           #authority:Ljava/lang/String;
     :cond_0
     :goto_0
-    if-nez v12, :cond_1
+    if-nez v10, :cond_1
 
-    .line 179
-    const v2, 0x1040430
+    .line 157
+    const v1, 0x1040419
 
-    invoke-virtual {p0, v2}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+    invoke-virtual {p0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
 
-    move-result-object v12
+    move-result-object v10
 
-    .line 181
-    if-nez v12, :cond_1
+    .line 159
+    if-nez v10, :cond_1
 
-    .line 182
-    const-string v12, ""
+    .line 160
+    const-string v10, ""
 
     :cond_1
-    move-object v2, v12
+    move-object v1, v10
 
-    .line 186
+    .line 164
     :cond_2
     :goto_1
-    return-object v2
+    return-object v1
 
-    .line 144
-    .restart local v10       #authority:Ljava/lang/String;
+    .line 132
+    .restart local v8       #authority:Ljava/lang/String;
     :cond_3
-    const-string v2, "com.tmobile.thememanager.packageresources"
-
-    invoke-virtual {v2, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v2
-
-    if-eqz v2, :cond_4
-
-    .line 145
-    const-string v2, "content://com.tmobile.thememanager.themes/themes"
-
-    invoke-static {v2}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
-
-    move-result-object v1
-
-    .line 146
-    .local v1, themes:Landroid/net/Uri;
-    const/4 v2, 0x1
-
-    new-array v2, v2, [Ljava/lang/String;
-
-    const/4 v3, 0x0
-
-    const-string/jumbo v4, "ringtone_name"
-
-    aput-object v4, v2, v3
-
-    const-string/jumbo v3, "ringtone_uri = ?"
-
-    const/4 v4, 0x1
-
-    new-array v4, v4, [Ljava/lang/String;
-
-    const/4 v5, 0x0
-
-    invoke-virtual {p1}, Landroid/net/Uri;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    aput-object v6, v4, v5
-
-    const/4 v5, 0x0
-
-    invoke-virtual/range {v0 .. v5}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
-
-    move-result-object v2
-
-    invoke-static {v2}, Landroid/media/Ringtone;->stringForQuery(Landroid/database/Cursor;)Ljava/lang/String;
-
-    move-result-object v12
-
-    .line 148
-    if-nez v12, :cond_0
-
-    .line 149
-    const/4 v2, 0x1
-
-    new-array v2, v2, [Ljava/lang/String;
-
-    const/4 v3, 0x0
-
-    const-string/jumbo v4, "notif_ringtone_name"
-
-    aput-object v4, v2, v3
-
-    const-string/jumbo v3, "notif_ringtone_uri = ?"
-
-    const/4 v4, 0x1
-
-    new-array v4, v4, [Ljava/lang/String;
-
-    const/4 v5, 0x0
-
-    invoke-virtual {p1}, Landroid/net/Uri;->toString()Ljava/lang/String;
-
-    move-result-object v6
-
-    aput-object v6, v4, v5
-
-    const/4 v5, 0x0
-
-    invoke-virtual/range {v0 .. v5}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
-
-    move-result-object v2
-
-    invoke-static {v2}, Landroid/media/Ringtone;->stringForQuery(Landroid/database/Cursor;)Ljava/lang/String;
-
-    move-result-object v12
-
-    goto :goto_0
-
-    .line 154
-    .end local v1           #themes:Landroid/net/Uri;
-    :cond_4
     invoke-static {v8}, Landroid/media/Ringtone$Injector;->isThemeAuthority(Ljava/lang/String;)Z
 
     move-result v1
 
     if-eqz v1, :lewa_cond_0
-    
-    const-string v12, ""
 
-    invoke-static {v0, v12, p1}, Landroid/media/Ringtone$Injector;->setTitle(Landroid/content/ContentResolver;Ljava/lang/String;Landroid/net/Uri;)V
+    invoke-static {v0, v10, p1}, Landroid/media/Ringtone$Injector;->setTitle(Landroid/content/ContentResolver;Ljava/lang/String;Landroid/net/Uri;)V
 
     goto :goto_0
 
     :lewa_cond_0
     :try_start_0
-    const-string v2, "drm"
+    const-string v1, "drm"
 
-    invoke-virtual {v2, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v2
+    move-result v1
 
-    if-eqz v2, :cond_6
+    if-eqz v1, :cond_5
 
-    .line 155
-    sget-object v4, Landroid/media/Ringtone;->DRM_COLUMNS:[Ljava/lang/String;
+    .line 133
+    sget-object v2, Landroid/media/Ringtone;->DRM_COLUMNS:[Ljava/lang/String;
+
+    const/4 v3, 0x0
+
+    const/4 v4, 0x0
 
     const/4 v5, 0x0
 
-    const/4 v6, 0x0
+    move-object v1, p1
 
-    const/4 v7, 0x0
-
-    move-object v2, v0
-
-    move-object v3, p1
-
-    invoke-virtual/range {v2 .. v7}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+    invoke-virtual/range {v0 .. v5}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
     :try_end_0
     .catch Ljava/lang/SecurityException; {:try_start_0 .. :try_end_0} :catch_0
 
-    move-result-object v11
+    move-result-object v9
 
-    .line 164
-    :cond_5
+    .line 142
+    :cond_4
     :goto_2
-    if-eqz v11, :cond_7
+    if-eqz v9, :cond_6
 
     :try_start_1
-    invoke-interface {v11}, Landroid/database/Cursor;->getCount()I
+    invoke-interface {v9}, Landroid/database/Cursor;->getCount()I
 
-    move-result v2
+    move-result v1
 
-    const/4 v3, 0x1
+    if-ne v1, v11, :cond_6
 
-    if-ne v2, v3, :cond_7
+    .line 143
+    invoke-interface {v9}, Landroid/database/Cursor;->moveToFirst()Z
 
-    .line 165
-    invoke-interface {v11}, Landroid/database/Cursor;->moveToFirst()Z
+    .line 144
+    const/4 v1, 0x2
 
-    .line 166
-    const/4 v2, 0x2
-
-    invoke-interface {v11, v2}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+    invoke-interface {v9, v1}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    move-result-object v2
+    move-result-object v1
 
-    .line 171
-    if-eqz v11, :cond_2
+    .line 149
+    if-eqz v9, :cond_2
 
-    .line 172
-    invoke-interface {v11}, Landroid/database/Cursor;->close()V
+    .line 150
+    invoke-interface {v9}, Landroid/database/Cursor;->close()V
 
     goto :goto_1
 
-    .line 156
-    :cond_6
+    .line 134
+    :cond_5
     :try_start_2
-    const-string/jumbo v2, "media"
+    const-string/jumbo v1, "media"
 
-    invoke-virtual {v2, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v2
+    move-result v1
 
-    if-eqz v2, :cond_5
+    if-eqz v1, :cond_4
 
-    .line 157
-    sget-object v4, Landroid/media/Ringtone;->MEDIA_COLUMNS:[Ljava/lang/String;
+    .line 135
+    sget-object v2, Landroid/media/Ringtone;->MEDIA_COLUMNS:[Ljava/lang/String;
+
+    const/4 v3, 0x0
+
+    const/4 v4, 0x0
 
     const/4 v5, 0x0
 
-    const/4 v6, 0x0
+    move-object v1, p1
 
-    const/4 v7, 0x0
-
-    move-object v2, v0
-
-    move-object v3, p1
-
-    invoke-virtual/range {v2 .. v7}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+    invoke-virtual/range {v0 .. v5}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
     :try_end_2
     .catch Ljava/lang/SecurityException; {:try_start_2 .. :try_end_2} :catch_0
 
-    move-result-object v11
+    move-result-object v9
 
     goto :goto_2
 
-    .line 168
-    :cond_7
+    .line 146
+    :cond_6
     :try_start_3
     invoke-virtual {p1}, Landroid/net/Uri;->getLastPathSegment()Ljava/lang/String;
     :try_end_3
     .catchall {:try_start_3 .. :try_end_3} :catchall_0
 
-    move-result-object v12
+    move-result-object v10
 
-    .line 171
-    if-eqz v11, :cond_0
+    .line 149
+    if-eqz v9, :cond_0
 
-    .line 172
-    invoke-interface {v11}, Landroid/database/Cursor;->close()V
-
-    goto/16 :goto_0
-
-    .line 171
-    :catchall_0
-    move-exception v2
-
-    if-eqz v11, :cond_8
-
-    .line 172
-    invoke-interface {v11}, Landroid/database/Cursor;->close()V
-
-    :cond_8
-    throw v2
-
-    .line 159
-    :catch_0
-    move-exception v2
-
-    goto :goto_2
-.end method
-
-.method private static stringForQuery(Landroid/database/Cursor;)Ljava/lang/String;
-    .locals 1
-    .parameter "cursor"
-
-    .prologue
-    .line 114
-    if-eqz p0, :cond_1
-
-    .line 116
-    :try_start_0
-    invoke-interface {p0}, Landroid/database/Cursor;->moveToFirst()Z
-
-    move-result v0
-
-    if-eqz v0, :cond_0
-
-    .line 117
-    const/4 v0, 0x0
-
-    invoke-interface {p0, v0}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
-
-    move-result-object v0
-
-    .line 120
-    invoke-interface {p0}, Landroid/database/Cursor;->close()V
-
-    .line 123
-    :goto_0
-    return-object v0
-
-    .line 120
-    :cond_0
-    invoke-interface {p0}, Landroid/database/Cursor;->close()V
-
-    .line 123
-    :cond_1
-    const/4 v0, 0x0
+    .line 150
+    invoke-interface {v9}, Landroid/database/Cursor;->close()V
 
     goto :goto_0
 
-    .line 120
+    .line 149
     :catchall_0
-    move-exception v0
+    move-exception v1
 
-    invoke-interface {p0}, Landroid/database/Cursor;->close()V
+    if-eqz v9, :cond_7
 
-    throw v0
+    .line 150
+    invoke-interface {v9}, Landroid/database/Cursor;->close()V
+
+    :cond_7
+    throw v1
+
+    .line 137
+    :catch_0
+    move-exception v1
+
+    goto :goto_2
 .end method
 
 
@@ -591,7 +436,7 @@
     .locals 1
 
     .prologue
-    .line 99
+    .line 98
     iget v0, p0, Landroid/media/Ringtone;->mStreamType:I
 
     return v0
@@ -602,14 +447,14 @@
     .parameter "context"
 
     .prologue
-    .line 109
+    .line 108
     iget-object v0, p0, Landroid/media/Ringtone;->mTitle:Ljava/lang/String;
 
     if-eqz v0, :cond_0
 
     iget-object v0, p0, Landroid/media/Ringtone;->mTitle:Ljava/lang/String;
 
-    .line 110
+    .line 109
     :goto_0
     return-object v0
 
@@ -631,7 +476,7 @@
     .locals 1
 
     .prologue
-    .line 236
+    .line 214
     iget-object v0, p0, Landroid/media/Ringtone;->mUri:Landroid/net/Uri;
 
     return-object v0
@@ -643,29 +488,29 @@
     .prologue
     const/4 v1, 0x0
 
-    .line 289
+    .line 267
     iget-object v2, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     if-eqz v2, :cond_0
 
-    .line 290
+    .line 268
     iget-object v1, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     invoke-virtual {v1}, Landroid/media/MediaPlayer;->isPlaying()Z
 
     move-result v1
 
-    .line 300
+    .line 278
     :goto_0
     return v1
 
-    .line 291
+    .line 269
     :cond_0
     iget-boolean v2, p0, Landroid/media/Ringtone;->mAllowRemote:Z
 
     if-eqz v2, :cond_1
 
-    .line 293
+    .line 271
     :try_start_0
     iget-object v2, p0, Landroid/media/Ringtone;->mRemotePlayer:Landroid/media/IRingtonePlayer;
 
@@ -679,11 +524,11 @@
 
     goto :goto_0
 
-    .line 294
+    .line 272
     :catch_0
     move-exception v0
 
-    .line 295
+    .line 273
     .local v0, e:Landroid/os/RemoteException;
     const-string v2, "Ringtone"
 
@@ -709,7 +554,7 @@
 
     goto :goto_0
 
-    .line 299
+    .line 277
     .end local v0           #e:Landroid/os/RemoteException;
     :cond_1
     const-string v2, "Ringtone"
@@ -725,12 +570,12 @@
     .locals 5
 
     .prologue
-    .line 243
+    .line 221
     iget-object v1, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     if-eqz v1, :cond_1
 
-    .line 246
+    .line 224
     iget-object v1, p0, Landroid/media/Ringtone;->mAudioManager:Landroid/media/AudioManager;
 
     iget v2, p0, Landroid/media/Ringtone;->mStreamType:I
@@ -741,23 +586,23 @@
 
     if-eqz v1, :cond_0
 
-    .line 247
+    .line 225
     iget-object v1, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     invoke-virtual {v1}, Landroid/media/MediaPlayer;->start()V
 
-    .line 258
+    .line 236
     :cond_0
     :goto_0
     return-void
 
-    .line 249
+    .line 227
     :cond_1
     iget-boolean v1, p0, Landroid/media/Ringtone;->mAllowRemote:Z
 
     if-eqz v1, :cond_2
 
-    .line 251
+    .line 229
     :try_start_0
     iget-object v1, p0, Landroid/media/Ringtone;->mRemotePlayer:Landroid/media/IRingtonePlayer;
 
@@ -773,11 +618,11 @@
 
     goto :goto_0
 
-    .line 252
+    .line 230
     :catch_0
     move-exception v0
 
-    .line 253
+    .line 231
     .local v0, e:Landroid/os/RemoteException;
     const-string v1, "Ringtone"
 
@@ -803,7 +648,7 @@
 
     goto :goto_0
 
-    .line 256
+    .line 234
     .end local v0           #e:Landroid/os/RemoteException;
     :cond_2
     const-string v1, "Ringtone"
@@ -820,15 +665,15 @@
     .parameter "streamType"
 
     .prologue
-    .line 86
+    .line 85
     iput p1, p0, Landroid/media/Ringtone;->mStreamType:I
 
-    .line 90
+    .line 89
     iget-object v0, p0, Landroid/media/Ringtone;->mUri:Landroid/net/Uri;
 
     invoke-virtual {p0, v0}, Landroid/media/Ringtone;->setUri(Landroid/net/Uri;)V
 
-    .line 91
+    .line 90
     return-void
 .end method
 
@@ -837,10 +682,10 @@
     .parameter "title"
 
     .prologue
-    .line 305
+    .line 283
     iput-object p1, p0, Landroid/media/Ringtone;->mTitle:Ljava/lang/String;
 
-    .line 306
+    .line 284
     return-void
 .end method
 
@@ -849,22 +694,22 @@
     .parameter "uri"
 
     .prologue
-    .line 197
+    .line 175
     invoke-direct {p0}, Landroid/media/Ringtone;->destroyLocalPlayer()V
 
-    .line 199
+    .line 177
     iput-object p1, p0, Landroid/media/Ringtone;->mUri:Landroid/net/Uri;
 
-    .line 200
+    .line 178
     iget-object v1, p0, Landroid/media/Ringtone;->mUri:Landroid/net/Uri;
 
     if-nez v1, :cond_0
 
-    .line 232
+    .line 210
     :goto_0
     return-void
 
-    .line 207
+    .line 185
     :cond_0
     new-instance v1, Landroid/media/MediaPlayer;
 
@@ -872,7 +717,7 @@
 
     iput-object v1, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
-    .line 209
+    .line 187
     :try_start_0
     iget-object v1, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
@@ -882,14 +727,14 @@
 
     invoke-virtual {v1, v2, v3}, Landroid/media/MediaPlayer;->setDataSource(Landroid/content/Context;Landroid/net/Uri;)V
 
-    .line 210
+    .line 188
     iget-object v1, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     iget v2, p0, Landroid/media/Ringtone;->mStreamType:I
 
     invoke-virtual {v1, v2}, Landroid/media/MediaPlayer;->setAudioStreamType(I)V
 
-    .line 211
+    .line 189
     iget-object v1, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     invoke-virtual {v1}, Landroid/media/MediaPlayer;->prepare()V
@@ -897,14 +742,14 @@
     .catch Ljava/lang/SecurityException; {:try_start_0 .. :try_end_0} :catch_0
     .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_1
 
-    .line 226
+    .line 204
     :cond_1
     :goto_1
     iget-object v1, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     if-eqz v1, :cond_2
 
-    .line 227
+    .line 205
     const-string v1, "Ringtone"
 
     const-string v2, "Successfully created local player"
@@ -913,20 +758,20 @@
 
     goto :goto_0
 
-    .line 213
+    .line 191
     :catch_0
     move-exception v0
 
-    .line 214
+    .line 192
     .local v0, e:Ljava/lang/SecurityException;
     invoke-direct {p0}, Landroid/media/Ringtone;->destroyLocalPlayer()V
 
-    .line 215
+    .line 193
     iget-boolean v1, p0, Landroid/media/Ringtone;->mAllowRemote:Z
 
     if-nez v1, :cond_1
 
-    .line 216
+    .line 194
     const-string v1, "Ringtone"
 
     new-instance v2, Ljava/lang/StringBuilder;
@@ -951,21 +796,21 @@
 
     goto :goto_1
 
-    .line 218
+    .line 196
     .end local v0           #e:Ljava/lang/SecurityException;
     :catch_1
     move-exception v0
 
-    .line 219
+    .line 197
     .local v0, e:Ljava/io/IOException;
     invoke-direct {p0}, Landroid/media/Ringtone;->destroyLocalPlayer()V
 
-    .line 220
+    .line 198
     iget-boolean v1, p0, Landroid/media/Ringtone;->mAllowRemote:Z
 
     if-nez v1, :cond_1
 
-    .line 221
+    .line 199
     const-string v1, "Ringtone"
 
     new-instance v2, Ljava/lang/StringBuilder;
@@ -990,7 +835,7 @@
 
     goto :goto_1
 
-    .line 229
+    .line 207
     .end local v0           #e:Ljava/io/IOException;
     :cond_2
     const-string v1, "Ringtone"
@@ -1006,26 +851,26 @@
     .locals 4
 
     .prologue
-    .line 264
+    .line 242
     iget-object v1, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     if-eqz v1, :cond_1
 
-    .line 265
+    .line 243
     invoke-direct {p0}, Landroid/media/Ringtone;->destroyLocalPlayer()V
 
-    .line 273
+    .line 251
     :cond_0
     :goto_0
     return-void
 
-    .line 266
+    .line 244
     :cond_1
     iget-boolean v1, p0, Landroid/media/Ringtone;->mAllowRemote:Z
 
     if-eqz v1, :cond_0
 
-    .line 268
+    .line 246
     :try_start_0
     iget-object v1, p0, Landroid/media/Ringtone;->mRemotePlayer:Landroid/media/IRingtonePlayer;
 
@@ -1037,11 +882,11 @@
 
     goto :goto_0
 
-    .line 269
+    .line 247
     :catch_0
     move-exception v0
 
-    .line 270
+    .line 248
     .local v0, e:Landroid/os/RemoteException;
     const-string v1, "Ringtone"
 
