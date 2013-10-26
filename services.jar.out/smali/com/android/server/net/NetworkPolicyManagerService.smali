@@ -1417,6 +1417,11 @@
 
     .line 701
     :pswitch_0
+    invoke-static/range {p1 .. p4}, Lcom/android/server/net/NetworkPolicyManagerService$Injector;->getOverByte(Landroid/net/NetworkPolicy;IJ)J
+
+    move-result-wide v10
+
+    .local v10, overBytes:J
     const v1, 0x1040507
 
     invoke-virtual {v12, v1}, Landroid/content/res/Resources;->getText(I)Ljava/lang/CharSequence;
@@ -1537,9 +1542,6 @@
     .line 741
     .restart local v14       #title:Ljava/lang/CharSequence;
     :goto_2
-    const/4 v1, 0x1
-
-    invoke-virtual {v8, v1}, Landroid/app/Notification$Builder;->setOngoing(Z)Landroid/app/Notification$Builder;
 
     .line 742
     const v1, 0x108053a
@@ -1641,12 +1643,12 @@
     :pswitch_6
     move-object/from16 v0, p1
 
-    iget-wide v4, v0, Landroid/net/NetworkPolicy;->limitBytes:J
-
-    sub-long v10, p3, v4
+    invoke-static/range {p1 .. p4}, Lcom/android/server/net/NetworkPolicyManagerService$Injector;->getOverByte(Landroid/net/NetworkPolicy;IJ)J
+  
+    move-result-wide v10
 
     .line 754
-    .local v10, overBytes:J
+    .restart local v10       #overBytes:J
     const v1, 0x1040512
 
     const/4 v4, 0x1
