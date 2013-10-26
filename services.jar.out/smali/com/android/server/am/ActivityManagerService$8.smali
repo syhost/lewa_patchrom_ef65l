@@ -1,11 +1,11 @@
 .class Lcom/android/server/am/ActivityManagerService$8;
-.super Landroid/content/BroadcastReceiver;
+.super Lcom/android/server/am/ActivityManagerService$ForegroundToken;
 .source "ActivityManagerService.java"
 
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lcom/android/server/am/ActivityManagerService;->finishBooting()V
+    value = Lcom/android/server/am/ActivityManagerService;->setProcessForeground(Landroid/os/IBinder;IZ)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -24,29 +24,25 @@
     .parameter
 
     .prologue
-    .line 4250
+    .line 4648
     iput-object p1, p0, Lcom/android/server/am/ActivityManagerService$8;->this$0:Lcom/android/server/am/ActivityManagerService;
 
-    invoke-direct {p0}, Landroid/content/BroadcastReceiver;-><init>()V
+    invoke-direct {p0, p1}, Lcom/android/server/am/ActivityManagerService$ForegroundToken;-><init>(Lcom/android/server/am/ActivityManagerService;)V
 
     return-void
 .end method
 
 
 # virtual methods
-.method public onReceive(Landroid/content/Context;Landroid/content/Intent;)V
-    .locals 2
-    .parameter "context"
-    .parameter "intent"
+.method public binderDied()V
+    .locals 1
 
     .prologue
-    .line 4253
+    .line 4650
     iget-object v0, p0, Lcom/android/server/am/ActivityManagerService$8;->this$0:Lcom/android/server/am/ActivityManagerService;
 
-    const/4 v1, 0x0
+    invoke-virtual {v0, p0}, Lcom/android/server/am/ActivityManagerService;->foregroundTokenDied(Lcom/android/server/am/ActivityManagerService$ForegroundToken;)V
 
-    iput-object v1, v0, Lcom/android/server/am/ActivityManagerService;->mUiContext:Landroid/content/Context;
-
-    .line 4254
+    .line 4651
     return-void
 .end method
