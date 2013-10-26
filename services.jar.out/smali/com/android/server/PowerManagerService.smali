@@ -36,7 +36,7 @@
 
 .field static final ANIM_STEPS:I = 0x3c
 
-.field static final AUTOBRIGHTNESS_ANIM_STEPS:I = 0x78
+.field static final AUTOBRIGHTNESS_ANIM_STEPS:I = 0x1e
 
 .field static final AUTODIMNESS_ANIM_STEPS:I = 0x147ae1
 
@@ -2728,6 +2728,9 @@
     .parameter "last"
     .parameter "levels"
     .parameter "values"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_ACCESS:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 2769
@@ -3812,6 +3815,9 @@
     .locals 8
     .parameter "value"
     .parameter "immediate"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 3001
@@ -3890,7 +3896,7 @@
     iget-object v6, p0, Lcom/android/server/PowerManagerService;->mCustomLcdValues:[I
 
     :goto_3
-    invoke-direct {p0, v4, v7, v5, v6}, Lcom/android/server/PowerManagerService;->getAutoBrightnessValue(II[I[I)I
+    invoke-virtual {p0, v4, v7, v5, v6}, Lcom/android/server/PowerManagerService;->getAutoBrightnessValue(II[I[I)I
 
     move-result v2
 
@@ -3912,7 +3918,7 @@
     iget-object v5, p0, Lcom/android/server/PowerManagerService;->mCustomButtonValues:[I
 
     :goto_5
-    invoke-direct {p0, p1, v6, v4, v5}, Lcom/android/server/PowerManagerService;->getAutoBrightnessValue(II[I[I)I
+    invoke-static {p0, p1, v6, v4, v5}, Lcom/android/server/PowerManagerService;->getAutoBrightnessValue(II[I[I)I
 
     move-result v0
 
@@ -3939,7 +3945,7 @@
     iget-object v5, p0, Lcom/android/server/PowerManagerService;->mCustomKeyboardValues:[I
 
     :goto_7
-    invoke-direct {p0, p1, v6, v4, v5}, Lcom/android/server/PowerManagerService;->getAutoBrightnessValue(II[I[I)I
+    invoke-virtual {p0, p1, v6, v4, v5}, Lcom/android/server/PowerManagerService;->getAutoBrightnessValue(II[I[I)I
 
     move-result v1
 
@@ -3996,6 +4002,9 @@
 
     .line 3072
     :cond_5
+    invoke-static {p0, v0}, Lcom/android/server/PowerManagerService$Injector;->adjustButtonValue(Lcom/android/server/PowerManagerService;I)I
+
+    move-result v0
     iget v4, p0, Lcom/android/server/PowerManagerService;->mButtonBrightnessOverride:I
 
     if-gez v4, :cond_6
@@ -10827,6 +10836,9 @@
 
 .method initInThread()V
     .locals 14
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     const/high16 v4, 0x5000
@@ -11005,7 +11017,7 @@
     iput-object v1, p0, Lcom/android/server/PowerManagerService;->mLcdBacklightValues:[I
 
     .line 736
-    const v1, 0x107003a
+    const v1, 0x90d0004
 
     invoke-virtual {v7, v1}, Landroid/content/res/Resources;->getIntArray(I)[I
 
