@@ -1803,6 +1803,19 @@
     return-object v0
 .end method
 
+.method static getWindowTypesWhereHomeDoesntWork()[I
+    .locals 1
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+
+    .prologue
+    sget-object v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->WINDOW_TYPES_WHERE_HOME_DOESNT_WORK:[I
+
+    return-object v0
+.end method
+
+
 .method private interceptFallback(Landroid/view/WindowManagerPolicy$WindowState;Landroid/view/KeyEvent;I)Z
     .locals 6
     .parameter "win"
@@ -8288,11 +8301,11 @@
     if-nez v11, :cond_0
 
     .line 1145
-    new-instance v11, Lcom/android/internal/policy/impl/KeyguardViewMediator;
+    new-instance v11, Lcom/android/internal/policy/impl/LewaKeyguardViewMediator;
 
     move-object/from16 v0, p4
 
-    invoke-direct {v11, p1, p0, v0}, Lcom/android/internal/policy/impl/KeyguardViewMediator;-><init>(Landroid/content/Context;Lcom/android/internal/policy/impl/PhoneWindowManager;Landroid/os/LocalPowerManager;)V
+    invoke-direct {v11, p1, p0, v0}, Lcom/android/internal/policy/impl/LewaKeyguardViewMediator;-><init>(Landroid/content/Context;Lcom/android/internal/policy/impl/PhoneWindowManager;Landroid/os/LocalPowerManager;)V
 
     iput-object v11, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mKeyguardMediator:Lcom/android/internal/policy/impl/KeyguardViewMediator;
 
