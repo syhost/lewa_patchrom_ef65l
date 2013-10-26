@@ -1641,6 +1641,17 @@
     return-void
 .end method
 
+.method static synthetic access$1602(Lcom/android/server/wm/WindowManagerService;Landroid/content/Context;)Landroid/content/Context;
+    .locals 0
+    .parameter "x0"
+    .parameter "x1"
+
+    .prologue
+    iput-object p1, p0, Lcom/android/server/wm/WindowManagerService;->mUiContext:Landroid/content/Context;
+
+    return-object p1
+.end method
+
 .method static synthetic access$202(Lcom/android/server/wm/WindowManagerService;Landroid/content/Context;)Landroid/content/Context;
     .locals 0
     .parameter "x0"
@@ -27745,7 +27756,10 @@
 
 .method public reboot()V
     .locals 3
-
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->NEW_METHOD:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
+    
     .prologue
     .line 5187
     invoke-direct {p0}, Lcom/android/server/wm/WindowManagerService;->getUiContext()Landroid/content/Context;
@@ -27764,6 +27778,9 @@
 
 .method public rebootSafeMode()V
     .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 5181
@@ -36104,6 +36121,9 @@
 
 .method public shutdown()V
     .locals 2
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 5175
