@@ -1,11 +1,11 @@
 .class Lcom/android/internal/policy/impl/SimUnlockScreen$1;
-.super Landroid/content/BroadcastReceiver;
+.super Lcom/android/internal/policy/impl/SimUnlockScreen$CheckSimPin;
 .source "SimUnlockScreen.java"
 
 
 # annotations
-.annotation system Ldalvik/annotation/EnclosingClass;
-    value = Lcom/android/internal/policy/impl/SimUnlockScreen;
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lcom/android/internal/policy/impl/SimUnlockScreen;->checkPin()V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -19,41 +19,41 @@
 
 
 # direct methods
-.method constructor <init>(Lcom/android/internal/policy/impl/SimUnlockScreen;)V
+.method constructor <init>(Lcom/android/internal/policy/impl/SimUnlockScreen;Ljava/lang/String;)V
     .locals 0
     .parameter
+    .parameter "x0"
 
     .prologue
-    .line 77
+    .line 225
     iput-object p1, p0, Lcom/android/internal/policy/impl/SimUnlockScreen$1;->this$0:Lcom/android/internal/policy/impl/SimUnlockScreen;
 
-    invoke-direct {p0}, Landroid/content/BroadcastReceiver;-><init>()V
+    invoke-direct {p0, p1, p2}, Lcom/android/internal/policy/impl/SimUnlockScreen$CheckSimPin;-><init>(Lcom/android/internal/policy/impl/SimUnlockScreen;Ljava/lang/String;)V
 
     return-void
 .end method
 
 
 # virtual methods
-.method public onReceive(Landroid/content/Context;Landroid/content/Intent;)V
+.method onSimLockChangedResponse(Z)V
     .locals 2
-    .parameter "context"
-    .parameter "intent"
+    .parameter "success"
 
     .prologue
-    const/4 v1, 0x0
-
-    .line 80
+    .line 227
     iget-object v0, p0, Lcom/android/internal/policy/impl/SimUnlockScreen$1;->this$0:Lcom/android/internal/policy/impl/SimUnlockScreen;
 
-    #setter for: Lcom/android/internal/policy/impl/SimUnlockScreen;->mUiContext:Landroid/content/Context;
-    invoke-static {v0, v1}, Lcom/android/internal/policy/impl/SimUnlockScreen;->access$002(Lcom/android/internal/policy/impl/SimUnlockScreen;Landroid/content/Context;)Landroid/content/Context;
+    #getter for: Lcom/android/internal/policy/impl/SimUnlockScreen;->mPinText:Landroid/widget/TextView;
+    invoke-static {v0}, Lcom/android/internal/policy/impl/SimUnlockScreen;->access$600(Lcom/android/internal/policy/impl/SimUnlockScreen;)Landroid/widget/TextView;
 
-    .line 81
-    iget-object v0, p0, Lcom/android/internal/policy/impl/SimUnlockScreen$1;->this$0:Lcom/android/internal/policy/impl/SimUnlockScreen;
+    move-result-object v0
 
-    #setter for: Lcom/android/internal/policy/impl/SimUnlockScreen;->mSimUnlockProgressDialog:Landroid/app/ProgressDialog;
-    invoke-static {v0, v1}, Lcom/android/internal/policy/impl/SimUnlockScreen;->access$102(Lcom/android/internal/policy/impl/SimUnlockScreen;Landroid/app/ProgressDialog;)Landroid/app/ProgressDialog;
+    new-instance v1, Lcom/android/internal/policy/impl/SimUnlockScreen$1$1;
 
-    .line 82
+    invoke-direct {v1, p0, p1}, Lcom/android/internal/policy/impl/SimUnlockScreen$1$1;-><init>(Lcom/android/internal/policy/impl/SimUnlockScreen$1;Z)V
+
+    invoke-virtual {v0, v1}, Landroid/widget/TextView;->post(Ljava/lang/Runnable;)Z
+
+    .line 246
     return-void
 .end method

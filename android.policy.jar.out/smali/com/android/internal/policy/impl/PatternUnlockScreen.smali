@@ -77,65 +77,65 @@
 
     const/4 v7, 0x0
 
-    .line 149
+    .line 147
     invoke-direct {p0, p1}, Lcom/android/internal/widget/LinearLayoutWithDefaultTouchRecepient;-><init>(Landroid/content/Context;)V
 
-    .line 61
+    .line 59
     iput v7, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mFailedPatternAttemptsSinceLastTimeout:I
 
-    .line 62
+    .line 60
     iput v7, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mTotalFailedPatternAttempts:I
 
-    .line 63
+    .line 61
     iput-object v8, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCountdownTimer:Landroid/os/CountDownTimer;
 
-    .line 83
+    .line 81
     const-wide/16 v0, -0x1b58
 
     iput-wide v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLastPokeTime:J
 
-    .line 88
+    .line 86
     new-instance v0, Lcom/android/internal/policy/impl/PatternUnlockScreen$1;
 
     invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/PatternUnlockScreen$1;-><init>(Lcom/android/internal/policy/impl/PatternUnlockScreen;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCancelPatternRunnable:Ljava/lang/Runnable;
 
-    .line 94
+    .line 92
     new-instance v0, Lcom/android/internal/policy/impl/PatternUnlockScreen$2;
 
     invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/PatternUnlockScreen$2;-><init>(Lcom/android/internal/policy/impl/PatternUnlockScreen;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mForgotPatternClick:Landroid/view/View$OnClickListener;
 
-    .line 150
+    .line 148
     iput-object p3, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
-    .line 151
+    .line 149
     iput-object p4, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
 
-    .line 152
+    .line 150
     iput-object p5, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
-    .line 153
+    .line 151
     iput p6, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mTotalFailedPatternAttempts:I
 
-    .line 154
+    .line 152
     rem-int/lit8 v0, p6, 0x5
 
     iput v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mFailedPatternAttemptsSinceLastTimeout:I
 
-    .line 163
+    .line 161
     iget v0, p2, Landroid/content/res/Configuration;->orientation:I
 
     iput v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCreationOrientation:I
 
-    .line 165
+    .line 163
     invoke-static {p1}, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;
 
     move-result-object v6
 
-    .line 167
+    .line 165
     .local v6, inflater:Landroid/view/LayoutInflater;
     iget v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCreationOrientation:I
 
@@ -143,31 +143,20 @@
 
     if-eq v0, v1, :cond_0
 
-    .line 168
+    .line 166
     const-string v0, "UnlockScreen"
 
     const-string v1, "portrait mode"
 
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 169
+    .line 167
     const v0, 0x109005b
 
     invoke-virtual {v6, v0, p0, v5}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
-    .line 174
+    .line 173
     :goto_0
-    const v0, 0x10202af
-
-    invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->findViewById(I)Landroid/view/View;
-
-    move-result-object v0
-
-    check-cast v0, Landroid/view/ViewGroup;
-
-    invoke-static {p1, v0}, Lcom/android/internal/policy/impl/LockScreen;->setBackground(Landroid/content/Context;Landroid/view/ViewGroup;)V
-
-    .line 175
     new-instance v0, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
     iget-object v2, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
@@ -182,8 +171,8 @@
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mKeyguardStatusViewManager:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
-    .line 178
-    const v0, 0x10202db
+    .line 176
+    const v0, 0x10202c5
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->findViewById(I)Landroid/view/View;
 
@@ -193,8 +182,8 @@
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
-    .line 180
-    const v0, 0x10202da
+    .line 178
+    const v0, 0x10202c4
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->findViewById(I)Landroid/view/View;
 
@@ -204,36 +193,36 @@
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mForgotPatternButton:Landroid/widget/Button;
 
-    .line 181
+    .line 179
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mForgotPatternButton:Landroid/widget/Button;
 
-    const v1, 0x104034d
+    const v1, 0x1040320
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setText(I)V
 
-    .line 182
+    .line 180
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mForgotPatternButton:Landroid/widget/Button;
 
     iget-object v1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mForgotPatternClick:Landroid/view/View$OnClickListener;
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 186
+    .line 184
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->setDefaultTouchRecepient(Landroid/view/View;)V
 
-    .line 188
+    .line 186
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     invoke-virtual {v0, v7}, Lcom/android/internal/widget/LockPatternView;->setSaveEnabled(Z)V
 
-    .line 189
+    .line 187
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     invoke-virtual {v0, v7}, Lcom/android/internal/widget/LockPatternView;->setFocusable(Z)V
 
-    .line 190
+    .line 188
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     new-instance v1, Lcom/android/internal/policy/impl/PatternUnlockScreen$UnlockPatternListener;
@@ -242,29 +231,7 @@
 
     invoke-virtual {v0, v1}, Lcom/android/internal/widget/LockPatternView;->setOnPatternListener(Lcom/android/internal/widget/LockPatternView$OnPatternListener;)V
 
-    .line 192
-    iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
-
-    iget-object v1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
-
-    invoke-virtual {v1}, Lcom/android/internal/widget/LockPatternUtils;->isVisibleDotsEnabled()Z
-
-    move-result v1
-
-    invoke-virtual {v0, v1}, Lcom/android/internal/widget/LockPatternView;->setVisibleDots(Z)V
-
-    .line 193
-    iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
-
-    iget-object v1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
-
-    invoke-virtual {v1}, Lcom/android/internal/widget/LockPatternUtils;->isShowErrorPath()Z
-
-    move-result v1
-
-    invoke-virtual {v0, v1}, Lcom/android/internal/widget/LockPatternView;->setShowErrorPath(Z)V
-
-    .line 196
+    .line 191
     iget-object v1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
@@ -280,7 +247,7 @@
     :goto_1
     invoke-virtual {v1, v0}, Lcom/android/internal/widget/LockPatternView;->setInStealthMode(Z)V
 
-    .line 199
+    .line 194
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     iget-object v1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
@@ -291,34 +258,18 @@
 
     invoke-virtual {v0, v1}, Lcom/android/internal/widget/LockPatternView;->setTactileFeedbackEnabled(Z)V
 
-    .line 201
-    iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
-
-    iget-object v1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
-
-    invoke-virtual {v1}, Lcom/android/internal/widget/LockPatternUtils;->getLockPatternSize()I
-
-    move-result v1
-
-    invoke-virtual {v0, v1}, Lcom/android/internal/widget/LockPatternView;->setLockPatternSize(I)V
-
-    .line 204
+    .line 197
     sget-object v0, Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;->Normal:Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;
 
     invoke-direct {p0, v0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->updateFooter(Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;)V
 
-    .line 206
+    .line 199
     invoke-virtual {p0, v5}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->setFocusableInTouchMode(Z)V
 
-    .line 208
-    iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
-
-    invoke-virtual {v0}, Lcom/android/internal/widget/LockPatternUtils;->updateLockPatternSize()V
-
-    .line 209
+    .line 200
     return-void
 
-    .line 171
+    .line 169
     :cond_0
     const-string v0, "UnlockScreen"
 
@@ -326,17 +277,17 @@
 
     invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 172
+    .line 170
     const v0, 0x109005a
 
     invoke-virtual {v6, v0, p0, v5}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
-    goto/16 :goto_0
+    goto :goto_0
 
     :cond_1
     move v0, v7
 
-    .line 196
+    .line 191
     goto :goto_1
 .end method
 
@@ -345,7 +296,7 @@
     .parameter "x0"
 
     .prologue
-    .line 43
+    .line 41
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     return-object v0
@@ -356,7 +307,7 @@
     .parameter "x0"
 
     .prologue
-    .line 43
+    .line 41
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
     return-object v0
@@ -368,7 +319,7 @@
     .parameter "x1"
 
     .prologue
-    .line 43
+    .line 41
     invoke-direct {p0, p1}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->updateFooter(Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;)V
 
     return-void
@@ -379,7 +330,7 @@
     .parameter "x0"
 
     .prologue
-    .line 43
+    .line 41
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCancelPatternRunnable:Ljava/lang/Runnable;
 
     return-object v0
@@ -390,7 +341,7 @@
     .parameter "x0"
 
     .prologue
-    .line 43
+    .line 41
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
     return-object v0
@@ -401,7 +352,7 @@
     .parameter "x0"
 
     .prologue
-    .line 43
+    .line 41
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mKeyguardStatusViewManager:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
     return-object v0
@@ -412,7 +363,7 @@
     .parameter "x0"
 
     .prologue
-    .line 43
+    .line 41
     iget v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mTotalFailedPatternAttempts:I
 
     add-int/lit8 v1, v0, 0x1
@@ -427,7 +378,7 @@
     .parameter "x0"
 
     .prologue
-    .line 43
+    .line 41
     iget v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mFailedPatternAttemptsSinceLastTimeout:I
 
     return v0
@@ -439,7 +390,7 @@
     .parameter "x1"
 
     .prologue
-    .line 43
+    .line 41
     iput p1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mFailedPatternAttemptsSinceLastTimeout:I
 
     return p1
@@ -450,7 +401,7 @@
     .parameter "x0"
 
     .prologue
-    .line 43
+    .line 41
     iget v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mFailedPatternAttemptsSinceLastTimeout:I
 
     add-int/lit8 v1, v0, 0x1
@@ -466,7 +417,7 @@
     .parameter "x1"
 
     .prologue
-    .line 43
+    .line 41
     invoke-direct {p0, p1, p2}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->handleAttemptLockout(J)V
 
     return-void
@@ -477,7 +428,7 @@
     .parameter "x0"
 
     .prologue
-    .line 43
+    .line 41
     iget-boolean v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mEnableFallback:Z
 
     return v0
@@ -488,24 +439,24 @@
     .parameter "elapsedRealtimeDeadline"
 
     .prologue
-    .line 420
+    .line 390
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     invoke-virtual {v0}, Lcom/android/internal/widget/LockPatternView;->clearPattern()V
 
-    .line 421
+    .line 391
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     const/4 v1, 0x0
 
     invoke-virtual {v0, v1}, Lcom/android/internal/widget/LockPatternView;->setEnabled(Z)V
 
-    .line 422
+    .line 392
     invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
 
     move-result-wide v6
 
-    .line 423
+    .line 393
     .local v6, elapsedRealtime:J
     new-instance v0, Lcom/android/internal/policy/impl/PatternUnlockScreen$3;
 
@@ -523,7 +474,7 @@
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCountdownTimer:Landroid/os/CountDownTimer;
 
-    .line 449
+    .line 419
     return-void
 .end method
 
@@ -531,14 +482,14 @@
     .locals 2
 
     .prologue
-    .line 110
+    .line 108
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mForgotPatternButton:Landroid/widget/Button;
 
     const/16 v1, 0x8
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setVisibility(I)V
 
-    .line 111
+    .line 109
     return-void
 .end method
 
@@ -546,14 +497,14 @@
     .locals 2
 
     .prologue
-    .line 114
+    .line 112
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mForgotPatternButton:Landroid/widget/Button;
 
     const/4 v1, 0x0
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setVisibility(I)V
 
-    .line 115
+    .line 113
     return-void
 .end method
 
@@ -562,7 +513,7 @@
     .parameter "mode"
 
     .prologue
-    .line 118
+    .line 116
     sget-object v0, Lcom/android/internal/policy/impl/PatternUnlockScreen$4;->$SwitchMap$com$android$internal$policy$impl$PatternUnlockScreen$FooterMode:[I
 
     invoke-virtual {p1}, Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;->ordinal()I
@@ -573,29 +524,29 @@
 
     packed-switch v0, :pswitch_data_0
 
-    .line 131
+    .line 129
     :goto_0
     return-void
 
-    .line 121
+    .line 119
     :pswitch_0
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->hideForgotPatternButton()V
 
     goto :goto_0
 
-    .line 125
+    .line 123
     :pswitch_1
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->showForgotPatternButton()V
 
     goto :goto_0
 
-    .line 129
+    .line 127
     :pswitch_2
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->hideForgotPatternButton()V
 
     goto :goto_0
 
-    .line 118
+    .line 116
     :pswitch_data_0
     .packed-switch 0x1
         :pswitch_0
@@ -612,26 +563,26 @@
     .prologue
     const/4 v1, 0x0
 
-    .line 338
+    .line 309
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
 
     invoke-virtual {v0, p0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->removeCallback(Ljava/lang/Object;)V
 
-    .line 339
+    .line 310
     iput-object v1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
-    .line 340
+    .line 311
     iput-object v1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
 
-    .line 341
+    .line 312
     iput-object v1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
-    .line 342
+    .line 313
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     invoke-virtual {v0, v1}, Lcom/android/internal/widget/LockPatternView;->setOnPatternListener(Lcom/android/internal/widget/LockPatternView$OnPatternListener;)V
 
-    .line 343
+    .line 314
     return-void
 .end method
 
@@ -640,12 +591,12 @@
     .parameter "ev"
 
     .prologue
-    .line 241
+    .line 212
     invoke-super {p0, p1}, Lcom/android/internal/widget/LinearLayoutWithDefaultTouchRecepient;->dispatchTouchEvent(Landroid/view/MotionEvent;)Z
 
     move-result v0
 
-    .line 242
+    .line 213
     .local v0, result:Z
     if-eqz v0, :cond_0
 
@@ -663,14 +614,14 @@
 
     if-lez v1, :cond_0
 
-    .line 245
+    .line 216
     invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
 
     move-result-wide v1
 
     iput-wide v1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLastPokeTime:J
 
-    .line 247
+    .line 218
     :cond_0
     return v0
 .end method
@@ -679,7 +630,7 @@
     .locals 1
 
     .prologue
-    .line 288
+    .line 259
     const/4 v0, 0x0
 
     return v0
@@ -689,10 +640,10 @@
     .locals 2
 
     .prologue
-    .line 252
+    .line 223
     invoke-super {p0}, Lcom/android/internal/widget/LinearLayoutWithDefaultTouchRecepient;->onAttachedToWindow()V
 
-    .line 258
+    .line 229
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->getResources()Landroid/content/res/Resources;
 
     move-result-object v0
@@ -707,7 +658,7 @@
 
     if-eq v0, v1, :cond_0
 
-    .line 259
+    .line 230
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->getResources()Landroid/content/res/Resources;
@@ -720,7 +671,7 @@
 
     invoke-interface {v0, v1}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->recreateMe(Landroid/content/res/Configuration;)V
 
-    .line 261
+    .line 232
     :cond_0
     return-void
 .end method
@@ -730,95 +681,24 @@
     .parameter "newConfig"
 
     .prologue
-    .line 267
+    .line 238
     invoke-super {p0, p1}, Lcom/android/internal/widget/LinearLayoutWithDefaultTouchRecepient;->onConfigurationChanged(Landroid/content/res/Configuration;)V
 
-    .line 273
+    .line 244
     iget v0, p1, Landroid/content/res/Configuration;->orientation:I
 
     iget v1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCreationOrientation:I
 
     if-eq v0, v1, :cond_0
 
-    .line 274
+    .line 245
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
     invoke-interface {v0, p1}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->recreateMe(Landroid/content/res/Configuration;)V
 
-    .line 276
+    .line 247
     :cond_0
     return-void
-.end method
-
-.method public onKeyDown(ILandroid/view/KeyEvent;)Z
-    .locals 1
-    .parameter "keyCode"
-    .parameter "event"
-
-    .prologue
-    .line 218
-    const/4 v0, 0x4
-
-    if-eq p1, v0, :cond_0
-
-    const/4 v0, 0x3
-
-    if-eq p1, v0, :cond_0
-
-    const/16 v0, 0x52
-
-    if-ne p1, v0, :cond_1
-
-    .line 221
-    :cond_0
-    invoke-virtual {p2}, Landroid/view/KeyEvent;->startTracking()V
-
-    .line 222
-    const/4 v0, 0x1
-
-    .line 224
-    :goto_0
-    return v0
-
-    :cond_1
-    const/4 v0, 0x0
-
-    goto :goto_0
-.end method
-
-.method public onKeyLongPress(ILandroid/view/KeyEvent;)Z
-    .locals 1
-    .parameter "keyCode"
-    .parameter "event"
-
-    .prologue
-    .line 229
-    invoke-virtual {p0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->getContext()Landroid/content/Context;
-
-    move-result-object v0
-
-    invoke-static {v0, p1}, Lcom/android/internal/policy/impl/LockScreen;->handleKeyLongPress(Landroid/content/Context;I)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_0
-
-    .line 230
-    iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
-
-    invoke-interface {v0}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->pokeWakelock()V
-
-    .line 231
-    const/4 v0, 0x1
-
-    .line 233
-    :goto_0
-    return v0
-
-    :cond_0
-    const/4 v0, 0x0
-
-    goto :goto_0
 .end method
 
 .method public onKeyboardChange(Z)V
@@ -826,7 +706,7 @@
     .parameter "isKeyboardOpen"
 
     .prologue
-    .line 279
+    .line 250
     return-void
 .end method
 
@@ -834,28 +714,28 @@
     .locals 1
 
     .prologue
-    .line 293
+    .line 264
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCountdownTimer:Landroid/os/CountDownTimer;
 
     if-eqz v0, :cond_0
 
-    .line 294
+    .line 265
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCountdownTimer:Landroid/os/CountDownTimer;
 
     invoke-virtual {v0}, Landroid/os/CountDownTimer;->cancel()V
 
-    .line 295
+    .line 266
     const/4 v0, 0x0
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCountdownTimer:Landroid/os/CountDownTimer;
 
-    .line 297
+    .line 268
     :cond_0
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mKeyguardStatusViewManager:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
     invoke-virtual {v0}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->onPause()V
 
-    .line 298
+    .line 269
     return-void
 .end method
 
@@ -863,29 +743,29 @@
     .locals 4
 
     .prologue
-    .line 303
+    .line 274
     iget-object v2, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mKeyguardStatusViewManager:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
     invoke-virtual {v2}, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;->onResume()V
 
-    .line 306
+    .line 277
     iget-object v2, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     invoke-virtual {v2}, Lcom/android/internal/widget/LockPatternView;->enableInput()V
 
-    .line 307
+    .line 278
     iget-object v2, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     const/4 v3, 0x1
 
     invoke-virtual {v2, v3}, Lcom/android/internal/widget/LockPatternView;->setEnabled(Z)V
 
-    .line 308
+    .line 279
     iget-object v2, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     invoke-virtual {v2}, Lcom/android/internal/widget/LockPatternView;->clearPattern()V
 
-    .line 311
+    .line 282
     iget-object v2, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
     invoke-interface {v2}, Lcom/android/internal/policy/impl/KeyguardScreenCallback;->doesFallbackUnlockScreenExist()Z
@@ -894,10 +774,10 @@
 
     if-eqz v2, :cond_1
 
-    .line 312
+    .line 283
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->showForgotPatternButton()V
 
-    .line 318
+    .line 289
     :goto_0
     iget-object v2, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
 
@@ -905,7 +785,7 @@
 
     move-result-wide v0
 
-    .line 319
+    .line 290
     .local v0, deadline:J
     const-wide/16 v2, 0x0
 
@@ -913,10 +793,10 @@
 
     if-eqz v2, :cond_0
 
-    .line 320
+    .line 291
     invoke-direct {p0, v0, v1}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->handleAttemptLockout(J)V
 
-    .line 324
+    .line 295
     :cond_0
     iget-object v2, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
@@ -926,23 +806,23 @@
 
     if-eqz v2, :cond_2
 
-    .line 325
+    .line 296
     sget-object v2, Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;->VerifyUnlocked:Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;
 
     invoke-direct {p0, v2}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->updateFooter(Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;)V
 
-    .line 333
+    .line 304
     :goto_1
     return-void
 
-    .line 314
+    .line 285
     .end local v0           #deadline:J
     :cond_1
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->hideForgotPatternButton()V
 
     goto :goto_0
 
-    .line 326
+    .line 297
     .restart local v0       #deadline:J
     :cond_2
     iget-boolean v2, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mEnableFallback:Z
@@ -955,14 +835,14 @@
 
     if-lt v2, v3, :cond_3
 
-    .line 328
+    .line 299
     sget-object v2, Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;->ForgotLockPattern:Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;
 
     invoke-direct {p0, v2}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->updateFooter(Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;)V
 
     goto :goto_1
 
-    .line 330
+    .line 301
     :cond_3
     sget-object v2, Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;->Normal:Lcom/android/internal/policy/impl/PatternUnlockScreen$FooterMode;
 
@@ -976,16 +856,16 @@
     .parameter "hasWindowFocus"
 
     .prologue
-    .line 347
+    .line 318
     invoke-super {p0, p1}, Lcom/android/internal/widget/LinearLayoutWithDefaultTouchRecepient;->onWindowFocusChanged(Z)V
 
-    .line 348
+    .line 319
     if-eqz p1, :cond_0
 
-    .line 350
+    .line 321
     invoke-virtual {p0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->onResume()V
 
-    .line 352
+    .line 323
     :cond_0
     return-void
 .end method
@@ -995,10 +875,10 @@
     .parameter "state"
 
     .prologue
-    .line 213
+    .line 204
     iput-boolean p1, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mEnableFallback:Z
 
-    .line 214
+    .line 205
     return-void
 .end method
 
@@ -1006,7 +886,7 @@
     .locals 1
 
     .prologue
-    .line 283
+    .line 254
     const/4 v0, 0x0
 
     return v0
