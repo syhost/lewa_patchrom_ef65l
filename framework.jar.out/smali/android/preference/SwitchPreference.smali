@@ -186,13 +186,24 @@
 .method protected onBindView(Landroid/view/View;)V
     .locals 4
     .parameter "view"
+    .annotation build Landroid/annotation/LewaHook;
+        value = .enum Landroid/annotation/LewaHook$LewaHookType;->CHANGE_CODE:Landroid/annotation/LewaHook$LewaHookType;
+    .end annotation
 
     .prologue
     .line 102
     invoke-super {p0, p1}, Landroid/preference/TwoStatePreference;->onBindView(Landroid/view/View;)V
 
     .line 104
-    const v2, 0x102031e
+    invoke-virtual {p0}, Landroid/preference/SwitchPreference;->getContext()Landroid/content/Context;
+
+    move-result-object v2
+
+    const v3, 0x102031e
+
+    invoke-static {v2, v3}, Landroid/preference/SwitchPreference$Injector;->getCheckableResourceId(Landroid/content/Context;I)I
+
+    move-result v2
 
     invoke-virtual {p1, v2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -218,7 +229,7 @@
 
     instance-of v2, v0, Landroid/widget/Switch;
 
-    if-eqz v2, :cond_0
+    if-eqz v2, :cond_lewa_0
 
     move-object v1, v0
 
