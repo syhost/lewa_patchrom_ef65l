@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@drawable/main_bg" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:attrs="http://schemas.android.com/apk/res/com.android.calculator2">
+    <LinearLayout android:gravity="center_vertical" android:layout_gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/port_display_margin_left" android:layout_marginTop="@dimen/port_display_margin_top" android:layout_marginRight="@dimen/port_display_margin_right">
+        <com.android.calculator2.CalculatorDisplay android:id="@id/display" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" maxDigits="10">
+            <com.android.calculator2.CalculatorEditText android:textCursorDrawable="@null" style="@style/display_style_port" />
+            <com.android.calculator2.CalculatorEditText android:textCursorDrawable="@null" style="@style/display_style_port" />
+        </com.android.calculator2.CalculatorDisplay>
+    </LinearLayout>
+    <LinearLayout android:layout_gravity="bottom" android:id="@id/control_bt" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/port_control_bt_margin_left" android:layout_marginTop="@dimen/port_control_bt_margin_top">
+        <ImageButton android:id="@id/switch_advance_bt" android:src="@drawable/advanced" style="@style/gray_medium_button_style" />
+        <ImageButton android:id="@id/goback_bt" android:visibility="gone" android:src="@drawable/goback" style="@style/gray_medium_button_style" />
+        <com.android.calculator2.ColorButton android:id="@id/show_history_bt" attrs:src="@drawable/history_port" style="@style/gray_medium_button_style" />
+        <com.android.calculator2.ColorButton android:textColor="@color/simple_symbol_button_text" android:id="@id/clear" android:background="@drawable/orange_button_selector" android:text="@string/clear" style="@style/medium_button_style" />
+        <com.android.calculator2.ColorButton android:id="@id/del" attrs:src="@drawable/del_port" style="@style/blue_medium_button_style" />
+    </LinearLayout>
+    <com.android.calculator2.CalculatorViewPager android:id="@id/panelswitch" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</LinearLayout>
