@@ -22,9 +22,9 @@ local-lewa-removed-apps := LewaIntercept LatinIME Bluetooth
 local-lewa-modified-apps := 
 
 # set ro.sys.partner in build.prop for lewa partner
-local-lewa-partner := Lewa
+local-lewa-partner := syhost
 
-local-lewa-device := EF65L_JB
+local-lewa-device := A820L_JB
 
 # Config density for co-developers to use the aaps with HDPI or XHDPI resource,
 # Default configrations are HDPI for ics branch and XHDPI for jellybean branch
