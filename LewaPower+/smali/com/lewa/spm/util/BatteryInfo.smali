@@ -36,7 +36,7 @@
     sput-object v0, Lcom/lewa/spm/util/BatteryInfo;->acOnline:Ljava/lang/String;
 
     .line 11
-    const-string v0, "/sys/class/power_supply/usb/online"
+    const-string v0, "/sys/class/power_supply/smb137b-charger/online"
 
     sput-object v0, Lcom/lewa/spm/util/BatteryInfo;->usbOnline:Ljava/lang/String;
 
@@ -56,12 +56,12 @@
     sput-object v0, Lcom/lewa/spm/util/BatteryInfo;->battPresent:Ljava/lang/String;
 
     .line 15
-    const-string v0, "/sys/class/power_supply/battery/capacity"
+    const-string v0, "/sys/class/power_supply/batterys/capacity"
 
     sput-object v0, Lcom/lewa/spm/util/BatteryInfo;->battCapacity:Ljava/lang/String;
 
     .line 16
-    const-string v0, "/sys/class/power_supply/battery/voltage_now"
+    const-string v0, "/sys/class/power_supply/batterys/voltage_now"
 
     sput-object v0, Lcom/lewa/spm/util/BatteryInfo;->battVol:Ljava/lang/String;
 
