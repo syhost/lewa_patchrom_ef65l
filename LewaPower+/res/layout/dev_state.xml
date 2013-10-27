@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListView android:id="@id/dev_list_info" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:gravity="center_vertical" android:id="@id/dev_lock_screen" android:layout_width="180.0dip" android:layout_height="50.0dip" android:layout_marginLeft="10.0dip" android:text="@string/spm_screen_timeout_show" />
+        <TextView android:id="@id/dev_lock_screen_value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="80.0dip" android:layout_toRightOf="@id/dev_lock_screen" />
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:gravity="center_vertical" android:id="@id/dev_light_of_screen" android:layout_width="180.0dip" android:layout_height="50.0dip" android:layout_marginLeft="10.0dip" android:text="@string/spm_screen_light_show" />
+        <TextView android:id="@id/dev_lock_light_of_value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="80.0dip" android:layout_toRightOf="@id/dev_light_of_screen" />
+    </RelativeLayout>
+</LinearLayout>

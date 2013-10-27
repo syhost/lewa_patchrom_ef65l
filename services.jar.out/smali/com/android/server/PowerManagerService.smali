@@ -94,7 +94,7 @@
 
 .field private static final PARTIAL_WAKE_LOCK_ID:I = 0x1
 
-.field private static final PROXIMITY_SENSOR_DELAY:I = 0x3e8
+.field private static final PROXIMITY_SENSOR_DELAY:I = 0x64
 
 .field private static final PROXIMITY_THRESHOLD:F = 5.0f
 
@@ -192,9 +192,11 @@
 
 .field private mInitialized:Z
 
+.field private mIsCharging:Z
+
 .field private mIsDocked:Z
 
-.field private mIsPowered:Z
+.field private mIsPlugged:Z
 
 .field private mKeyboardBacklightValues:[I
 
@@ -491,7 +493,9 @@
     iput-boolean v4, p0, Lcom/android/server/PowerManagerService;->mWaitingForFirstLightSensor:Z
 
     .line 253
-    iput-boolean v4, p0, Lcom/android/server/PowerManagerService;->mIsPowered:Z
+    iput-boolean v4, p0, Lcom/android/server/PowerManagerService;->mIsPlugged:Z
+    
+    iput-boolean v4, p0, Lcom/android/server/PowerManagerService;->mIsCharging:Z
 
     .line 261
     iput v7, p0, Lcom/android/server/PowerManagerService;->mLightSensorValue:F
@@ -677,6 +681,16 @@
         0xfft 0xfft 0xfft 0xfft
         0xfft 0xfft 0xfft 0xfft
     .end array-data
+.end method
+
+.method static synthetic access$1001(Lcom/android/server/PowerManagerService;)I
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget v0, p0, Lcom/android/server/PowerManagerService;->mPowerState:I
+
+    return v0
 .end method
 
 .method static synthetic access$1000(Lcom/android/server/PowerManagerService;)V
@@ -1133,6 +1147,18 @@
     return-object p1
 .end method
 
+.method static synthetic access$500(Lcom/android/server/PowerManagerService;)Lcom/android/server/PowerManagerService$LockList;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    .line 80
+    iget-object v0, p0, Lcom/android/server/PowerManagerService;->mLocks:Lcom/android/server/PowerManagerService$LockList;
+
+    return-object v0
+.end method
+
+
 .method static synthetic access$4500(Lcom/android/server/PowerManagerService;)Z
     .locals 1
     .parameter "x0"
@@ -1200,17 +1226,6 @@
     return-object v0
 .end method
 
-.method static synthetic access$500(Lcom/android/server/PowerManagerService;)Lcom/android/server/PowerManagerService$LockList;
-    .locals 1
-    .parameter "x0"
-
-    .prologue
-    .line 80
-    iget-object v0, p0, Lcom/android/server/PowerManagerService;->mLocks:Lcom/android/server/PowerManagerService$LockList;
-
-    return-object v0
-.end method
-
 .method static synthetic access$5100(Lcom/android/server/PowerManagerService;I)V
     .locals 0
     .parameter "x0"
@@ -1223,6 +1238,15 @@
     return-void
 .end method
 
+.method static synthetic access$600(Lcom/android/server/PowerManagerService;)Z
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-boolean v0, p0, Lcom/android/server/PowerManagerService;->mIsPlugged:Z
+
+    return v0
+.end method
 .method static synthetic access$5202(Lcom/android/server/PowerManagerService;Z)Z
     .locals 0
     .parameter "x0"
@@ -1235,6 +1259,16 @@
     return p1
 .end method
 
+.method static synthetic access$602(Lcom/android/server/PowerManagerService;Z)Z
+    .locals 0
+    .parameter "x0"
+    .parameter "x1"
+
+    .prologue
+    iput-boolean p1, p0, Lcom/android/server/PowerManagerService;->mIsPlugged:Z
+
+    return p1
+.end method
 .method static synthetic access$5300(Lcom/android/server/PowerManagerService;)I
     .locals 1
     .parameter "x0"
@@ -1330,17 +1364,6 @@
     return p1
 .end method
 
-.method static synthetic access$600(Lcom/android/server/PowerManagerService;)Z
-    .locals 1
-    .parameter "x0"
-
-    .prologue
-    .line 80
-    iget-boolean v0, p0, Lcom/android/server/PowerManagerService;->mIsPowered:Z
-
-    return v0
-.end method
-
 .method static synthetic access$6000(Lcom/android/server/PowerManagerService;Z)V
     .locals 0
     .parameter "x0"
@@ -1353,18 +1376,6 @@
     return-void
 .end method
 
-.method static synthetic access$602(Lcom/android/server/PowerManagerService;Z)Z
-    .locals 0
-    .parameter "x0"
-    .parameter "x1"
-
-    .prologue
-    .line 80
-    iput-boolean p1, p0, Lcom/android/server/PowerManagerService;->mIsPowered:Z
-
-    return p1
-.end method
-
 .method static synthetic access$6100(Lcom/android/server/PowerManagerService;)Lcom/android/server/PowerManagerService$UnsynchronizedWakeLock;
     .locals 1
     .parameter "x0"
@@ -1374,6 +1385,16 @@
     iget-object v0, p0, Lcom/android/server/PowerManagerService;->mProximityPartialLock:Lcom/android/server/PowerManagerService$UnsynchronizedWakeLock;
 
     return-object v0
+.end method
+
+.method static synthetic access$700(Lcom/android/server/PowerManagerService;)Z
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-boolean v0, p0, Lcom/android/server/PowerManagerService;->mIsCharging:Z
+
+    return v0
 .end method
 
 .method static synthetic access$6200(Lcom/android/server/PowerManagerService;)Z
@@ -1395,6 +1416,17 @@
     .prologue
     .line 80
     iput-boolean p1, p0, Lcom/android/server/PowerManagerService;->mLightSensorPendingDecrease:Z
+
+    return p1
+.end method
+
+.method static synthetic access$702(Lcom/android/server/PowerManagerService;Z)Z
+    .locals 0
+    .parameter "x0"
+    .parameter "x1"
+
+    .prologue
+    iput-boolean p1, p0, Lcom/android/server/PowerManagerService;->mIsCharging:Z
 
     return p1
 .end method
@@ -1506,7 +1538,7 @@
     return-object v0
 .end method
 
-.method static synthetic access$700(Lcom/android/server/PowerManagerService;)Lcom/android/server/BatteryService;
+.method static synthetic access$701(Lcom/android/server/PowerManagerService;)Lcom/android/server/BatteryService;
     .locals 1
     .parameter "x0"
 
@@ -1745,7 +1777,7 @@
 
     .prologue
     .line 1995
-    iget-boolean v0, p0, Lcom/android/server/PowerManagerService;->mIsPowered:Z
+    iget-boolean v0, p0, Lcom/android/server/PowerManagerService;->mIsCharging:Z
 
     if-nez v0, :cond_0
 
@@ -6752,7 +6784,7 @@
 
     invoke-direct {v11}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v13, "  mIsPowered="
+    const-string v13, "  mIsPlugged="
 
     invoke-virtual {v11, v13}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -6760,7 +6792,20 @@
 
     move-object/from16 v0, p0
 
-    iget-boolean v13, v0, Lcom/android/server/PowerManagerService;->mIsPowered:Z
+    iget-boolean v13, v0, Lcom/android/server/PowerManagerService;->mIsPlugged:Z
+    invoke-virtual {v11, v13}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    const-string v13, " mIsCharging="
+
+    invoke-virtual {v11, v13}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    move-object/from16 v0, p0
+
+    iget-boolean v13, v0, Lcom/android/server/PowerManagerService;->mIsCharging:Z
 
     invoke-virtual {v11, v13}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
 

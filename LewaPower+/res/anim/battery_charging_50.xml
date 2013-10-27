@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="false"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="500" android:drawable="@drawable/spm_battery_charging_50_bg" />
+    <item android:duration="500" android:drawable="@drawable/spm_battery_charging_60_bg" />
+    <item android:duration="500" android:drawable="@drawable/spm_battery_charging_70_bg" />
+    <item android:duration="500" android:drawable="@drawable/spm_battery_charging_80_bg" />
+    <item android:duration="500" android:drawable="@drawable/spm_battery_charging_90_bg" />
+    <item android:duration="500" android:drawable="@drawable/spm_battery_charging_100_bg" />
+</animation-list>

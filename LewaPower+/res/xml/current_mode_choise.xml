@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:orderingFromXml="true" android:key="curr_mode_choise"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/spm_mode_standby">
+        <SwitchPreference android:title="@string/spm_mode_standby" android:key="spm_mode_long" android:summary="@string/long_standby_check_explain" />
+        <Preference android:title="@string/spm_mode_standby_set_para" android:key="set_spm_mode_standby" android:summary="@string/spm_custom_settings_tip" />
+    </PreferenceCategory>
+</PreferenceScreen>

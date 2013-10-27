@@ -344,9 +344,9 @@
     .parameter "level"
 
     .prologue
-    const v0, 0x108051e
+    const v0, 0x1080551
 
-    const v1, 0x1080510
+    const v1, 0x1080543
 
     .line 474
     iget v2, p0, Lcom/android/server/BatteryService;->mBatteryStatus:I
@@ -389,7 +389,7 @@
 
     .line 480
     :cond_3
-    invoke-virtual {p0}, Lcom/android/server/BatteryService;->isPowered()Z
+    invoke-virtual {p0}, Lcom/android/server/BatteryService;->isPlugged()Z
 
     move-result v2
 
@@ -409,7 +409,7 @@
 
     .line 486
     :cond_5
-    const v0, 0x108052c
+    const v0, 0x108055f
 
     goto :goto_0
 .end method
@@ -1822,7 +1822,7 @@
 
     if-nez v1, :cond_0
 
-    invoke-virtual {p0}, Lcom/android/server/BatteryService;->isPowered()Z
+    invoke-virtual {p0}, Lcom/android/server/BatteryService;->isCharging()Z
 
     move-result v1
 
@@ -2283,7 +2283,28 @@
     return v0
 .end method
 
-.method final isPowered()Z
+.method final isCharging()Z
+    .locals 2
+
+    .prologue
+    iget v0, p0, Lcom/android/server/BatteryService;->mBatteryStatus:I
+
+    const/4 v1, 0x2
+
+    if-ne v0, v1, :cond_0
+
+    const/4 v0, 0x1
+
+    :goto_0
+    return v0
+
+    :cond_0
+    const/4 v0, 0x0
+
+    goto :goto_0
+.end method
+
+.method final isPlugged()Z
     .locals 2
 
     .prologue
@@ -2312,7 +2333,7 @@
     goto :goto_0
 .end method
 
-.method final isPowered(I)Z
+.method final isPlugged(I)Z
     .locals 4
     .parameter "plugTypeSet"
 
