@@ -52,3 +52,4 @@ local-pre-zip-misc: add-prebuilt-lewa-sqlite-library
 	@echo customize build.prop
 	cp -f other/build.prop $(ZIP_DIR)/system/build.prop
 	cp other/boot.img $(ZIP_DIR)/boot.img
+	cp -f other/bootanimation.zip $(ZIP_DIR)/system/media
