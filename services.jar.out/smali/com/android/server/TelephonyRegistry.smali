@@ -1421,7 +1421,7 @@
     .end annotation
 
     .prologue
-    if-eqz p3, :cond_f
+    if-eqz p3, :cond_e
 
     invoke-direct {p0, p3}, Lcom/android/server/TelephonyRegistry;->checkListenerPermission(I)V
 
@@ -1429,7 +1429,7 @@
 
     move-result v8
 
-    if-eqz v8, :cond_c
+    if-eqz v8, :cond_lewa_0
 
     iget-object v9, p0, Lcom/android/server/TelephonyRegistry;->mRecords:Ljava/util/ArrayList;
 
@@ -1462,7 +1462,7 @@
     .end local v5           #r:Lcom/android/server/TelephonyRegistry$Record;
     .local v6, r:Lcom/android/server/TelephonyRegistry$Record;
     :goto_0
-    if-ge v4, v0, :cond_e
+    if-ge v4, v0, :cond_d
 
     .line 155
     :try_start_1
@@ -1482,7 +1482,7 @@
     :try_start_2
     iget-object v8, v5, Lcom/android/server/TelephonyRegistry$Record;->binder:Landroid/os/IBinder;
 
-    if-ne v1, v8, :cond_d
+    if-ne v1, v8, :cond_c
 
     .line 166
     :goto_1
@@ -1741,7 +1741,8 @@
     .end local v4           #i:I
     .end local v5           #r:Lcom/android/server/TelephonyRegistry$Record;
     .end local v7           #send:I
-    :cond_c
+
+    :cond_lewa_0
     :goto_d
     return-void
 
@@ -1750,7 +1751,7 @@
     .restart local v1       #b:Landroid/os/IBinder;
     .restart local v4       #i:I
     .restart local v5       #r:Lcom/android/server/TelephonyRegistry$Record;
-    :cond_d
+    :cond_c
     add-int/lit8 v4, v4, 0x1
 
     move-object v6, v5
@@ -1760,7 +1761,7 @@
     goto/16 :goto_0
 
     .line 160
-    :cond_e
+    :cond_d
     :try_start_f
     new-instance v5, Lcom/android/server/TelephonyRegistry$Record;
 
@@ -1959,7 +1960,7 @@
     .end local v4           #i:I
     .end local v5           #r:Lcom/android/server/TelephonyRegistry$Record;
     .end local v7           #send:I
-    :cond_f
+    :cond_e
     invoke-interface {p2}, Lcom/android/internal/telephony/IPhoneStateListener;->asBinder()Landroid/os/IBinder;
 
     move-result-object v8
