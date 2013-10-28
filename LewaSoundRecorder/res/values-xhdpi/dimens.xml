@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_margin_bottom">5.0dip</dimen>
+    <dimen name="tape_width">335.0px</dimen>
+    <dimen name="tape_margin_top">94.0px</dimen>
+    <dimen name="time_digit_margin_top">210.0px</dimen>
+    <dimen name="volume_bar_margin_top">95.0px</dimen>
+    <dimen name="tape_interval">22.0px</dimen>
+    <dimen name="digit_digit_interval">4.0px</dimen>
+    <dimen name="digit_point_interval">15.0px</dimen>
+    <dimen name="record_button_interval">13.0px</dimen>
+    <dimen name="volume_bar_width">530.0px</dimen>
+    <dimen name="volume_bar_height">42.0px</dimen>
+    <dimen name="progress_ly_margin">15.0px</dimen>
+    <dimen name="progress_bar_margin">23.0px</dimen>
+    <dimen name="progress_time_text_size">18.0sp</dimen>
+    <dimen name="progress_bar_height">16.0px</dimen>
+    <dimen name="progress_bar_corners">8.0px</dimen>
+    <dimen name="play_button_margin_top">15.0px</dimen>
+    <dimen name="no_record_file_text_size">18.0sp</dimen>
+    <dimen name="file_list_height">210.0px</dimen>
+    <dimen name="file_create_time_margin_left">36.0px</dimen>
+    <dimen name="file_create_time_padding_buttom">44.0px</dimen>
+    <dimen name="file_create_date_margin_top">6.0px</dimen>
+    <dimen name="file_create_time_text_size">38.0sp</dimen>
+    <dimen name="file_create_date_text_size">15.0sp</dimen>
+    <dimen name="playing_iv_margin_right">21.0px</dimen>
+    <dimen name="duration_text_size">20.0sp</dimen>
+</resources>
