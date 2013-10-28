@@ -3,9 +3,9 @@
     <dimen name="small_button_width">76.0dip</dimen>
     <dimen name="small_button_height">40.0dip</dimen>
     <dimen name="land_advanced_button_height">51.0dip</dimen>
-    <dimen name="medium_button_width">74.0dip</dimen>
+    <dimen name="medium_button_width">81.0dip</dimen>
     <dimen name="medium_button_height">72.0dip</dimen>
-    <dimen name="large_button_width">103.0dip</dimen>
+    <dimen name="large_button_width">114.5dip</dimen>
     <dimen name="large_button_height">75.0dip</dimen>
     <dimen name="display_text_size_port">49.0dip</dimen>
     <dimen name="display_text_size_land">33.0dip</dimen>
@@ -15,10 +15,10 @@
     <dimen name="land_advanced_button_textsize">27.0dip</dimen>
     <dimen name="medium_button_text_size">50.0dip</dimen>
     <dimen name="medium_button_margin_top">13.0dip</dimen>
-    <dimen name="medium_button_margin_left">11.0dip</dimen>
+    <dimen name="medium_button_margin_left">14.5dip</dimen>
     <dimen name="large_button_text_size">30.0dip</dimen>
     <dimen name="large_button_margin_top">8.0dip</dimen>
-    <dimen name="large_button_margin_left">8.0dip</dimen>
+    <dimen name="large_button_margin_left">11.5dip</dimen>
     <dimen name="port_advanced_pad_padding_left">7.0dip</dimen>
     <dimen name="port_advanced_pad_padding_top">6.0dip</dimen>
     <dimen name="port_advanced_pad_long_symbol_textsize">27.0dip</dimen>
@@ -42,7 +42,7 @@
     <dimen name="port_history_expr_textsize">40.0dip</dimen>
     <dimen name="port_history_result_textsize">60.0dip</dimen>
     <dimen name="land_simple_pad_margin_right">14.0dip</dimen>
-    <dimen name="land_simple_pad_margin_top">24.0dip</dimen>
+    <dimen name="land_simple_pad_margin_top">36.0dip</dimen>
     <dimen name="land_simple_pad_padding_left">13.0dip</dimen>
     <dimen name="land_advanced_pad_padding_left">10.0dip</dimen>
     <dimen name="land_advanced_pad_long_symbol_textsize">27.0dip</dimen>
@@ -59,7 +59,7 @@
     <dimen name="land_history_list_height">215.0dip</dimen>
     <dimen name="land_history_bt_ll_margin_left">23.0dip</dimen>
     <dimen name="land_history_bt_ll_margin_right">23.0dip</dimen>
-    <dimen name="land_history_bt_ll_margin_top">30.0dip</dimen>
+    <dimen name="land_history_bt_ll_margin_top">65.0dip</dimen>
     <dimen name="land_history_bt_margin_left">21.0dip</dimen>
     <dimen name="land_history_bt_width">356.0dip</dimen>
     <dimen name="land_history_bt_height">51.0dip</dimen>
