@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <ImageView android:id="@id/battery_calibration_img" android:background="@drawable/battery_calibration_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    <TextView android:id="@id/battery_calibration_txt" android:background="@string/spm_battery_calibration" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-</LinearLayout>

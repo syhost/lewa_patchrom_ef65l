@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
-        <ImageView android:id="@id/spm_notification_img" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-        <TextView android:id="@id/spm_notification_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="2.0dip" />
-    </LinearLayout>
-    <TextView android:id="@id/spm_notification_content" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-</LinearLayout>

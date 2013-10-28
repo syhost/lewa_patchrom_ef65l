@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/set_low_power_parent" android:layout_width="fill_parent" android:layout_height="fill_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView android:textColor="#ff000000" android:id="@id/set_low_power_hint_txt" android:padding="20.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" />
-    <ImageView android:id="@id/seekbar_progress_img" android:background="@drawable/spm_progress_img" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    <SeekBar android:id="@id/seekbar" android:padding="20.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" />
-</LinearLayout>

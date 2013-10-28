@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen android:orderingFromXml="true" android:key="Intercept"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <Preference android:title="@string/intelligent_start_time" android:key="start_time" android:summary="@string/intelligent_start_time_value" />
-    <Preference android:title="@string/intelligent_end_time" android:key="end_time" android:summary="@string/intelligent_end_time_value" />
-</PreferenceScreen>
