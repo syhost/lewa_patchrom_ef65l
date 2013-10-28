@@ -45,7 +45,7 @@
     <dimen name="timer_time_indicate_padding_top">100.0dip</dimen>
     <dimen name="timer_ring_padding_bottom">20.0dip</dimen>
     <dimen name="timer_ring_text_padding_bottom">40.0dip</dimen>
-    <dimen name="timer_ring_paddingleft_right">28.0dip</dimen>
+    <dimen name="timer_ring_paddingleft_right">48.0dip</dimen>
     <dimen name="bottom_actionbar_height">48.0dip</dimen>
     <dimen name="bottom_actionbar_textsize">20.0sp</dimen>
     <dimen name="minute_text_size">16.0sp</dimen>
