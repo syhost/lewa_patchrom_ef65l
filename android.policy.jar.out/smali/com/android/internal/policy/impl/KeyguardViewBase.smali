@@ -69,12 +69,12 @@
 
     move-result v1
 
-    if-nez v1, :cond_6
+    if-nez v1, :cond_7
 
     .line 180
     sparse-switch v0, :sswitch_data_0
 
-    .line 248
+    .line 251
     :cond_0
     :goto_0
     const/4 v2, 0x0
@@ -156,19 +156,15 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 218
-    iget-object v3, p0, Lcom/android/internal/policy/impl/KeyguardViewBase;->mAudioManager:Landroid/media/AudioManager;
-
-    const/4 v4, 0x3
-
-    const/16 v1, 0x18
+    .line 217
+    const/16 v1, 0xa4
 
     if-ne v0, v1, :cond_5
 
-    move v1, v2
+    .line 218
+    iget-object v1, p0, Lcom/android/internal/policy/impl/KeyguardViewBase;->mAudioManager:Landroid/media/AudioManager;
 
-    :goto_2
-    invoke-virtual {v3, v4, v1}, Landroid/media/AudioManager;->adjustLocalOrRemoteStreamVolume(II)V
+    invoke-virtual {v1}, Landroid/media/AudioManager;->toggleGlobalMute()V
 
     goto :goto_1
 
@@ -183,26 +179,42 @@
 
     throw v1
 
-    .line 218
+    .line 220
     :cond_5
+    iget-object v3, p0, Lcom/android/internal/policy/impl/KeyguardViewBase;->mAudioManager:Landroid/media/AudioManager;
+
+    const/4 v4, 0x3
+
+    const/16 v1, 0x18
+
+    if-ne v0, v1, :cond_6
+
+    move v1, v2
+
+    :goto_2
+    invoke-virtual {v3, v4, v1}, Landroid/media/AudioManager;->adjustLocalOrRemoteStreamVolume(II)V
+
+    goto :goto_1
+
+    :cond_6
     const/4 v1, -0x1
 
     goto :goto_2
 
-    .line 230
-    :cond_6
+    .line 233
+    :cond_7
     invoke-virtual {p1}, Landroid/view/KeyEvent;->getAction()I
 
     move-result v1
 
     if-ne v1, v2, :cond_0
 
-    .line 231
+    .line 234
     sparse-switch v0, :sswitch_data_1
 
     goto :goto_0
 
-    .line 243
+    .line 246
     :sswitch_3
     invoke-virtual {p0, p1}, Lcom/android/internal/policy/impl/KeyguardViewBase;->handleMediaKeyEvent(Landroid/view/KeyEvent;)V
 
@@ -229,7 +241,7 @@
         0xa4 -> :sswitch_2
     .end sparse-switch
 
-    .line 231
+    .line 234
     :sswitch_data_1
     .sparse-switch
         0x4f -> :sswitch_3
@@ -340,15 +352,15 @@
     .parameter "visibility"
 
     .prologue
-    .line 267
+    .line 270
     invoke-super {p0, p1}, Landroid/widget/FrameLayout;->dispatchSystemUiVisibilityChanged(I)V
 
-    .line 268
+    .line 271
     const/high16 v0, 0x40
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/KeyguardViewBase;->setSystemUiVisibility(I)V
 
-    .line 269
+    .line 272
     return-void
 .end method
 
@@ -367,7 +379,7 @@
     .parameter "keyEvent"
 
     .prologue
-    .line 252
+    .line 255
     const-string v2, "audio"
 
     invoke-static {v2}, Landroid/os/ServiceManager;->checkService(Ljava/lang/String;)Landroid/os/IBinder;
@@ -378,25 +390,25 @@
 
     move-result-object v0
 
-    .line 254
+    .line 257
     .local v0, audioService:Landroid/media/IAudioService;
     if-eqz v0, :cond_0
 
-    .line 256
+    .line 259
     :try_start_0
     invoke-interface {v0, p1}, Landroid/media/IAudioService;->dispatchMediaKeyEvent(Landroid/view/KeyEvent;)V
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 263
+    .line 266
     :goto_0
     return-void
 
-    .line 257
+    .line 260
     :catch_0
     move-exception v1
 
-    .line 258
+    .line 261
     .local v1, e:Landroid/os/RemoteException;
     const-string v2, "KeyguardViewBase"
 
@@ -422,7 +434,7 @@
 
     goto :goto_0
 
-    .line 261
+    .line 264
     .end local v1           #e:Landroid/os/RemoteException;
     :cond_0
     const-string v2, "KeyguardViewBase"
