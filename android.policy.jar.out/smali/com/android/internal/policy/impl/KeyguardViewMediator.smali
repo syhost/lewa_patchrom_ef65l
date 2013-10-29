@@ -897,7 +897,7 @@
     .line 1217
     iget-object v2, p0, Lcom/android/internal/policy/impl/KeyguardViewMediator;->mContext:Landroid/content/Context;
 
-    const v3, 0x10404fa
+    const v3, 0x1040526
 
     invoke-virtual {v2, v3}, Landroid/content/Context;->getString(I)Ljava/lang/String;
 
@@ -909,7 +909,7 @@
 
     const-string v3, "secure"
 
-    const v4, 0x1080542
+    const v4, 0x1080575
 
     invoke-virtual {v2, v3, v4, v5, v0}, Landroid/app/StatusBarManager;->setIcon(Ljava/lang/String;IILjava/lang/String;)V
 
