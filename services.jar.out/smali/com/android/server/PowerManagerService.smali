@@ -5461,7 +5461,7 @@
 
     move/from16 v1, v17
 
-    invoke-virtual {v0, v1}, Lcom/android/server/BatteryService;->isPowered(I)Z
+    invoke-virtual {v0, v1}, Lcom/android/server/BatteryService;->isPlugged(I)Z
 
     move-result v19
 
@@ -5618,7 +5618,7 @@
 
     iget-object v1, p0, Lcom/android/server/PowerManagerService;->mBatteryService:Lcom/android/server/BatteryService;
 
-    invoke-virtual {v1, v0}, Lcom/android/server/BatteryService;->isPowered(I)Z
+    invoke-virtual {v1, v0}, Lcom/android/server/BatteryService;->isPlugged(I)Z
 
     move-result v1
 
