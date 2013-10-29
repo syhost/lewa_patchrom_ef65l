@@ -114,7 +114,7 @@
     .line 239
     iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView$2;->this$0:Lcom/android/internal/policy/impl/LockPatternKeyguardView;
 
-    const v1, 0x10202b5
+    const v1, 0x010202bc
 
     invoke-virtual {v0, v1}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->findViewById(I)Landroid/view/View;
 

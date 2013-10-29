@@ -213,7 +213,7 @@
     iput-boolean v0, p0, Lcom/android/internal/policy/impl/LockScreen;->mSilentMode:Z
 
     .line 476
-    const v0, 0x10202c2
+    const v0, 0x10202d8
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/LockScreen;->findViewById(I)Landroid/view/View;
 
@@ -444,18 +444,18 @@
     invoke-virtual {v3, v6, v7}, Lcom/android/internal/widget/SlidingTab;->setHoldAfterTrigger(ZZ)V
 
     .line 487
-    const v6, 0x104032a
+    const v6, 0x1040357
 
     invoke-virtual {v3, v6}, Lcom/android/internal/widget/SlidingTab;->setLeftHintText(I)V
 
     .line 488
     const v6, 0x10802d5
 
-    const v7, 0x10803a9
+    const v7, 0x10803dc
 
-    const v8, 0x108038a
+    const v8, 0x10803bd
 
-    const v9, 0x108039d
+    const v9, 0x10803d0
 
     invoke-virtual {v3, v6, v7, v8, v9}, Lcom/android/internal/widget/SlidingTab;->setLeftTabResources(IIII)V
 
@@ -611,7 +611,7 @@
 
     .line 427
     .local v3, res:Landroid/content/res/Resources;
-    const v4, 0x1110020
+    const v4, 0x1110022
 
     invoke-virtual {v3, v4}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -756,7 +756,7 @@
 
     check-cast v5, Lcom/android/internal/policy/impl/LockScreen$GlowPadViewMethods;
 
-    const v8, 0x10802de
+    const v8, 0x10802eb
 
     invoke-virtual {v5, v8}, Lcom/android/internal/policy/impl/LockScreen$GlowPadViewMethods;->isTargetPresent(I)Z
 
