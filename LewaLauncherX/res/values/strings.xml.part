@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">鸟瞰</string>
+    <string name="mb">MB</string>
+    <string name="gb">GB</string>
+    <string name="nosim">No traffic data</string>
+    <string name="used">Used</string>
+    <string name="surplus">Remain</string>
+    <string name="noalarm">Add alarm</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="alarm">Alarm</string>
+    <string name="power_on">Save</string>
+    <string name="power_surplus">Remain</string>
+    <string name="power_full">Charging</string>
+    <string name="power_isfull">Charged</string>
+    <string name="power_h">h</string>
+    <string name="power_m">m</string>
+    <string name="torch">Flashlight</string>
+    <string name="safe_scanning">Scanning...</string>
+    <string name="safe_status_one">Healthy</string>
+    <string name="safe_status_two">"days havn't been scanned"</string>
+    <string name="safe_status_three">Never be scanned</string>
+    <string name="clean_toast_str0">Has been optimized to best</string>
+    <string name="clean_toast_str1">"Successfully freed %1$d M memory
+Currently available memory is %2$d M"</string>
+    <string name="config_workspaceDefaultTransitionEffect">Standard</string>
+    <string name="application_name">Launcher</string>
+    <string name="home">Home</string>
+    <string name="uid_name">Android Core Apps</string>
+    <string name="folder_name">Folder</string>
+    <string name="chooser_wallpaper">Choose wallpaper from</string>
+    <string name="wallpaper_instructions">Set wallpaper</string>
+    <string name="pick_wallpaper">Wallpapers</string>
+    <string name="activity_not_found">"App isn't installed."</string>
+    <string name="widgets_tab_label">Widgets</string>
+    <string name="widget_dims_format">%1$d x %2$d</string>
+    <string name="external_drop_widget_pick_format">%1$s (%2$d x %3$d)</string>
+    <string name="external_drop_widget_error">"Couldn't drop item on this Home screen."</string>
+    <string name="external_drop_widget_pick_title">Choose widget to create</string>
+    <string name="rename_folder_title">rename</string>
+    <string name="menu_item_add_item">Add to Home screen</string>
+    <string name="group_applications">Apps</string>
+    <string name="group_shortcuts">Shortcuts</string>
+    <string name="group_widgets">Widgets</string>
+    <string name="group_wallpapers">Wallpapers</string>
+    <string name="completely_out_of_space">No more room on your Home screens.</string>
+    <string name="out_of_space">No more room on this Home screen.</string>
+    <string name="hotseat_out_of_space">No more room on the hotseat.</string>
+    <string name="invalid_hotseat_item">This widget is too large for the hotseat.</string>
+    <string name="shortcut_installed">Shortcut \"%s\" created.</string>
+    <string name="shortcut_uninstalled">Shortcut \"%s\" was removed.</string>
+    <string name="shortcut_duplicate">Shortcut \"%s\" already exists.</string>
+    <string name="title_select_shortcut">Choose shortcut</string>
+    <string name="title_select_application">Choose app</string>
+    <string name="menu_theme">Themes</string>
+    <string name="menu_wallpaper">Wallpaper</string>
+    <string name="menu_settings">System settings</string>
+    <string name="cab_menu_delete_app">Uninstall app</string>
+    <string name="cab_menu_app_info">App details</string>
+    <string name="cab_app_selection_text">1 app selected</string>
+    <string name="cab_widget_selection_text">1 widget selected</string>
+    <string name="cab_folder_selection_text">1 folder selected</string>
+    <string name="cab_shortcut_selection_text">1 shortcut selected</string>
+    <string name="permlab_install_shortcut">install shortcuts</string>
+    <string name="permdesc_install_shortcut">Allows an app to add shortcuts without user intervention.</string>
+    <string name="permlab_uninstall_shortcut">uninstall shortcuts</string>
+    <string name="permdesc_uninstall_shortcut">Allows the app to remove shortcuts without user intervention.</string>
+    <string name="permlab_read_settings">read Home settings and shortcuts</string>
+    <string name="permdesc_read_settings">Allows the app to read the settings and shortcuts in Home.</string>
+    <string name="permlab_write_settings">write Home settings and shortcuts</string>
+    <string name="permdesc_write_settings">Allows the app to change the settings and shortcuts in Home.</string>
+    <string name="gadget_error_text">Problem loading widget</string>
+    <string name="folder_hint_text">Folder</string>
+    <string name="workspace_description_format">Home screen %1$d</string>
+    <string name="default_scroll_format">Page %1$d of %2$d</string>
+    <string name="workspace_scroll_format">Home screen %1$d of %2$d</string>
+    <string name="folder_opened">Folder opened, %1$d by %2$d</string>
+    <string name="folder_tap_to_close">Touch to close folder</string>
+    <string name="folder_tap_to_rename">Touch to save rename</string>
+    <string name="folder_closed">Folder closed</string>
+    <string name="folder_renamed">Folder renamed to %1$s</string>
+    <string name="folder_name_format">Folder: %1$s</string>
+    <string name="cannot_add_more_screen">"You can't add more screens"</string>
+    <string name="cannot_delete_more_screen">No more screen to delete.</string>
+    <string name="menu_preview">Preview</string>
+    <string name="menu_edit">Widgets</string>
+    <string name="menu_desktop_settings">Home settings</string>
+    <string name="pref_desktop_effect">Desktop Transition Effect</string>
+    <string name="pref_screen_layout">Screen Layout</string>
+    <string name="pref_screen_layout_summary">Choose the screen layout of desktop icons</string>
+    <string name="pref_desktop_effect_summary">Scrolling effect when scrolling homescreens</string>
+    <string name="pref_title_wallpaper_scrolling">Wallpaper Scrolling</string>
+    <string name="pref_summary_wallpaper_scrolling">Wallpaper moves together with desktop panels</string>
+    <string name="pref_title_action_updown">Desktop Gestures</string>
+    <string name="pref_summary_action_updown">From the desktop, swipe down to open the notifications</string>
+    <string name="pref_title_lewa_lockscreen">Use LeWa lockscreen</string>
+    <string name="pref_hide_status_bar">Hide status bar while screen is locked</string>
+    <string name="pref_title_resetlauncher">Reset Launcher</string>
+    <string name="pref_summary_resetlauncher">Reset Launcher</string>
+    <string name="pref_title_update">Check for updates</string>
+    <string name="pref_summary_update">Check the Lewa Launcher have the latest version</string>
+    <string name="message_resetlauncher">Reset all icons, widgets and screen position with in launcher.</string>
+    <string name="pref_label_settings">Launcher Settings</string>
+    <string name="folder_full_hint">This folder is full.</string>
+    <string name="shortcut_phone">Phone</string>
+    <string name="shortcut_contacts">Contacts</string>
+    <string name="shortcut_browser">Browser</string>
+    <string name="shortcut_messaging">Messaging</string>
+    <string name="phone_intent">\#Intent;action=android.intent.action.DIAL;launchFlags=0x10000000;end</string>
+    <string name="contacts_intent">content://com.android.contacts/contacts#Intent;action=android.intent.action.VIEW;launchFlags=0x10000000;end</string>
+    <string name="browser_intent">http://www.google.com#Intent;action=android.intent.action.VIEW;launchFlags=0x10000000;end</string>
+    <string name="messaging_intent">\#Intent;action=android.intent.action.MAIN;type=vnd.android-dir/mms-sms;launchFlags=0x10000000;end</string>
+    <string name="lewabbs_intent">http://bbs.lewaos.com/forum.php?mobile=yes#Intent;action=android.intent.action.VIEW;end</string>
+    <string name="loading_prompt">Loading...</string>
+    <string name="uninstall_system_app_text">System App cannot be uninstalled.</string>
+    <string name="uninstall_widget_text">Widget cannot be uninstalled.</string>
+    <string name="cannot_delete_widget_text">Widget cannot be deleted.</string>
+    <string name="cannot_delete_app_text">Application cannot be deleted.</string>
+    <string name="system_tool_folder">Tools</string>
+    <string name="system_secrity_folder">System</string>
+    <string name="new_rom_hint">New</string>
+    <string name="onekey_lockscreen">LockScreen</string>
+    <string name="other_widgets">Other Widgets</string>
+    <string name="admin_description">Allow the widget with admin permissions to enable screen lock at first run.</string>
+    <string name="add_widget">Add widget</string>
+    <string name="folder_not_empty_hint">Folder is not empty, please try again after clearing.</string>
+    <string name="image_content">image content</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="uninstall_done">Uninstall finished.</string>
+    <string name="uninstall_failed">Uninstall unsuccessful.</string>
+    <string name="uninstall_failed_msg">"%1$s couldn't be uninstalled."</string>
+    <string name="uninstall_application_text">Do you want to uninstall this app?</string>
+    <string name="uninstall_failed_device_policy_manager">"Can't uninstall because this package is an active device administrator."</string>
+    <string name="uninstall_app_not_found_text">"The app wasn't found in the list of installed apps."</string>
+    <string name="uninstall_application_title">Uninstall app</string>
+    <string name="uninstall_update_title">Uninstall update</string>
+    <string name="uninstall_activity_text">%1$s is part of the following app:</string>
+    <string name="uninstall_update_text">Do you want to replace this app with the factory version?</string>
+    <string name="app_not_found_dlg_text">"The app wasn't found in the list of installed apps."</string>
+    <item type="string" name="APKTOOL_DUMMY_0090">false</item>
+    <item type="string" name="APKTOOL_DUMMY_0091">false</item>
+    <item type="string" name="APKTOOL_DUMMY_0092">false</item>
+    <item type="string" name="APKTOOL_DUMMY_0093">false</item>
+    <item type="string" name="APKTOOL_DUMMY_0094">false</item>
+    <item type="string" name="APKTOOL_DUMMY_0095">false</item>
+    <item type="string" name="APKTOOL_DUMMY_0096">false</item>
+</resources>
