@@ -17,7 +17,7 @@ local-modified-apps := Bluetooth
 local-modified-jars :=
 
 # All apks from LEWA
-local-lewa-removed-apps := LewaIntercept LatinIME Bluetooth
+local-lewa-removed-apps := LewaIntercept LatinIME Bluetooth LewaGameCenter
 
 local-lewa-modified-apps := LewaPower+ Settings LewaUpdater LewaCalculator LewaDeskClock LewaSoundRecorder LewaLauncherX
 
