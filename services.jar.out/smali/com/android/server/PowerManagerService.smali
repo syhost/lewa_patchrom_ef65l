@@ -9552,7 +9552,7 @@
     iput-object v1, p0, Lcom/android/server/PowerManagerService;->mAutoBrightnessLevels:[I
 
     .line 653
-    const v1, 0x107002a
+    const v1, 0x1070039
 
     invoke-virtual {v7, v1}, Landroid/content/res/Resources;->getIntArray(I)[I
 
@@ -9561,7 +9561,7 @@
     iput-object v1, p0, Lcom/android/server/PowerManagerService;->mLcdBacklightValues:[I
 
     .line 655
-    const v1, 0x107002b
+    const v1, 0x107003a
 
     invoke-virtual {v7, v1}, Landroid/content/res/Resources;->getIntArray(I)[I
 
@@ -9570,7 +9570,7 @@
     iput-object v1, p0, Lcom/android/server/PowerManagerService;->mButtonBacklightValues:[I
 
     .line 657
-    const v1, 0x107002c
+    const v1, 0x107003b
 
     invoke-virtual {v7, v1}, Landroid/content/res/Resources;->getIntArray(I)[I
 
