@@ -13,8 +13,5 @@ private-phone-apps := ApplicationsProvider \
 					  Gallery2 \
 					  UserDictionaryProvider \
 					  Email \
-					  PinyinIME \
-					  LiveWallpapers \
-					  LiveWallpapersPicker \
 					  RootExplorer\
 					  DrmProvider \
