@@ -2804,7 +2804,7 @@
 
     .line 2263
     :cond_7
-    const v5, 0x1020314
+    const v5, 0x102032a
 
     invoke-virtual {p0, v5}, Lcom/android/internal/policy/impl/PhoneWindow$DecorView;->findViewById(I)Landroid/view/View;
 

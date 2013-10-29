@@ -557,7 +557,7 @@
 
     .line 3099
     :cond_1
-    const v0, 0x1020317
+    const v0, 0x102032d
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/PhoneWindow;->findViewById(I)Landroid/view/View;
 
@@ -711,7 +711,7 @@
 
     .line 3113
     :cond_1
-    const v0, 0x1020318
+    const v0, 0x102032e
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/PhoneWindow;->findViewById(I)Landroid/view/View;
 
@@ -761,7 +761,7 @@
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PhoneWindow;->installDecor()V
 
     :cond_1
-    const v0, 0x1020232
+    const v0, 0x1020239
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/PhoneWindow;->findViewById(I)Landroid/view/View;
 
@@ -931,7 +931,7 @@
     invoke-direct {p0}, Lcom/android/internal/policy/impl/PhoneWindow;->installDecor()V
 
     :cond_1
-    const v0, 0x1020234
+    const v0, 0x102023b
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/PhoneWindow;->findViewById(I)Landroid/view/View;
 
@@ -1074,7 +1074,7 @@
 
     if-eqz v6, :cond_3
 
-    const v6, 0x1020235
+    const v6, 0x102023c
 
     invoke-virtual {p0, v6}, Lcom/android/internal/policy/impl/PhoneWindow;->findViewById(I)Landroid/view/View;
 
@@ -1124,7 +1124,7 @@
     goto :goto_1
 
     :cond_4
-    const v6, 0x102031a
+    const v6, 0x1020330
 
     invoke-virtual {p0, v6}, Lcom/android/internal/policy/impl/PhoneWindow;->findViewById(I)Landroid/view/View;
 
@@ -1212,7 +1212,7 @@
     move-result v2
 
     :goto_3
-    const v6, 0x102031c
+    const v6, 0x1020332
 
     invoke-virtual {p0, v6}, Lcom/android/internal/policy/impl/PhoneWindow;->findViewById(I)Landroid/view/View;
 
@@ -1235,7 +1235,7 @@
 
     invoke-virtual {v6, v4}, Lcom/android/internal/widget/ActionBarView;->setSplitWhenNarrow(Z)V
 
-    const v6, 0x102031b
+    const v6, 0x1020331
 
     invoke-virtual {p0, v6}, Lcom/android/internal/policy/impl/PhoneWindow;->findViewById(I)Landroid/view/View;
 
@@ -5026,7 +5026,7 @@
 
     if-ne p1, v1, :cond_1
 
-    const v1, 0x1020235
+    const v1, 0x102023c
 
     invoke-virtual {p0, v1}, Lcom/android/internal/policy/impl/PhoneWindow;->findViewById(I)Landroid/view/View;
 
