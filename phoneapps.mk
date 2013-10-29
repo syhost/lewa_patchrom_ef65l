@@ -15,3 +15,5 @@ private-phone-apps := ApplicationsProvider \
 					  Email \
 					  RootExplorer\
 					  DrmProvider \
+					  Nfc \
+					  Tag
