@@ -7603,7 +7603,7 @@
 
     move-result-object v4
 
-    const v5, 0x1070023
+    const v5, 0x1070032
 
     invoke-static {v4, v5}, Lcom/android/internal/policy/impl/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
@@ -7618,7 +7618,7 @@
 
     move-result-object v4
 
-    const v5, 0x1070024
+    const v5, 0x1070033
 
     invoke-static {v4, v5}, Lcom/android/internal/policy/impl/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
@@ -7633,7 +7633,7 @@
 
     move-result-object v4
 
-    const v5, 0x1070025
+    const v5, 0x1070034
 
     invoke-static {v4, v5}, Lcom/android/internal/policy/impl/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
@@ -7648,7 +7648,7 @@
 
     move-result-object v4
 
-    const v5, 0x1070026
+    const v5, 0x1070035
 
     invoke-static {v4, v5}, Lcom/android/internal/policy/impl/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
@@ -7663,7 +7663,7 @@
 
     move-result-object v4
 
-    const v5, 0x1070027
+    const v5, 0x1070036
 
     invoke-static {v4, v5}, Lcom/android/internal/policy/impl/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
@@ -14408,7 +14408,7 @@
 
     move-result-object v9
 
-    const v10, 0x1110037
+    const v10, 0x111003a
 
     invoke-virtual {v9, v10}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -15712,7 +15712,7 @@
 
     move-result-object v9
 
-    const v11, 0x111003b
+    const v11, 0x111003e
 
     invoke-virtual {v9, v11}, Landroid/content/res/Resources;->getBoolean(I)Z
 
