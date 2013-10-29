@@ -9543,7 +9543,7 @@
 
     if-eqz v1, :cond_0
 
-    const v1, 0x90d0004
+    const v1, 0x90d0002
 
     invoke-virtual {v7, v1}, Landroid/content/res/Resources;->getIntArray(I)[I
 
