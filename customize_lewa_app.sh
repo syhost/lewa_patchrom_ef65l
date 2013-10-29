@@ -45,3 +45,7 @@ if [ $1 = "LewaSoundRecorder" ];then
     mergyXmlPart $1 $2
 fi
 
+if [ $1 = "LewaDeskClock" ];then
+    mergyXmlPart $1 $2
+fi
+

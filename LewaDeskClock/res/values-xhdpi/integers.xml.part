@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="time_indicate_x">133</integer>
+    <integer name="time_indicate_y">260</integer>
+    <integer name="center_x">400</integer>
+    <integer name="center_y">530</integer>
+    <integer name="radius">200</integer>
+    <integer name="width">45</integer>
+</resources>
