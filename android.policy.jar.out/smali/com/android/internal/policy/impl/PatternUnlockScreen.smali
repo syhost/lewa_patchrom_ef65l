@@ -172,7 +172,7 @@
     iput-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mKeyguardStatusViewManager:Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
     .line 176
-    const v0, 0x10202c5
+    const v0, 0x10202db
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->findViewById(I)Landroid/view/View;
 
@@ -183,7 +183,7 @@
     iput-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mLockPatternView:Lcom/android/internal/widget/LockPatternView;
 
     .line 178
-    const v0, 0x10202c4
+    const v0, 0x10202da
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/PatternUnlockScreen;->findViewById(I)Landroid/view/View;
 
@@ -196,7 +196,7 @@
     .line 179
     iget-object v0, p0, Lcom/android/internal/policy/impl/PatternUnlockScreen;->mForgotPatternButton:Landroid/widget/Button;
 
-    const v1, 0x1040320
+    const v1, 0x104034d
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setText(I)V
 

@@ -69,7 +69,7 @@
     invoke-virtual {v0, v1, p0, v5}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
     .line 95
-    const v0, 0x1020295
+    const v0, 0x102029c
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/AccountUnlockScreen;->findViewById(I)Landroid/view/View;
 
@@ -90,13 +90,13 @@
 
     if-eqz v0, :cond_0
 
-    const v0, 0x1040322
+    const v0, 0x104034f
 
     :goto_0
     invoke-virtual {v1, v0}, Landroid/widget/TextView;->setText(I)V
 
     .line 100
-    const v0, 0x1020297
+    const v0, 0x102029e
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/AccountUnlockScreen;->findViewById(I)Landroid/view/View;
 
@@ -107,7 +107,7 @@
     iput-object v0, p0, Lcom/android/internal/policy/impl/AccountUnlockScreen;->mInstructions:Landroid/widget/TextView;
 
     .line 102
-    const v0, 0x1020298
+    const v0, 0x102029f
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/AccountUnlockScreen;->findViewById(I)Landroid/view/View;
 
@@ -138,7 +138,7 @@
     invoke-virtual {v0, p0}, Landroid/widget/EditText;->addTextChangedListener(Landroid/text/TextWatcher;)V
 
     .line 106
-    const v0, 0x1020299
+    const v0, 0x10202a0
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/AccountUnlockScreen;->findViewById(I)Landroid/view/View;
 
@@ -154,7 +154,7 @@
     invoke-virtual {v0, p0}, Landroid/widget/EditText;->addTextChangedListener(Landroid/text/TextWatcher;)V
 
     .line 109
-    const v0, 0x102029a
+    const v0, 0x10202a1
 
     invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/AccountUnlockScreen;->findViewById(I)Landroid/view/View;
 
@@ -192,7 +192,7 @@
 
     .line 96
     :cond_0
-    const v0, 0x1040321
+    const v0, 0x104034e
 
     goto :goto_0
 .end method
@@ -569,7 +569,7 @@
 
     iget-object v1, p0, Lcom/android/internal/policy/impl/AccountUnlockScreen;->mContext:Landroid/content/Context;
 
-    const v2, 0x1040329
+    const v2, 0x1040356
 
     invoke-virtual {v1, v2}, Landroid/content/Context;->getString(I)Ljava/lang/String;
 
