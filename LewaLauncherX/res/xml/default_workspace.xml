@@ -27,6 +27,7 @@
         <favorite launcher:className="com.android.soundrecorder.LewaSoundRecordMainActivity" launcher:packageName="com.android.soundrecorder" />
         <favorite launcher:className="com.android.calculator2.Calculator" launcher:packageName="com.android.calculator2" />
         <favorite launcher:className="com.lewa.compass.MainActivity" launcher:packageName="com.lewa.compass" />
+        <favorite launcher:className="net.micode.compass.CompassActivity" launcher:packageName="net.micode.compass" />
         <favorite launcher:className="com.lewa.flashlight.LewaMainActivity" launcher:packageName="com.lewa.flashlight" />
     </folder>
     <noncustom launcher:container="-101" launcher:screen="1" launcher:x="0" launcher:y="0" />
