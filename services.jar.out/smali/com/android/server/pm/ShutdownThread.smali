@@ -177,7 +177,7 @@
 
     if-nez v3, :cond_2
 
-    const v2, 0x1040153
+    const v2, 0x104012f
 
     .line 214
     .local v2, shutdownMessageId:I
@@ -354,7 +354,7 @@
 
     .line 208
     :cond_2
-    const v2, 0x104014e
+    const v2, 0x104050c
 
     goto/16 :goto_1
 
@@ -695,7 +695,7 @@
 
     if-eqz v4, :cond_1
 
-    const v3, 0x1040157
+    const v3, 0x1040133
 
     .line 123
     .local v3, resourceId:I
@@ -740,7 +740,7 @@
 
     if-eqz v4, :cond_3
 
-    const v5, 0x1040156
+    const v4, 0x1040132
 
     :goto_2
     invoke-virtual {v5, v4}, Landroid/app/AlertDialog$Builder;->setTitle(I)Landroid/app/AlertDialog$Builder;
@@ -814,12 +814,12 @@
 
     if-ne v2, v4, :cond_2
 
-    const v3, 0x1040155
+    const v3, 0x1040131
 
     goto :goto_1
 
     :cond_2
-    const v3, 0x1040154
+    const v3, 0x1040130
 
     goto :goto_1
 
@@ -827,7 +827,7 @@
     .restart local v0       #closer:Lcom/android/server/pm/ShutdownThread$CloseDialogReceiver;
     .restart local v3       #resourceId:I
     :cond_3
-    const v4, 0x1040142
+    const v4, 0x104012b
 
     goto :goto_2
 
