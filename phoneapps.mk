@@ -16,4 +16,6 @@ private-phone-apps := ApplicationsProvider \
 					  RootExplorer\
 					  DrmProvider \
 					  Nfc \
-					  Tag
+					  Tag \
+					  PinyinIME \
+					  Compass
