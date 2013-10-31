@@ -91,20 +91,20 @@ ro.hwui.text_cache_width=2048
 
 #
 debug.sf.hw=1
-debug.egl.hw=1
+#debug.egl.hw=1
 debug.composition.type=dyn
 dev.pm.dyn_samplingrate=1
 persist.hwc.mdpcomp.enable=true
 debug.mdpcomp.maxlayer=3
-debug.hwc.dynThreshold=1.9
+#debug.hwc.dynThreshold=1.9
 debug.mdpcomp.logs=0
 #debug.overlayui.enable=1
 #ro.sf.compbypass.enable=1
 #video.accelerate.hw=1
 #debug.sf.no_hw_vsync=0
 #hwui.disable_vsync=false
-debug.hwui.render_dirty_regions=false
-persist.sys.strictmode.visual=0
+#debug.hwui.render_dirty_regions=false
+#persist.sys.strictmode.visual=0
 persist.sys.strictmode.disable=true  
 
 
