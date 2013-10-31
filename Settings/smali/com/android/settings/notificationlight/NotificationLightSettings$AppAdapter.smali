@@ -259,7 +259,7 @@
 
     .line 610
     .local v2, layoutInflater:Landroid/view/LayoutInflater;
-    const v4, 0x7f040059
+    const v4, 0x7f04006b
 
     const/4 v5, 0x0
 
@@ -301,7 +301,7 @@
     iput-object v4, v1, Lcom/android/settings/notificationlight/NotificationLightSettings$ViewHolder;->summary:Landroid/widget/TextView;
 
     .line 615
-    const v4, 0x7f0a001a
+    const v4, 0x7f090020
 
     invoke-virtual {p2, v4}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 

@@ -162,7 +162,7 @@
     .line 96
     iget-object v2, p0, Lcom/android/settings/notificationlight/LightSettingsDialog;->mInflater:Landroid/view/LayoutInflater;
 
-    const v5, 0x7f04002f
+    const v5, 0x7f0400b7
 
     const/4 v6, 0x0
 
@@ -172,7 +172,7 @@
 
     .line 98
     .local v0, layout:Landroid/view/View;
-    const v2, 0x7f0a006f
+    const v2, 0x7f0902a8
 
     invoke-virtual {v0, v2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -183,7 +183,7 @@
     iput-object v2, p0, Lcom/android/settings/notificationlight/LightSettingsDialog;->mColorPicker:Lcom/android/settings/notificationlight/ColorPickerView;
 
     .line 99
-    const v2, 0x7f0a0071
+    const v2, 0x7f0902aa
 
     invoke-virtual {v0, v2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -194,7 +194,7 @@
     iput-object v2, p0, Lcom/android/settings/notificationlight/LightSettingsDialog;->mOldColor:Lcom/android/settings/notificationlight/ColorPanelView;
 
     .line 100
-    const v2, 0x7f0a0072
+    const v2, 0x7f0902ab
 
     invoke-virtual {v0, v2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -251,7 +251,7 @@
     invoke-virtual {v2, p1, v3}, Lcom/android/settings/notificationlight/ColorPickerView;->setColor(IZ)V
 
     .line 110
-    const v2, 0x7f0a0074
+    const v2, 0x7f0902ad
 
     invoke-virtual {v0, v2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -264,9 +264,9 @@
     .line 111
     new-instance v1, Lcom/android/settings/notificationlight/LightSettingsDialog$PulseSpeedAdapter;
 
-    const v2, 0x7f09007a
+    const v2, 0x7f08005c
 
-    const v5, 0x7f09007b
+    const v5, 0x7f08005d
 
     invoke-static {p2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
@@ -301,7 +301,7 @@
     invoke-virtual {v2, v5}, Landroid/widget/Spinner;->setOnItemSelectedListener(Landroid/widget/AdapterView$OnItemSelectedListener;)V
 
     .line 119
-    const v2, 0x7f0a0075
+    const v2, 0x7f0902ae
 
     invoke-virtual {v0, v2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -315,9 +315,9 @@
     new-instance v1, Lcom/android/settings/notificationlight/LightSettingsDialog$PulseSpeedAdapter;
 
     .end local v1           #pulseSpeedAdapter:Lcom/android/settings/notificationlight/LightSettingsDialog$PulseSpeedAdapter;
-    const v2, 0x7f09007c
+    const v2, 0x7f08005e
 
-    const v5, 0x7f09007d
+    const v5, 0x7f08005f
 
     invoke-static {p3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
@@ -365,7 +365,7 @@
     invoke-virtual {p0, v0}, Lcom/android/settings/notificationlight/LightSettingsDialog;->setView(Landroid/view/View;)V
 
     .line 130
-    const v2, 0x7f0706d8
+    const v2, 0x7f0c0841
 
     invoke-virtual {p0, v2}, Lcom/android/settings/notificationlight/LightSettingsDialog;->setTitle(I)V
 

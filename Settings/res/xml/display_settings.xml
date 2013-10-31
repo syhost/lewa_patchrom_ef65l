@@ -9,7 +9,8 @@
     <PreferenceScreen android:title="@string/screensaver_settings_title" android:key="screensaver" android:fragment="com.android.settings.DreamSettings" />
     <ListPreference android:persistent="false" android:entries="@array/battery_style_entries" android:title="@string/battery_style" android:key="battery_styles" android:widgetLayout="@null" android:entryValues="@array/battery_style_values" />
     <ListPreference android:entries="@array/entries_font_size" android:title="@string/title_font_size" android:key="font_size" android:summary="@string/summary_font_size" android:widgetLayout="@null" android:dialogTitle="@string/dialog_title_font_size" android:entryValues="@array/entryvalues_font_size" />
-    <CheckBoxPreference android:persistent="false" android:title="@string/notification_pulse_title" android:key="notification_pulse" />
+    <PreferenceScreen android:title="@string/notification_pulse_title" android:key="notification_pulse" android:fragment="com.android.settings.notificationlight.NotificationLightSettings" />
+    <PreferenceScreen android:title="@string/battery_light_title" android:key="battery_light" android:fragment="com.android.settings.notificationlight.BatteryLightSettings" />
     <SwitchPreference android:title="@string/nightmode_title" android:key="nightmode" android:widgetLayout="@lewa:layout/preference_widget_switch_noclickable" />
     <ListPreference android:persistent="false" android:entries="@array/nightmode_entries" android:title="@string/nightmodecolor_title" android:key="nightmodecolor" android:widgetLayout="@null" android:dialogTitle="@string/nightmode_title" android:entryValues="@array/nightmode_value" />
     <SwitchPreference android:title="@string/inadvertmode_title" android:key="inadvertmode" android:summary="@string/inadvertmode_msg" android:widgetLayout="@lewa:layout/preference_widget_switch_noclickable" />

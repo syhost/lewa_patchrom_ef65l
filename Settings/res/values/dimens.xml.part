@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <add-resource type="dimen" name="dialog_light_settings_width" />
+    <dimen name="dialog_light_settings_width">400.0dip</dimen>
+</resources>

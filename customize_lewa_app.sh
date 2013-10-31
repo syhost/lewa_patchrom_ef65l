@@ -57,4 +57,8 @@ if [ $1 = "SystemUI" ];then
     mergyXmlPart $1 $2
 fi
 
+if [ $1 = "Settings" ];then
+    mergyXmlPart $1 $2
+fi
+
 

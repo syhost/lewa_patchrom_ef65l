@@ -1248,7 +1248,7 @@
     invoke-super {p0, p1}, Lcom/android/settings/SettingsPreferenceFragment;->onCreate(Landroid/os/Bundle;)V
 
     .line 114
-    const v2, 0x7f050024
+    const v2, 0x7f06005f
 
     invoke-virtual {p0, v2}, Lcom/android/settings/notificationlight/NotificationLightSettings;->addPreferencesFromResource(I)V
 
@@ -1418,7 +1418,7 @@
     invoke-virtual {v2, v3}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
 
     .line 447
-    const v3, 0x7f0707dc
+    const v3, 0x7f0c0857
 
     invoke-virtual {v0, v3}, Landroid/app/AlertDialog$Builder;->setTitle(I)Landroid/app/AlertDialog$Builder;
 
@@ -1461,13 +1461,13 @@
     .line 420
     iget-object v0, p0, Lcom/android/settings/notificationlight/NotificationLightSettings;->mMenu:Landroid/view/Menu;
 
-    const v1, 0x7f0707a9
+    const v1, 0x7f0c0858
 
     invoke-interface {v0, v2, v2, v2, v1}, Landroid/view/Menu;->add(IIII)Landroid/view/MenuItem;
 
     move-result-object v0
 
-    const v1, 0x7f020050
+    const v1, 0x7f0200cb
 
     invoke-interface {v0, v1}, Landroid/view/MenuItem;->setIcon(I)Landroid/view/MenuItem;
 
@@ -1511,12 +1511,12 @@
     if-eqz v1, :cond_0
 
     .line 376
-    const v2, 0x7f0706de
+    const v2, 0x7f0c0847
 
     invoke-virtual {v0, v2}, Landroid/app/AlertDialog$Builder;->setTitle(I)Landroid/app/AlertDialog$Builder;
 
     .line 377
-    const v2, 0x7f0706df
+    const v2, 0x7f0c0848
 
     invoke-virtual {v0, v2}, Landroid/app/AlertDialog$Builder;->setMessage(I)Landroid/app/AlertDialog$Builder;
 

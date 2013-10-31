@@ -152,7 +152,7 @@
 
     move-result-object v2
 
-    const v3, 0x7f0706dc
+    const v3, 0x7f0c0845
 
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
 
@@ -302,7 +302,7 @@
 
     move-result-object v1
 
-    const v2, 0x7f04006d
+    const v2, 0x7f0400b9
 
     const/4 v3, 0x0
 
@@ -318,7 +318,7 @@
 
     .line 246
     .local v0, entry:Landroid/util/Pair;,"Landroid/util/Pair<Ljava/lang/String;Ljava/lang/Integer;>;"
-    const v1, 0x7f0a0125
+    const v1, 0x7f0902b3
 
     invoke-virtual {p2, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 

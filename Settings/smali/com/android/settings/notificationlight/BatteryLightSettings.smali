@@ -315,7 +315,7 @@
     invoke-super {p0, p1}, Lcom/android/settings/SettingsPreferenceFragment;->onCreate(Landroid/os/Bundle;)V
 
     .line 57
-    const v1, 0x7f05000b
+    const v1, 0x7f06005e
 
     invoke-virtual {p0, v1}, Lcom/android/settings/notificationlight/BatteryLightSettings;->addPreferencesFromResource(I)V
 
@@ -401,13 +401,13 @@
 
     const/4 v1, 0x1
 
-    const v2, 0x7f0707b7
+    const v2, 0x7f0c0856
 
     invoke-interface {v0, v3, v1, v3, v2}, Landroid/view/Menu;->add(IIII)Landroid/view/MenuItem;
 
     move-result-object v0
 
-    const v1, 0x7f020061
+    const v1, 0x7f0200e3
 
     invoke-interface {v0, v1}, Landroid/view/MenuItem;->setIcon(I)Landroid/view/MenuItem;
 
