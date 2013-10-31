@@ -150,7 +150,7 @@
     .line 3334
     .local v0, active:Z
     :goto_0
-    const-wide/16 v10, 0x3e8
+    const-wide/16 v10, 0x32
 
     cmp-long v8, v6, v10
 
@@ -182,7 +182,7 @@
 
     move-result-object v10
 
-    const-wide/16 v11, 0x3e8
+    const-wide/16 v11, 0x64
 
     sub-long/2addr v11, v6
 
