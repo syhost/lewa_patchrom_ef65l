@@ -406,7 +406,7 @@
     .local v0, d:Lcom/android/settings/notificationlight/LightSettingsDialog;
     iget-object v1, p0, Lcom/android/settings/notificationlight/ApplicationLightPreference;->mResources:Landroid/content/res/Resources;
 
-    const v2, 0x7f0d001f
+    const v2, 0x7f0e0034
 
     invoke-virtual {v1, v2}, Landroid/content/res/Resources;->getDimension(I)F
 
@@ -492,21 +492,21 @@
 
     move-result-object v1
 
-    invoke-static {v1}, Lcom/android/settings/Utils;->isTablet(Landroid/content/Context;)Z
+#    invoke-static {v1}, Lcom/android/settings/Utils;->isTablet(Landroid/content/Context;)Z
 
-    move-result v1
+#    move-result v1
 
-    if-eqz v1, :cond_0
+#    if-eqz v1, :cond_0
 
-    .line 225
-    invoke-virtual {v0}, Lcom/android/settings/notificationlight/LightSettingsDialog;->getWindow()Landroid/view/Window;
+#    .line 225
+#    invoke-virtual {v0}, Lcom/android/settings/notificationlight/LightSettingsDialog;->getWindow()Landroid/view/Window;
 
-    move-result-object v1
+#    move-result-object v1
 
-    invoke-virtual {v1, v7, v9}, Landroid/view/Window;->setLayout(II)V
+#    invoke-virtual {v1, v7, v9}, Landroid/view/Window;->setLayout(II)V
 
-    .line 227
-    :cond_0
+#    .line 227
+#    :cond_0
     return-void
 .end method
 
@@ -849,7 +849,7 @@
     .line 163
     iget-object v2, p0, Lcom/android/settings/notificationlight/ApplicationLightPreference;->mResources:Landroid/content/res/Resources;
 
-    const/high16 v3, 0x7f0d
+    const v3, 0x7f0e0005
 
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getDimension(I)F
 
