@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest android:versionCode="16" android:versionName="4.1.2-eng.ioz9.20131025.145305" package="com.lewa.launcher"
+<manifest android:versionCode="16" android:versionName="4.1.2-eng.ioz9.20131031.192807" package="com.lewa.launcher"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="16" />
     <permission android:name="com.android.launcher.permission.PRELOAD_WORKSPACE" android:protectionLevel="signatureOrSystem" android:permissionGroup="android.permission-group.SYSTEM_TOOLS" />

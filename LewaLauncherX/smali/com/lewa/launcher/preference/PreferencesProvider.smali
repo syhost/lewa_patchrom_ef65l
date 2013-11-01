@@ -22,6 +22,8 @@
 
 .field private static bFirstRun:Ljava/lang/Boolean;
 
+.field private static sp:Landroid/content/SharedPreferences;
+
 
 # direct methods
 .method public constructor <init>()V
@@ -39,10 +41,10 @@
     .parameter "context"
 
     .prologue
-    .line 55
+    .line 58
     const-string v0, "4|4"
 
-    .line 56
+    .line 59
     .local v0, defVal:Ljava/lang/String;
     invoke-static {p0}, Lcom/lewa/launcher/LauncherApplication;->isLargeScreen(Landroid/content/Context;)Z
 
@@ -50,10 +52,10 @@
 
     if-eqz v3, :cond_0
 
-    .line 57
+    .line 60
     const-string v0, "4|4"
 
-    .line 59
+    .line 62
     :cond_0
     invoke-static {p0}, Lcom/lewa/launcher/preference/PreferencesProvider;->getSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
@@ -71,7 +73,7 @@
 
     move-result-object v2
 
-    .line 61
+    .line 64
     .local v2, values:[Ljava/lang/String;
     const/4 v3, 0x0
 
@@ -84,15 +86,15 @@
 
     move-result v3
 
-    .line 63
+    .line 66
     :goto_0
     return v3
 
-    .line 62
+    .line 65
     :catch_0
     move-exception v1
 
-    .line 63
+    .line 66
     .local v1, e:Ljava/lang/NumberFormatException;
     const/4 v3, 0x4
 
@@ -104,10 +106,10 @@
     .parameter "context"
 
     .prologue
-    .line 68
+    .line 71
     const-string v0, "4|4"
 
-    .line 69
+    .line 72
     .local v0, defVal:Ljava/lang/String;
     invoke-static {p0}, Lcom/lewa/launcher/LauncherApplication;->isLargeScreen(Landroid/content/Context;)Z
 
@@ -115,7 +117,7 @@
 
     if-eqz v3, :cond_0
 
-    .line 70
+    .line 73
     const-string v0, "4|4"
 
     .line 72
@@ -169,7 +171,7 @@
     .parameter "context"
 
     .prologue
-    .line 47
+    .line 50
     invoke-static {p0}, Lcom/lewa/launcher/preference/PreferencesProvider;->getSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object v0
@@ -190,7 +192,7 @@
     .parameter "context"
 
     .prologue
-    .line 39
+    .line 42
     invoke-static {p0}, Lcom/lewa/launcher/preference/PreferencesProvider;->getSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object v0
@@ -211,7 +213,7 @@
     .parameter "context"
 
     .prologue
-    .line 81
+    .line 84
     invoke-static {p0}, Lcom/lewa/launcher/preference/PreferencesProvider;->getSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object v0
@@ -232,13 +234,22 @@
     .parameter "context"
 
     .prologue
-    .line 23
+    .line 24
+    sget-object v0, Lcom/lewa/launcher/preference/PreferencesProvider;->sp:Landroid/content/SharedPreferences;
+
+    if-nez v0, :cond_0
+
+    .line 25
     invoke-static {p0}, Landroid/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object v0
 
-    .line 24
-    .local v0, sp:Landroid/content/SharedPreferences;
+    sput-object v0, Lcom/lewa/launcher/preference/PreferencesProvider;->sp:Landroid/content/SharedPreferences;
+
+    .line 27
+    :cond_0
+    sget-object v0, Lcom/lewa/launcher/preference/PreferencesProvider;->sp:Landroid/content/SharedPreferences;
+
     return-object v0
 .end method
 
@@ -247,7 +258,7 @@
     .parameter "context"
 
     .prologue
-    .line 85
+    .line 88
     invoke-static {p0}, Lcom/lewa/launcher/preference/PreferencesProvider;->getSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object v0
@@ -268,18 +279,18 @@
     .parameter "context"
 
     .prologue
-    .line 89
+    .line 96
     invoke-virtual {p0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v2
 
-    const v3, 0x7f080017
+    const v3, 0x7f080018
 
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
 
     move-result-object v0
 
-    .line 90
+    .line 97
     .local v0, def:Ljava/lang/String;
     invoke-static {p0}, Lcom/lewa/launcher/preference/PreferencesProvider;->getSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
@@ -291,7 +302,7 @@
 
     move-result-object v1
 
-    .line 91
+    .line 98
     .local v1, val:Ljava/lang/String;
     invoke-static {v1}, Lcom/lewa/launcher/Workspace$TransitionEffect;->valueOf(Ljava/lang/String;)Lcom/lewa/launcher/Workspace$TransitionEffect;
 
@@ -305,17 +316,17 @@
     .parameter "context"
 
     .prologue
-    .line 28
+    .line 31
     sget-object v1, Lcom/lewa/launcher/preference/PreferencesProvider;->bFirstRun:Ljava/lang/Boolean;
 
     if-nez v1, :cond_0
 
-    .line 29
+    .line 32
     invoke-static {p0}, Lcom/lewa/launcher/preference/PreferencesProvider;->getSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object v0
 
-    .line 30
+    .line 33
     .local v0, sp:Landroid/content/SharedPreferences;
     const-string v1, "first_run"
 
@@ -331,7 +342,7 @@
 
     sput-object v1, Lcom/lewa/launcher/preference/PreferencesProvider;->bFirstRun:Ljava/lang/Boolean;
 
-    .line 31
+    .line 34
     sget-object v1, Lcom/lewa/launcher/preference/PreferencesProvider;->bFirstRun:Ljava/lang/Boolean;
 
     invoke-virtual {v1}, Ljava/lang/Boolean;->booleanValue()Z
@@ -340,7 +351,7 @@
 
     if-eqz v1, :cond_0
 
-    .line 32
+    .line 35
     invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
 
     move-result-object v1
@@ -355,7 +366,7 @@
 
     invoke-interface {v1}, Landroid/content/SharedPreferences$Editor;->commit()Z
 
-    .line 35
+    .line 38
     .end local v0           #sp:Landroid/content/SharedPreferences;
     :cond_0
     sget-object v1, Lcom/lewa/launcher/preference/PreferencesProvider;->bFirstRun:Ljava/lang/Boolean;
@@ -367,13 +378,34 @@
     return v1
 .end method
 
+.method public static isSupportShake(Landroid/content/Context;)Z
+    .locals 3
+    .parameter "context"
+
+    .prologue
+    .line 92
+    invoke-static {p0}, Lcom/lewa/launcher/preference/PreferencesProvider;->getSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "shake_arrange_apps"
+
+    const/4 v2, 0x1
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
 .method public static setDefaultScreen(Landroid/content/Context;I)V
     .locals 2
     .parameter "context"
     .parameter "screen"
 
     .prologue
-    .line 51
+    .line 54
     invoke-static {p0}, Lcom/lewa/launcher/preference/PreferencesProvider;->getSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object v0
@@ -390,7 +422,7 @@
 
     invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->commit()Z
 
-    .line 52
+    .line 55
     return-void
 .end method
 
@@ -400,7 +432,7 @@
     .parameter "screenCount"
 
     .prologue
-    .line 43
+    .line 46
     invoke-static {p0}, Lcom/lewa/launcher/preference/PreferencesProvider;->getSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object v0
@@ -417,6 +449,6 @@
 
     invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->commit()Z
 
-    .line 44
+    .line 47
     return-void
 .end method
