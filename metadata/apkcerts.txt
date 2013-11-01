@@ -150,4 +150,5 @@ name="ifeng.apk" certificate="PRESIGNED" private_key=""
 name="sogoumap.apk" certificate="PRESIGNED" private_key=""
 name="kuwo.apk" certificate="PRESIGNED" private_key=""
 name="SohuTV.apk" certificate="PRESIGNED" private_key=""
+name="Compass.apk" certificate="PRESIGNED" private_key=""
 
