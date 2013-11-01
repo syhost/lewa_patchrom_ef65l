@@ -24,7 +24,7 @@ local-lewa-modified-apps := LewaPower+ Settings LewaUpdater LewaCalculator LewaD
 # set ro.sys.partner in build.prop for lewa partner
 local-lewa-partner := syhost
 
-local-lewa-device := A820L
+local-lewa-device := A820L_syhost
 
 # Config density for co-developers to use the aaps with HDPI or XHDPI resource,
 # Default configrations are HDPI for ics branch and XHDPI for jellybean branch
