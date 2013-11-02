@@ -17,6 +17,6 @@ private-phone-apps := ApplicationsProvider \
 					  DrmProvider \
 					  Nfc \
 					  Tag \
-					  PinyinIME \
 					  Compass \
-					  MediaProvider
+					  MediaProvider \
+					  baiduxiaomi
