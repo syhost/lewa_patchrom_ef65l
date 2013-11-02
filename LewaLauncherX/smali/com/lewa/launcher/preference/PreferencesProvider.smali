@@ -10,7 +10,7 @@
 
 .field public static final DEFAULT_SCREEN_LAYOUT:Ljava/lang/String; = "4|4"
 
-.field public static final LARGE_SCREEN_LAYOUT:Ljava/lang/String; = "4|4"
+.field public static final LARGE_SCREEN_LAYOUT:Ljava/lang/String; = "4|5"
 
 .field public static final MARKET_EDITION:Z = true
 
@@ -53,7 +53,7 @@
     if-eqz v3, :cond_0
 
     .line 60
-    const-string v0, "4|4"
+    const-string v0, "4|5"
 
     .line 62
     :cond_0
@@ -118,7 +118,7 @@
     if-eqz v3, :cond_0
 
     .line 73
-    const-string v0, "4|4"
+    const-string v0, "4|5"
 
     .line 72
     :cond_0
