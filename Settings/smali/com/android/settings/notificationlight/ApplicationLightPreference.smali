@@ -433,7 +433,7 @@
     .local v6, resources:Landroid/content/res/Resources;
     const/4 v1, -0x1
 
-    const v2, 0x7f0900c9
+    const v2, 0x7f0c042f
 
     invoke-virtual {v6, v2}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
 
@@ -461,7 +461,7 @@
     invoke-virtual {v0, v2, v3, v1}, Lcom/android/settings/notificationlight/LightSettingsDialog;->setButton(ILjava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)V
 
     .line 209
-    const v1, 0x7f0c00fb
+    const v1, 0x7f0c0430
 
     invoke-virtual {v6, v1}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
 
