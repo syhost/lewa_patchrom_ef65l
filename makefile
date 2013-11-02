@@ -19,7 +19,7 @@ local-modified-jars :=
 # All apks from LEWA
 local-lewa-removed-apps := LewaIntercept LatinIME Bluetooth LewaGameCenter
 
-local-lewa-modified-apps := LewaPower+ Settings LewaUpdater LewaCalculator LewaDeskClock LewaSoundRecorder LewaLauncherX SystemUI
+local-lewa-modified-apps := LewaPower+ Settings LewaCalculator LewaDeskClock LewaSoundRecorder LewaLauncherX SystemUI
 
 # set ro.sys.partner in build.prop for lewa partner
 local-lewa-partner := syhost
