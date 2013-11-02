@@ -35,7 +35,7 @@
     <string name="config_ethernet_iface_regex">eth\\d</string>
     <string name="config_tether_apndata" />
     <string name="config_wifi_p2p_device_type">10-0050F204-5</string>
-    <string name="default_wallpaper_component">wallpaper</string>
+    <string name="default_wallpaper_component">@null</string>
     <string name="config_networkLocationProviderPackageName">com.google.android.location</string>
     <string name="config_geocodeProviderPackageName">com.google.android.location</string>
     <string name="config_datause_iface">rmnet_sdio0</string>
