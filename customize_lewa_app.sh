@@ -65,3 +65,6 @@ if [ $1 = "SettingsProvider" ];then
     mergyXmlPart $1 $2
 fi
 
+if [ $1 = "PIM" ];then
+    mergyXmlPart $1 $2
+fi
