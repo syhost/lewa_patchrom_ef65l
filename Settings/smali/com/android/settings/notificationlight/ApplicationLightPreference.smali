@@ -461,7 +461,7 @@
     invoke-virtual {v0, v2, v3, v1}, Lcom/android/settings/notificationlight/LightSettingsDialog;->setButton(ILjava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)V
 
     .line 209
-    const v1, 0x7f0900c8
+    const v1, 0x7f0c00fb
 
     invoke-virtual {v6, v1}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
 
