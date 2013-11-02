@@ -44,7 +44,7 @@ def AddBasebandAssertion(info, input_zip):
 	info.script.script.append(info.script._WordWrap('unmount("/data");'))
 	info.script.script.append(info.script._WordWrap('mount("ext4", "EMMC", "/dev/block/mmcblk0p14", "/data");'))
 	info.script.script.append(info.script._WordWrap('run_program("/tmp/init.qcom.baseband.sh");'))
-	info.script.script.append(info.script._WordWrap('run_program("cat /persist/.baseband");'))
+	info.script.script.append(info.script._WordWrap('run_program("cat“，”/persist/.baseband");'))
 	info.script.script.append(info.script._WordWrap('unmount("/data");'))
 	info.script.script.append(info.script._WordWrap('unmount("/persist");'))
 	info.script.AppendExtra('ui_print(" ");')
