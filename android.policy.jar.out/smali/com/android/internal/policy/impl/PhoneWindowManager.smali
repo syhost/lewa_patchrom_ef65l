@@ -8864,7 +8864,7 @@
 
     move/from16 v1, v32
 
-    if-ne v0, v1, :cond_1c
+    if-ne v0, v1, :cond_34
 
     .line 1894
     if-eqz v9, :cond_1a
@@ -8887,7 +8887,25 @@
     const-wide/16 v32, -0x1
 
     goto/16 :goto_1
+    
+    :cond_34
+    const/16 v32, 0x4
 
+    move/from16 v0, v18
+
+    move/from16 v1, v32
+
+    if-ne v0, v1, :cond_1c
+
+    if-eqz v9, :cond_1c
+
+    if-nez v23, :cond_1c
+
+    invoke-direct/range {p0 .. p1}, Lcom/android/internal/policy/impl/PhoneWindowManager;->setKeyVib(Landroid/view/WindowManagerPolicy$WindowState;)V
+    
+    goto/16 :goto_34
+    
+    
     .line 1897
     :cond_19
     const/16 v32, 0x1
@@ -8946,6 +8964,7 @@
     goto :goto_9
 
     .line 1920
+    :goto_34
     :cond_1c
     move-object/from16 v0, p0
 
