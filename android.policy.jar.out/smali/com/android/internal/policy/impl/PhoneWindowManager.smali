@@ -2230,6 +2230,68 @@
     goto :goto_0
 .end method
 
+.method private setKeyVib(Landroid/view/WindowManagerPolicy$WindowState;)V
+    .locals 7
+    .parameter "win"
+
+    .prologue
+    const/4 v3, 0x0
+
+    const/4 v6, 0x1
+
+    .line 2110
+    if-eqz p1, :cond_1
+
+    invoke-interface {p1}, Landroid/view/WindowManagerPolicy$WindowState;->getAttrs()Landroid/view/WindowManager$LayoutParams;
+
+    move-result-object v0
+
+    .line 2111
+    .local v0, attrs:Landroid/view/WindowManager$LayoutParams;
+    :goto_0
+    new-instance v2, Landroid/content/Intent;
+
+    invoke-direct {v2}, Landroid/content/Intent;-><init>()V
+
+    .line 2112
+    .local v2, service:Landroid/content/Intent;
+    iget-object v4, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mContext:Landroid/content/Context;
+
+    invoke-virtual {v4}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    .line 2113
+    .local v1, res:Landroid/content/ContentResolver;
+    const-string v4, "haptic_feedback_enabled"
+
+    const/4 v5, 0x0
+
+    invoke-static {v1, v4, v5}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v4
+
+    if-ne v6, v4, :cond_0
+
+    .line 2115
+    const/4 v4, 0x3
+
+    invoke-virtual {p0, v3, v4, v6}, Lcom/android/internal/policy/impl/PhoneWindowManager;->performHapticFeedbackLw(Landroid/view/WindowManagerPolicy$WindowState;IZ)Z
+
+    .line 2117
+    :cond_0
+    return-void
+
+    .end local v0           #attrs:Landroid/view/WindowManager$LayoutParams;
+    .end local v1           #res:Landroid/content/ContentResolver;
+    .end local v2           #service:Landroid/content/Intent;
+    :cond_1
+    move-object v0, v3
+
+    .line 2110
+    goto :goto_0
+.end method
+
 .method private takeScreenshot()V
     .locals 8
 
@@ -8384,6 +8446,7 @@
     .line 1799
     .end local v11           #ex:Landroid/os/RemoteException;
     :cond_6
+    invoke-direct/range {p0 .. p1}, Lcom/android/internal/policy/impl/PhoneWindowManager;->setKeyVib(Landroid/view/WindowManagerPolicy$WindowState;)V
     invoke-virtual/range {p0 .. p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->launchHomeFromHotKey()V
 
     goto :goto_4
@@ -8630,6 +8693,8 @@
     if-eqz v9, :cond_1c
 
     if-nez v23, :cond_1c
+
+    invoke-direct/range {p0 .. p1}, Lcom/android/internal/policy/impl/PhoneWindowManager;->setKeyVib(Landroid/view/WindowManagerPolicy$WindowState;)V
 
     .line 1853
     move-object/from16 v0, p0
