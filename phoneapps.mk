@@ -18,4 +18,5 @@ private-phone-apps := ApplicationsProvider \
 					  Nfc \
 					  Tag \
 					  PinyinIME \
-					  Compass
+					  Compass \
+					  MediaProvider
