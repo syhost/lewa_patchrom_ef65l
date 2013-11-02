@@ -12,7 +12,7 @@ local-out-zip-file := lewa_ef65l.zip
 local-previous-target-dir := ~/workspace/ota_base/ef65l_4.1
 
 # All apps from original ZIP, but has smali files chanded
-local-modified-apps := Bluetooth Browser
+local-modified-apps := Bluetooth
 
 local-modified-jars :=
 
