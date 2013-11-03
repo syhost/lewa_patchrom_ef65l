@@ -18,5 +18,4 @@ private-phone-apps := ApplicationsProvider \
 					  Nfc \
 					  Tag \
 					  Compass \
-					  MediaProvider \
 					  baiduxiaomi
