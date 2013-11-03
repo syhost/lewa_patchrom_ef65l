@@ -32,7 +32,6 @@ def FullOTA_Assertions(info):
 
 def IncrementalOTA_Assertions(info):
 	Thanks(info)
-	AddBasebandAssertion(info, info.input_zip)
 	
 def AddBasebandAssertion(info, input_zip):
 	info.script.AppendExtra('ui_print("Get Baseband Version:");')
