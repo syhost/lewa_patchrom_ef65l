@@ -200,7 +200,7 @@
     .local v2, enable:C
     const/16 v5, 0x31
 
-    if-ne v2, v5, :cond_3
+    if-ne v2, v5, :cond_2
 
     const/4 v5, 0x1
 
@@ -319,7 +319,7 @@
     .restart local v2       #enable:C
     .restart local v3       #state:Ljava/lang/String;
     .restart local v4       #value:Ljava/lang/String;
-    :cond_3
+    :cond_2
     const/16 v5, 0x30
 
     if-ne v2, v5, :cond_1
@@ -1397,7 +1397,8 @@
     .local v1, intent:Landroid/content/Intent;
     iget-object v7, p0, Lcom/android/server/usb/UsbDeviceManager$UsbHandler;->this$0:Lcom/android/server/usb/UsbDeviceManager;
 
-    invoke-virtual {v7}, Lcom/android/server/usb/UsbDeviceManager;->getUiContext()Landroid/content/Context;
+    #getter for: Lcom/android/server/usb/UsbDeviceManager;->mContext:Landroid/content/Context;
+    invoke-static {v7}, Lcom/android/server/usb/UsbDeviceManager;->access$800(Lcom/android/server/usb/UsbDeviceManager;)Landroid/content/Context;
 
     move-result-object v7
 
@@ -1409,7 +1410,8 @@
     .local v4, pi:Landroid/app/PendingIntent;
     iget-object v7, p0, Lcom/android/server/usb/UsbDeviceManager$UsbHandler;->this$0:Lcom/android/server/usb/UsbDeviceManager;
 
-    invoke-virtual {v7}, Lcom/android/server/usb/UsbDeviceManager;->getUiContext()Landroid/content/Context;
+    #getter for: Lcom/android/server/usb/UsbDeviceManager;->mContext:Landroid/content/Context;
+    invoke-static {v7}, Lcom/android/server/usb/UsbDeviceManager;->access$800(Lcom/android/server/usb/UsbDeviceManager;)Landroid/content/Context;
 
     move-result-object v7
 
