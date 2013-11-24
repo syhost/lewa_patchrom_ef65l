@@ -15,13 +15,16 @@
     <favorite launcher:screen="0" launcher:x="1" launcher:y="3" launcher:appType="CALENDAR" />
     <favorite launcher:className="com.android.settings.LewaSettings" launcher:packageName="com.android.settings" launcher:screen="0" launcher:x="2" launcher:y="3" />
     <favorite launcher:className="com.android.email.activity.Welcome" launcher:packageName="com.android.email" launcher:screen="0" launcher:x="3" launcher:y="3" />
-    <favorite launcher:className="com.lewa.updater.UpdaterActivity" launcher:packageName="com.lewa.updater" launcher:screen="1" launcher:x="0" launcher:y="2" />
+    <appwidget launcher:className="com.lewa.search.widget.SearchWidgetProvider" launcher:packageName="com.lewa.search" launcher:screen="1" launcher:x="0" launcher:y="0" launcher:spanX="4" launcher:spanY="1" />
+    <favorite launcher:className="com.chaozh.iReader.ui.activity.WelcomeActivity" launcher:packageName="com.chaozh.iReader" launcher:screen="1" launcher:x="0" launcher:y="2" />
     <folder launcher:screen="1" launcher:x="1" launcher:y="2" launcher:title="@string/system_secrity_folder">
         <favorite launcher:className="com.lewa.filemanager.FileManagerMainActivity" launcher:packageName="com.lewa.filemanager" />
         <favorite launcher:className="com.lewa.security.SecurityActivity" launcher:packageName="com.lewa.security" />
         <favorite launcher:className="com.lewa.spm.activity.SPMActivity" launcher:packageName="com.lewa.spm" />
-        <favorite launcher:className="com.android.stk.StkLauncherActivity" launcher:packageName="com.android.stk" />
+        <favorite launcher:className="com.mediatek.StkSelection.StkSelection" launcher:packageName="com.mediatek.StkSelection" />
         <favorite launcher:className="com.android.stk.StkCDMALauncherActivity" launcher:packageName="com.android.stk" />
+        <favorite launcher:className="com.android.stk.StkLauncherActivity" launcher:packageName="com.android.stk" />
+        <favorite launcher:className="com.android.stk.StkLauncherActivity2" launcher:packageName="com.android.stk" />
     </folder>
     <folder launcher:screen="1" launcher:x="2" launcher:y="2" launcher:title="@string/system_tool_folder">
         <favorite launcher:className="com.android.soundrecorder.LewaSoundRecordMainActivity" launcher:packageName="com.android.soundrecorder" />

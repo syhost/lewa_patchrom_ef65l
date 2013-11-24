@@ -21,8 +21,11 @@
         <favorite launcher:className="com.lewa.filemanager.FileManagerMainActivity" launcher:packageName="com.lewa.filemanager" />
         <favorite launcher:className="com.lewa.security.SecurityActivity" launcher:packageName="com.lewa.security" />
         <favorite launcher:className="com.lewa.spm.activity.SPMActivity" launcher:packageName="com.lewa.spm" />
-        <favorite launcher:className="com.android.stk.StkLauncherActivity" launcher:packageName="com.android.stk" />
+        <favorite launcher:className="com.mediatek.StkSelection.StkSelection" launcher:packageName="com.mediatek.StkSelection" />
         <favorite launcher:className="com.android.stk.StkCDMALauncherActivity" launcher:packageName="com.android.stk" />
+        <favorite launcher:className="com.android.stk.StkCDMALauncherActivity" launcher:packageName="com.android.stk" />
+        <favorite launcher:className="com.android.stk.StkLauncherActivity" launcher:packageName="com.android.stk" />
+        <favorite launcher:className="com.android.stk.StkLauncherActivity2" launcher:packageName="com.android.stk" />
     </folder>
     <folder launcher:screen="1" launcher:x="2" launcher:y="2" launcher:title="@string/system_tool_folder">
         <favorite launcher:className="com.android.soundrecorder.LewaSoundRecordMainActivity" launcher:packageName="com.android.soundrecorder" />

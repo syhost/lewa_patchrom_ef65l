@@ -4,6 +4,7 @@
     <ListPreference android:entries="@array/desktop_transition_effect_entries" android:title="@string/pref_desktop_effect" android:key="pref_key_effects" android:summary="@string/pref_desktop_effect_summary" android:defaultValue="@string/config_workspaceDefaultTransitionEffect" android:entryValues="@array/desktop_transition_effect_values" />
     <SwitchPreference android:title="@string/pref_title_wallpaper_scrolling" android:key="wallpaper_scrolling" android:summary="@string/pref_summary_wallpaper_scrolling" android:defaultValue="false" />
     <SwitchPreference android:title="@string/pref_title_action_updown" android:key="action_updown" android:summary="@string/pref_summary_action_updown" android:defaultValue="true" />
+    <SwitchPreference android:title="@string/pref_title_shake" android:key="shake_arrange_apps" android:summary="@string/pref_summary_shake" android:defaultValue="true" />
     <ListPreference android:entries="@array/screen_layout" android:title="@string/pref_screen_layout" android:key="pref_screen_layout" android:summary="@string/pref_screen_layout_summary" android:entryValues="@array/screen_layout_value" />
     <Preference android:title="@string/pref_title_resetlauncher" android:key="reset_launcher" android:summary="@string/pref_summary_resetlauncher" />
 </PreferenceScreen>
